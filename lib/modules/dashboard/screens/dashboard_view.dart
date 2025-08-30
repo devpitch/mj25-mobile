@@ -10,8 +10,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../widgets/dashboard_widgets_exporter.dart';
 
 final Map<String, Widget> viewMapper = {
-  "Links": Container(color: Colors.red),
-  "Guests": GuestListBuilder(),
+  "Links": const LinkListBuilder(),
+  "Guests": const GuestListBuilder(),
   "Upload": Container(color: Colors.green),
 };
 

@@ -36,5 +36,11 @@ List<GetPage> appRouters() {
       transition: Transition.fadeIn,
       transitionDuration: Duration(milliseconds: 300),
     ),
+    GetPage(
+      name: AppRouter.linkInvitationView,
+      page: () => InvitationLinkScreen(),
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 300),
+    ),
   ];
 }

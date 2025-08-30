@@ -5,7 +5,6 @@ import 'package:event_handler/cores/utils/extensions.dart';
 import 'package:event_handler/cores/utils/hex_color.dart';
 import 'package:event_handler/cores/utils/icon_builder.dart';
 import 'package:event_handler/cores/widgets/custom_text.dart';
-import 'package:event_handler/modules/dashboard/provider/dashboard_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,7 +16,7 @@ class GuestDetailsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(dashboardProvider);
+    // final state = ref.watch(dashboardProvider);
     return Scaffold(
       appBar: AppBar(
         title: CustomText(
@@ -27,7 +26,6 @@ class GuestDetailsScreen extends ConsumerWidget {
           color: HexColor("#171712"),
         ),
         centerTitle: true,
-        automaticallyImplyLeading: false,
       ),
       body: Container(
         height: context.deviceHeight,
