@@ -8,10 +8,11 @@ import 'package:event_handler/cores/widgets/custom_text.dart';
 import 'package:event_handler/cores/widgets/rydmie_button.dart';
 import 'package:event_handler/modules/dashboard/models/upload_image_model.dart';
 import 'package:event_handler/modules/dashboard/provider/dashboard_provider.dart';
-import 'package:event_handler/modules/dashboard/screens/photo_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import 'dashboard_widgets_exporter.dart';
 
 class UploadViewBuilder extends ConsumerWidget {
   const UploadViewBuilder({super.key});
@@ -70,7 +71,7 @@ class UploadViewBuilder extends ConsumerWidget {
             ),
           )
         else ...[
-          Flexible(
+          Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -110,7 +111,12 @@ class UploadViewBuilder extends ConsumerWidget {
                           text: "+ Tag Guests",
                           textColor: context.backgroundSecondary,
                           fillColor: context.contentSecondary,
-                          onClick: () {},
+                          onClick: () {
+                            notifier.openSheet(
+                              context: context,
+                              type: "tagGuest",
+                            );
+                          },
                         ),
                       ),
                       15.horizontalSpace,
@@ -125,12 +131,13 @@ class UploadViewBuilder extends ConsumerWidget {
                       ),
                     ],
                   ),
+                  20.verticalSpace,
+                  TaggedGuestBuilder(noPadding: true, isFlex: false),
                 ],
               ),
             ),
           ),
-          20.verticalSpace,
-          TaggedGuestBuilder(noPadding: true),
+
           // 120.verticalSpace,
         ],
       ],
