@@ -1,7 +1,6 @@
-import 'package:event_handler/modules/authentication/screens/landing_page.dart';
-import 'package:event_handler/modules/authentication/screens/splash_screen.dart';
 import 'package:get/get.dart';
 
+import '../../modules/authentication/screens/auth_screens_exporter.dart';
 import 'route_mapping.dart';
 
 List<GetPage> appRouters() {
@@ -15,6 +14,12 @@ List<GetPage> appRouters() {
     GetPage(
       name: AppRouter.landingPage,
       page: () => LandingPage(),
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: AppRouter.loginPage,
+      page: () => LoginScreen(),
       transition: Transition.fadeIn,
       transitionDuration: Duration(milliseconds: 300),
     ),

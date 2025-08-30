@@ -10,7 +10,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   void navigateUser(BuildContext context) async {
     await Future.delayed(const Duration(milliseconds: 1200));
-    Get.toNamed(AppRouter.landingPage);
+    Get.toNamed(AppRouter.loginPage);
   }
 }
 

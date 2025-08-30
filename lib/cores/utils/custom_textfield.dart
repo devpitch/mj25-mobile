@@ -109,17 +109,19 @@ class CustomLabelTextField extends HookWidget {
           constraints: BoxConstraints(minHeight: minHeight ?? 50),
           padding: EdgeInsets.symmetric(horizontal: boxHPadding ?? 12.sp),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(radius ?? (noBorder ? 0 : 22)),
+            borderRadius: BorderRadius.circular(
+              radius ?? (noBorder ? 0 : 12.r),
+            ),
             color:
-                fillColor ?? context.backgroundSecondary.withValues(alpha: 0.6),
+                fillColor ?? context.backgroundSecondary.withValues(alpha: 0.1),
             border:
                 border ??
                 (noBorder
                     ? null
                     : Border.all(
-                      color: fillColor ?? context.borderPrimary,
-                      width: 1,
-                    )),
+                        color: fillColor ?? Colors.transparent,
+                        width: 1,
+                      )),
           ),
           child: Row(
             children: [

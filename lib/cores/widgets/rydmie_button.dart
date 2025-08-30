@@ -1,4 +1,3 @@
-import 'package:event_handler/config/theme/app_colors.dart';
 import 'package:event_handler/cores/utils/loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,17 +41,16 @@ class RydmieButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDisabled = onClick == null;
-    final Color resolvedTextColor =
-        isDisabled
-            ? context.backgroundColor
-            : textColor ?? (outline ? context.primaryColor : ThemeColors.white);
+    final Color resolvedTextColor = isDisabled
+        ? context.backgroundColor
+        : textColor ??
+              (outline ? context.primaryColor : context.contentSecondary);
 
-    final Color resolvedButtonColor =
-        isDisabled
-            ? context.backgroundDisabled
-            : outline
-            ? Colors.transparent
-            : fillColor ?? color ?? context.buttonBackground;
+    final Color resolvedButtonColor = isDisabled
+        ? context.backgroundDisabled
+        : outline
+        ? Colors.transparent
+        : fillColor ?? color ?? context.buttonBackground;
 
     return Material(
       color: Colors.transparent,
@@ -70,33 +68,29 @@ class RydmieButton extends StatelessWidget {
               color: resolvedButtonColor,
               borderRadius: BorderRadius.circular(radius ?? 60),
               border: Border.all(
-                color:
-                    outline
-                        ? (color ?? context.primaryColor)
-                        : Colors.transparent,
+                color: outline
+                    ? (color ?? context.primaryColor)
+                    : Colors.transparent,
                 width: outline ? (borderWidth ?? 1.2) : 0,
               ),
             ),
             height: height ?? 53.h,
             width: width,
             padding: const EdgeInsets.symmetric(horizontal: 5),
-            child:
-                isLoading
-                    ? itemLoader(context, color: resolvedTextColor)
-                    : Center(
-                      child:
-                          child ??
-                          CustomText(
-                            fontFamily: textFamily ?? "SFProDisplay",
-                            text: text,
-                            size: textSize ?? 16,
-                            isCenter: true,
-                            weight:
-                                textFontWeight ??
-                                (outline ? FontWeight.w700 : FontWeight.w600),
-                            color: resolvedTextColor,
-                          ),
-                    ),
+            child: isLoading
+                ? itemLoader(context, color: resolvedTextColor)
+                : Center(
+                    child:
+                        child ??
+                        CustomText(
+                          fontFamily: textFamily ?? "SFProDisplay",
+                          text: text,
+                          size: textSize ?? 16,
+                          isCenter: true,
+                          weight: textFontWeight ?? (FontWeight.w700),
+                          color: resolvedTextColor,
+                        ),
+                  ),
           ),
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:event_handler/config/theme/app_colors.dart';
+import 'package:event_handler/cores/utils/hex_color.dart';
 import 'package:flutter/material.dart';
 
 class MyAppThemes {
@@ -39,7 +40,7 @@ class MyAppThemes {
       primaryContainer: ThemeColors.borderBrandPositive,
       onPrimaryContainer: ThemeColors.borderBrandWarning,
       secondaryContainer: ThemeColors.borderBrandNegative,
-      onSecondaryContainer: ThemeColors.contentPrimary,
+      onSecondaryContainer: HexColor("#013220"),
     ),
   );
   static final darkTheme = ThemeData(
