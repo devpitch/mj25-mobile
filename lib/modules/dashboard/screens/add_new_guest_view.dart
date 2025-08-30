@@ -15,10 +15,7 @@ class AddNewGuestScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.backgroundColor,
-      appBar: AppBar(
-        title: AppHeaderText(label: "Add Guest Details"),
-        automaticallyImplyLeading: false,
-      ),
+      appBar: AppBar(title: AppHeaderText(label: "Add Guest Details")),
       bottomSheet: AppFooterBox(
         buttonText: "Add Guest",
         onTapped: () {

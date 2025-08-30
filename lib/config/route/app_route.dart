@@ -48,5 +48,11 @@ List<GetPage> appRouters() {
       transition: Transition.fadeIn,
       transitionDuration: Duration(milliseconds: 300),
     ),
+    GetPage(
+      name: AppRouter.photoDetailsView,
+      page: () => PhotoDetailsScreen(),
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 300),
+    ),
   ];
 }

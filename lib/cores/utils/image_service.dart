@@ -35,7 +35,9 @@ class ImageService {
     try {
       final List<XFile> pickedFile = await _imagePicker.pickMultiImage();
       return pickedFile.map((e) => File(e.path)).toList();
-    } catch (e) {}
+    } catch (e) {
+      log("Error picking images: $e");
+    }
     return [];
   }
 
@@ -85,10 +87,9 @@ class ImageService {
       }
 
       // Log size details
-      final originalSizeKB =
-          isPath
-              ? (File(imagePath!).lengthSync() / 1024).toStringAsFixed(2)
-              : (image!.lengthInBytes / 1024).toStringAsFixed(2);
+      final originalSizeKB = isPath
+          ? (File(imagePath!).lengthSync() / 1024).toStringAsFixed(2)
+          : (image!.lengthInBytes / 1024).toStringAsFixed(2);
       final compressedSizeKB = (File(compressedPhoto.path).lengthSync() / 1024)
           .toStringAsFixed(2);
 

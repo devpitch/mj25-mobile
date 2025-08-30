@@ -6,4 +6,5 @@ class AppRouter {
   static const String addGuestView = "/add_guest_view";
   static const String linkInvitationView = "/link_invitation_view";
   static const String guestDetailsView = "/guest_details_view";
+  static const String photoDetailsView = "/photo_details_view";
 }

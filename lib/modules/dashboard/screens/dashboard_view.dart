@@ -12,7 +12,7 @@ import '../widgets/dashboard_widgets_exporter.dart';
 final Map<String, Widget> viewMapper = {
   "Links": const LinkListBuilder(),
   "Guests": const GuestListBuilder(),
-  "Upload": Container(color: Colors.green),
+  "Upload": const UploadViewBuilder(),
 };
 
 class DashboardView extends ConsumerWidget {
