@@ -1,0 +1,16 @@
+class TextControllerStrings {
+  static const String phoneNumber = "phoneNumber";
+  static const String referalCode = "referal_code";
+  static const String amount = "startup_amount";
+  static const String otp = "otp";
+  static const String nin = "nin";
+  static const String bvn = "bvn";
+  static const String email = "email";
+  static const String info = "info";
+  static const String firstName = "first_name";
+  static const String message = "message";
+  static const String title = "title";
+  static const String lastName = "last_name";
+  static const String dateOfBirth = "date_of_birth";
+  static const String accountNumber = "account_number";
+}

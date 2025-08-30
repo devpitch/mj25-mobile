@@ -1,0 +1,203 @@
+################################################################
+############################ USERS #############################
+
+query getUser($input: User!) {
+    getUser(input: $input) {
+        ...UserResponse
+    }
+}
+
+query me {
+    me {
+        ...UserResponse
+    }
+}
+
+query getSelfieUploadUrl {
+    getSelfieUploadUrl {
+        expireAt
+        url
+    }
+}
+
+### END USERS ###
+
+################################################################
+############################ PAYMENT #############################
+
+query paymentOptions {
+    paymentOptions {
+        ...GroupedPaymentOptionResponse
+    }
+}
+
+query Subscription {
+    subscription {
+        ... SubscriptionResponse
+    }
+}
+
+query subscriptionActionReasons($input: SubscriptionReasonsInput!) {
+    subscriptionActionReasons(input: $input) {
+        ...SubscriptionReasonsResponse
+    }
+}
+
+query paymentCards {
+    paymentCards {
+        ...PaymentCardResponse
+    }
+}
+
+query transactions($limit: Int!, $page: Int!, $search: String!) {
+    transactions(limit: $limit, page: $page, search: $search) {
+        ...PaginatedTransactionResponse
+    }
+}
+
+query pass {
+    pass {
+        ...PassResponse
+    }
+}
+
+query passes {
+    passes {
+        ...PassResponse
+    }
+}
+
+query wallet {
+    wallet {
+        ...WalletResponse
+    }
+}
+
+query account {
+    account {
+        ...PaymentAccountResponse
+    }
+}
+
+query fetchBanks {
+    fetchBanks {
+        ...BankResponse
+    }
+}
+
+### END PAYMENT ###
+
+################################################################
+############################ Referral ###########################
+
+query referralProfile {
+    referralProfile {
+        ...ReferralProfileResponse
+    }
+}
+
+### END Referral ###
+
+################################################################
+############################ DISCOUNT ###########################
+
+query discounts {
+    discounts {
+        ...DiscountResponse
+    }
+}
+
+
+### END DISCOUNT ###
+
+################################################################
+############################ BIKE ###########################
+
+query vehicle($input: SimpleInput!) {
+    vehicle(input: $input) {
+        ...VehicleResponse
+    }
+}
+
+query vehicles($limit: Int!, $page: Int!, $search: String!) {
+    vehicles(limit: $limit, page: $page, search: $search) {
+        ...PaginatedVehicleResponse
+    }
+}
+
+query vehiclesNear($latitude: Float!, $longitude: Float!, $radius: Float!) {
+    vehiclesNear(latitude: $latitude, longitude: $longitude, radius: $radius) {
+        ...VehicleResponse
+    }
+}
+
+query operatorVehiclesNear($latitude: Float!, $longitude: Float!, $radius: Float!) {
+    vehiclesNear(latitude: $latitude, longitude: $longitude, radius: $radius) {
+        ...OperatorVehicleResponse
+    }
+}
+
+query rental{
+    rental {
+        ...RentalResponse
+    }
+}
+
+query rentals($limit: Int!, $page: Int!, $search: String!) {
+    rentals(limit: $limit, page: $page, search: $search) {
+        ...PaginatedRentalResponse
+    }
+}
+
+
+query groupedFaults {
+    groupedFaults {
+        ...GroupedFaultResponse
+    }
+}
+
+query reportedFaults($limit: Int!, $page: Int!, $search: String!, $input: FaultReportFilterInput) {
+    reportedFaults(limit: $limit, page: $page, search: $search, input: $input) {
+        ...PaginatedFaultReportResponse
+    }
+}
+
+query faqs {
+    faqs {
+        ...Faq
+    }
+}
+
+query adminUsers {
+    adminUsers {
+        ...PaginatedUserResponse
+    }
+}
+
+### END BIKE ###
+
+################################################################
+############################ GROUP RENTAL ###########################
+
+
+query groupRental {
+    groupRental {
+        ...GroupRentalResponse
+    }
+}
+
+query groupRentals($limit: Int!, $page: Int!, $search: String!) {
+    groupRentals(limit: $limit, page: $page, search: $search) {
+        items {
+            ...GroupRentalResponse
+        }
+        limit
+        page
+    }
+}
+
+
+### GROUP RENTAL ###
+
+################################################################
+############################ PAYMENT ###########################

@@ -1,0 +1,633 @@
+###  Auth ###
+fragment TokenResponse on TokenResponse {
+    token
+    expiresAt
+}
+
+fragment StartResponse on StartResponse {
+    phone
+    status
+}
+
+fragment WalletResponse on WalletResponse {
+    _id
+    __typename
+    accountId
+    balance
+    lastBalance
+    createdAt
+    currency
+    updatedAt
+    userId
+}
+
+fragment UserResponse on UserResponse{
+    _id
+    __typename
+    firstName
+    lastName
+    phone
+    email
+    status
+    type
+    createdAt
+    updatedAt
+#    wallet {
+#        ...WalletResponse
+#    }
+#    pass {
+#        ...PassResponse
+#    }
+    paymentMethod
+#    subscription {
+#        ...SubscriptionResponse
+#    }
+}
+
+fragment PaginatedUserResponse on PaginatedUserResponse {
+    items {
+        ...UserResponse
+    }
+    limit
+    page
+    __typename
+}
+
+fragment PassResponse on PassResponse {
+    _id
+    userId
+    rideMinute
+    startAt
+    expireAt
+    status
+    paymentOptionId
+    transactionId
+    createdAt
+    updatedAt
+    plan {
+        ...PaymentOptionResponse
+    }
+    transaction {
+        ...TransactionResponse
+    }
+}
+
+
+fragment LoginResponse on LoginResponse {
+    user {
+        ...UserResponse
+    }
+    accessToken {
+        ...TokenResponse
+    }
+    passcode
+    refreshToken {
+        ...TokenResponse
+    }
+}
+
+fragment VerificationResponse on VerificationResponse {
+    _id
+    userId
+    idType
+    idNumber
+    firstName
+    middleName
+    lastName
+    birthDate
+    photo
+    selfie
+    status
+    likeliness
+    createdAt
+    updatedAt
+    user {
+        ...UserResponse
+    }
+    verificationRecords {
+        ...VerificationRecordResponse
+    }
+}
+
+fragment VerificationRecordResponse on VerificationRecordResponse {
+    _id
+    userId
+    idType
+    idNumber
+    rawData
+    createdAt
+    updatedAt
+}
+
+fragment UserSupportTicketResponse on UserSupportTicketResponse {
+        _id
+        userId
+        title
+        message
+        status
+        shortCode
+        createdAt
+        user {
+            _id
+            lastName
+            firstName
+        }
+}
+
+################################################################
+############################ PAYMENT ###########################
+
+fragment PaymentOptionResponse on PaymentOptionResponse{
+    _id
+    title
+    type
+    description
+    price {
+        ...PaymentOptionPrice
+    }
+    features
+    isRecommended
+    status
+    period
+    periodUnit
+    rideDuration
+    messageText
+    startAt
+    createdAt
+    updatedAt
+}
+
+fragment GroupedPaymentOptionResponse on GroupedPaymentOptionResponse{
+    subscription {
+        ...PaymentOptionResponse
+    }
+    continuous {
+        ...PaymentOptionResponse
+    }
+    pass {
+        ...PaymentOptionResponse
+    }
+}
+
+fragment PaymentOptionPrice on PaymentOptionPrice {
+    regular
+    saving
+    final
+}
+
+fragment ManageSubscription on SubscriptionResponse {
+    _id
+    userId
+    startAt
+    rideMinute
+    endAt
+    status
+    paymentOptionId
+    paymentMethod
+    paymentCardId
+    lastPaymentId
+    nextPaymentId
+    discountId
+    pause {
+        ... SubscriptionPause
+    }
+    cancellation {
+        ... SubscriptionCancellation
+    }
+    lastRenewalDate
+    renewalStatus
+    createdAt
+    updatedAt
+    paymentCard {
+        ...PaymentCardResponse
+    }
+}
+
+fragment SubscriptionResponse on SubscriptionResponse {
+    _id
+    userId
+    startAt
+    rideMinute
+    endAt
+    status
+    paymentOptionId
+    paymentMethod
+#    paymentCardId
+    lastPaymentId
+    nextPaymentId
+    discountId
+    pause {
+      ... SubscriptionPause
+    }
+    cancellation {
+        ... SubscriptionCancellation
+    }
+    lastRenewalDate
+    renewalStatus
+    createdAt
+    updatedAt
+    paymentCard {
+        ...PaymentCardResponse
+    }
+    plan {
+        ...PaymentOptionResponse
+    }
+}
+
+fragment SubscriptionPause on SubscriptionPause {
+    startAt
+    endAt
+    reason
+    createdAt
+    updatedAt
+}
+
+fragment SubscriptionCancellation on SubscriptionCancellation{
+    reason
+    requestedAt
+    processedAt
+    status
+    createdAt
+    updatedAt
+}
+
+fragment PaymentCardResponse on PaymentCardResponse {
+    _id
+    userId
+    isDefault
+    shortNumber
+    number
+    email
+    type
+    countryCode
+    brand
+    createdAt
+    updatedAt
+}
+
+fragment  SubscriptionReasonsResponse on SubscriptionReasonsResponse {
+    _id
+    reason
+    type
+    createdAt
+    updatedAt
+}
+
+fragment PaginatedTransactionResponse on PaginatedTransactionResponse {
+    limit
+    page
+    items {
+        ...TransactionResponse
+    }
+}
+
+fragment TransactionResponse on TransactionResponse{
+    _id
+    userId
+    type
+    amount
+    fee
+    source
+    referenceType
+    referenceId
+    paymentUrl
+    paymentCardId
+    discountApplied
+    discountId
+    status
+    retryCount
+    description
+    createdAt
+    updatedAt
+}
+
+fragment PaymentAccountResponse on PaymentAccountResponse {
+    _id
+    userId
+    bank
+    number
+    name
+    createdAt
+    updatedAt
+}
+
+fragment BankResponse on BankResponse {
+    _id
+    name
+    code
+    createdAt
+    updatedAt
+}
+
+fragment BankingVerificationResponse on BankingVerificationResponse{
+    message
+    status
+}
+
+## END PAYMENT ##
+
+
+################################################################
+############################ Referral ###########################
+
+fragment ReferralProfileResponse on ReferralProfileResponse {
+    _id
+    code
+    userId
+    referralCount
+    createdAt
+    updatedAt
+}
+
+
+## END Referral ##
+
+################################################################
+############################ DISCOUNT ###########################
+
+fragment DiscountResponse on DiscountResponse {
+    _id
+    code
+    userId
+    type
+    activeUntil
+    coverage
+    cappedAmount
+    percentage
+    maxRedemption
+    totalRedemption
+    status
+    createdAt
+    updatedAt
+}
+
+## END DISCOUNT ##
+
+################################################################
+############################ BIKE ###########################
+
+fragment  VehicleResponse on VehicleResponse {
+    _id
+    name
+    make
+    model
+    code
+    battery
+    distance
+
+    geoLocation {
+        _id
+        name
+    }
+    status
+    createdAt
+    updatedAt
+    location {
+        type
+        coordinates
+    }
+}
+
+fragment  OperatorVehicleResponse on VehicleResponse {
+    _id
+    name
+    make
+    model
+    code
+    battery
+    distance
+    geoLocation {
+        _id
+        name
+    }
+    status
+    createdAt
+    updatedAt
+    location {
+        type
+        coordinates
+    }
+    faultReport {
+        _id
+        faults {
+            ...FaultReportItemResponse
+        }
+    }
+}
+
+fragment PaginatedVehicleResponse on PaginatedVehicleResponse {
+    limit
+    page
+    items {
+        ...VehicleResponse
+    }
+}
+
+fragment RentalResponse on RentalResponse {
+    _id
+    vehicleId
+    userId
+    paymentMethod
+    discountCode
+    distance
+    polyline
+    type
+    startPoint {
+        ...LocationType
+    }
+    endPoint {
+        ...LocationType
+    }
+    pausedUntil
+    reservedUntil
+    appliedDiscount {
+        ...AppliedDiscount
+    }
+    startAt
+    rideMinute
+    status
+    createdAt
+    updatedAt
+    transaction {
+        ...TransactionResponse
+    }
+    vehicle {
+        ...VehicleResponse
+    }
+}
+
+fragment LocationType on LocationType {
+    coordinates
+    type
+}
+
+fragment AppliedDiscount on AppliedDiscount {
+    _id
+    type
+    coverage
+    percent
+    price {
+       ...DiscountCostDetail
+    }
+    time {
+        ...DiscountCostDetail
+    }
+}
+
+fragment DiscountCostDetail on DiscountCostDetail {
+    amount
+    saved
+    final
+}
+
+fragment PaginatedRentalResponse on PaginatedRentalResponse {
+    items {
+        ...RentalResponse
+    }
+    page
+    limit
+}
+
+fragment GroupedFaultResponse on GroupedFaultResponse {
+    tyre {
+        ...FaultResponse
+    }
+    brake {
+        ...FaultResponse
+    }
+    powertrain {
+        ...FaultResponse
+    }
+    others {
+        ...FaultResponse
+    }
+    light {
+        ...FaultResponse
+    }
+    bell {
+        ...FaultResponse
+    }
+    saddle {
+        ...FaultResponse
+    }
+    lock {
+        ...FaultResponse
+    }
+}
+
+fragment FaultResponse on FaultResponse {
+    _id
+    type
+    title
+    createdAt
+    updatedAt
+}
+
+fragment FaultReportResponse on FaultReportResponse {
+    _id
+    vehicleId
+    reporterId
+    assigneeId
+    status
+    escalationCount
+    createdAt
+    updatedAt
+    faults {
+        ...FaultReportItemResponse
+    }
+    vehicle {
+        ...VehicleResponse
+    }
+    assignee {
+        ...UserResponse
+    }
+    escalations {
+        ...FaultReportEscalationResponse
+    }
+}
+
+fragment FaultReportItemResponse on FaultReportItemResponse {
+    _id
+    faultId
+    description
+    fault {
+        ...FaultResponse
+    }
+}
+
+fragment FaultReportEscalationResponse on FaultReportEscalationResponse {
+    escalator {
+        ...UserResponse
+    }
+    assignee {
+        ...UserResponse
+    }
+    message
+}
+
+fragment PaginatedFaultReportResponse on PaginatedFaultReportResponse {
+    items {
+        ...FaultReportResponse
+    }
+    limit
+    page
+}
+
+fragment Faq on Faq {
+    _id
+    question
+    answer
+    createdAt
+    updatedAt
+}
+
+
+
+
+## END BIKE ##
+
+################################################################
+############################ GROUP RENTAL ###########################
+
+fragment GroupRentalResponse on GroupRentalResponse {
+    _id
+    userId
+    paymentMethod
+    members {
+        ...GroupRentalVehicleResponse
+    }
+    discountCode
+    appliedDiscount {
+        ...AppliedDiscount
+    }
+    status
+    pausedUntil
+    pendingUntil
+    createdAt
+    updatedAt
+    rentals {
+        ...RentalResponse
+    }
+}
+
+
+fragment GroupRentalVehicleResponse on GroupRentalVehicleResponse {
+    vehicle {
+        _id
+        code
+        battery
+    }
+    user {
+        _id
+        firstName
+        lastName
+        email
+        phone
+    }
+}
+
+
+## GROUP RENTAL ##
+
+################################################################
+############################ PAYMENT ###########################
