@@ -3,11 +3,17 @@ const String svgBaseUrl = 'assets/svgs/';
 
 class AppImage {
   static const String symbol = "${imageBaseUrl}symbol.png";
+  static const String check = "${imageBaseUrl}check.png";
+  static const String guestUser = "${imageBaseUrl}guest-user.png";
+  static const String checkTicked = "${imageBaseUrl}check-ticked.png";
 
   ///Icons
   static const String scanIcon = "${svgBaseUrl}scan.svg";
   static const String findUserIcon = "${svgBaseUrl}search-user.svg";
   static const String registerUserIcon = "${svgBaseUrl}add-user.svg";
   static const String generateIcon = "${svgBaseUrl}generate.svg";
+  static const String guestIcon = "${svgBaseUrl}guest.svg";
+  static const String linkIcon = "${svgBaseUrl}link.svg";
+  static const String uploadIcon = "${svgBaseUrl}upload.svg";
   static const String attendanceIcon = "${svgBaseUrl}attendance.svg";
 }

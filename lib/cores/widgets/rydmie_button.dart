@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../config/theme/app_theme.dart';
 import 'custom_text.dart';
 
-class RydmieButton extends StatelessWidget {
+class EventButton extends StatelessWidget {
   final double width;
   final double? height;
   final String text;
@@ -19,7 +19,7 @@ class RydmieButton extends StatelessWidget {
   final double? radius, borderWidth;
   final VoidCallback? onClick;
 
-  const RydmieButton({
+  const EventButton({
     super.key,
     required this.width,
     required this.text,

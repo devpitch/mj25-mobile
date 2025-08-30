@@ -1,3 +1,4 @@
+import 'package:event_handler/config/route/route_mapping.dart';
 import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/utils/constants.dart';
 import 'package:event_handler/cores/utils/custom_textfield.dart';
@@ -7,6 +8,7 @@ import 'package:event_handler/cores/widgets/app_footer_box.dart';
 import 'package:event_handler/cores/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -19,7 +21,12 @@ class LoginScreen extends StatelessWidget {
         title: CustomText(text: "Login", size: 18, weight: FontWeight.w700),
         automaticallyImplyLeading: false,
       ),
-      bottomSheet: AppFooterBox(buttonText: "Login", onTapped: () {}),
+      bottomSheet: AppFooterBox(
+        buttonText: "Login",
+        onTapped: () {
+          Get.toNamed(AppRouter.dashboardView);
+        },
+      ),
       body: Container(
         height: context.deviceHeight,
         width: context.deviceWidth,

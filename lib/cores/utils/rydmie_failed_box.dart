@@ -42,7 +42,7 @@ class RydmieFailedBox extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RydmieButton(
+                EventButton(
                   width: 200,
                   height: 45,
                   text: "Try again",

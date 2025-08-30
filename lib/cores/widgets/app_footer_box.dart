@@ -8,7 +8,14 @@ class AppFooterBox extends StatelessWidget {
   final String? buttonText;
   final Function()? onTapped;
   final Widget? child;
-  const AppFooterBox({super.key, this.buttonText, this.onTapped, this.child});
+  final double? bottomPadding;
+  const AppFooterBox({
+    super.key,
+    this.buttonText,
+    this.onTapped,
+    this.child,
+    this.bottomPadding,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +29,12 @@ class AppFooterBox extends StatelessWidget {
         children: [
           if (child != null) child!,
           if (buttonText != null)
-            RydmieButton(
+            EventButton(
               width: double.infinity,
               text: buttonText!,
               onClick: onTapped,
             ),
-          40.verticalSpace,
+          (bottomPadding ?? 40).verticalSpace,
         ],
       ),
     );
