@@ -42,5 +42,11 @@ List<GetPage> appRouters() {
       transition: Transition.fadeIn,
       transitionDuration: Duration(milliseconds: 300),
     ),
+    GetPage(
+      name: AppRouter.addGuestView,
+      page: () => AddNewGuestScreen(),
+      transition: Transition.fadeIn,
+      transitionDuration: Duration(milliseconds: 300),
+    ),
   ];
 }

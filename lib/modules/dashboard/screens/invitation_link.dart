@@ -1,3 +1,4 @@
+import 'package:event_handler/config/route/route_mapping.dart';
 import 'package:event_handler/config/theme/app_colors.dart';
 import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/utils/assets_mangment.dart';
@@ -10,6 +11,7 @@ import 'package:event_handler/cores/widgets/custom_text.dart';
 import 'package:event_handler/cores/widgets/rydmie_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class InvitationLinkScreen extends StatelessWidget {
   const InvitationLinkScreen({super.key});
@@ -29,7 +31,9 @@ class InvitationLinkScreen extends StatelessWidget {
               textColor: context.contentSecondary,
               fillColor: context.contentPrimary,
               text: "Add New Guest",
-              onClick: () {},
+              onClick: () {
+                Get.toNamed(AppRouter.addGuestView);
+              },
             ),
             8.verticalSpace,
             EventButton(

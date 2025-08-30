@@ -3,6 +3,7 @@ class AppRouter {
   static const String landingPage = "/landing_page";
   static const String loginPage = "/login_page";
   static const String dashboardView = "/dashboard_view";
+  static const String addGuestView = "/add_guest_view";
   static const String linkInvitationView = "/link_invitation_view";
   static const String guestDetailsView = "/guest_details_view";
 }
