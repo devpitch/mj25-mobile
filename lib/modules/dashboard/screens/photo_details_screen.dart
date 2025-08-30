@@ -53,25 +53,42 @@ class PhotoDetailsScreen extends ConsumerWidget {
               fit: BoxFit.cover,
             ),
             30.verticalSpace,
-            AppHeaderText(
-              label: "Tagged Guests",
-            ).paddingSymmetric(horizontal: AppConstants.pageHorizontalPadding),
-            Expanded(
-              child: ListView.separated(
-                shrinkWrap: true,
-                padding: EdgeInsets.only(
-                  bottom: 80,
-                  top: 20,
-                  left: AppConstants.pageHorizontalPadding,
-                  right: AppConstants.pageHorizontalPadding,
-                ),
-                itemBuilder: (cxt, index) => PhotoGuestInfo(),
-                separatorBuilder: (_, __) => 10.verticalSpace,
-                itemCount: 15,
-              ),
-            ),
+            TaggedGuestBuilder(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class TaggedGuestBuilder extends StatelessWidget {
+  final bool noPadding;
+  const TaggedGuestBuilder({super.key, this.noPadding = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppHeaderText(label: "Tagged Guests").paddingSymmetric(
+            horizontal: noPadding ? 0 : AppConstants.pageHorizontalPadding,
+          ),
+          Expanded(
+            child: ListView.separated(
+              shrinkWrap: true,
+              padding: EdgeInsets.only(
+                bottom: 80,
+                top: 20,
+                left: noPadding ? 0 : AppConstants.pageHorizontalPadding,
+                right: noPadding ? 0 : AppConstants.pageHorizontalPadding,
+              ),
+              itemBuilder: (cxt, index) => PhotoGuestInfo(),
+              separatorBuilder: (_, __) => 10.verticalSpace,
+              itemCount: 15,
+            ),
+          ),
+        ],
       ),
     );
   }

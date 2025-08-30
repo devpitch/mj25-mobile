@@ -5,11 +5,14 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:event_handler/config/route/route_mapping.dart';
 import 'package:event_handler/cores/utils/image_service.dart';
+import 'package:event_handler/cores/widgets/app_bottom_sheet.dart';
 import 'package:event_handler/main.dart';
 import 'package:event_handler/modules/dashboard/models/upload_image_model.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../widgets/dashboard_widgets_exporter.dart';
 
 class DashboardNotifier extends StateNotifier<DashboardState> {
   DashboardNotifier() : super(DashboardState());
@@ -56,6 +59,33 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       Get.toNamed(AppRouter.photoDetailsView);
     } catch (e) {
       log(":: This is the error during file opening::: $e");
+    }
+  }
+
+  openSheet({required BuildContext context, required String type}) async {
+    try {
+      switch (type) {
+        case "generateLink":
+          {
+            AppBottomSheet.show(
+              context,
+              title: "Guest count",
+              child: UserCountBottomSheet(),
+            );
+            break;
+          }
+        case "tagGuest":
+          {
+            AppBottomSheet.show(
+              context,
+              title: "Tag Guests",
+              child: GuestListSheet(),
+            );
+            break;
+          }
+      }
+    } catch (e) {
+      log(":::: This is the error link generate :::: $e");
     }
   }
 }

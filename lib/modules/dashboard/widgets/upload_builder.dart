@@ -8,6 +8,7 @@ import 'package:event_handler/cores/widgets/custom_text.dart';
 import 'package:event_handler/cores/widgets/rydmie_button.dart';
 import 'package:event_handler/modules/dashboard/models/upload_image_model.dart';
 import 'package:event_handler/modules/dashboard/provider/dashboard_provider.dart';
+import 'package:event_handler/modules/dashboard/screens/photo_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -68,7 +69,7 @@ class UploadViewBuilder extends ConsumerWidget {
               ),
             ),
           )
-        else
+        else ...[
           Flexible(
             child: SingleChildScrollView(
               child: Column(
@@ -103,61 +104,36 @@ class UploadViewBuilder extends ConsumerWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      EventButton(
-                        width: 142,
-                        text: "Upload More",
-                        onClick: () {
-                          notifier.pickImages(context, isMore: true);
-                        },
+                      Flexible(
+                        child: EventButton(
+                          width: double.infinity,
+                          text: "+ Tag Guests",
+                          textColor: context.backgroundSecondary,
+                          fillColor: context.contentSecondary,
+                          onClick: () {},
+                        ),
+                      ),
+                      15.horizontalSpace,
+                      Flexible(
+                        child: EventButton(
+                          width: double.infinity,
+                          text: "Upload More",
+                          onClick: () {
+                            notifier.pickImages(context, isMore: true);
+                          },
+                        ),
                       ),
                     ],
                   ),
-                  120.verticalSpace,
                 ],
               ),
             ),
           ),
+          20.verticalSpace,
+          TaggedGuestBuilder(noPadding: true),
+          // 120.verticalSpace,
+        ],
       ],
     );
   }
 }
-
-// class LinkItemBox extends StatelessWidget {
-//   const LinkItemBox({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: 72,
-//       width: double.infinity,
-//       alignment: Alignment.center,
-//       child: Row(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               CustomText(
-//                 text: "mj.url/xyz123",
-//                 weight: FontWeight.w500,
-//                 color: ThemeColors.contentPrimary,
-//                 size: 16,
-//               ),
-//               CustomText(text: "Used", color: ThemeColors.contentTertiary),
-//             ],
-//           ),
-//           10.horizontalSpace,
-//           IconBuilder(
-//             iconPath: AppImage.refer,
-//             size: 14,
-//             onTapped: () {
-//               Get.toNamed(AppRouter.linkInvitationView);
-//             },
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

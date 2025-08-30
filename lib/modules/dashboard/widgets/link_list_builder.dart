@@ -5,6 +5,8 @@ import 'package:event_handler/cores/utils/assets_mangment.dart';
 import 'package:event_handler/cores/utils/icon_builder.dart';
 import 'package:event_handler/cores/widgets/custom_text.dart';
 import 'package:event_handler/cores/widgets/rydmie_button.dart';
+import 'package:event_handler/main.dart';
+import 'package:event_handler/modules/dashboard/provider/dashboard_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -22,7 +24,11 @@ class LinkListBuilder extends StatelessWidget {
           fillColor: context.contentSecondary,
           textColor: context.contentPrimary,
           text: "Generate Invitation Link",
-          onClick: () {},
+          onClick: () {
+            genRef!
+                .read(dashboardProvider.notifier)
+                .openSheet(context: context, type: "generateLink");
+          },
         ),
         Expanded(
           child: ListView.separated(
