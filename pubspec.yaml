@@ -60,10 +60,16 @@ dependencies:
   pinput: ^5.0.1
   dotted_border: ^3.1.0
   modal_bottom_sheet: ^3.0.0
+  fresh_graphql: ^0.6.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner:
+  flutter_gen_runner:
+  graphql_codegen: ^2.0.0
+  freezed: ^3.2.0
+  json_serializable: ^6.11.0
 
 
   icons_launcher: ^3.0.2

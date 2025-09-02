@@ -1,6 +1,6 @@
 import 'package:event_handler/cores/cache/secure_storage.dart';
 import 'package:injectable/injectable.dart';
-// import 'package:rydmie_mobile/cores/cache/secure_storage.dart';
+// import 'package:event_handler/cores/cache/secure_storage.dart';
 
 abstract class SecureStorageInteractor {
   Future<String?> get token;
@@ -14,6 +14,8 @@ abstract class SecureStorageInteractor {
   Future<void> saveSessionExpiryDate(DateTime date);
 
   Future<void> onLogout();
+
+  Future<void> saveRefreshToken(String token);
 }
 
 @Injectable(as: SecureStorageInteractor)
@@ -54,6 +56,14 @@ class SecureStorageInteractorImpl implements SecureStorageInteractor {
     await _secureStorage.write(
       key: _SecureStorageKeys.sessionExpiryDate,
       value: savedDate,
+    );
+  }
+
+  @override
+  Future<void> saveRefreshToken(String token) async {
+    await _secureStorage.write(
+      key: _SecureStorageKeys.refreshToken,
+      value: token,
     );
   }
 

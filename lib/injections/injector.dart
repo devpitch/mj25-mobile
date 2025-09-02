@@ -3,10 +3,10 @@
 // import 'package:graphql_flutter/graphql_flutter.dart';
 // import 'package:hive_flutter/adapters.dart';
 // import 'package:injectable/injectable.dart';
-// import 'package:rydmie_mobile/cores/cache/cache_container.dart';
-// import 'package:rydmie_mobile/cores/cache/secure_storage_interactor.dart';
-// import 'package:rydmie_mobile/cores/network/client/create_graphql_client.dart';
-// import 'package:rydmie_mobile/cores/network/models/DataHolder.dart';
+// import 'package:event_handler/cores/cache/cache_container.dart';
+// import 'package:event_handler/cores/cache/secure_storage_interactor.dart';
+// import 'package:event_handler/cores/network/client/create_graphql_client.dart';
+// import 'package:event_handler/cores/network/models/DataHolder.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 //
 // import 'injector.config.dart';

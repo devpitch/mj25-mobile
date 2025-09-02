@@ -2,8 +2,8 @@
 // import 'dart:math' as math;
 //
 // import 'package:rxdart/rxdart.dart';
-// import 'package:rydmie_mobile/cores/cache/secure_storage_interactor.dart';
-// import 'package:rydmie_mobile/injections/injector.dart';
+// import 'package:event_handler/cores/cache/secure_storage_interactor.dart';
+// import 'package:event_handler/injections/injector.dart';
 // import 'package:socket_io_client/socket_io_client.dart' as IO;
 //
 // enum SocketConnectionState {

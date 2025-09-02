@@ -1,17 +1,17 @@
 enum UserTypeEnum {
-  /// Regular user of the platform
+  /// Regular user
   USER,
 
-  /// Operator with specific responsibilities
+  /// Operator-level user
   OPERATOR,
 
-  /// Admin with management permissions
+  /// Admin-level user
   ADMIN,
 
-  /// Super admin with elevated privileges
+  /// Super admin with higher privileges
   SUPER_ADMIN,
 
-  /// Chief admin with highest level of access
+  /// Chief administrator with the highest privileges
   CHIEF_ADMIN;
 
   @override

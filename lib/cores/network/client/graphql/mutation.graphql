@@ -1,19 +1,13 @@
 ###  Activations ###
-mutation activate($input: ActivateInput!) {
-    activate(input: $input) {
-        ...LoginResponse
+mutation generateInviteLink($input: CreateInvitationLinkInput!) {
+    generateInviteLink(input: $input) {
+        ...OkayResponse
     }
 }
 
-mutation start($input: StartInput!) {
-    start(input: $input) {
-        ...StartResponse
-    }
-}
-
-mutation refreshToken {
-    refreshToken {
-        ...LoginResponse
+mutation generatePrintCard($input: CreatePrintCardInput!) {
+    generatePrintCard(input: $input) {
+        ...OkayResponse
     }
 }
 
@@ -23,144 +17,16 @@ mutation login($input: LoginInput!) {
     }
 }
 
-mutation updateUser($input: UpdateUserInput!) {
-    updateUser(input: $input) {
-        ...UserResponse
+
+mutation refreshToken {
+    refreshToken {
+        ...LoginResponse
     }
 }
 
-mutation createUserSupport($input: CreateUserSupportTicketInput!) {
-    createUserSupport(input: $input) {
-        ...UserSupportTicketResponse
-    }
-}
-
-mutation verifyMe($input: CreateVerificationInput!) {
-    verifyMe(input: $input) {
-        ...VerificationResponse
-    }
-}
-
-### END USERS ###
-
-################################################################
-############################ PAYMENT #############################
-
-
-mutation createSubscriptionActionReason($input: CreateSubscriptionReasonsInput!) {
-    createSubscriptionActionReason(input: $input) {
-        ...SubscriptionReasonsResponse
-    }
-}
-
-mutation createTransaction($input: CreateTransactionInput!) {
-    createTransaction(input: $input) {
-        ...TransactionResponse
-    }
-}
-
-mutation enrolSubscription($input: CreateSubscriptionInput!) {
-    enrolSubscription(input: $input) {
-        ...SubscriptionResponse
-    }
-}
-
-mutation manageSubscription($input: UpdateSubscriptionInput!) {
-    manageSubscription(input: $input) {
-        ...ManageSubscription
-    }
-}
-
-mutation updatePaymentOption($input: UpdatePaymentOptionInput!) {
-    updatePaymentOption(input: $input) {
-        ...PaymentOptionResponse
-    }
-}
-
-mutation updateSubscriptionActionReason($input: UpdateSubscriptionReasonsInput!) {
-    updateSubscriptionActionReason(input: $input) {
-        ...SubscriptionReasonsResponse
-    }
-}
-
-mutation verifyTransaction($input: SimpleInput!) {
-    verifyTransaction(input: $input) {
-        ...TransactionResponse
-    }
-}
-
-mutation updatePaymentCard($input: UpdatePaymentCardInput!) {
-    updatePaymentCard(input: $input) {
-        ...PaymentCardResponse
-    }
-}
-
-mutation verifyBankingDetail($input: BankingVerificationInput!) {
-    verifyBankingDetail(input: $input) {
-        ...BankingVerificationResponse
-    }
-}
-
-################################################################
-############################ DISCOUNT ###########################
-
-mutation applyDiscount($input: ApplyDiscountInput!) {
-    applyDiscount(input: $input) {
-        ...DiscountResponse
-    }
-}
-
-
-### END DISCOUNT ###
-
-################################################################
-############################ BIKES ###########################
-
-mutation endRental($input: SimpleInput!) {
-    endRental(input: $input) {
-        ...RentalResponse
-    }
-}
-
-mutation InitiateRental($input: InitiateRentalInput!) {
-    initiateRental(input: $input) {
-        ...RentalResponse
-    }
-}
-
-mutation assignFaultReport($input: AssignFaultReportInput!) {
-    assignFaultReport(input: $input) {
-        ...FaultReportResponse
-    }
-}
-
-mutation removeFaultItem($input: RemoveFaultReportItemInput!) {
-    removeFaultItem(input: $input) {
-        ...FaultReportResponse
-    }
-}
-
-mutation reportFault($input: CreateFaultReportInput!) {
-    reportFault(input: $input) {
-        ...FaultReportResponse
-    }
-}
-
-
-### END BIKES ###
-
-################################################################
-############################ GROUP RENTAL ###########################
-
-mutation initiateGroupRental($input: InitiateGroupRentalInput!) {
-    initiateGroupRental(input: $input) {
-        ...GroupRentalResponse
-    }
-}
-
-mutation joinGroupRental($input: JoinGroupRentalInput!) {
-    joinGroupRental(input: $input) {
-        ...GroupRentalResponse
+mutation rsvp($input: CreateGuestInput!) {
+    rsvp(input: $input) {
+        ...GuestResponse
     }
 }
 

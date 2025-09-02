@@ -1,11 +1,11 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_screenutil/flutter_screenutil.dart';
 // import 'package:get/get.dart';
-// import 'package:rydmie_mobile/config/theme/app_theme.dart';
-// import 'package:rydmie_mobile/cores/utils/assets_mangment.dart';
-// import 'package:rydmie_mobile/cores/utils/icon_builder.dart';
-// import 'package:rydmie_mobile/cores/utils/money_formatter.dart';
-// import 'package:rydmie_mobile/cores/widgets/custom_text.dart';
+// import 'package:event_handler/config/theme/app_theme.dart';
+// import 'package:event_handler/cores/utils/assets_mangment.dart';
+// import 'package:event_handler/cores/utils/icon_builder.dart';
+// import 'package:event_handler/cores/utils/money_formatter.dart';
+// import 'package:event_handler/cores/widgets/custom_text.dart';
 // import 'package:skeletonizer/skeletonizer.dart';
 //
 // class RydmieMoneyFormatter extends StatelessWidget {

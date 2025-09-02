@@ -1,3 +1,10 @@
+import java.util.Properties
+import java.io.FileInputStream
+
+val keystoreProperties = Properties().apply {
+    load(FileInputStream(rootProject.file("key.properties")))
+}
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -7,9 +14,17 @@ plugins {
 
 android {
     namespace = "com.event_handler"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    compileSdk = 36
+    ndkVersion = "27.0.12077973"
 
+    signingConfigs {
+        create("release") {
+            keyAlias = keystoreProperties["keyAlias"] as String
+            keyPassword = keystoreProperties["keyPassword"] as String
+            storeFile = file(keystoreProperties["storeFile"] as String)
+            storePassword = keystoreProperties["storePassword"] as String
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -24,17 +39,22 @@ android {
         applicationId = "com.event_handler"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        minSdk = 23
+        targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+        getByName("release") {
+            ndk {
+
+                abiFilters.addAll(listOf("arm64-v8a", "armeabi-v7a"))
+            }
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
+
         }
     }
 }

@@ -1,0 +1,39 @@
+targets:
+  $default:
+    builders:
+      graphql_codegen:
+        options:
+          outputDirectory: __generated
+          generatedFileHeader: "// ignore_for_file: type=lint\n"
+          scalars:
+              ISODateTime:
+                type: DateTime
+                fromJsonFunctionName: dateTimeFromJson
+                toJsonFunctionName: dateTimeToJson
+                import: "package:event_handler/common/network/client/graphql/scalar.dart"
+              DateTime:
+                type: DateTime
+                fromJsonFunctionName: dateTimeFromJson
+                toJsonFunctionName: dateTimeToJson
+                import: "package:event_handler/common/network/client/graphql/scalar.dart"
+          enums:
+            linkStatusEnum:
+              type: LinkStatusEnum
+              fromJsonFunctionName: linkStatusEnumFromJson
+              toJsonFunctionName: linkStatusEnumToJson
+              import: "package:event_handler/common/network/client/graphql/enums/link_status_enum.dart"
+            linkTypeEnum:
+              type: LinkTypeEnum
+              fromJsonFunctionName: linkTypeEnumFromJson
+              toJsonFunctionName: linkTypeEnumToJson
+              import: "package:event_handler/common/network/client/graphql/enums/link_type_enum.dart"
+            userTypeEnum:
+              type: UserTypeEnum
+              fromJsonFunctionName: userTypeEnumFromJson
+              toJsonFunctionName: userTypeEnumToJson
+              import: "package:event_handler/common/network/client/graphql/enums/user_type_enum.dart"
+            
+          addTypename: true
+          clients:
+            - graphql
+            - graphql_flutter

@@ -3,2458 +3,6 @@ Indicates exactly one field must be supplied and this field must not be `null`.
 """
 directive @oneOf on INPUT_OBJECT
 
-input ActivateInput {
-  """User phone number"""
-  phone: String!
-
-  """Activation code sent to user"""
-  code: String!
-
-  """Referral code with which the user was invited"""
-  referralCode: String
-}
-
-union ActivityLogUnionType = ServiceEventLog | AdminActivityLog | UserActivityLog
-
-type AdminActivityLog {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Action name"""
-  action: String!
-
-  """Service name"""
-  service: String!
-
-  """Unique user Identifier"""
-  userId: ID
-
-  """Event timestamp"""
-  timestamp: DateTime!
-
-  """Record creation time"""
-  createdAt: DateTime!
-}
-
-"""Applied Discount response data"""
-type AppliedDiscount {
-  """Discount ID"""
-  _id: ID!
-
-  """Type of discount"""
-  type: DiscountTypeEnum!
-
-  """Type of costs the discount covers"""
-  coverage: DiscountCoverageEnum!
-
-  """Percentage the discount covers"""
-  percent: Float!
-
-  """Time based discount details"""
-  price: DiscountCostDetail
-
-  """Price based discount details"""
-  time: DiscountCostDetail
-}
-
-"""Input type for applying a discount"""
-input ApplyDiscountInput {
-  """Discount code to apply"""
-  code: String!
-
-  """Transaction ID for the discount application"""
-  transactionId: ID!
-
-  """Type of transaction"""
-  type: TransactionReferenceTypeEnum!
-}
-
-"""Input type for creating a fault report assignment/escalation"""
-input AssignFaultReportInput {
-  """Unique identifier for the fault report"""
-  faultReportId: ID!
-
-  """Unique identifier for the staff member to assign the fault report to"""
-  assigneeId: ID!
-
-  """Additional message to include with the assignment"""
-  message: String
-}
-
-"""Input type for verifying a bank account"""
-input BankingVerificationInput {
-  """Bank Verification Number"""
-  bvn: String!
-
-  """Account number"""
-  accountNumber: String!
-
-  """Bank code"""
-  bankCode: String!
-}
-
-"""Banking Verification Response"""
-type BankingVerificationResponse {
-  """Banking verification response status"""
-  status: String!
-
-  """Banking verification response message/ status reason"""
-  message: String!
-}
-
-"""Pass Response"""
-type BankResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Bank name"""
-  name: String!
-
-  """Bank code"""
-  code: String!
-
-  """Creation date"""
-  createdAt: DateTime!
-
-  """Last update date"""
-  updatedAt: DateTime!
-}
-
-"""Input type for creating a discount"""
-input CreateDiscountInput {
-  """Unique discount code"""
-  code: String!
-
-  """User ID for user-specific discounts"""
-  userId: String
-
-  """Type of discount, either USER or GENERAL"""
-  type: DiscountTypeEnum!
-
-  """Expiration date of the discount"""
-  activeUntil: DateTime!
-
-  """
-  Coverage type of the discount, e.g., Unlock or Rental Time cost or both
-  """
-  coverage: DiscountCoverageEnum!
-
-  """Maximum amount or reduction provided by the discount """
-  cappedAmount: Float
-
-  """Percentage of the discount applied to the original cost"""
-  percentage: Float!
-
-  """Maximum number of times the discount can be redeemed"""
-  maxRedemption: Float! = 1
-}
-
-input CreateFaqInput {
-  question: String!
-  answer: String!
-}
-
-"""Input type for creating a fault item"""
-input CreateFaultInput {
-  """Type of the fault"""
-  type: FaultTypeEnum! = OTHER
-
-  """Title of the fault"""
-  title: String!
-}
-
-"""Input type for creating a fault item"""
-input CreateFaultReportInput {
-  """Unique identifier for the vehicle"""
-  vehicleId: ID!
-
-  """List of faults"""
-  faults: [FaultReportItemInput!]!
-}
-
-"""Input for creating a new GeoLocation"""
-input CreateGeoLocationInput {
-  """Location name"""
-  name: String!
-
-  """
-  Max distance measured from the center of the location to the farthest edge
-  """
-  radius: Float!
-
-  """Coordinates of the center of this location, [longitude, latitude]"""
-  center: [Float!]!
-}
-
-"""Input type for creating a payment option"""
-input CreatePaymentOptionInput {
-  """Name of the payment option"""
-  title: String!
-
-  """Type of the payment option"""
-  type: PaymentOptionTypeEnum!
-
-  """Description of the payment option"""
-  description: String!
-
-  """Features of the payment option"""
-  features: [String!]!
-
-  """If the payment option is a recommended option"""
-  isRecommended: Boolean!
-
-  """Availability status of Payment option"""
-  status: PaymentOptionStatusEnum!
-
-  """Period duration of a single Payment option item"""
-  period: Float!
-
-  """Period unit of duration of a single Payment option item"""
-  periodUnit: PeriodUnitTypeEnum!
-
-  """Ride duration available for a single Payment option item"""
-  rideDuration: Float!
-
-  """Additional message displayed on Payment option purchase"""
-  messageText: String
-
-  """Start date for a Payment option"""
-  startAt: String = null
-
-  """Price details for the payment option"""
-  price: CreatePaymentOptionPrice!
-}
-
-"""Input type for creating a payment option"""
-input CreatePaymentOptionPrice {
-  """Regular amount without discount"""
-  regular: Float!
-
-  """Amount saved in descriptive text"""
-  saving: String
-
-  """Final retails cost after discount has been applied"""
-  final: Float!
-}
-
-"""Input for creating a new subscription"""
-input CreateSubscriptionInput {
-  """reference to the payment option (subscription plan)"""
-  paymentOptionId: ID!
-
-  """reference to the payment card"""
-  paymentCardId: ID = null
-
-  """
-  Payment Transaction ID generated in previous step. Only needed for
-  users who authorizes payment card for the first time
-  """
-  transactionId: ID = null
-}
-
-"""Subscription reasons filter input"""
-input CreateSubscriptionReasonsInput {
-  """reason for cancellation/pausing of subscription"""
-  reason: String!
-
-  """Type of subscription reason"""
-  type: SubscriptionReasonsTypeEnum! = BOTH
-
-  """Unique Identifier"""
-  _id: ID
-}
-
-input CreateTransactionInput {
-  """Transaction type"""
-  type: TransactionTypeEnum!
-
-  """Source of the transaction"""
-  source: TransactionSourceEnum
-
-  """Reference of the transaction"""
-  referenceType: TransactionReferenceTypeEnum!
-
-  """reference to the transaction or payment"""
-  referenceId: ID!
-
-  """transaction amount"""
-  amount: Float
-}
-
-"""Create user support input"""
-input CreateUserSupportTicketInput {
-  """title"""
-  title: String!
-
-  """message"""
-  message: String!
-}
-
-"""Input for creating a new Vehicle"""
-input CreateVehicleInput {
-  """Vehicle name"""
-  name: String!
-
-  """make"""
-  make: String!
-
-  """model"""
-  model: String!
-
-  """code"""
-  code: String!
-
-  """Industrial Unique ID"""
-  uid: String!
-
-  """battery level of the vehicle in percentage"""
-  battery: Float!
-
-  """status of the vehicle"""
-  status: VehicleStatusEnum! = AVAILABLE
-
-  """Coordinates, [longitude, latitude]"""
-  location: [Float!]!
-
-  """
-  distance in Kilometers the vehicle can travel with current battery level
-  """
-  distance: Float = 50
-
-  """ID of the GeoLocation the vehicle is stationed at"""
-  geoLocationId: ID
-}
-
-"""Input for creating a user verification"""
-input CreateVerificationInput {
-  """User Id Type"""
-  idType: String! = "NIN"
-
-  """User Id number"""
-  idNumber: String!
-
-  """User date of birth"""
-  birthDate: String
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-"""Specifies the default payment method for a user"""
-enum DefaultPaymentMethodEnum {
-  """Payment method for subscription customer"""
-  SUBSCRIPTION
-
-  """Payment method for one-time pass purchase"""
-  PASS
-
-  """Payment method for continuous Pay-As-You-Go (PAYG) customer"""
-  WALLET
-}
-
-"""Applied Discount response data"""
-type DiscountCostDetail {
-  """Original amount of transaction"""
-  amount: Float!
-
-  """
-  Saved amount of transaction - difference from original amount and amount subtracted
-  """
-  saved: Float!
-
-  """Final amount of transaction after applying discount"""
-  final: Float!
-}
-
-"""Specifies the coverage of the discount"""
-enum DiscountCoverageEnum {
-  """Full coverage - Discount applies to the entire service"""
-  FULL
-
-  """Time coverage - Discount applies to time-based services"""
-  TIME
-
-  """Unlock coverage - Discount applies to unlock features"""
-  UNLOCK
-
-  """Pass coverage - Discount applies to pass purchases"""
-  PASS
-
-  """Subscription coverage - Discount applies to subscription payment"""
-  SUBSCRIPTION
-}
-
-type DiscountResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Unique discount code"""
-  code: String!
-
-  """User ID for user-specific discounts"""
-  userId: String
-
-  """Type of discount, either USER or GENERAL"""
-  type: DiscountTypeEnum!
-
-  """Expiration date of the discount"""
-  activeUntil: DateTime!
-
-  """
-  Coverage type of the discount, e.g., Unlock or Rental Time cost or both
-  """
-  coverage: DiscountCoverageEnum!
-
-  """Maximum amount or reduction provided by the discount """
-  cappedAmount: Float
-
-  """Percentage of the discount applied to the original cost"""
-  percentage: Float!
-
-  """Maximum number of times the discount can be redeemed"""
-  maxRedemption: Float!
-
-  """Total number of times the discount has been redeemed"""
-  totalRedemption: Float!
-
-  """Current status of the discount"""
-  status: DiscountStatusEnum!
-
-  """Creation date of the discount"""
-  createdAt: DateTime!
-
-  """Last updated date of the discount"""
-  updatedAt: DateTime!
-}
-
-"""Specifies the status of the discount"""
-enum DiscountStatusEnum {
-  """Active discount - Currently available for use"""
-  ACTIVE
-
-  """Inactive discount - Temporarily disabled"""
-  INACTIVE
-
-  """Used discount - Has reached maximum redemption limit"""
-  USED
-
-  """Archived discount - No longer in use but kept"""
-  ARCHIVED
-
-  """Expired discount - Past its active date and no longer valid"""
-  EXPIRED
-}
-
-"""Specifies the type of discount offered"""
-enum DiscountTypeEnum {
-  """Discount applicable to a specific user"""
-  USER
-
-  """General discount applicable to all users"""
-  GENERAL
-}
-
-type Faq {
-  """Unique Identifier"""
-  _id: ID!
-
-  """The actual question being asked"""
-  question: String!
-
-  """The answer provided for the question"""
-  answer: String!
-
-  """Date of creation"""
-  createdAt: DateTime!
-
-  """Date of last update"""
-  updatedAt: DateTime!
-}
-
-"""Fault Report Item response"""
-type FaultReportEscalationResponse {
-  """The user who escalated the fault report"""
-  escalator: UserResponse!
-
-  """The user to whom the fault report was escalated"""
-  assignee: UserResponse!
-
-  """Extra description of the escalation"""
-  message: String
-}
-
-"""Input type for filtering fault reports"""
-input FaultReportFilterInput {
-  """ID of the admin who is assigned to fault report"""
-  assigneeId: ID
-
-  """ID of the vehicle associated with the fault report"""
-  vehicleId: ID
-
-  """Status of the fault report"""
-  status: FaultStatusEnum
-
-  """Minimum escalation count for the fault report"""
-  minEscalationCount: Float
-
-  """Maximum escalation count for the fault report"""
-  maxEscalationCount: Float
-
-  """Start date for filtering fault reports"""
-  createdSince: DateTime
-
-  """End date for filtering fault reports"""
-  createdUntil: DateTime
-
-  """Start date for filtering fault reports by last update"""
-  updatedSince: DateTime
-
-  """End date for filtering fault reports by last update"""
-  updatedUntil: DateTime
-}
-
-"""Input type for fault item"""
-input FaultReportItemInput {
-  """Fault Item Id"""
-  faultId: ID!
-
-  """Extra description of the fault"""
-  description: String
-}
-
-"""Fault Report Item response"""
-type FaultReportItemResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Fault Item Id"""
-  faultId: ID!
-
-  """Extra description of the fault"""
-  description: String
-
-  """Fault item"""
-  fault: FaultResponse
-}
-
-"""Fault report response entity"""
-type FaultReportResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Unique identifier for the vehicle"""
-  vehicleId: ID!
-
-  """User who reported the fault"""
-  reporterId: String!
-
-  """User to whom the fault is assigned"""
-  assigneeId: ID
-
-  """Status of the fault"""
-  status: FaultStatusEnum!
-
-  """Number of times the fault has been escalated"""
-  escalationCount: Float!
-
-  """Creation date"""
-  createdAt: DateTime!
-
-  """Last Update date"""
-  updatedAt: DateTime!
-
-  """Fault Report Items"""
-  faults: [FaultReportItemResponse!]!
-
-  """Vehicle details associated with the fault report"""
-  vehicle: VehicleResponse!
-
-  """User who this fault report is assigned to"""
-  assignee: UserResponse
-
-  """Fault Report Escalations"""
-  escalations: [FaultReportEscalationResponse!]!
-
-  """User who created the support ticket"""
-  reporter: UserResponse
-}
-
-"""Fault response entity"""
-type FaultResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Type of the fault"""
-  type: FaultTypeEnum!
-
-  """Title of the fault"""
-  title: String!
-
-  """Creation date"""
-  createdAt: DateTime!
-
-  """Last Update date"""
-  updatedAt: DateTime!
-}
-
-"""The various statuses a fault can have"""
-enum FaultStatusEnum {
-  """The fault is open and has not been addressed yet."""
-  OPEN
-
-  """The fault is currently being worked on."""
-  IN_PROGRESS
-
-  """The fault has been resolved but not yet closed."""
-  RESOLVED
-
-  """The fault has been closed and no further action is needed."""
-  CLOSED
-}
-
-"""The type of fault that can occur on a bike"""
-enum FaultTypeEnum {
-  """Issues related to the bike brake system"""
-  BRAKE
-
-  """Issues related to the bike saddle (seat)"""
-  SADDLE
-
-  """Issues related to the bike bell"""
-  BELL
-
-  """Any other type of fault not covered by the above categories"""
-  OTHER
-
-  """Issues related to the bike tyre"""
-  TYRE
-
-  """Issues related to the bike lock"""
-  LOCK
-
-  """Issues related to the bike chain"""
-  POWERTRAIN
-
-  """Issues related to the bike light"""
-  LIGHT
-}
-
-"""GeoLocation response data"""
-type GeoLocationResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Location name"""
-  name: String!
-
-  """
-  Max distance measured from the center of the location to the farthest edge
-  """
-  radius: Float!
-
-  """Creation date"""
-  createdAt: DateTime!
-
-  """Last updated date"""
-  updatedAt: DateTime!
-
-  """Main center of the GeoLocation: Coordinates, [longitude, latitude]"""
-  center: LocationType!
-}
-
-"""Grouped fault response containing various types of faults"""
-type GroupedFaultResponse {
-  """Faults related to bike tyres"""
-  tyre: [FaultResponse!]!
-
-  """Faults related to bike brakes"""
-  brake: [FaultResponse!]!
-
-  """Faults related to bike powertrain (chains)"""
-  powertrain: [FaultResponse!]!
-
-  """Faults related to bike lights"""
-  light: [FaultResponse!]!
-
-  """Faults related to bike bells"""
-  bell: [FaultResponse!]!
-
-  """Faults related to bike saddle (seat)"""
-  saddle: [FaultResponse!]!
-
-  """Faults related to bike locks"""
-  lock: [FaultResponse!]!
-
-  """Other types of faults"""
-  others: [FaultResponse!]!
-}
-
-type GroupedPaymentOptionResponse {
-  """Payment options grouped by type subscription"""
-  subscription: [PaymentOptionResponse!]!
-
-  """Payment options grouped by type pass"""
-  pass: [PaymentOptionResponse!]!
-
-  """Payment options grouped by type continuous - Pay As You Go"""
-  continuous: [PaymentOptionResponse!]!
-}
-
-"""Describes action to be performed on rental"""
-enum GroupRentalActionEnum {
-  """Start the group rental"""
-  START
-
-  """User adds a bike to the group rental"""
-  ADD_VEHICLE
-
-  """User removes a bike from the group rental"""
-  REMOVE_VEHICLE
-
-  """User adds another user to the group rental"""
-  ASSIGN_USER
-
-  """User removes another user from the group rental"""
-  REMOVE_USER
-
-  """User cancels the ride"""
-  CANCEL
-
-  """Discount applied to the group rental"""
-  APPLY_DISCOUNT
-
-  """Discount removed from the group rental"""
-  REMOVE_DISCOUNT
-}
-
-type GroupRentalResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """User ID of the group leader"""
-  userId: ID!
-
-  """User default payment method"""
-  paymentMethod: DefaultPaymentMethodEnum!
-
-  """Discount code"""
-  discountCode: String
-
-  """Applied discount details"""
-  appliedDiscount: AppliedDiscount
-
-  """Status of the Rental"""
-  status: RentalStatusEnum!
-
-  """Deadline for current pause action"""
-  pausedUntil: DateTime
-
-  """Deadline for rental pending status"""
-  pendingUntil: DateTime
-
-  """Creation date"""
-  createdAt: DateTime!
-
-  """Last updated date"""
-  updatedAt: DateTime!
-
-  """Associated rentals for the group rental"""
-  rentals: [RentalResponse!]!
-
-  """Associated vehicles for the group rental with attached users"""
-  members: [GroupRentalVehicleResponse!]!
-}
-
-"""Group rental vehicle response data"""
-type GroupRentalVehicleResponse {
-  """Vehicle response data"""
-  vehicle: VehicleResponse!
-
-  """User response data"""
-  user: UserResponse
-}
-
-"""Input for updating a Rental"""
-input InitiateGroupRentalInput {
-  """Rental action"""
-  action: GroupRentalActionEnum!
-
-  """Plain text of the QR code on vehicle or directly typed in text"""
-  code: String
-
-  """Vehicle ID to which the user is to be attached"""
-  vehicleId: ID
-
-  """User ID to be attached to a vehicle in the group rental"""
-  userId: ID
-
-  """Discount code"""
-  discountCode: String
-}
-
-"""Input for updating a Rental"""
-input InitiateRentalInput {
-  """Rental action"""
-  action: RentalActionEnum!
-
-  """Plain text of the QR code on vehicle or directly typed in text"""
-  code: String!
-
-  """Discount code"""
-  discountCode: String
-}
-
-"""Input for joining a group Rental"""
-input JoinGroupRentalInput {
-  """Vehicle ID to which the user is to be attached"""
-  vehicleId: ID!
-
-  """Group ID to which the user is to be attached"""
-  groupId: ID!
-}
-
-"""Location type for coordinate"""
-type LocationType {
-  """Type of data"""
-  type: String!
-
-  """Coordinates, [longitude, latitude]"""
-  coordinates: [Float!]!
-}
-
-input LogFilterInput {
-  """Type of log"""
-  type: String
-
-  """User Id in the log"""
-  userId: ID
-
-  """Start date range of log"""
-  startDate: DateTime
-
-  """End date range of log"""
-  endDate: DateTime
-}
-
-"""Login input data"""
-input LoginInput {
-  """User phone number"""
-  phone: String!
-
-  """User passcode"""
-  passcode: String!
-
-  """Device id"""
-  deviceId: String!
-}
-
-type LoginResponse {
-  """User basic data"""
-  user: UserResponse!
-
-  """Passcode"""
-  passcode: String
-
-  """Access token"""
-  accessToken: TokenResponse!
-
-  """Refresh Token"""
-  refreshToken: TokenResponse!
-}
-
-"""Get subscribed users filter input"""
-input MailingListFilterInput {
-  """Filter by subscription status"""
-  isSubscribed: Boolean
-
-  """Start date for filtering fault reports"""
-  createdSince: DateTime
-
-  """End date for filtering fault reports"""
-  createdUntil: DateTime
-}
-
-"""Mailing list input"""
-input MailingListInput {
-  """Subscriber email address"""
-  email: String!
-}
-
-"""Mailing list response entity"""
-type MailingListResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Subscriber email address"""
-  email: String!
-
-  """Subscription status"""
-  isSubscribed: Boolean!
-
-  """Creation date"""
-  createdAt: DateTime!
-
-  """Last Update date"""
-  updatedAt: DateTime!
-}
-
-type Mutation {
-  """Onboard a returning or new user"""
-  start(input: StartInput!): StartResponse!
-
-  """Activate a user account"""
-  activate(input: ActivateInput!): LoginResponse!
-
-  """Login a returning user"""
-  login(input: LoginInput!): LoginResponse!
-
-  """Refresh user access and refresh tokens"""
-  refreshToken: LoginResponse!
-
-  """Set system wallet configuration"""
-  setWalletConfig(input: SetWalletConfigInput!): WalletConfigResponse!
-
-  """Create a new transaction"""
-  createTransaction(input: CreateTransactionInput!): TransactionResponse!
-
-  """Verify a transaction"""
-  verifyTransaction(input: SimpleInput!): TransactionResponse!
-
-  """Update payment cards for a user"""
-  updatePaymentCard(input: UpdatePaymentCardInput!): PaymentCardResponse!
-
-  """Create a new payment option"""
-  createPaymentOption(input: CreatePaymentOptionInput!): PaymentOptionResponse!
-
-  """Update an existing payment option"""
-  updatePaymentOption(input: UpdatePaymentOptionInput!): PaymentOptionResponse!
-
-  """Complete Subscription Enrolment"""
-  enrolSubscription(input: CreateSubscriptionInput!): SubscriptionResponse!
-
-  """Cancel/Reactivate, Pause/Resume Subscription"""
-  manageSubscription(input: UpdateSubscriptionInput!): SubscriptionResponse!
-
-  """Create Subscription Cancellation/Pause Reason"""
-  createSubscriptionActionReason(input: CreateSubscriptionReasonsInput!): SubscriptionReasonsResponse!
-
-  """Update Subscription Cancellation/Pause Reason"""
-  updateSubscriptionActionReason(input: UpdateSubscriptionReasonsInput!): SubscriptionReasonsResponse!
-
-  """Verify a bank account"""
-  verifyBankingDetail(input: BankingVerificationInput!): BankingVerificationResponse!
-
-  """Create a new discount"""
-  createDiscount(input: CreateDiscountInput!): DiscountResponse!
-
-  """Apply a discount to a transaction"""
-  applyDiscount(input: ApplyDiscountInput!): DiscountResponse!
-
-  """Create a new vehicle in the fleet"""
-  createVehicle(input: CreateVehicleInput!): VehicleResponse!
-
-  """Update an existing vehicle"""
-  updateVehicle(input: UpdateVehicleInput!): VehicleResponse!
-
-  """Create/Update a new GeoLocation"""
-  setGeoLocation(input: CreateGeoLocationInput!): GeoLocationResponse!
-
-  """Create a new fault item"""
-  createFault(input: CreateFaultInput!): FaultResponse!
-
-  """Report one ore more faults for a vehicle"""
-  reportFault(input: CreateFaultReportInput!): FaultReportResponse!
-
-  """
-  Assigns a fault to others or to the staff member who is currently logged in
-  """
-  assignFaultReport(input: AssignFaultReportInput!): FaultReportResponse!
-
-  """Marks a fault report as invalid and removes it"""
-  removeFaultItem(input: RemoveFaultReportItemInput!): FaultReportResponse!
-
-  """initiates the ride"""
-  initiateRental(input: InitiateRentalInput!): RentalResponse!
-
-  """Ends the rental after the ride"""
-  endRental(input: SimpleInput!): RentalResponse!
-
-  """initiates a group rental operation for a user"""
-  initiateGroupRental(input: InitiateGroupRentalInput!): GroupRentalResponse!
-
-  """Join a group rental"""
-  joinGroupRental(input: JoinGroupRentalInput!): GroupRentalResponse!
-
-  """Subscribe an email to the RydMie mailing list"""
-  subscribeNewsLetter(input: MailingListInput!): OkayResponse!
-
-  """Unsubscribe an email from the RydMie mailing list"""
-  unsubscribeNewsLetter(input: UnsubscribeMailingListInput!): OkayResponse!
-
-  """Update user information"""
-  updateUser(input: UpdateUserInput!): UserResponse!
-
-  """Create record and process user verification"""
-  verifyMe(input: CreateVerificationInput!): VerificationResponse!
-
-  """Create a new user support ticket"""
-  createUserSupport(input: CreateUserSupportTicketInput!): UserSupportTicketResponse!
-
-  """Update an existing user support ticket"""
-  updateUserSupport(input: UpdateUserSupportTicketInput!): UserSupportTicketResponse!
-
-  """create an FAQ"""
-  createFaq(input: CreateFaqInput!): Faq!
-
-  """Update FAQ"""
-  updateFaq(input: UpdateFaqInput!): Faq!
-
-  """Delete FAQ"""
-  deleteFaq(input: SimpleInput!): Boolean!
-}
-
-"""Response for OK requests"""
-type OkayResponse {
-  """Confirmation message"""
-  message: String!
-
-  """Status of the request"""
-  status: String!
-}
-
-type PaginatedActivityLogResponse {
-  """List of activity logged items"""
-  items: [ActivityLogUnionType!]!
-
-  """Total number of items per load"""
-  limit: Int!
-
-  """Current page number"""
-  page: Int!
-}
-
-"""Paginated Fault Report Response"""
-type PaginatedFaultReportResponse {
-  """List of FaultReportResponse"""
-  items: [FaultReportResponse!]
-
-  """Total number of FaultReportResponse per load"""
-  limit: Int!
-
-  """Current page number"""
-  page: Int!
-}
-
-"""Paginated response for GeoLocations"""
-type PaginatedGeoLocationResponse {
-  """List of GeoLocationResponse"""
-  items: [GeoLocationResponse!]
-
-  """Total number of GeoLocationResponse per load"""
-  limit: Int!
-
-  """Current page number"""
-  page: Int!
-}
-
-"""Paginated rental responses"""
-type PaginatedGroupRentalResponse {
-  """List of GroupRentalResponse"""
-  items: [GroupRentalResponse!]
-
-  """Total number of GroupRentalResponse per load"""
-  limit: Int!
-
-  """Current page number"""
-  page: Int!
-}
-
-"""Paginated Mailing List Response"""
-type PaginatedMailingListResponse {
-  """List of MailingListResponse"""
-  items: [MailingListResponse!]
-
-  """Total number of MailingListResponse per load"""
-  limit: Int!
-
-  """Current page number"""
-  page: Int!
-}
-
-"""Paginated rental responses"""
-type PaginatedRentalResponse {
-  """List of RentalResponse"""
-  items: [RentalResponse!]
-
-  """Total number of RentalResponse per load"""
-  limit: Int!
-
-  """Current page number"""
-  page: Int!
-}
-
-type PaginatedTransactionResponse {
-  """List of TransactionResponse"""
-  items: [TransactionResponse!]
-
-  """Total number of TransactionResponse per load"""
-  limit: Int!
-
-  """Current page number"""
-  page: Int!
-}
-
-type PaginatedUserResponse {
-  """List of UserResponse"""
-  items: [UserResponse!]
-
-  """Total number of UserResponse per load"""
-  limit: Int!
-
-  """Current page number"""
-  page: Int!
-}
-
-"""Paginated response for vehicles"""
-type PaginatedUserSupportTicketResponse {
-  """List of UserSupportTicketResponse"""
-  items: [UserSupportTicketResponse!]
-
-  """Total number of UserSupportTicketResponse per load"""
-  limit: Int!
-
-  """Current page number"""
-  page: Int!
-}
-
-"""Paginated response for vehicles"""
-type PaginatedVehicleResponse {
-  """List of VehicleResponse"""
-  items: [VehicleResponse!]
-
-  """Total number of VehicleResponse per load"""
-  limit: Int!
-
-  """Current page number"""
-  page: Int!
-}
-
-type PaginatedVerificationResponse {
-  """List of VerificationResponse"""
-  items: [VerificationResponse!]
-
-  """Total number of VerificationResponse per load"""
-  limit: Int!
-
-  """Current page number"""
-  page: Int!
-}
-
-"""Pass Response"""
-type PassResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """reference to the user"""
-  userId: ID!
-
-  """Ride minute available"""
-  rideMinute: Float!
-
-  """Validity Start date"""
-  startAt: DateTime!
-
-  """Validity end date"""
-  expireAt: DateTime!
-
-  """Pass status"""
-  status: PassStatusEnum!
-
-  """reference to the payment option (pass plan)"""
-  paymentOptionId: ID!
-
-  """reference to the payment transaction"""
-  transactionId: ID
-
-  """date when the pass was first created"""
-  createdAt: DateTime!
-
-  """date when the pass was last updated"""
-  updatedAt: DateTime!
-
-  """Pass plan"""
-  plan: PaymentOptionResponse!
-
-  """Transaction associated with pass purchase"""
-  transaction: TransactionResponse!
-}
-
-"""Specifies Pass status"""
-enum PassStatusEnum {
-  """Pass is active and available for use"""
-  ACTIVE
-
-  """Pass is inactive - Validity period had ended"""
-  INACTIVE
-}
-
-"""Payment Account Response"""
-type PaymentAccountResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """User ID associated with the payment account"""
-  userId: ID!
-
-  """Bank Name"""
-  bank: String!
-
-  """Bank Account Number"""
-  number: String!
-
-  """Bank Account Name"""
-  name: String!
-
-  """account creation date"""
-  createdAt: DateTime!
-
-  """account last update date"""
-  updatedAt: DateTime!
-}
-
-type PaymentCardResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """User ID"""
-  userId: ID!
-
-  """Indicates if the card is the default payment card for the user"""
-  isDefault: Boolean!
-
-  """Shortened Payment card Number"""
-  shortNumber: String!
-
-  """Payment card Number"""
-  number: String!
-
-  """Customer email"""
-  email: String!
-
-  """Card type"""
-  type: String!
-
-  """Card country"""
-  countryCode: String!
-
-  """Card brand"""
-  brand: String!
-
-  """creation date"""
-  createdAt: DateTime!
-
-  """update date"""
-  updatedAt: DateTime!
-}
-
-"""Price data"""
-type PaymentOptionPrice {
-  """Regular amount without discount"""
-  regular: Float!
-
-  """Amount saved in descriptive text"""
-  saving: String
-
-  """Final retails cost after discount has been applied"""
-  final: Float!
-}
-
-type PaymentOptionResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Name of the payment option"""
-  title: String!
-
-  """Type of the payment option"""
-  type: PaymentOptionTypeEnum!
-
-  """Description of the payment option"""
-  description: String!
-
-  """Price of the payment option"""
-  price: PaymentOptionPrice!
-
-  """Features of the payment option"""
-  features: [String!]!
-
-  """If the payment option is a recommended option"""
-  isRecommended: Boolean!
-
-  """Availability status of Payment option"""
-  status: PaymentOptionStatusEnum!
-
-  """Period duration of a single Payment option item"""
-  period: Float!
-
-  """Period unit of duration of a single Payment option item"""
-  periodUnit: PeriodUnitTypeEnum!
-
-  """Ride duration available for a single Payment option item"""
-  rideDuration: Float!
-
-  """Additional message displayed on Payment option purchase"""
-  messageText: String
-
-  """Start date for a Payment option"""
-  startAt: String
-
-  """Creation date"""
-  createdAt: DateTime!
-
-  """Last update date"""
-  updatedAt: DateTime!
-}
-
-"""Describes Payment Option status"""
-enum PaymentOptionStatusEnum {
-  """Payment Option is currently active and available for use"""
-  ACTIVE
-
-  """
-  Payment Option has been archived and is no longer available for new transactions
-  """
-  ARCHIVED
-
-  """
-  Payment Option is inactive and not available for use, but can be reactivated
-  """
-  INACTIVE
-}
-
-"""Specifies payment option type"""
-enum PaymentOptionTypeEnum {
-  """Continuous payment option - Pay as you go option"""
-  CONTINUOUS
-
-  """
-  Pass payment option - One-time payment option for a specific duration type
-  """
-  PASS
-
-  """
-  Subscription payment option - Recurring payment option for a specific duration type
-  """
-  SUBSCRIPTION
-}
-
-"""Specifies Period Unit for item"""
-enum PeriodUnitTypeEnum {
-  """Period Unit is a minute"""
-  MINUTE
-
-  """Period Unit is a day"""
-  DAY
-
-  """Period Unit is a week"""
-  WEEK
-
-  """Period Unit is a month"""
-  MONTH
-
-  """Period Unit is a year"""
-  YEAR
-}
-
-type Query {
-  """Get system wallet configuration"""
-  getWalletConfig(
-    """Location tied to the config"""
-    location: String
-
-    """Currency tied to the config"""
-    defaultCurrency: String
-  ): [WalletConfigResponse!]!
-
-  """Get user wallet"""
-  wallet: WalletResponse!
-
-  """Get all transactions"""
-  transactions(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-  ): PaginatedTransactionResponse!
-
-  """Get all User's Payment Cards"""
-  paymentCards: [PaymentCardResponse!]!
-
-  """Get all payment options"""
-  paymentOptions: GroupedPaymentOptionResponse!
-
-  """Get Subscription Cancellation/Pause Reasons"""
-  subscriptionActionReasons(input: SubscriptionReasonsInput!): [SubscriptionReasonsResponse!]!
-
-  """Get Subscription Details"""
-  subscription: SubscriptionResponse
-
-  """Get the payment account of the current user"""
-  account: PaymentAccountResponse
-
-  """Get a list of banks"""
-  fetchBanks: [BankResponse!]!
-
-  """Get all available discounts for the user"""
-  discounts: [DiscountResponse!]!
-
-  """Get user pass"""
-  pass: PassResponse
-
-  """Get all passes"""
-  passes: [PassResponse!]!
-
-  """Get all vehicles in the fleet"""
-  vehicles(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-  ): PaginatedVehicleResponse!
-
-  """Get all vehicles  within the specified radius"""
-  vehiclesNear(
-    """Latitude of the search location"""
-    latitude: Float!
-
-    """Longitude of the search location"""
-    longitude: Float!
-
-    """Search radius in meters"""
-    radius: Float! = 500
-  ): [VehicleResponse!]!
-
-  """Get a single vehicle by ID"""
-  vehicle(input: SimpleInput!): VehicleResponse!
-
-  """Get all GeoLocations"""
-  geoLocations(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-  ): PaginatedGeoLocationResponse!
-
-  """Get all grouped faults"""
-  groupedFaults: GroupedFaultResponse!
-
-  """Get all reported faults with pagination and filtering"""
-  reportedFaults(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-    input: FaultReportFilterInput
-  ): PaginatedFaultReportResponse!
-
-  """Get user current rental"""
-  rental: RentalResponse
-
-  """Get user rental history"""
-  rentals(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-  ): PaginatedRentalResponse!
-
-  """Get user current group rental"""
-  groupRental: GroupRentalResponse
-
-  """Get user group rental history"""
-  groupRentals(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-  ): PaginatedGroupRentalResponse!
-
-  """Get all subscribed users with pagination"""
-  mailingList(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-    input: MailingListFilterInput
-  ): PaginatedMailingListResponse!
-
-  """Get admin users for admin"""
-  adminUsers(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-  ): PaginatedUserResponse!
-
-  """Get user information"""
-  me: UserResponse!
-
-  """Get user information"""
-  getUser(input: User!): UserResponse!
-
-  """Get referral profile by userId"""
-  referralProfile: ReferralProfileResponse!
-
-  """Get presigned URL for uploading selfie for verification"""
-  getSelfieUploadUrl: UploadUrlResponse!
-
-  """Get verification data for users"""
-  verifications(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-    input: VerificationFilterInput
-  ): PaginatedVerificationResponse!
-
-  """Fetch admin activity logs with pagination"""
-  adminActivityLogs(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-
-    """Additional search query"""
-    filter: LogFilterInput = null
-  ): PaginatedActivityLogResponse!
-
-  """Fetch user activity logs with pagination"""
-  userActivityLogs(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-
-    """Additional search query"""
-    filter: LogFilterInput = null
-  ): PaginatedActivityLogResponse!
-
-  """Fetch service event logs with pagination"""
-  serviceEventLogs(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-
-    """Additional search query"""
-    filter: LogFilterInput = null
-  ): PaginatedActivityLogResponse!
-
-  """Get all user support tickets with pagination"""
-  userSupportTickets(
-    """Total number of items per load"""
-    limit: Int! = 25
-
-    """Desired page number"""
-    page: Int! = 1
-
-    """Search query"""
-    search: String! = ""
-    input: UserSupportFilterInput
-  ): PaginatedUserSupportTicketResponse!
-
-  """Get a single user support ticket by ID"""
-  userSupport(input: SimpleInput!): UserSupportTicketResponse!
-
-  """Get all FAQs"""
-  faqs: [Faq!]!
-}
-
-type ReferralProfileResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Referral Code"""
-  code: String!
-
-  """User ID"""
-  userId: String!
-
-  """Referral Count"""
-  referralCount: Float!
-
-  """Date created"""
-  createdAt: DateTime!
-
-  """Date updated"""
-  updatedAt: DateTime!
-}
-
-"""Input type for fault removal from a fault report"""
-input RemoveFaultReportItemInput {
-  """Fault report unique identifier"""
-  faultReportId: ID!
-
-  """Fault Item Id"""
-  faultItemId: ID!
-}
-
-"""Describes action to be performed on rental"""
-enum RentalActionEnum {
-  """To reserve a vehicle"""
-  RESERVE
-
-  """User unlocks the ride"""
-  UNLOCK
-
-  """discount applied"""
-  APPLY_DISCOUNT
-  REMOVE_DISCOUNT
-
-  """User cancels the ride"""
-  CANCEL
-}
-
-type RentalResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Vehicle ID of the ride"""
-  vehicleId: ID!
-
-  """User ID of the ride"""
-  userId: ID!
-
-  """Rental ID of the associated group rental"""
-  groupId: ID
-
-  """User ID of the associated group rental leader"""
-  groupLeaderId: ID
-
-  """Rental type (Single, Group or Group member Rental)"""
-  type: RentalTypeEnum!
-
-  """User default payment method"""
-  paymentMethod: DefaultPaymentMethodEnum!
-
-  """Discount code"""
-  discountCode: String
-
-  """Applied discount details"""
-  appliedDiscount: AppliedDiscount
-
-  """Start time of the ride"""
-  startAt: DateTime
-
-  """End time of the ride"""
-  endAt: DateTime
-
-  """Deadline for current reservation"""
-  reservedUntil: DateTime
-
-  """Deadline for current pause action"""
-  pausedUntil: DateTime
-
-  """Duration of the ride in minutes"""
-  rideMinute: Float!
-
-  """Status of the Rental"""
-  status: RentalStatusEnum!
-
-  """Polyline of the rental route"""
-  polyline: String
-
-  """Distance of the ride in kilometers"""
-  distance: Float!
-
-  """Creation date"""
-  createdAt: DateTime!
-
-  """Last updated date"""
-  updatedAt: DateTime!
-
-  """Transaction associated with the rental"""
-  transaction: TransactionResponse!
-
-  """Vehicle details"""
-  vehicle: VehicleResponse!
-
-  """Start Point Coordinates, [longitude, latitude]"""
-  startPoint: LocationType
-
-  """End Point Coordinates, [longitude, latitude]"""
-  endPoint: LocationType
-}
-
-"""Describes rental status"""
-enum RentalStatusEnum {
-  """The rental is created but user choose discount"""
-  PENDING
-
-  """User starts the ride"""
-  START
-
-  """User ends the ride"""
-  COMPLETED
-
-  """User cancelled the ride"""
-  CANCELLED
-
-  """Reserved ride"""
-  RESERVED
-
-  """Rental is paused for some reason, e.g. user balance is low"""
-  PAUSED
-}
-
-"""Type of rental, can be single or group"""
-enum RentalTypeEnum {
-  """Single rental for a user"""
-  SINGLE
-
-  """Rental as a member of a group rental"""
-  GROUP
-}
-
-type ServiceEventLog {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Action name"""
-  action: String!
-
-  """Service name"""
-  service: String!
-
-  """Unique user Identifier"""
-  userId: ID
-
-  """Event timestamp"""
-  timestamp: DateTime!
-
-  """Record creation time"""
-  createdAt: DateTime!
-}
-
-"""Input type for setting wallet configuration"""
-input SetWalletConfigInput {
-  """Location for this config"""
-  location: String!
-
-  """Default wallet balance"""
-  defaultBalance: Float!
-
-  """Default Currency code"""
-  defaultCurrency: String!
-}
-
-"""Simple input Argument with ID"""
-input SimpleInput {
-  """Unique Identifier"""
-  _id: ID
-}
-
-input StartInput {
-  """User phone number"""
-  phone: String!
-}
-
-type StartResponse {
-  """Phone number received from user"""
-  phone: String!
-
-  """Registration status of the user"""
-  status: UserStatusEnum!
-}
-
-"""GeoLocation response data"""
-type SubGeoLocation {
-  """Location ID"""
-  _id: ID!
-
-  """Location name"""
-  name: String!
-}
-
-"""Specify action type for subscription update"""
-enum SubscriptionActionType {
-  """Pause the subscription"""
-  PAUSE
-
-  """Cancel the subscription"""
-  CANCEL
-
-  """Resume a paused subscription"""
-  RESUME
-
-  """Reactivate a cancelled subscription"""
-  REACTIVATE
-}
-
-"""Subscription Pause details"""
-type SubscriptionCancellation {
-  """reason for cancelling the subscription"""
-  reason: String
-
-  """date when the cancellation was requested"""
-  requestedAt: DateTime!
-
-  """date when the cancellation was processed"""
-  processedAt: String
-
-  """status of the cancellation request"""
-  status: SubscriptionCancellationStatusEnum!
-
-  """date when the subscription cancellation was created"""
-  createdAt: DateTime!
-
-  """date when the subscription cancellation was last updated"""
-  updatedAt: DateTime!
-}
-
-"""Subscription Cancellation Input"""
-input SubscriptionCancellationInput {
-  """reason for cancelling the subscription"""
-  reasonId: ID
-
-  """reason for cancelling the subscription"""
-  reason: String
-}
-
-"""Specifies Subscription cancellation status"""
-enum SubscriptionCancellationStatusEnum {
-  """Cancellation request has been made"""
-  REQUESTED
-
-  """Cancellation request has been processed"""
-  PROCESSED
-
-  """
-  Cancellation request has been canceled. The subscription should be active again
-  """
-  CANCELED
-}
-
-"""Subscription Pause details"""
-type SubscriptionPause {
-  """start date of the pause period"""
-  startAt: DateTime!
-
-  """end date of the pause period"""
-  endAt: DateTime!
-
-  """reason for pausing the subscription"""
-  reason: String
-
-  """date when the subscription pause was created"""
-  createdAt: DateTime!
-
-  """date when the subscription pause was last updated"""
-  updatedAt: DateTime!
-}
-
-"""Subscription Pause Input"""
-input SubscriptionPauseInput {
-  """end date of the pause period"""
-  endAt: DateTime!
-
-  """reason for pausing the subscription"""
-  reasonId: ID
-
-  """reason for pausing the subscription"""
-  reason: String
-}
-
-"""Subscription reasons filter input"""
-input SubscriptionReasonsInput {
-  """Type of subscription reason"""
-  type: SubscriptionReasonsTypeEnum! = BOTH
-}
-
-"""Subscription Response"""
-type SubscriptionReasonsResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """reason for cancellation/pausing of subscription"""
-  reason: String!
-
-  """Type of subscription reason"""
-  type: SubscriptionReasonsTypeEnum!
-
-  """date when the item was created"""
-  createdAt: DateTime!
-
-  """date when the item was last updated"""
-  updatedAt: DateTime!
-}
-
-"""Specify User type"""
-enum SubscriptionReasonsTypeEnum {
-  """Reason for subscription cancellation"""
-  CANCELLATION
-
-  """Reason for subscription pause"""
-  PAUSE
-
-  """Reason applicable for both cancellation and pause"""
-  BOTH
-}
-
-"""Specifies the status of a subscription renewal"""
-enum SubscriptionRenewalStatusEnum {
-  """Renewal is pending and awaiting processing"""
-  PENDING
-
-  """Renewal has been successfully completed"""
-  COMPLETED
-
-  """Renewal attempt has failed"""
-  FAILED
-
-  """Renewal is queued for processing"""
-  QUEUED
-
-  """Renewal is scheduled to occur"""
-  TO_RENEW
-
-  """Renewal is paused, typically due to a subscription pause"""
-  PAUSED
-
-  """
-  Renewal has been canceled, typically due to a subscription cancellation
-  """
-  CANCELED
-}
-
-"""Subscription Response"""
-type SubscriptionResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """reference to the user"""
-  userId: ID!
-
-  """Subscription start date"""
-  startAt: DateTime!
-
-  """Subscription ride minute available"""
-  rideMinute: Float!
-
-  """Subscription end date"""
-  endAt: DateTime
-
-  """Subscription status"""
-  status: SubscriptionStatusEnum!
-
-  """reference to the payment option (subscription plan)"""
-  paymentOptionId: ID!
-
-  """method used for payment"""
-  paymentMethod: String!
-
-  """reference to the payment card"""
-  paymentCardId: ID
-
-  """reference to the last payment transaction"""
-  lastPaymentId: ID
-
-  """reference to the next payment transaction"""
-  nextPaymentId: ID
-
-  """reference to the discount applied, if any"""
-  discountId: ID
-
-  """the subscription has pause data"""
-  pause: SubscriptionPause
-
-  """the subscription cancellation data"""
-  cancellation: SubscriptionCancellation
-
-  """date when the subscription was last billed"""
-  lastRenewalDate: DateTime
-
-  """status of the renewal process"""
-  renewalStatus: SubscriptionRenewalStatusEnum
-
-  """date when the subscription was first created"""
-  createdAt: DateTime!
-
-  """date when the subscription was last updated"""
-  updatedAt: DateTime!
-
-  """Payment card details"""
-  paymentCard: PaymentCardResponse
-
-  """Subscription plan"""
-  plan: PaymentOptionResponse!
-}
-
-"""Specifies Subscription status"""
-enum SubscriptionStatusEnum {
-  """Subscription is enrolled but not yet active"""
-  ENROLLED
-
-  """Subscription is active"""
-  ACTIVE
-
-  """Subscription is inactive"""
-  INACTIVE
-
-  """Subscription is cancelled"""
-  CANCELLED
-
-  """Subscription has expired"""
-  EXPIRED
-
-  """Subscription is paused"""
-  PAUSED
-}
-
-"""Specifies support ticket status"""
-enum SupportTicketStatusEnum {
-  """Ticket is pending and awaiting action"""
-  PENDING
-
-  """Ticket is open and being processed"""
-  OPEN
-
-  """Ticket is waiting for customer response"""
-  WAITING_FOR_CUSTOMER
-
-  """Ticket has been cancelled"""
-  CANCELLED
-
-  """Ticket has been resolved"""
-  RESOLVED
-
-  """Ticket has been closed"""
-  CLOSED
-}
-
-type TokenResponse {
-  """Token"""
-  token: String!
-
-  """Token expiration time"""
-  expiresAt: DateTime!
-}
-
-"""Specifies the transaction reference type"""
-enum TransactionReferenceTypeEnum {
-  """Transaction related to a rental"""
-  RENTAL
-
-  """Transaction related to a pass"""
-  PASS
-
-  """Transaction related to a subscription"""
-  SUBSCRIPTION
-
-  """Transaction related to a penalty"""
-  RENTAL_PENALTY
-
-  """Transaction related to a wallet"""
-  WALLET
-
-  """Transaction related to an authorization charge"""
-  AUTHORIZATION
-
-  """Transaction related to a Subscription Payment Card update"""
-  SUBSCRIPTION_UPDATE
-}
-
-"""Transaction Details"""
-type TransactionResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """User ID associated with the transaction"""
-  userId: ID!
-
-  """Transaction type"""
-  type: TransactionTypeEnum!
-
-  """transaction amount"""
-  amount: Float!
-
-  """transaction leftover amount"""
-  leftOverAmount: Float
-
-  """discount amount"""
-  discountApplied: Float!
-
-  """transaction currency"""
-  currency: String!
-
-  """Payment platform transaction fee"""
-  fee: Float!
-
-  """Source of the transaction"""
-  source: TransactionSourceEnum
-
-  """Payment URL"""
-  paymentUrl: String
-
-  """Reference of the transaction"""
-  referenceType: TransactionReferenceTypeEnum!
-
-  """reference to the transaction or payment"""
-  referenceId: ID!
-
-  """reference to the payment card"""
-  paymentCardId: ID
-
-  """Discount ID associated with the transaction"""
-  discountId: ID
-
-  """status of the transaction"""
-  status: TransactionStatusEnum!
-
-  """Number of times transaction billing has been tried"""
-  retryCount: Float!
-
-  """Transaction description"""
-  description: String
-
-  """Creation date"""
-  createdAt: DateTime!
-
-  """Last update date"""
-  updatedAt: DateTime!
-}
-
-"""source of transaction or payment"""
-enum TransactionSourceEnum {
-  """Transaction made using a card"""
-  CARD
-
-  """Transaction made via bank transfer from 3rd party Provider"""
-  TRANSFER
-
-  """Transaction made from a dedicated account"""
-  ACCOUNT
-
-  """Transaction related to a refund"""
-  REFUND
-
-  """Transaction related to a bonus or promotional credit"""
-  BONUS
-
-  """Transaction made using a wallet balance"""
-  WALLET
-  PASS
-  SUBSCRIPTION
-}
-
-"""Specifies the status transaction """
-enum TransactionStatusEnum {
-  """Transaction is an invoice"""
-  INVOICE
-
-  """Transaction is pending and awaiting confirmation"""
-  PENDING
-
-  """Transaction has been successfully completed"""
-  PAID
-
-  """Transaction attempt has failed"""
-  FAILED
-
-  """Transaction is invalid or not recognized"""
-  INVALID
-
-  """Transaction has been refunded to the payer"""
-  REFUNDED
-
-  """Transaction has been cancelled by the payer or system"""
-  CANCELLED
-
-  """Transaction was declined by the payment processor"""
-  DECLINED
-
-  """Transaction is currently being processed"""
-  PROCESSING
-
-  """Transaction is on hold, possibly due to verification or review"""
-  HOLD
-}
-
-"""Specifies Period Unit for item"""
-enum TransactionTypeEnum {
-  """credit entry"""
-  CREDIT
-
-  """debit entry"""
-  DEBIT
-
-  """purchase transaction"""
-  PURCHASE
-
-  """authorization charge"""
-  AUTHORIZATION
-}
-
-"""Unsubscribe Mailing list input"""
-input UnsubscribeMailingListInput {
-  """Subscriber unsubscribe token"""
-  token: String!
-}
-
-input UpdateFaqInput {
-  """Unique Identifier"""
-  _id: ID!
-  question: String
-  answer: String
-}
-
-"""Update set/unset payment card as default"""
-input UpdatePaymentCardInput {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Indicates if the card is the default payment card for the user"""
-  isDefault: Boolean!
-}
-
-"""Input type for creating a payment option"""
-input UpdatePaymentOptionInput {
-  """Name of the payment option"""
-  title: String
-
-  """Type of the payment option"""
-  type: PaymentOptionTypeEnum
-
-  """Description of the payment option"""
-  description: String
-
-  """Features of the payment option"""
-  features: [String!]
-
-  """If the payment option is a recommended option"""
-  isRecommended: Boolean
-
-  """Availability status of Payment option"""
-  status: PaymentOptionStatusEnum
-
-  """Period duration of a single Payment option item"""
-  period: Float
-
-  """Period unit of duration of a single Payment option item"""
-  periodUnit: PeriodUnitTypeEnum
-
-  """Ride duration available for a single Payment option item"""
-  rideDuration: Float
-
-  """Additional message displayed on Payment option purchase"""
-  messageText: String
-
-  """Start date for a Payment option"""
-  startAt: String = null
-
-  """Price details for the payment option"""
-  price: CreatePaymentOptionPrice
-
-  """Unique Identifier"""
-  _id: ID!
-}
-
-"""Update Subscription Input"""
-input UpdateSubscriptionInput {
-  """Action to perform on the subscription"""
-  action: SubscriptionActionType!
-
-  """Pause details, if applicable"""
-  pause: SubscriptionPauseInput
-
-  """Cancellation details, if applicable"""
-  cancellation: SubscriptionCancellationInput
-}
-
-"""Subscription reasons filter input"""
-input UpdateSubscriptionReasonsInput {
-  """reason for cancellation/pausing of subscription"""
-  reason: String
-
-  """Type of subscription reason"""
-  type: SubscriptionReasonsTypeEnum = BOTH
-
-  """Unique Identifier"""
-  _id: ID!
-}
-
-"""Update user input"""
-input UpdateUserInput {
-  """User first name"""
-  firstName: String
-
-  """User last name"""
-  lastName: String
-
-  """User email"""
-  email: String
-
-  """Device Push notification token"""
-  notificationToken: String
-}
-
-"""Update user support input"""
-input UpdateUserSupportTicketInput {
-  """Unique Identifier"""
-  _id: ID!
-
-  """status of the ticket"""
-  status: SupportTicketStatusEnum!
-}
-
-"""Input for updating an existing Vehicle"""
-input UpdateVehicleInput {
-  """Unique Identifier"""
-  _id: ID
-
-  """Vehicle name"""
-  name: String
-
-  """make"""
-  make: String
-
-  """model"""
-  model: String
-
-  """code"""
-  code: String
-
-  """Industrial Unique ID"""
-  uid: String
-
-  """battery level of the vehicle in percentage"""
-  battery: Float
-
-  """
-  distance in Kilometers the vehicle can travel with current battery level
-  """
-  distance: Float = 50
-
-  """status of the vehicle"""
-  status: VehicleStatusEnum = AVAILABLE
-
-  """Creation date"""
-  createdAt: DateTime
-
-  """Last updated date"""
-  updatedAt: DateTime
-}
-
-type UploadUrlResponse {
-  """Presigned URL for uploading verification selfie"""
-  url: String!
-
-  """Expiration date of the presigned URL"""
-  expireAt: DateTime!
-}
-
-input User {
-  """Unique Identifier"""
-  _id: ID!
-
-  """User phone number"""
-  phone: String!
-
-  """User first name"""
-  firstName: String
-
-  """User last name"""
-  lastName: String
-
-  """User email"""
-  email: String
-
-  """User default payment method"""
-  paymentMethod: DefaultPaymentMethodEnum! = WALLET
-
-  """User account status"""
-  status: UserStatusEnum!
-
-  """User account type"""
-  type: UserTypeEnum!
-
-  """Date created"""
-  createdAt: DateTime!
-
-  """Date updated"""
-  updatedAt: DateTime!
-}
-
-type UserActivityLog {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Action name"""
-  action: String!
-
-  """Service name"""
-  service: String!
-
-  """Unique user Identifier"""
-  userId: ID
-
-  """Event timestamp"""
-  timestamp: DateTime!
-
-  """Record creation time"""
-  createdAt: DateTime!
-}
-
 type UserResponse {
   """Unique Identifier"""
   _id: ID!
@@ -2471,12 +19,6 @@ type UserResponse {
   """User email"""
   email: String
 
-  """User default payment method"""
-  paymentMethod: DefaultPaymentMethodEnum!
-
-  """User account status"""
-  status: UserStatusEnum!
-
   """User account type"""
   type: UserTypeEnum!
 
@@ -2485,81 +27,6 @@ type UserResponse {
 
   """Date updated"""
   updatedAt: DateTime!
-
-  """Wallet of the user"""
-  wallet: WalletResponse
-
-  """Subscription of the user"""
-  subscription: SubscriptionResponse
-
-  """Pass of the user"""
-  pass: PassResponse
-}
-
-"""Describes User registration status"""
-enum UserStatusEnum {
-  """User has just registered for the first time"""
-  NEW
-
-  """User has not verified their identity"""
-  INCOMPLETE
-
-  """User has verified their identity"""
-  COMPLETED
-
-  """User account has been deactivated"""
-  DEACTIVATED
-
-  """User has deleted their account"""
-  DELETED
-
-  """User account has been suspended"""
-  SUSPENDED
-}
-
-"""Input type for filtering user support tickets"""
-input UserSupportFilterInput {
-  """Start date for filtering user support"""
-  createdSince: DateTime
-
-  """End date for filtering user support"""
-  createdUntil: DateTime
-
-  """Start date for filtering user support by last update"""
-  updatedSince: DateTime
-
-  """End date for filtering user support by last update"""
-  updatedUntil: DateTime
-
-  """Status of the ticket"""
-  status: SupportTicketStatusEnum
-}
-
-"""support response data"""
-type UserSupportTicketResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """Unique user Identifier"""
-  userId: ID!
-
-  """title"""
-  title: String!
-
-  """message"""
-  message: String!
-
-  """status of the ticket"""
-  status: SupportTicketStatusEnum!
-
-  """short code for identification"""
-  shortCode: String!
-
-  """Record creation time"""
-  createdAt: DateTime!
-
-  """User who created the support ticket"""
-  user: UserResponse!
 }
 
 """Specify User type"""
@@ -2584,134 +51,177 @@ enum UserTypeEnum {
   CHIEF_ADMIN
 }
 
-"""User ID verification status"""
-enum UserVerificationStatusEnum {
-  """User ID verification was successful"""
-  SUCCESSFUL
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
-  """User ID verification failed"""
-  FAILED
+type TokenResponse {
+  """Token"""
+  token: String!
 
-  """User ID verification is pending"""
-  PENDING
-
-  """User ID verification is partially verifiable - Photos do not match"""
-  PARTIAL
+  """Token expiration time"""
+  expiresAt: DateTime!
 }
 
-"""Vehicle response data"""
-type VehicleResponse {
+type LoginResponse {
+  """User basic data"""
+  user: UserResponse!
+
+  """Access token"""
+  accessToken: TokenResponse!
+
+  """Refresh Token"""
+  refreshToken: TokenResponse!
+}
+
+"""Response for OK requests"""
+type OkayResponse {
+  """Confirmation message"""
+  message: String!
+
+  """Status of the request"""
+  status: String!
+}
+
+"""Guest Link Response"""
+type GuestLinkResponse {
   """Unique Identifier"""
   _id: ID!
 
-  """Vehicle name"""
-  name: String!
+  """Parent guest ID"""
+  guestId: ID!
 
-  """make"""
-  make: String!
-
-  """model"""
-  model: String!
-
-  """code"""
+  """Unique code"""
   code: String!
 
-  """Industrial Unique ID"""
-  uid: String!
+  """Invitation Card URL"""
+  invitationCardUrl: String!
 
-  """battery level of the vehicle in percentage"""
-  battery: Float!
+  """Link type"""
+  type: LinkTypeEnum!
 
-  """
-  distance in Kilometers the vehicle can travel with current battery level
-  """
-  distance: Float!
+  """Link status"""
+  status: LinkStatusEnum!
 
-  """GeoLocation of the vehicle"""
-  geoLocation: SubGeoLocation!
-
-  """status of the vehicle"""
-  status: VehicleStatusEnum!
-
-  """Creation date"""
+  """Date created"""
   createdAt: DateTime!
 
-  """Last updated date"""
+  """Date updated"""
   updatedAt: DateTime!
 
-  """Coordinates, [longitude, latitude]"""
-  location: LocationType!
-
-  """Fault report of the vehicle"""
-  faultReport: FaultReportResponse
+  """Guest Url"""
+  guestUrl: String!
 }
 
-"""Specify Vehicle status"""
-enum VehicleStatusEnum {
-  """The vehicle is available"""
-  AVAILABLE
+"""Link Type"""
+enum LinkTypeEnum {
+  """Public link for multiple guest usage"""
+  PUBLIC
 
-  """The vehicle has low battery"""
-  LOW_BATTERY
+  """Private link for single guest"""
+  PRIVATE
 
-  """The vehicle is currently in use"""
-  IN_USE
+  """Guest link for invitation purpose only"""
+  GUEST
 
-  """The vehicle is under maintenance"""
-  IN_MAINTENANCE
-
-  """The vehicle is out of service"""
-  OUT_OF_SERVICE
-
-  """The vehicle is lost"""
-  LOST
-
-  """The vehicle is damaged"""
-  DAMAGED
-
-  """The vehicle is decommissioned"""
-  DECOMMISSIONED
-
-  """The vehicle status is unknown"""
-  UNKNOWN
-
-  """The vehicle is reserved"""
-  RESERVED
+  """Guest code for printed copy only"""
+  PRINT
 }
 
-"""Input type for filtering user verification data"""
-input VerificationFilterInput {
-  """Start date for filtering user support"""
-  createdSince: DateTime
+"""Link Status"""
+enum LinkStatusEnum {
+  """Link is not being used"""
+  UNUSED
 
-  """End date for filtering user support"""
-  createdUntil: DateTime
+  """Link is currently in use"""
+  IN_PROGRESS
 
-  """Start date for filtering user support by last update"""
-  updatedSince: DateTime
+  """Link has been used"""
+  USED
 
-  """End date for filtering user support by last update"""
-  updatedUntil: DateTime
+  """Link is inactive"""
+  INACTIVE
 
-  """Status of the verification"""
-  status: UserVerificationStatusEnum
+  """Link has been generated on a printed invitation card"""
+  PRINTED
 }
 
-type VerificationRecordResponse {
+"""Guest Response"""
+type GuestResponse {
   """Unique Identifier"""
   _id: ID!
 
-  """User Id"""
-  userId: ID!
+  """Parent invitation link ID"""
+  invitationLinkId: ID!
 
-  """User Id Type"""
-  idType: String!
+  """User phone number"""
+  phone: String!
 
-  """User Id number"""
-  idNumber: String!
+  """Guest title"""
+  title: String!
 
-  """Verification Raw Data"""
-  rawData: String!
+  """Guest first name"""
+  firstName: String!
+
+  """Guest last name"""
+  lastName: String!
+
+  """Guest email"""
+  email: String
+
+  """If guest is on boarded"""
+  isOnBoarded: Boolean!
+
+  """If guest is in event"""
+  isInEvent: Boolean!
+
+  """If guest is gifted"""
+  isGifted: Boolean!
+
+  """Date created"""
+  createdAt: DateTime!
+
+  """Date updated"""
+  updatedAt: DateTime!
+
+  """Associated Guest Link Response"""
+  link: GuestLinkResponse!
+}
+
+type PaginatedGuestResponse {
+  """List of GuestResponse"""
+  items: [GuestResponse!]
+
+  """Total number of GuestResponse per load"""
+  limit: Int!
+
+  """Current page number"""
+  page: Int!
+}
+
+"""Invitation Link Response"""
+type InvitationLinkResponse {
+  """Unique Identifier"""
+  _id: ID!
+
+  """Unique code"""
+  code: String!
+
+  """Total number of guests allowed for link"""
+  guestSize: Int!
+
+  """Total number of guests allowed for each entry"""
+  guestPerEntry: Int!
+
+  """Total number of guests registered for link"""
+  guestsRegistered: Int!
+
+  """Link type"""
+  type: LinkTypeEnum!
+
+  """Link status"""
+  status: LinkStatusEnum!
 
   """Date created"""
   createdAt: DateTime!
@@ -2720,108 +230,160 @@ type VerificationRecordResponse {
   updatedAt: DateTime!
 }
 
-type VerificationResponse {
+type PaginatedInvitationLinkResponse {
+  """List of InvitationLinkResponse"""
+  items: [InvitationLinkResponse!]
+
+  """Total number of InvitationLinkResponse per load"""
+  limit: Int!
+
+  """Current page number"""
+  page: Int!
+}
+
+type Query {
+  """Get user information"""
+  me: UserResponse!
+
+  """Get a list of invitation links."""
+  invitationLinks(
+    """Total number of items per load"""
+    limit: Int! = 25
+
+    """Desired page number"""
+    page: Int! = 1
+
+    """Search query"""
+    search: String! = ""
+  ): PaginatedInvitationLinkResponse!
+
+  """Get a single invitation link."""
+  invitationLink(input: SimpleInput!): InvitationLinkResponse!
+
+  """Get a single guest data...."""
+  guest(input: FetchGuestInput!): GuestResponse!
+
+  """Get a list of guests."""
+  guests(
+    """Total number of items per load"""
+    limit: Int! = 25
+
+    """Desired page number"""
+    page: Int! = 1
+
+    """Search query"""
+    search: String! = ""
+  ): PaginatedGuestResponse!
+}
+
+"""Simple input Argument with Code"""
+input SimpleInput {
   """Unique Identifier"""
-  _id: ID!
+  code: String!
+}
 
-  """User Id"""
-  userId: ID!
+"""Fetch guest input with guest code and first 3 letter of surname"""
+input FetchGuestInput {
+  """Guest invitation card code"""
+  code: String!
 
-  """User Id Type"""
-  idType: String!
+  """Guest first 3 letter of surname"""
+  first3Letters: String!
+}
 
-  """User Id number"""
-  idNumber: String!
+type Mutation {
+  """Login a returning user"""
+  login(input: LoginInput!): LoginResponse!
+
+  """Create an Admin user"""
+  createAdmin(input: CreateUserInput!): UserResponse!
+
+  """Refresh user access and refresh tokens."""
+  refreshToken: LoginResponse!
+
+  """Guests details submitted."""
+  rsvp(input: CreateGuestInput!): [GuestResponse!]!
+
+  """Generate invitation links for guests.."""
+  generateInviteLink(input: CreateInvitationLinkInput!): OkayResponse!
+
+  """Generate print cards"""
+  generatePrintCard(input: CreatePrintCardInput!): OkayResponse!
+}
+
+"""Login input data"""
+input LoginInput {
+  """User phone number"""
+  phone: String!
+
+  """User password"""
+  password: String!
+}
+
+input CreateUserInput {
+  """User phone number"""
+  phone: String!
 
   """User first name"""
   firstName: String
 
-  """User middle name"""
-  middleName: String
-
   """User last name"""
   lastName: String
 
-  """User date of birth"""
-  birthDate: String
+  """User email"""
+  email: String
 
-  """User Photo"""
-  photo: String
+  """User account type"""
+  type: UserTypeEnum!
 
-  """User uploaded selfie Photo"""
-  selfie: String
-
-  """Id verification status"""
-  status: UserVerificationStatusEnum!
-
-  """Photo and selfie photo comparison likeliness"""
-  likeliness: Float
-
-  """Date created"""
-  createdAt: DateTime!
-
-  """Date updated"""
-  updatedAt: DateTime!
-
-  """User associated with the verification data"""
-  user: UserResponse!
-
-  """Records associated with the user verification"""
-  verificationRecords: [VerificationRecordResponse!]!
+  """User Password"""
+  password: String!
 }
 
-"""Response type for wallet configuration"""
-type WalletConfigResponse {
-  """Unique Identifier"""
-  _id: ID!
+"""Create guest input"""
+input CreateGuestInput {
+  """Guests data"""
+  guests: [GuestInput!]!
 
-  """Admin ID that set this up"""
-  createdBy: ID!
-
-  """Location for this config"""
-  location: String!
-
-  """Default wallet balance"""
-  defaultBalance: Float!
-
-  """Default Currency code"""
-  defaultCurrency: String!
-
-  """Config creation date"""
-  createdAt: DateTime!
-
-  """Config last update date"""
-  updatedAt: DateTime!
+  """Invitation link ID"""
+  invitationLinkId: ID!
 }
 
-type WalletResponse {
-  """Unique Identifier"""
-  _id: ID!
+"""Create guest input"""
+input GuestInput {
+  """User phone number"""
+  phone: String!
 
-  """User ID associated with the wallet"""
-  userId: ID!
+  """Guest title"""
+  title: String!
 
-  """Bank Account ID associated with the wallet"""
-  accountId: ID
+  """Guest first name"""
+  firstName: String!
 
-  """Current wallet balance"""
-  balance: Float!
+  """Guest last name"""
+  lastName: String!
 
-  """Last balance before the last transaction"""
-  lastBalance: Float!
+  """Guest email"""
+  email: String
+}
 
-  """Currency code"""
-  currency: String!
+"""Create invitation link input"""
+input CreateInvitationLinkInput {
+  """Total number of guests allowed for link"""
+  guestSize: Int! = 1
 
-  """Wallet creation date"""
-  createdAt: DateTime!
+  """Total number of guests allowed for each entry"""
+  guestPerEntry: Int! = 1
 
-  """Wallet last update date"""
-  updatedAt: DateTime!
+  """Link type"""
+  type: LinkTypeEnum! = PRIVATE
 
-  """Paginated transactions associated with the wallet"""
-  transactions: PaginatedTransactionResponse!
+  """Number of unique links to create"""
+  linkCount: Int! = 1
+}
 
-  """Payment account associated with the wallet"""
-  account: PaymentAccountResponse
+"""Create invitation link input"""
+input CreatePrintCardInput {
+  """Number of unique cards to create"""
+  count: Int! = 1
 }

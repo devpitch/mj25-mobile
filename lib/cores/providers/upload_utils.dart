@@ -3,11 +3,11 @@
 //
 // import 'package:event_handler/cores/utils/rydmie_alerts.dart';
 // import 'package:flutter/material.dart';
-// import 'package:rydmie_mobile/cores/network/client/http_client.dart';
-// import 'package:rydmie_mobile/cores/utils/rydmie_alerts.dart';
-// import 'package:rydmie_mobile/injections/injector.dart';
-// import 'package:rydmie_mobile/modules/authentication/data/auth_repository.dart';
-// import 'package:rydmie_mobile/modules/authentication/data/models/responses/upload_url_response.dart';
+// import 'package:event_handler/cores/network/client/http_client.dart';
+// import 'package:event_handler/cores/utils/rydmie_alerts.dart';
+// import 'package:event_handler/injections/injector.dart';
+// import 'package:event_handler/modules/authentication/data/auth_repository.dart';
+// import 'package:event_handler/modules/authentication/data/models/responses/upload_url_response.dart';
 //
 // class UploadFileUtil {
 //   UploadFileUtil._();
