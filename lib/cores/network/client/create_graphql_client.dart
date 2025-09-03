@@ -60,7 +60,7 @@ GraphQLClient createGraphQLClient({
       getToken: () async {
         final token = await secureStorageInteractor.token;
         log(":::The request token::: $token");
-        return token;
+        return "Bearer $token";
       },
     ).concat(HttpLink("https://testing.mj25.rsvp/graphql")),
   );

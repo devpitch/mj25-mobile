@@ -4,6 +4,7 @@ import 'package:event_handler/cores/utils/assets_mangment.dart';
 import 'package:event_handler/cores/utils/constants.dart';
 import 'package:event_handler/cores/utils/extensions.dart';
 import 'package:event_handler/cores/utils/icon_builder.dart';
+import 'package:event_handler/main.dart';
 import 'package:event_handler/modules/authentication/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -17,6 +18,7 @@ class SplashScreen extends HookConsumerWidget {
     useEffect(() {
       Future.microtask(() {
         ref.read(textControllersProvider.notifier).initializeStartups();
+        genRef!.read(globalBuildContextProvider.notifier).state = context;
         ref.read(authProvider.notifier).navigateUser(context);
       });
       return null;

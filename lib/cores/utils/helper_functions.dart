@@ -4,6 +4,7 @@ import 'dart:math' show Random;
 import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/utils/extensions.dart';
 import 'package:event_handler/cores/widgets/custom_text.dart';
+import 'package:event_handler/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,9 +29,7 @@ class HelperFunctions {
     String? svgPath,
   }) {
     BuildContext cxt =
-        context ??
-        AppConstants.genRef!.read(globalBuildContextProvider) ??
-        Get.context!;
+        context ?? genRef!.read(globalBuildContextProvider) ?? Get.context!;
     showToastWidget(
       Column(
         mainAxisAlignment: MainAxisAlignment.center,

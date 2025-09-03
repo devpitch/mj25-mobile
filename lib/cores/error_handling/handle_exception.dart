@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:event_handler/cores/utils/rydmie_alerts.dart';
+import 'package:event_handler/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -33,7 +34,7 @@ Future<dynamic> handleException(
   Iterable<String> popUntilRouteName = const [],
 }) async {
   log(":::::: The exception is 1 $exception");
-  final context = AppConstants.genRef!.read(globalBuildContextProvider);
+  final context = genRef!.read(globalBuildContextProvider);
   if (context == null) return null;
   log(":::::: The exception is 2");
   // final navigator = Navigator.of(context);

@@ -15,7 +15,7 @@ import 'package:injectable/injectable.dart';
 abstract class AuthRepository {
   Future<LoginResponse?> login({required LoginRequestModel request});
 
-  Future getMe();
+  Future<UserResponse?> getMe();
   // Future<UploadUrlResponse?> getSelfieUploadUrl();
 }
 
@@ -54,7 +54,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future getMe() async {
+  Future<UserResponse?> getMe() async {
     final response = await handleQueryResult(
       queryBuilder: () => _client.client.query$me(),
     );
@@ -64,12 +64,12 @@ class AuthRepositoryImpl implements AuthRepository {
     );
 
     if (response.parsedData?.toJson() != null) {
-      // UserResponse userInfo = UserResponse.fromJson(
-      //   response.parsedData?.toJson()['me'],
-      // );
+      UserResponse userInfo = UserResponse.fromJson(
+        response.parsedData?.toJson()['me'],
+      );
 
-      // _secureStorageInteractor.saveUser(userInfo);
-      // return userInfo;
+      _secureStorageInteractor.saveUser(userInfo);
+      return userInfo;
     }
 
     return null;

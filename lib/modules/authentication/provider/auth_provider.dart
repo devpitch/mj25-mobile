@@ -8,6 +8,7 @@ import 'package:event_handler/cores/utils/rydmie_alerts.dart';
 import 'package:event_handler/cores/utils/text_controller_strings.dart';
 import 'package:event_handler/injections/injector.dart';
 import 'package:event_handler/modules/authentication/models/request/login_request_model.dart';
+import 'package:event_handler/modules/authentication/models/responses/login_response.dart';
 import 'package:event_handler/modules/authentication/service/auth_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -30,6 +31,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
     if (sessionExpiryDate != null &&
         HelperFunctions.checkIfDateIsInTheFuture(sessionExpiryDate)) {
+      getMe();
       return Get.toNamed(AppRouter.dashboardView);
     }
 
@@ -62,6 +64,21 @@ class AuthNotifier extends StateNotifier<AuthState> {
       if (response != null) {
         Get.toNamed(AppRouter.dashboardView);
         RydmieAlert.showSuccess(context, message: "Login Successful");
+        getMe();
+      }
+    } catch (e) {
+      log("There is an error from the login flow::: e");
+    } finally {
+      state = state.copyWith(isLoading: false);
+    }
+  }
+
+  getMe() async {
+    try {
+      final response = await _service.getMe();
+
+      if (response != null) {
+        state = state.copyWith(userInfo: response);
       }
     } catch (e) {
       log("There is an error from the login flow::: e");
@@ -77,10 +94,14 @@ final authProvider = StateNotifierProvider<AuthNotifier, AuthState>(
 
 class AuthState {
   final bool? isLoading;
+  final UserResponse? userInfo;
 
-  AuthState({this.isLoading});
+  AuthState({this.isLoading, this.userInfo});
 
-  AuthState copyWith({bool? isLoading}) {
-    return AuthState(isLoading: isLoading ?? this.isLoading);
+  AuthState copyWith({bool? isLoading, UserResponse? userInfo}) {
+    return AuthState(
+      isLoading: isLoading ?? this.isLoading,
+      userInfo: userInfo ?? this.userInfo,
+    );
   }
 }
