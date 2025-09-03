@@ -1,4 +1,384 @@
 // ignore_for_file: type=lint
+import 'package:event_handler/common/network/client/graphql/scalar.dart';
+
+class Input$InvitationFilterInput {
+  factory Input$InvitationFilterInput({
+    DateTime? createdSince,
+    DateTime? createdUntil,
+    DateTime? updatedSince,
+    DateTime? updatedUntil,
+    Enum$LinkStatusEnum? status,
+    String? code,
+    int? guestSize,
+    Enum$LinkTypeEnum? type,
+    int? guestPerEntry,
+    int? guestsRegistered,
+  }) => Input$InvitationFilterInput._({
+    if (createdSince != null) r'createdSince': createdSince,
+    if (createdUntil != null) r'createdUntil': createdUntil,
+    if (updatedSince != null) r'updatedSince': updatedSince,
+    if (updatedUntil != null) r'updatedUntil': updatedUntil,
+    if (status != null) r'status': status,
+    if (code != null) r'code': code,
+    if (guestSize != null) r'guestSize': guestSize,
+    if (type != null) r'type': type,
+    if (guestPerEntry != null) r'guestPerEntry': guestPerEntry,
+    if (guestsRegistered != null) r'guestsRegistered': guestsRegistered,
+  });
+
+  Input$InvitationFilterInput._(this._$data);
+
+  factory Input$InvitationFilterInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('createdSince')) {
+      final l$createdSince = data['createdSince'];
+      result$data['createdSince'] = l$createdSince == null
+          ? null
+          : dateTimeFromJson(l$createdSince);
+    }
+    if (data.containsKey('createdUntil')) {
+      final l$createdUntil = data['createdUntil'];
+      result$data['createdUntil'] = l$createdUntil == null
+          ? null
+          : dateTimeFromJson(l$createdUntil);
+    }
+    if (data.containsKey('updatedSince')) {
+      final l$updatedSince = data['updatedSince'];
+      result$data['updatedSince'] = l$updatedSince == null
+          ? null
+          : dateTimeFromJson(l$updatedSince);
+    }
+    if (data.containsKey('updatedUntil')) {
+      final l$updatedUntil = data['updatedUntil'];
+      result$data['updatedUntil'] = l$updatedUntil == null
+          ? null
+          : dateTimeFromJson(l$updatedUntil);
+    }
+    if (data.containsKey('status')) {
+      final l$status = data['status'];
+      result$data['status'] = l$status == null
+          ? null
+          : fromJson$Enum$LinkStatusEnum((l$status as String));
+    }
+    if (data.containsKey('code')) {
+      final l$code = data['code'];
+      result$data['code'] = (l$code as String?);
+    }
+    if (data.containsKey('guestSize')) {
+      final l$guestSize = data['guestSize'];
+      result$data['guestSize'] = (l$guestSize as int?);
+    }
+    if (data.containsKey('type')) {
+      final l$type = data['type'];
+      result$data['type'] = l$type == null
+          ? null
+          : fromJson$Enum$LinkTypeEnum((l$type as String));
+    }
+    if (data.containsKey('guestPerEntry')) {
+      final l$guestPerEntry = data['guestPerEntry'];
+      result$data['guestPerEntry'] = (l$guestPerEntry as int?);
+    }
+    if (data.containsKey('guestsRegistered')) {
+      final l$guestsRegistered = data['guestsRegistered'];
+      result$data['guestsRegistered'] = (l$guestsRegistered as int?);
+    }
+    return Input$InvitationFilterInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  DateTime? get createdSince => (_$data['createdSince'] as DateTime?);
+
+  DateTime? get createdUntil => (_$data['createdUntil'] as DateTime?);
+
+  DateTime? get updatedSince => (_$data['updatedSince'] as DateTime?);
+
+  DateTime? get updatedUntil => (_$data['updatedUntil'] as DateTime?);
+
+  Enum$LinkStatusEnum? get status => (_$data['status'] as Enum$LinkStatusEnum?);
+
+  String? get code => (_$data['code'] as String?);
+
+  int? get guestSize => (_$data['guestSize'] as int?);
+
+  Enum$LinkTypeEnum? get type => (_$data['type'] as Enum$LinkTypeEnum?);
+
+  int? get guestPerEntry => (_$data['guestPerEntry'] as int?);
+
+  int? get guestsRegistered => (_$data['guestsRegistered'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('createdSince')) {
+      final l$createdSince = createdSince;
+      result$data['createdSince'] = l$createdSince == null
+          ? null
+          : dateTimeToJson(l$createdSince);
+    }
+    if (_$data.containsKey('createdUntil')) {
+      final l$createdUntil = createdUntil;
+      result$data['createdUntil'] = l$createdUntil == null
+          ? null
+          : dateTimeToJson(l$createdUntil);
+    }
+    if (_$data.containsKey('updatedSince')) {
+      final l$updatedSince = updatedSince;
+      result$data['updatedSince'] = l$updatedSince == null
+          ? null
+          : dateTimeToJson(l$updatedSince);
+    }
+    if (_$data.containsKey('updatedUntil')) {
+      final l$updatedUntil = updatedUntil;
+      result$data['updatedUntil'] = l$updatedUntil == null
+          ? null
+          : dateTimeToJson(l$updatedUntil);
+    }
+    if (_$data.containsKey('status')) {
+      final l$status = status;
+      result$data['status'] = l$status == null
+          ? null
+          : toJson$Enum$LinkStatusEnum(l$status);
+    }
+    if (_$data.containsKey('code')) {
+      final l$code = code;
+      result$data['code'] = l$code;
+    }
+    if (_$data.containsKey('guestSize')) {
+      final l$guestSize = guestSize;
+      result$data['guestSize'] = l$guestSize;
+    }
+    if (_$data.containsKey('type')) {
+      final l$type = type;
+      result$data['type'] = l$type == null
+          ? null
+          : toJson$Enum$LinkTypeEnum(l$type);
+    }
+    if (_$data.containsKey('guestPerEntry')) {
+      final l$guestPerEntry = guestPerEntry;
+      result$data['guestPerEntry'] = l$guestPerEntry;
+    }
+    if (_$data.containsKey('guestsRegistered')) {
+      final l$guestsRegistered = guestsRegistered;
+      result$data['guestsRegistered'] = l$guestsRegistered;
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$InvitationFilterInput<Input$InvitationFilterInput>
+  get copyWith => CopyWith$Input$InvitationFilterInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input$InvitationFilterInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$createdSince = createdSince;
+    final lOther$createdSince = other.createdSince;
+    if (_$data.containsKey('createdSince') !=
+        other._$data.containsKey('createdSince')) {
+      return false;
+    }
+    if (l$createdSince != lOther$createdSince) {
+      return false;
+    }
+    final l$createdUntil = createdUntil;
+    final lOther$createdUntil = other.createdUntil;
+    if (_$data.containsKey('createdUntil') !=
+        other._$data.containsKey('createdUntil')) {
+      return false;
+    }
+    if (l$createdUntil != lOther$createdUntil) {
+      return false;
+    }
+    final l$updatedSince = updatedSince;
+    final lOther$updatedSince = other.updatedSince;
+    if (_$data.containsKey('updatedSince') !=
+        other._$data.containsKey('updatedSince')) {
+      return false;
+    }
+    if (l$updatedSince != lOther$updatedSince) {
+      return false;
+    }
+    final l$updatedUntil = updatedUntil;
+    final lOther$updatedUntil = other.updatedUntil;
+    if (_$data.containsKey('updatedUntil') !=
+        other._$data.containsKey('updatedUntil')) {
+      return false;
+    }
+    if (l$updatedUntil != lOther$updatedUntil) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (_$data.containsKey('status') != other._$data.containsKey('status')) {
+      return false;
+    }
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$code = code;
+    final lOther$code = other.code;
+    if (_$data.containsKey('code') != other._$data.containsKey('code')) {
+      return false;
+    }
+    if (l$code != lOther$code) {
+      return false;
+    }
+    final l$guestSize = guestSize;
+    final lOther$guestSize = other.guestSize;
+    if (_$data.containsKey('guestSize') !=
+        other._$data.containsKey('guestSize')) {
+      return false;
+    }
+    if (l$guestSize != lOther$guestSize) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (_$data.containsKey('type') != other._$data.containsKey('type')) {
+      return false;
+    }
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$guestPerEntry = guestPerEntry;
+    final lOther$guestPerEntry = other.guestPerEntry;
+    if (_$data.containsKey('guestPerEntry') !=
+        other._$data.containsKey('guestPerEntry')) {
+      return false;
+    }
+    if (l$guestPerEntry != lOther$guestPerEntry) {
+      return false;
+    }
+    final l$guestsRegistered = guestsRegistered;
+    final lOther$guestsRegistered = other.guestsRegistered;
+    if (_$data.containsKey('guestsRegistered') !=
+        other._$data.containsKey('guestsRegistered')) {
+      return false;
+    }
+    if (l$guestsRegistered != lOther$guestsRegistered) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$createdSince = createdSince;
+    final l$createdUntil = createdUntil;
+    final l$updatedSince = updatedSince;
+    final l$updatedUntil = updatedUntil;
+    final l$status = status;
+    final l$code = code;
+    final l$guestSize = guestSize;
+    final l$type = type;
+    final l$guestPerEntry = guestPerEntry;
+    final l$guestsRegistered = guestsRegistered;
+    return Object.hashAll([
+      _$data.containsKey('createdSince') ? l$createdSince : const {},
+      _$data.containsKey('createdUntil') ? l$createdUntil : const {},
+      _$data.containsKey('updatedSince') ? l$updatedSince : const {},
+      _$data.containsKey('updatedUntil') ? l$updatedUntil : const {},
+      _$data.containsKey('status') ? l$status : const {},
+      _$data.containsKey('code') ? l$code : const {},
+      _$data.containsKey('guestSize') ? l$guestSize : const {},
+      _$data.containsKey('type') ? l$type : const {},
+      _$data.containsKey('guestPerEntry') ? l$guestPerEntry : const {},
+      _$data.containsKey('guestsRegistered') ? l$guestsRegistered : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$InvitationFilterInput<TRes> {
+  factory CopyWith$Input$InvitationFilterInput(
+    Input$InvitationFilterInput instance,
+    TRes Function(Input$InvitationFilterInput) then,
+  ) = _CopyWithImpl$Input$InvitationFilterInput;
+
+  factory CopyWith$Input$InvitationFilterInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$InvitationFilterInput;
+
+  TRes call({
+    DateTime? createdSince,
+    DateTime? createdUntil,
+    DateTime? updatedSince,
+    DateTime? updatedUntil,
+    Enum$LinkStatusEnum? status,
+    String? code,
+    int? guestSize,
+    Enum$LinkTypeEnum? type,
+    int? guestPerEntry,
+    int? guestsRegistered,
+  });
+}
+
+class _CopyWithImpl$Input$InvitationFilterInput<TRes>
+    implements CopyWith$Input$InvitationFilterInput<TRes> {
+  _CopyWithImpl$Input$InvitationFilterInput(this._instance, this._then);
+
+  final Input$InvitationFilterInput _instance;
+
+  final TRes Function(Input$InvitationFilterInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? createdSince = _undefined,
+    Object? createdUntil = _undefined,
+    Object? updatedSince = _undefined,
+    Object? updatedUntil = _undefined,
+    Object? status = _undefined,
+    Object? code = _undefined,
+    Object? guestSize = _undefined,
+    Object? type = _undefined,
+    Object? guestPerEntry = _undefined,
+    Object? guestsRegistered = _undefined,
+  }) => _then(
+    Input$InvitationFilterInput._({
+      ..._instance._$data,
+      if (createdSince != _undefined)
+        'createdSince': (createdSince as DateTime?),
+      if (createdUntil != _undefined)
+        'createdUntil': (createdUntil as DateTime?),
+      if (updatedSince != _undefined)
+        'updatedSince': (updatedSince as DateTime?),
+      if (updatedUntil != _undefined)
+        'updatedUntil': (updatedUntil as DateTime?),
+      if (status != _undefined) 'status': (status as Enum$LinkStatusEnum?),
+      if (code != _undefined) 'code': (code as String?),
+      if (guestSize != _undefined) 'guestSize': (guestSize as int?),
+      if (type != _undefined) 'type': (type as Enum$LinkTypeEnum?),
+      if (guestPerEntry != _undefined) 'guestPerEntry': (guestPerEntry as int?),
+      if (guestsRegistered != _undefined)
+        'guestsRegistered': (guestsRegistered as int?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Input$InvitationFilterInput<TRes>
+    implements CopyWith$Input$InvitationFilterInput<TRes> {
+  _CopyWithStubImpl$Input$InvitationFilterInput(this._res);
+
+  TRes _res;
+
+  call({
+    DateTime? createdSince,
+    DateTime? createdUntil,
+    DateTime? updatedSince,
+    DateTime? updatedUntil,
+    Enum$LinkStatusEnum? status,
+    String? code,
+    int? guestSize,
+    Enum$LinkTypeEnum? type,
+    int? guestPerEntry,
+    int? guestsRegistered,
+  }) => _res;
+}
+
 class Input$SimpleInput {
   factory Input$SimpleInput({required String code}) =>
       Input$SimpleInput._({r'code': code});
@@ -1140,52 +1520,564 @@ class _CopyWithStubImpl$Input$CreatePrintCardInput<TRes>
   call({int? count}) => _res;
 }
 
-enum Enum$UserTypeEnum {
-  USER,
-  OPERATOR,
-  ADMIN,
-  SUPER_ADMIN,
-  CHIEF_ADMIN,
-  $unknown;
+class Input$UploadRequestInput {
+  factory Input$UploadRequestInput({
+    int? count,
+    List<String>? tagIds,
+    bool? isGeneral,
+  }) => Input$UploadRequestInput._({
+    if (count != null) r'count': count,
+    if (tagIds != null) r'tagIds': tagIds,
+    if (isGeneral != null) r'isGeneral': isGeneral,
+  });
 
-  factory Enum$UserTypeEnum.fromJson(String value) =>
-      fromJson$Enum$UserTypeEnum(value);
+  Input$UploadRequestInput._(this._$data);
 
-  String toJson() => toJson$Enum$UserTypeEnum(this);
-}
+  factory Input$UploadRequestInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('count')) {
+      final l$count = data['count'];
+      result$data['count'] = (l$count as int);
+    }
+    if (data.containsKey('tagIds')) {
+      final l$tagIds = data['tagIds'];
+      result$data['tagIds'] = (l$tagIds as List<dynamic>)
+          .map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('isGeneral')) {
+      final l$isGeneral = data['isGeneral'];
+      result$data['isGeneral'] = (l$isGeneral as bool);
+    }
+    return Input$UploadRequestInput._(result$data);
+  }
 
-String toJson$Enum$UserTypeEnum(Enum$UserTypeEnum e) {
-  switch (e) {
-    case Enum$UserTypeEnum.USER:
-      return r'USER';
-    case Enum$UserTypeEnum.OPERATOR:
-      return r'OPERATOR';
-    case Enum$UserTypeEnum.ADMIN:
-      return r'ADMIN';
-    case Enum$UserTypeEnum.SUPER_ADMIN:
-      return r'SUPER_ADMIN';
-    case Enum$UserTypeEnum.CHIEF_ADMIN:
-      return r'CHIEF_ADMIN';
-    case Enum$UserTypeEnum.$unknown:
-      return r'$unknown';
+  Map<String, dynamic> _$data;
+
+  int? get count => (_$data['count'] as int?);
+
+  List<String>? get tagIds => (_$data['tagIds'] as List<String>?);
+
+  bool? get isGeneral => (_$data['isGeneral'] as bool?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('count')) {
+      final l$count = count;
+      result$data['count'] = (l$count as int);
+    }
+    if (_$data.containsKey('tagIds')) {
+      final l$tagIds = tagIds;
+      result$data['tagIds'] = (l$tagIds as List<String>).map((e) => e).toList();
+    }
+    if (_$data.containsKey('isGeneral')) {
+      final l$isGeneral = isGeneral;
+      result$data['isGeneral'] = (l$isGeneral as bool);
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$UploadRequestInput<Input$UploadRequestInput> get copyWith =>
+      CopyWith$Input$UploadRequestInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input$UploadRequestInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
+      return false;
+    }
+    if (l$count != lOther$count) {
+      return false;
+    }
+    final l$tagIds = tagIds;
+    final lOther$tagIds = other.tagIds;
+    if (_$data.containsKey('tagIds') != other._$data.containsKey('tagIds')) {
+      return false;
+    }
+    if (l$tagIds != null && lOther$tagIds != null) {
+      if (l$tagIds.length != lOther$tagIds.length) {
+        return false;
+      }
+      for (int i = 0; i < l$tagIds.length; i++) {
+        final l$tagIds$entry = l$tagIds[i];
+        final lOther$tagIds$entry = lOther$tagIds[i];
+        if (l$tagIds$entry != lOther$tagIds$entry) {
+          return false;
+        }
+      }
+    } else if (l$tagIds != lOther$tagIds) {
+      return false;
+    }
+    final l$isGeneral = isGeneral;
+    final lOther$isGeneral = other.isGeneral;
+    if (_$data.containsKey('isGeneral') !=
+        other._$data.containsKey('isGeneral')) {
+      return false;
+    }
+    if (l$isGeneral != lOther$isGeneral) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$count = count;
+    final l$tagIds = tagIds;
+    final l$isGeneral = isGeneral;
+    return Object.hashAll([
+      _$data.containsKey('count') ? l$count : const {},
+      _$data.containsKey('tagIds')
+          ? l$tagIds == null
+                ? null
+                : Object.hashAll(l$tagIds.map((v) => v))
+          : const {},
+      _$data.containsKey('isGeneral') ? l$isGeneral : const {},
+    ]);
   }
 }
 
-Enum$UserTypeEnum fromJson$Enum$UserTypeEnum(String value) {
-  switch (value) {
-    case r'USER':
-      return Enum$UserTypeEnum.USER;
-    case r'OPERATOR':
-      return Enum$UserTypeEnum.OPERATOR;
-    case r'ADMIN':
-      return Enum$UserTypeEnum.ADMIN;
-    case r'SUPER_ADMIN':
-      return Enum$UserTypeEnum.SUPER_ADMIN;
-    case r'CHIEF_ADMIN':
-      return Enum$UserTypeEnum.CHIEF_ADMIN;
-    default:
-      return Enum$UserTypeEnum.$unknown;
+abstract class CopyWith$Input$UploadRequestInput<TRes> {
+  factory CopyWith$Input$UploadRequestInput(
+    Input$UploadRequestInput instance,
+    TRes Function(Input$UploadRequestInput) then,
+  ) = _CopyWithImpl$Input$UploadRequestInput;
+
+  factory CopyWith$Input$UploadRequestInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$UploadRequestInput;
+
+  TRes call({int? count, List<String>? tagIds, bool? isGeneral});
+}
+
+class _CopyWithImpl$Input$UploadRequestInput<TRes>
+    implements CopyWith$Input$UploadRequestInput<TRes> {
+  _CopyWithImpl$Input$UploadRequestInput(this._instance, this._then);
+
+  final Input$UploadRequestInput _instance;
+
+  final TRes Function(Input$UploadRequestInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? tagIds = _undefined,
+    Object? isGeneral = _undefined,
+  }) => _then(
+    Input$UploadRequestInput._({
+      ..._instance._$data,
+      if (count != _undefined && count != null) 'count': (count as int),
+      if (tagIds != _undefined && tagIds != null)
+        'tagIds': (tagIds as List<String>),
+      if (isGeneral != _undefined && isGeneral != null)
+        'isGeneral': (isGeneral as bool),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Input$UploadRequestInput<TRes>
+    implements CopyWith$Input$UploadRequestInput<TRes> {
+  _CopyWithStubImpl$Input$UploadRequestInput(this._res);
+
+  TRes _res;
+
+  call({int? count, List<String>? tagIds, bool? isGeneral}) => _res;
+}
+
+class Input$UploadConfirmInput {
+  factory Input$UploadConfirmInput({required List<String> ids}) =>
+      Input$UploadConfirmInput._({r'ids': ids});
+
+  Input$UploadConfirmInput._(this._$data);
+
+  factory Input$UploadConfirmInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$ids = data['ids'];
+    result$data['ids'] = (l$ids as List<dynamic>)
+        .map((e) => (e as String))
+        .toList();
+    return Input$UploadConfirmInput._(result$data);
   }
+
+  Map<String, dynamic> _$data;
+
+  List<String> get ids => (_$data['ids'] as List<String>);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$ids = ids;
+    result$data['ids'] = l$ids.map((e) => e).toList();
+    return result$data;
+  }
+
+  CopyWith$Input$UploadConfirmInput<Input$UploadConfirmInput> get copyWith =>
+      CopyWith$Input$UploadConfirmInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input$UploadConfirmInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$ids = ids;
+    final lOther$ids = other.ids;
+    if (l$ids.length != lOther$ids.length) {
+      return false;
+    }
+    for (int i = 0; i < l$ids.length; i++) {
+      final l$ids$entry = l$ids[i];
+      final lOther$ids$entry = lOther$ids[i];
+      if (l$ids$entry != lOther$ids$entry) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$ids = ids;
+    return Object.hashAll([Object.hashAll(l$ids.map((v) => v))]);
+  }
+}
+
+abstract class CopyWith$Input$UploadConfirmInput<TRes> {
+  factory CopyWith$Input$UploadConfirmInput(
+    Input$UploadConfirmInput instance,
+    TRes Function(Input$UploadConfirmInput) then,
+  ) = _CopyWithImpl$Input$UploadConfirmInput;
+
+  factory CopyWith$Input$UploadConfirmInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$UploadConfirmInput;
+
+  TRes call({List<String>? ids});
+}
+
+class _CopyWithImpl$Input$UploadConfirmInput<TRes>
+    implements CopyWith$Input$UploadConfirmInput<TRes> {
+  _CopyWithImpl$Input$UploadConfirmInput(this._instance, this._then);
+
+  final Input$UploadConfirmInput _instance;
+
+  final TRes Function(Input$UploadConfirmInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? ids = _undefined}) => _then(
+    Input$UploadConfirmInput._({
+      ..._instance._$data,
+      if (ids != _undefined && ids != null) 'ids': (ids as List<String>),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Input$UploadConfirmInput<TRes>
+    implements CopyWith$Input$UploadConfirmInput<TRes> {
+  _CopyWithStubImpl$Input$UploadConfirmInput(this._res);
+
+  TRes _res;
+
+  call({List<String>? ids}) => _res;
+}
+
+class Input$TagFileInput {
+  factory Input$TagFileInput({
+    required List<String> ids,
+    required List<String> tagIds,
+    required bool isGeneral,
+  }) => Input$TagFileInput._({
+    r'ids': ids,
+    r'tagIds': tagIds,
+    r'isGeneral': isGeneral,
+  });
+
+  Input$TagFileInput._(this._$data);
+
+  factory Input$TagFileInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$ids = data['ids'];
+    result$data['ids'] = (l$ids as List<dynamic>)
+        .map((e) => (e as String))
+        .toList();
+    final l$tagIds = data['tagIds'];
+    result$data['tagIds'] = (l$tagIds as List<dynamic>)
+        .map((e) => (e as String))
+        .toList();
+    final l$isGeneral = data['isGeneral'];
+    result$data['isGeneral'] = (l$isGeneral as bool);
+    return Input$TagFileInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<String> get ids => (_$data['ids'] as List<String>);
+
+  List<String> get tagIds => (_$data['tagIds'] as List<String>);
+
+  bool get isGeneral => (_$data['isGeneral'] as bool);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$ids = ids;
+    result$data['ids'] = l$ids.map((e) => e).toList();
+    final l$tagIds = tagIds;
+    result$data['tagIds'] = l$tagIds.map((e) => e).toList();
+    final l$isGeneral = isGeneral;
+    result$data['isGeneral'] = l$isGeneral;
+    return result$data;
+  }
+
+  CopyWith$Input$TagFileInput<Input$TagFileInput> get copyWith =>
+      CopyWith$Input$TagFileInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input$TagFileInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$ids = ids;
+    final lOther$ids = other.ids;
+    if (l$ids.length != lOther$ids.length) {
+      return false;
+    }
+    for (int i = 0; i < l$ids.length; i++) {
+      final l$ids$entry = l$ids[i];
+      final lOther$ids$entry = lOther$ids[i];
+      if (l$ids$entry != lOther$ids$entry) {
+        return false;
+      }
+    }
+    final l$tagIds = tagIds;
+    final lOther$tagIds = other.tagIds;
+    if (l$tagIds.length != lOther$tagIds.length) {
+      return false;
+    }
+    for (int i = 0; i < l$tagIds.length; i++) {
+      final l$tagIds$entry = l$tagIds[i];
+      final lOther$tagIds$entry = lOther$tagIds[i];
+      if (l$tagIds$entry != lOther$tagIds$entry) {
+        return false;
+      }
+    }
+    final l$isGeneral = isGeneral;
+    final lOther$isGeneral = other.isGeneral;
+    if (l$isGeneral != lOther$isGeneral) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$ids = ids;
+    final l$tagIds = tagIds;
+    final l$isGeneral = isGeneral;
+    return Object.hashAll([
+      Object.hashAll(l$ids.map((v) => v)),
+      Object.hashAll(l$tagIds.map((v) => v)),
+      l$isGeneral,
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$TagFileInput<TRes> {
+  factory CopyWith$Input$TagFileInput(
+    Input$TagFileInput instance,
+    TRes Function(Input$TagFileInput) then,
+  ) = _CopyWithImpl$Input$TagFileInput;
+
+  factory CopyWith$Input$TagFileInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$TagFileInput;
+
+  TRes call({List<String>? ids, List<String>? tagIds, bool? isGeneral});
+}
+
+class _CopyWithImpl$Input$TagFileInput<TRes>
+    implements CopyWith$Input$TagFileInput<TRes> {
+  _CopyWithImpl$Input$TagFileInput(this._instance, this._then);
+
+  final Input$TagFileInput _instance;
+
+  final TRes Function(Input$TagFileInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? ids = _undefined,
+    Object? tagIds = _undefined,
+    Object? isGeneral = _undefined,
+  }) => _then(
+    Input$TagFileInput._({
+      ..._instance._$data,
+      if (ids != _undefined && ids != null) 'ids': (ids as List<String>),
+      if (tagIds != _undefined && tagIds != null)
+        'tagIds': (tagIds as List<String>),
+      if (isGeneral != _undefined && isGeneral != null)
+        'isGeneral': (isGeneral as bool),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Input$TagFileInput<TRes>
+    implements CopyWith$Input$TagFileInput<TRes> {
+  _CopyWithStubImpl$Input$TagFileInput(this._res);
+
+  TRes _res;
+
+  call({List<String>? ids, List<String>? tagIds, bool? isGeneral}) => _res;
+}
+
+class Input$RemoveFileTagInput {
+  factory Input$RemoveFileTagInput({
+    required String $_id,
+    required String tagId,
+    bool? isGeneral,
+  }) => Input$RemoveFileTagInput._({
+    r'_id': $_id,
+    r'tagId': tagId,
+    if (isGeneral != null) r'isGeneral': isGeneral,
+  });
+
+  Input$RemoveFileTagInput._(this._$data);
+
+  factory Input$RemoveFileTagInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$$_id = data['_id'];
+    result$data['_id'] = (l$$_id as String);
+    final l$tagId = data['tagId'];
+    result$data['tagId'] = (l$tagId as String);
+    if (data.containsKey('isGeneral')) {
+      final l$isGeneral = data['isGeneral'];
+      result$data['isGeneral'] = (l$isGeneral as bool?);
+    }
+    return Input$RemoveFileTagInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get $_id => (_$data['_id'] as String);
+
+  String get tagId => (_$data['tagId'] as String);
+
+  bool? get isGeneral => (_$data['isGeneral'] as bool?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$$_id = $_id;
+    result$data['_id'] = l$$_id;
+    final l$tagId = tagId;
+    result$data['tagId'] = l$tagId;
+    if (_$data.containsKey('isGeneral')) {
+      final l$isGeneral = isGeneral;
+      result$data['isGeneral'] = l$isGeneral;
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$RemoveFileTagInput<Input$RemoveFileTagInput> get copyWith =>
+      CopyWith$Input$RemoveFileTagInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input$RemoveFileTagInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_id = $_id;
+    final lOther$$_id = other.$_id;
+    if (l$$_id != lOther$$_id) {
+      return false;
+    }
+    final l$tagId = tagId;
+    final lOther$tagId = other.tagId;
+    if (l$tagId != lOther$tagId) {
+      return false;
+    }
+    final l$isGeneral = isGeneral;
+    final lOther$isGeneral = other.isGeneral;
+    if (_$data.containsKey('isGeneral') !=
+        other._$data.containsKey('isGeneral')) {
+      return false;
+    }
+    if (l$isGeneral != lOther$isGeneral) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_id = $_id;
+    final l$tagId = tagId;
+    final l$isGeneral = isGeneral;
+    return Object.hashAll([
+      l$$_id,
+      l$tagId,
+      _$data.containsKey('isGeneral') ? l$isGeneral : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$RemoveFileTagInput<TRes> {
+  factory CopyWith$Input$RemoveFileTagInput(
+    Input$RemoveFileTagInput instance,
+    TRes Function(Input$RemoveFileTagInput) then,
+  ) = _CopyWithImpl$Input$RemoveFileTagInput;
+
+  factory CopyWith$Input$RemoveFileTagInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$RemoveFileTagInput;
+
+  TRes call({String? $_id, String? tagId, bool? isGeneral});
+}
+
+class _CopyWithImpl$Input$RemoveFileTagInput<TRes>
+    implements CopyWith$Input$RemoveFileTagInput<TRes> {
+  _CopyWithImpl$Input$RemoveFileTagInput(this._instance, this._then);
+
+  final Input$RemoveFileTagInput _instance;
+
+  final TRes Function(Input$RemoveFileTagInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_id = _undefined,
+    Object? tagId = _undefined,
+    Object? isGeneral = _undefined,
+  }) => _then(
+    Input$RemoveFileTagInput._({
+      ..._instance._$data,
+      if ($_id != _undefined && $_id != null) '_id': ($_id as String),
+      if (tagId != _undefined && tagId != null) 'tagId': (tagId as String),
+      if (isGeneral != _undefined) 'isGeneral': (isGeneral as bool?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Input$RemoveFileTagInput<TRes>
+    implements CopyWith$Input$RemoveFileTagInput<TRes> {
+  _CopyWithStubImpl$Input$RemoveFileTagInput(this._res);
+
+  TRes _res;
+
+  call({String? $_id, String? tagId, bool? isGeneral}) => _res;
 }
 
 enum Enum$LinkTypeEnum {
@@ -1276,6 +2168,54 @@ Enum$LinkStatusEnum fromJson$Enum$LinkStatusEnum(String value) {
       return Enum$LinkStatusEnum.PRINTED;
     default:
       return Enum$LinkStatusEnum.$unknown;
+  }
+}
+
+enum Enum$UserTypeEnum {
+  USER,
+  OPERATOR,
+  ADMIN,
+  SUPER_ADMIN,
+  CHIEF_ADMIN,
+  $unknown;
+
+  factory Enum$UserTypeEnum.fromJson(String value) =>
+      fromJson$Enum$UserTypeEnum(value);
+
+  String toJson() => toJson$Enum$UserTypeEnum(this);
+}
+
+String toJson$Enum$UserTypeEnum(Enum$UserTypeEnum e) {
+  switch (e) {
+    case Enum$UserTypeEnum.USER:
+      return r'USER';
+    case Enum$UserTypeEnum.OPERATOR:
+      return r'OPERATOR';
+    case Enum$UserTypeEnum.ADMIN:
+      return r'ADMIN';
+    case Enum$UserTypeEnum.SUPER_ADMIN:
+      return r'SUPER_ADMIN';
+    case Enum$UserTypeEnum.CHIEF_ADMIN:
+      return r'CHIEF_ADMIN';
+    case Enum$UserTypeEnum.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum$UserTypeEnum fromJson$Enum$UserTypeEnum(String value) {
+  switch (value) {
+    case r'USER':
+      return Enum$UserTypeEnum.USER;
+    case r'OPERATOR':
+      return Enum$UserTypeEnum.OPERATOR;
+    case r'ADMIN':
+      return Enum$UserTypeEnum.ADMIN;
+    case r'SUPER_ADMIN':
+      return Enum$UserTypeEnum.SUPER_ADMIN;
+    case r'CHIEF_ADMIN':
+      return Enum$UserTypeEnum.CHIEF_ADMIN;
+    default:
+      return Enum$UserTypeEnum.$unknown;
   }
 }
 

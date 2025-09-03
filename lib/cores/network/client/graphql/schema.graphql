@@ -3,87 +3,6 @@ Indicates exactly one field must be supplied and this field must not be `null`.
 """
 directive @oneOf on INPUT_OBJECT
 
-type UserResponse {
-  """Unique Identifier"""
-  _id: ID!
-
-  """User phone number"""
-  phone: String!
-
-  """User first name"""
-  firstName: String
-
-  """User last name"""
-  lastName: String
-
-  """User email"""
-  email: String
-
-  """User account type"""
-  type: UserTypeEnum!
-
-  """Date created"""
-  createdAt: DateTime!
-
-  """Date updated"""
-  updatedAt: DateTime!
-}
-
-"""Specify User type"""
-enum UserTypeEnum {
-  """Simple user"""
-  USER
-
-  """Operator - Technical field operator/support"""
-  OPERATOR
-
-  """Admin - Administrator of the system with limited access"""
-  ADMIN
-
-  """
-  Super Admin - Super Administrator of the entire system with full access
-  """
-  SUPER_ADMIN
-
-  """
-  Chief Admin - Chief Administrator of the entire system with sovereign access
-  """
-  CHIEF_ADMIN
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
-type TokenResponse {
-  """Token"""
-  token: String!
-
-  """Token expiration time"""
-  expiresAt: DateTime!
-}
-
-type LoginResponse {
-  """User basic data"""
-  user: UserResponse!
-
-  """Access token"""
-  accessToken: TokenResponse!
-
-  """Refresh Token"""
-  refreshToken: TokenResponse!
-}
-
-"""Response for OK requests"""
-type OkayResponse {
-  """Confirmation message"""
-  message: String!
-
-  """Status of the request"""
-  status: String!
-}
-
 """Guest Link Response"""
 type GuestLinkResponse {
   """Unique Identifier"""
@@ -147,6 +66,11 @@ enum LinkStatusEnum {
   PRINTED
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 """Guest Response"""
 type GuestResponse {
   """Unique Identifier"""
@@ -200,6 +124,82 @@ type PaginatedGuestResponse {
   page: Int!
 }
 
+type UserResponse {
+  """Unique Identifier"""
+  _id: ID!
+
+  """User phone number"""
+  phone: String!
+
+  """User first name"""
+  firstName: String
+
+  """User last name"""
+  lastName: String
+
+  """User email"""
+  email: String
+
+  """User account type"""
+  type: UserTypeEnum!
+
+  """Date created"""
+  createdAt: DateTime!
+
+  """Date updated"""
+  updatedAt: DateTime!
+}
+
+"""Specify User type"""
+enum UserTypeEnum {
+  """Simple user"""
+  USER
+
+  """Operator - Technical field operator/support"""
+  OPERATOR
+
+  """Admin - Administrator of the system with limited access"""
+  ADMIN
+
+  """
+  Super Admin - Super Administrator of the entire system with full access
+  """
+  SUPER_ADMIN
+
+  """
+  Chief Admin - Chief Administrator of the entire system with sovereign access
+  """
+  CHIEF_ADMIN
+}
+
+type TokenResponse {
+  """Token"""
+  token: String!
+
+  """Token expiration time"""
+  expiresAt: DateTime!
+}
+
+type LoginResponse {
+  """User basic data"""
+  user: UserResponse!
+
+  """Access token"""
+  accessToken: TokenResponse!
+
+  """Refresh Token"""
+  refreshToken: TokenResponse!
+}
+
+"""Response for OK requests"""
+type OkayResponse {
+  """Confirmation message"""
+  message: String!
+
+  """Status of the request"""
+  status: String!
+}
+
 """Invitation Link Response"""
 type InvitationLinkResponse {
   """Unique Identifier"""
@@ -241,6 +241,33 @@ type PaginatedInvitationLinkResponse {
   page: Int!
 }
 
+"""Gallery file response object"""
+type FileResponse {
+  """Unique Identifier"""
+  _id: ID!
+
+  """File URL"""
+  url: String!
+
+  """File upload pre-signed URL"""
+  uploadUrl: String
+
+  """If file is general"""
+  isGeneral: Boolean!
+
+  """If file uploaded"""
+  isConfirmed: Boolean!
+
+  """Date created"""
+  createdAt: DateTime!
+
+  """Date updated"""
+  updatedAt: DateTime!
+
+  """Tagged guests"""
+  tags: [GuestResponse!]!
+}
+
 type Query {
   """Get user information"""
   me: UserResponse!
@@ -255,6 +282,7 @@ type Query {
 
     """Search query"""
     search: String! = ""
+    input: InvitationFilterInput
   ): PaginatedInvitationLinkResponse!
 
   """Get a single invitation link."""
@@ -274,6 +302,42 @@ type Query {
     """Search query"""
     search: String! = ""
   ): PaginatedGuestResponse!
+
+  """Get all gallery files"""
+  galleryFiles(guestCode: String!): [FileResponse!]!
+}
+
+"""Input type for filtering user support tickets"""
+input InvitationFilterInput {
+  """Start date for filtering user support"""
+  createdSince: DateTime
+
+  """End date for filtering items"""
+  createdUntil: DateTime
+
+  """Start date for filtering items by last update"""
+  updatedSince: DateTime
+
+  """End date for filtering items by last update"""
+  updatedUntil: DateTime
+
+  """Status of the link items"""
+  status: LinkStatusEnum
+
+  """Unique code"""
+  code: String
+
+  """Total number of guests allowed for link"""
+  guestSize: Int
+
+  """Link type"""
+  type: LinkTypeEnum
+
+  """Total number of guests allowed for each entry"""
+  guestPerEntry: Int
+
+  """Total number of guests registered for link"""
+  guestsRegistered: Int
 }
 
 """Simple input Argument with Code"""
@@ -298,17 +362,29 @@ type Mutation {
   """Create an Admin user"""
   createAdmin(input: CreateUserInput!): UserResponse!
 
-  """Refresh user access and refresh tokens."""
+  """Refresh user access and refresh tokens.."""
   refreshToken: LoginResponse!
 
   """Guests details submitted."""
   rsvp(input: CreateGuestInput!): [GuestResponse!]!
 
-  """Generate invitation links for guests.."""
+  """Generate invitation links for guests."""
   generateInviteLink(input: CreateInvitationLinkInput!): OkayResponse!
 
   """Generate print cards"""
   generatePrintCard(input: CreatePrintCardInput!): OkayResponse!
+
+  """Get Upload URLs to upload files"""
+  uploadRequest(input: UploadRequestInput!): [FileResponse!]!
+
+  """Confirm uploaded files"""
+  confirmUpload(input: UploadConfirmInput!): [FileResponse!]!
+
+  """Add tags to files"""
+  addTagsToFiles(input: TagFileInput!): [FileResponse!]!
+
+  """Remove tag from files.."""
+  removeFileTag(input: RemoveFileTagInput!): FileResponse!
 }
 
 """Login input data"""
@@ -386,4 +462,48 @@ input CreateInvitationLinkInput {
 input CreatePrintCardInput {
   """Number of unique cards to create"""
   count: Int! = 1
+}
+
+"""Create upload request input"""
+input UploadRequestInput {
+  """Number of files to upload"""
+  count: Int! = 1
+
+  """List of guest IDs tagged to the upload request files"""
+  tagIds: [ID!]! = []
+
+  """Whether the upload request is for general access"""
+  isGeneral: Boolean! = false
+}
+
+"""Confirmation input for uploaded files"""
+input UploadConfirmInput {
+  """Ids of the files to be confirmed for upload"""
+  ids: [ID!]!
+}
+
+"""Input for tagging a file with a guest"""
+input TagFileInput {
+  """
+  IDs of the files being tagged. This enables bulk tagging multiple files at a time
+  """
+  ids: [ID!]!
+
+  """List of guest IDs tagged to the upload request files"""
+  tagIds: [ID!]!
+
+  """Whether the upload request is for general access"""
+  isGeneral: Boolean!
+}
+
+"""Input for removing a tag from a file"""
+input RemoveFileTagInput {
+  """ID of the file being untagged"""
+  _id: ID!
+
+  """ID of the tag being removed"""
+  tagId: ID!
+
+  """Whether the upload request is for general access"""
+  isGeneral: Boolean
 }

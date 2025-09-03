@@ -2289,3 +2289,999 @@ class Mutation$rsvp$Widget extends graphql_flutter.Mutation<Mutation$rsvp> {
          ),
        );
 }
+
+class Variables$Mutation$confirmUpload {
+  factory Variables$Mutation$confirmUpload({
+    required Input$UploadConfirmInput input,
+  }) => Variables$Mutation$confirmUpload._({r'input': input});
+
+  Variables$Mutation$confirmUpload._(this._$data);
+
+  factory Variables$Mutation$confirmUpload.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] = Input$UploadConfirmInput.fromJson(
+      (l$input as Map<String, dynamic>),
+    );
+    return Variables$Mutation$confirmUpload._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$UploadConfirmInput get input =>
+      (_$data['input'] as Input$UploadConfirmInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$confirmUpload<Variables$Mutation$confirmUpload>
+  get copyWith => CopyWith$Variables$Mutation$confirmUpload(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables$Mutation$confirmUpload ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$confirmUpload<TRes> {
+  factory CopyWith$Variables$Mutation$confirmUpload(
+    Variables$Mutation$confirmUpload instance,
+    TRes Function(Variables$Mutation$confirmUpload) then,
+  ) = _CopyWithImpl$Variables$Mutation$confirmUpload;
+
+  factory CopyWith$Variables$Mutation$confirmUpload.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$confirmUpload;
+
+  TRes call({Input$UploadConfirmInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$confirmUpload<TRes>
+    implements CopyWith$Variables$Mutation$confirmUpload<TRes> {
+  _CopyWithImpl$Variables$Mutation$confirmUpload(this._instance, this._then);
+
+  final Variables$Mutation$confirmUpload _instance;
+
+  final TRes Function(Variables$Mutation$confirmUpload) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) => _then(
+    Variables$Mutation$confirmUpload._({
+      ..._instance._$data,
+      if (input != _undefined && input != null)
+        'input': (input as Input$UploadConfirmInput),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Variables$Mutation$confirmUpload<TRes>
+    implements CopyWith$Variables$Mutation$confirmUpload<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$confirmUpload(this._res);
+
+  TRes _res;
+
+  call({Input$UploadConfirmInput? input}) => _res;
+}
+
+class Mutation$confirmUpload {
+  Mutation$confirmUpload({
+    required this.confirmUpload,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$confirmUpload.fromJson(Map<String, dynamic> json) {
+    final l$confirmUpload = json['confirmUpload'];
+    final l$$__typename = json['__typename'];
+    return Mutation$confirmUpload(
+      confirmUpload: (l$confirmUpload as List<dynamic>)
+          .map(
+            (e) => Fragment$FileResponse.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Fragment$FileResponse> confirmUpload;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$confirmUpload = confirmUpload;
+    _resultData['confirmUpload'] = l$confirmUpload
+        .map((e) => e.toJson())
+        .toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$confirmUpload = confirmUpload;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$confirmUpload.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation$confirmUpload || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$confirmUpload = confirmUpload;
+    final lOther$confirmUpload = other.confirmUpload;
+    if (l$confirmUpload.length != lOther$confirmUpload.length) {
+      return false;
+    }
+    for (int i = 0; i < l$confirmUpload.length; i++) {
+      final l$confirmUpload$entry = l$confirmUpload[i];
+      final lOther$confirmUpload$entry = lOther$confirmUpload[i];
+      if (l$confirmUpload$entry != lOther$confirmUpload$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$confirmUpload on Mutation$confirmUpload {
+  CopyWith$Mutation$confirmUpload<Mutation$confirmUpload> get copyWith =>
+      CopyWith$Mutation$confirmUpload(this, (i) => i);
+}
+
+abstract class CopyWith$Mutation$confirmUpload<TRes> {
+  factory CopyWith$Mutation$confirmUpload(
+    Mutation$confirmUpload instance,
+    TRes Function(Mutation$confirmUpload) then,
+  ) = _CopyWithImpl$Mutation$confirmUpload;
+
+  factory CopyWith$Mutation$confirmUpload.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$confirmUpload;
+
+  TRes call({List<Fragment$FileResponse>? confirmUpload, String? $__typename});
+  TRes confirmUpload(
+    Iterable<Fragment$FileResponse> Function(
+      Iterable<CopyWith$Fragment$FileResponse<Fragment$FileResponse>>,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl$Mutation$confirmUpload<TRes>
+    implements CopyWith$Mutation$confirmUpload<TRes> {
+  _CopyWithImpl$Mutation$confirmUpload(this._instance, this._then);
+
+  final Mutation$confirmUpload _instance;
+
+  final TRes Function(Mutation$confirmUpload) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? confirmUpload = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation$confirmUpload(
+      confirmUpload: confirmUpload == _undefined || confirmUpload == null
+          ? _instance.confirmUpload
+          : (confirmUpload as List<Fragment$FileResponse>),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  TRes confirmUpload(
+    Iterable<Fragment$FileResponse> Function(
+      Iterable<CopyWith$Fragment$FileResponse<Fragment$FileResponse>>,
+    )
+    _fn,
+  ) => call(
+    confirmUpload: _fn(
+      _instance.confirmUpload.map(
+        (e) => CopyWith$Fragment$FileResponse(e, (i) => i),
+      ),
+    ).toList(),
+  );
+}
+
+class _CopyWithStubImpl$Mutation$confirmUpload<TRes>
+    implements CopyWith$Mutation$confirmUpload<TRes> {
+  _CopyWithStubImpl$Mutation$confirmUpload(this._res);
+
+  TRes _res;
+
+  call({List<Fragment$FileResponse>? confirmUpload, String? $__typename}) =>
+      _res;
+
+  confirmUpload(_fn) => _res;
+}
+
+const documentNodeMutationconfirmUpload = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'confirmUpload'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'input')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'UploadConfirmInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'confirmUpload'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'input'),
+                value: VariableNode(name: NameNode(value: 'input')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'FileResponse'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionFileResponse,
+    fragmentDefinitionGuestResponse,
+    fragmentDefinitionGuestLinkResponse,
+  ],
+);
+Mutation$confirmUpload _parserFn$Mutation$confirmUpload(
+  Map<String, dynamic> data,
+) => Mutation$confirmUpload.fromJson(data);
+typedef OnMutationCompleted$Mutation$confirmUpload =
+    FutureOr<void> Function(Map<String, dynamic>?, Mutation$confirmUpload?);
+
+class Options$Mutation$confirmUpload
+    extends graphql.MutationOptions<Mutation$confirmUpload> {
+  Options$Mutation$confirmUpload({
+    String? operationName,
+    required Variables$Mutation$confirmUpload variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$confirmUpload? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$confirmUpload? onCompleted,
+    graphql.OnMutationUpdate<Mutation$confirmUpload>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null ? null : _parserFn$Mutation$confirmUpload(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationconfirmUpload,
+         parserFn: _parserFn$Mutation$confirmUpload,
+       );
+
+  final OnMutationCompleted$Mutation$confirmUpload? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+class WatchOptions$Mutation$confirmUpload
+    extends graphql.WatchQueryOptions<Mutation$confirmUpload> {
+  WatchOptions$Mutation$confirmUpload({
+    String? operationName,
+    required Variables$Mutation$confirmUpload variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$confirmUpload? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         document: documentNodeMutationconfirmUpload,
+         pollInterval: pollInterval,
+         eagerlyFetchResults: eagerlyFetchResults,
+         carryForwardDataOnException: carryForwardDataOnException,
+         fetchResults: fetchResults,
+         parserFn: _parserFn$Mutation$confirmUpload,
+       );
+}
+
+extension ClientExtension$Mutation$confirmUpload on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$confirmUpload>> mutate$confirmUpload(
+    Options$Mutation$confirmUpload options,
+  ) async => await this.mutate(options);
+  graphql.ObservableQuery<Mutation$confirmUpload> watchMutation$confirmUpload(
+    WatchOptions$Mutation$confirmUpload options,
+  ) => this.watchMutation(options);
+}
+
+class Mutation$confirmUpload$HookResult {
+  Mutation$confirmUpload$HookResult(this.runMutation, this.result);
+
+  final RunMutation$Mutation$confirmUpload runMutation;
+
+  final graphql.QueryResult<Mutation$confirmUpload> result;
+}
+
+Mutation$confirmUpload$HookResult useMutation$confirmUpload([
+  WidgetOptions$Mutation$confirmUpload? options,
+]) {
+  final result = graphql_flutter.useMutation(
+    options ?? WidgetOptions$Mutation$confirmUpload(),
+  );
+  return Mutation$confirmUpload$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+          variables.toJson(),
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+        ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$confirmUpload> useWatchMutation$confirmUpload(
+  WatchOptions$Mutation$confirmUpload options,
+) => graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$confirmUpload
+    extends graphql.MutationOptions<Mutation$confirmUpload> {
+  WidgetOptions$Mutation$confirmUpload({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$confirmUpload? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$confirmUpload? onCompleted,
+    graphql.OnMutationUpdate<Mutation$confirmUpload>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null ? null : _parserFn$Mutation$confirmUpload(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationconfirmUpload,
+         parserFn: _parserFn$Mutation$confirmUpload,
+       );
+
+  final OnMutationCompleted$Mutation$confirmUpload? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+typedef RunMutation$Mutation$confirmUpload =
+    graphql.MultiSourceResult<Mutation$confirmUpload> Function(
+      Variables$Mutation$confirmUpload, {
+      Object? optimisticResult,
+      Mutation$confirmUpload? typedOptimisticResult,
+    });
+typedef Builder$Mutation$confirmUpload =
+    widgets.Widget Function(
+      RunMutation$Mutation$confirmUpload,
+      graphql.QueryResult<Mutation$confirmUpload>?,
+    );
+
+class Mutation$confirmUpload$Widget
+    extends graphql_flutter.Mutation<Mutation$confirmUpload> {
+  Mutation$confirmUpload$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$confirmUpload? options,
+    required Builder$Mutation$confirmUpload builder,
+  }) : super(
+         key: key,
+         options: options ?? WidgetOptions$Mutation$confirmUpload(),
+         builder: (run, result) => builder(
+           (variables, {optimisticResult, typedOptimisticResult}) => run(
+             variables.toJson(),
+             optimisticResult:
+                 optimisticResult ?? typedOptimisticResult?.toJson(),
+           ),
+           result,
+         ),
+       );
+}
+
+class Variables$Mutation$UploadRequest {
+  factory Variables$Mutation$UploadRequest({
+    required Input$UploadRequestInput input,
+  }) => Variables$Mutation$UploadRequest._({r'input': input});
+
+  Variables$Mutation$UploadRequest._(this._$data);
+
+  factory Variables$Mutation$UploadRequest.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] = Input$UploadRequestInput.fromJson(
+      (l$input as Map<String, dynamic>),
+    );
+    return Variables$Mutation$UploadRequest._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$UploadRequestInput get input =>
+      (_$data['input'] as Input$UploadRequestInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$UploadRequest<Variables$Mutation$UploadRequest>
+  get copyWith => CopyWith$Variables$Mutation$UploadRequest(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables$Mutation$UploadRequest ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$UploadRequest<TRes> {
+  factory CopyWith$Variables$Mutation$UploadRequest(
+    Variables$Mutation$UploadRequest instance,
+    TRes Function(Variables$Mutation$UploadRequest) then,
+  ) = _CopyWithImpl$Variables$Mutation$UploadRequest;
+
+  factory CopyWith$Variables$Mutation$UploadRequest.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$UploadRequest;
+
+  TRes call({Input$UploadRequestInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$UploadRequest<TRes>
+    implements CopyWith$Variables$Mutation$UploadRequest<TRes> {
+  _CopyWithImpl$Variables$Mutation$UploadRequest(this._instance, this._then);
+
+  final Variables$Mutation$UploadRequest _instance;
+
+  final TRes Function(Variables$Mutation$UploadRequest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) => _then(
+    Variables$Mutation$UploadRequest._({
+      ..._instance._$data,
+      if (input != _undefined && input != null)
+        'input': (input as Input$UploadRequestInput),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Variables$Mutation$UploadRequest<TRes>
+    implements CopyWith$Variables$Mutation$UploadRequest<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$UploadRequest(this._res);
+
+  TRes _res;
+
+  call({Input$UploadRequestInput? input}) => _res;
+}
+
+class Mutation$UploadRequest {
+  Mutation$UploadRequest({
+    required this.uploadRequest,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$UploadRequest.fromJson(Map<String, dynamic> json) {
+    final l$uploadRequest = json['uploadRequest'];
+    final l$$__typename = json['__typename'];
+    return Mutation$UploadRequest(
+      uploadRequest: (l$uploadRequest as List<dynamic>)
+          .map(
+            (e) => Fragment$FileResponse.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Fragment$FileResponse> uploadRequest;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$uploadRequest = uploadRequest;
+    _resultData['uploadRequest'] = l$uploadRequest
+        .map((e) => e.toJson())
+        .toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$uploadRequest = uploadRequest;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$uploadRequest.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation$UploadRequest || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$uploadRequest = uploadRequest;
+    final lOther$uploadRequest = other.uploadRequest;
+    if (l$uploadRequest.length != lOther$uploadRequest.length) {
+      return false;
+    }
+    for (int i = 0; i < l$uploadRequest.length; i++) {
+      final l$uploadRequest$entry = l$uploadRequest[i];
+      final lOther$uploadRequest$entry = lOther$uploadRequest[i];
+      if (l$uploadRequest$entry != lOther$uploadRequest$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$UploadRequest on Mutation$UploadRequest {
+  CopyWith$Mutation$UploadRequest<Mutation$UploadRequest> get copyWith =>
+      CopyWith$Mutation$UploadRequest(this, (i) => i);
+}
+
+abstract class CopyWith$Mutation$UploadRequest<TRes> {
+  factory CopyWith$Mutation$UploadRequest(
+    Mutation$UploadRequest instance,
+    TRes Function(Mutation$UploadRequest) then,
+  ) = _CopyWithImpl$Mutation$UploadRequest;
+
+  factory CopyWith$Mutation$UploadRequest.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$UploadRequest;
+
+  TRes call({List<Fragment$FileResponse>? uploadRequest, String? $__typename});
+  TRes uploadRequest(
+    Iterable<Fragment$FileResponse> Function(
+      Iterable<CopyWith$Fragment$FileResponse<Fragment$FileResponse>>,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl$Mutation$UploadRequest<TRes>
+    implements CopyWith$Mutation$UploadRequest<TRes> {
+  _CopyWithImpl$Mutation$UploadRequest(this._instance, this._then);
+
+  final Mutation$UploadRequest _instance;
+
+  final TRes Function(Mutation$UploadRequest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? uploadRequest = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation$UploadRequest(
+      uploadRequest: uploadRequest == _undefined || uploadRequest == null
+          ? _instance.uploadRequest
+          : (uploadRequest as List<Fragment$FileResponse>),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  TRes uploadRequest(
+    Iterable<Fragment$FileResponse> Function(
+      Iterable<CopyWith$Fragment$FileResponse<Fragment$FileResponse>>,
+    )
+    _fn,
+  ) => call(
+    uploadRequest: _fn(
+      _instance.uploadRequest.map(
+        (e) => CopyWith$Fragment$FileResponse(e, (i) => i),
+      ),
+    ).toList(),
+  );
+}
+
+class _CopyWithStubImpl$Mutation$UploadRequest<TRes>
+    implements CopyWith$Mutation$UploadRequest<TRes> {
+  _CopyWithStubImpl$Mutation$UploadRequest(this._res);
+
+  TRes _res;
+
+  call({List<Fragment$FileResponse>? uploadRequest, String? $__typename}) =>
+      _res;
+
+  uploadRequest(_fn) => _res;
+}
+
+const documentNodeMutationUploadRequest = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'UploadRequest'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'input')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'UploadRequestInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'uploadRequest'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'input'),
+                value: VariableNode(name: NameNode(value: 'input')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'FileResponse'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionFileResponse,
+    fragmentDefinitionGuestResponse,
+    fragmentDefinitionGuestLinkResponse,
+  ],
+);
+Mutation$UploadRequest _parserFn$Mutation$UploadRequest(
+  Map<String, dynamic> data,
+) => Mutation$UploadRequest.fromJson(data);
+typedef OnMutationCompleted$Mutation$UploadRequest =
+    FutureOr<void> Function(Map<String, dynamic>?, Mutation$UploadRequest?);
+
+class Options$Mutation$UploadRequest
+    extends graphql.MutationOptions<Mutation$UploadRequest> {
+  Options$Mutation$UploadRequest({
+    String? operationName,
+    required Variables$Mutation$UploadRequest variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$UploadRequest? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$UploadRequest? onCompleted,
+    graphql.OnMutationUpdate<Mutation$UploadRequest>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null ? null : _parserFn$Mutation$UploadRequest(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationUploadRequest,
+         parserFn: _parserFn$Mutation$UploadRequest,
+       );
+
+  final OnMutationCompleted$Mutation$UploadRequest? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+class WatchOptions$Mutation$UploadRequest
+    extends graphql.WatchQueryOptions<Mutation$UploadRequest> {
+  WatchOptions$Mutation$UploadRequest({
+    String? operationName,
+    required Variables$Mutation$UploadRequest variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$UploadRequest? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         document: documentNodeMutationUploadRequest,
+         pollInterval: pollInterval,
+         eagerlyFetchResults: eagerlyFetchResults,
+         carryForwardDataOnException: carryForwardDataOnException,
+         fetchResults: fetchResults,
+         parserFn: _parserFn$Mutation$UploadRequest,
+       );
+}
+
+extension ClientExtension$Mutation$UploadRequest on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$UploadRequest>> mutate$UploadRequest(
+    Options$Mutation$UploadRequest options,
+  ) async => await this.mutate(options);
+  graphql.ObservableQuery<Mutation$UploadRequest> watchMutation$UploadRequest(
+    WatchOptions$Mutation$UploadRequest options,
+  ) => this.watchMutation(options);
+}
+
+class Mutation$UploadRequest$HookResult {
+  Mutation$UploadRequest$HookResult(this.runMutation, this.result);
+
+  final RunMutation$Mutation$UploadRequest runMutation;
+
+  final graphql.QueryResult<Mutation$UploadRequest> result;
+}
+
+Mutation$UploadRequest$HookResult useMutation$UploadRequest([
+  WidgetOptions$Mutation$UploadRequest? options,
+]) {
+  final result = graphql_flutter.useMutation(
+    options ?? WidgetOptions$Mutation$UploadRequest(),
+  );
+  return Mutation$UploadRequest$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+          variables.toJson(),
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+        ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$UploadRequest> useWatchMutation$UploadRequest(
+  WatchOptions$Mutation$UploadRequest options,
+) => graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$UploadRequest
+    extends graphql.MutationOptions<Mutation$UploadRequest> {
+  WidgetOptions$Mutation$UploadRequest({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$UploadRequest? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$UploadRequest? onCompleted,
+    graphql.OnMutationUpdate<Mutation$UploadRequest>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null ? null : _parserFn$Mutation$UploadRequest(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationUploadRequest,
+         parserFn: _parserFn$Mutation$UploadRequest,
+       );
+
+  final OnMutationCompleted$Mutation$UploadRequest? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+typedef RunMutation$Mutation$UploadRequest =
+    graphql.MultiSourceResult<Mutation$UploadRequest> Function(
+      Variables$Mutation$UploadRequest, {
+      Object? optimisticResult,
+      Mutation$UploadRequest? typedOptimisticResult,
+    });
+typedef Builder$Mutation$UploadRequest =
+    widgets.Widget Function(
+      RunMutation$Mutation$UploadRequest,
+      graphql.QueryResult<Mutation$UploadRequest>?,
+    );
+
+class Mutation$UploadRequest$Widget
+    extends graphql_flutter.Mutation<Mutation$UploadRequest> {
+  Mutation$UploadRequest$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$UploadRequest? options,
+    required Builder$Mutation$UploadRequest builder,
+  }) : super(
+         key: key,
+         options: options ?? WidgetOptions$Mutation$UploadRequest(),
+         builder: (run, result) => builder(
+           (variables, {optimisticResult, typedOptimisticResult}) => run(
+             variables.toJson(),
+             optimisticResult:
+                 optimisticResult ?? typedOptimisticResult?.toJson(),
+           ),
+           result,
+         ),
+       );
+}

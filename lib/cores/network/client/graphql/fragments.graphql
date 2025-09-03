@@ -74,3 +74,16 @@ fragment LoginResponse on LoginResponse {
         ...TokenResponse
     }
 }
+
+fragment FileResponse on FileResponse{
+    _id
+    url
+    uploadUrl
+    isGeneral
+    isConfirmed
+    createdAt
+    updatedAt
+    tags {
+        ...GuestResponse
+    }
+}

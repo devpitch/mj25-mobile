@@ -1,8 +1,7 @@
 // ignore_for_file: type=lint
-import 'package:event_handler/cores/network/client/graphql/scalar.dart';
+import 'package:event_handler/common/network/client/graphql/scalar.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
-
 import 'schema.graphql.dart';
 
 class Fragment$TokenResponse {
@@ -2417,5 +2416,420 @@ extension ClientExtension$Fragment$LoginResponse on graphql.GraphQLClient {
       optimistic: optimistic,
     );
     return result == null ? null : Fragment$LoginResponse.fromJson(result);
+  }
+}
+
+class Fragment$FileResponse {
+  Fragment$FileResponse({
+    required this.$_id,
+    required this.url,
+    this.uploadUrl,
+    required this.isGeneral,
+    required this.isConfirmed,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.tags,
+    this.$__typename = 'FileResponse',
+  });
+
+  factory Fragment$FileResponse.fromJson(Map<String, dynamic> json) {
+    final l$$_id = json['_id'];
+    final l$url = json['url'];
+    final l$uploadUrl = json['uploadUrl'];
+    final l$isGeneral = json['isGeneral'];
+    final l$isConfirmed = json['isConfirmed'];
+    final l$createdAt = json['createdAt'];
+    final l$updatedAt = json['updatedAt'];
+    final l$tags = json['tags'];
+    final l$$__typename = json['__typename'];
+    return Fragment$FileResponse(
+      $_id: (l$$_id as String),
+      url: (l$url as String),
+      uploadUrl: (l$uploadUrl as String?),
+      isGeneral: (l$isGeneral as bool),
+      isConfirmed: (l$isConfirmed as bool),
+      createdAt: dateTimeFromJson(l$createdAt),
+      updatedAt: dateTimeFromJson(l$updatedAt),
+      tags: (l$tags as List<dynamic>)
+          .map(
+            (e) => Fragment$GuestResponse.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String $_id;
+
+  final String url;
+
+  final String? uploadUrl;
+
+  final bool isGeneral;
+
+  final bool isConfirmed;
+
+  final DateTime createdAt;
+
+  final DateTime updatedAt;
+
+  final List<Fragment$GuestResponse> tags;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$$_id = $_id;
+    _resultData['_id'] = l$$_id;
+    final l$url = url;
+    _resultData['url'] = l$url;
+    final l$uploadUrl = uploadUrl;
+    _resultData['uploadUrl'] = l$uploadUrl;
+    final l$isGeneral = isGeneral;
+    _resultData['isGeneral'] = l$isGeneral;
+    final l$isConfirmed = isConfirmed;
+    _resultData['isConfirmed'] = l$isConfirmed;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = dateTimeToJson(l$createdAt);
+    final l$updatedAt = updatedAt;
+    _resultData['updatedAt'] = dateTimeToJson(l$updatedAt);
+    final l$tags = tags;
+    _resultData['tags'] = l$tags.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_id = $_id;
+    final l$url = url;
+    final l$uploadUrl = uploadUrl;
+    final l$isGeneral = isGeneral;
+    final l$isConfirmed = isConfirmed;
+    final l$createdAt = createdAt;
+    final l$updatedAt = updatedAt;
+    final l$tags = tags;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$$_id,
+      l$url,
+      l$uploadUrl,
+      l$isGeneral,
+      l$isConfirmed,
+      l$createdAt,
+      l$updatedAt,
+      Object.hashAll(l$tags.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment$FileResponse || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_id = $_id;
+    final lOther$$_id = other.$_id;
+    if (l$$_id != lOther$$_id) {
+      return false;
+    }
+    final l$url = url;
+    final lOther$url = other.url;
+    if (l$url != lOther$url) {
+      return false;
+    }
+    final l$uploadUrl = uploadUrl;
+    final lOther$uploadUrl = other.uploadUrl;
+    if (l$uploadUrl != lOther$uploadUrl) {
+      return false;
+    }
+    final l$isGeneral = isGeneral;
+    final lOther$isGeneral = other.isGeneral;
+    if (l$isGeneral != lOther$isGeneral) {
+      return false;
+    }
+    final l$isConfirmed = isConfirmed;
+    final lOther$isConfirmed = other.isConfirmed;
+    if (l$isConfirmed != lOther$isConfirmed) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$tags = tags;
+    final lOther$tags = other.tags;
+    if (l$tags.length != lOther$tags.length) {
+      return false;
+    }
+    for (int i = 0; i < l$tags.length; i++) {
+      final l$tags$entry = l$tags[i];
+      final lOther$tags$entry = lOther$tags[i];
+      if (l$tags$entry != lOther$tags$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Fragment$FileResponse on Fragment$FileResponse {
+  CopyWith$Fragment$FileResponse<Fragment$FileResponse> get copyWith =>
+      CopyWith$Fragment$FileResponse(this, (i) => i);
+}
+
+abstract class CopyWith$Fragment$FileResponse<TRes> {
+  factory CopyWith$Fragment$FileResponse(
+    Fragment$FileResponse instance,
+    TRes Function(Fragment$FileResponse) then,
+  ) = _CopyWithImpl$Fragment$FileResponse;
+
+  factory CopyWith$Fragment$FileResponse.stub(TRes res) =
+      _CopyWithStubImpl$Fragment$FileResponse;
+
+  TRes call({
+    String? $_id,
+    String? url,
+    String? uploadUrl,
+    bool? isGeneral,
+    bool? isConfirmed,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    List<Fragment$GuestResponse>? tags,
+    String? $__typename,
+  });
+  TRes tags(
+    Iterable<Fragment$GuestResponse> Function(
+      Iterable<CopyWith$Fragment$GuestResponse<Fragment$GuestResponse>>,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl$Fragment$FileResponse<TRes>
+    implements CopyWith$Fragment$FileResponse<TRes> {
+  _CopyWithImpl$Fragment$FileResponse(this._instance, this._then);
+
+  final Fragment$FileResponse _instance;
+
+  final TRes Function(Fragment$FileResponse) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_id = _undefined,
+    Object? url = _undefined,
+    Object? uploadUrl = _undefined,
+    Object? isGeneral = _undefined,
+    Object? isConfirmed = _undefined,
+    Object? createdAt = _undefined,
+    Object? updatedAt = _undefined,
+    Object? tags = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Fragment$FileResponse(
+      $_id: $_id == _undefined || $_id == null
+          ? _instance.$_id
+          : ($_id as String),
+      url: url == _undefined || url == null ? _instance.url : (url as String),
+      uploadUrl: uploadUrl == _undefined
+          ? _instance.uploadUrl
+          : (uploadUrl as String?),
+      isGeneral: isGeneral == _undefined || isGeneral == null
+          ? _instance.isGeneral
+          : (isGeneral as bool),
+      isConfirmed: isConfirmed == _undefined || isConfirmed == null
+          ? _instance.isConfirmed
+          : (isConfirmed as bool),
+      createdAt: createdAt == _undefined || createdAt == null
+          ? _instance.createdAt
+          : (createdAt as DateTime),
+      updatedAt: updatedAt == _undefined || updatedAt == null
+          ? _instance.updatedAt
+          : (updatedAt as DateTime),
+      tags: tags == _undefined || tags == null
+          ? _instance.tags
+          : (tags as List<Fragment$GuestResponse>),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  TRes tags(
+    Iterable<Fragment$GuestResponse> Function(
+      Iterable<CopyWith$Fragment$GuestResponse<Fragment$GuestResponse>>,
+    )
+    _fn,
+  ) => call(
+    tags: _fn(
+      _instance.tags.map((e) => CopyWith$Fragment$GuestResponse(e, (i) => i)),
+    ).toList(),
+  );
+}
+
+class _CopyWithStubImpl$Fragment$FileResponse<TRes>
+    implements CopyWith$Fragment$FileResponse<TRes> {
+  _CopyWithStubImpl$Fragment$FileResponse(this._res);
+
+  TRes _res;
+
+  call({
+    String? $_id,
+    String? url,
+    String? uploadUrl,
+    bool? isGeneral,
+    bool? isConfirmed,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    List<Fragment$GuestResponse>? tags,
+    String? $__typename,
+  }) => _res;
+
+  tags(_fn) => _res;
+}
+
+const fragmentDefinitionFileResponse = FragmentDefinitionNode(
+  name: NameNode(value: 'FileResponse'),
+  typeCondition: TypeConditionNode(
+    on: NamedTypeNode(name: NameNode(value: 'FileResponse'), isNonNull: false),
+  ),
+  directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: '_id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'url'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'uploadUrl'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'isGeneral'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'isConfirmed'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'createdAt'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'updatedAt'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'tags'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'GuestResponse'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
+        ),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
+);
+const documentNodeFragmentFileResponse = DocumentNode(
+  definitions: [
+    fragmentDefinitionFileResponse,
+    fragmentDefinitionGuestResponse,
+    fragmentDefinitionGuestLinkResponse,
+  ],
+);
+
+extension ClientExtension$Fragment$FileResponse on graphql.GraphQLClient {
+  void writeFragment$FileResponse({
+    required Fragment$FileResponse data,
+    required Map<String, dynamic> idFields,
+    bool broadcast = true,
+  }) => this.writeFragment(
+    graphql.FragmentRequest(
+      idFields: idFields,
+      fragment: const graphql.Fragment(
+        fragmentName: 'FileResponse',
+        document: documentNodeFragmentFileResponse,
+      ),
+    ),
+    data: data.toJson(),
+    broadcast: broadcast,
+  );
+  Fragment$FileResponse? readFragment$FileResponse({
+    required Map<String, dynamic> idFields,
+    bool optimistic = true,
+  }) {
+    final result = this.readFragment(
+      graphql.FragmentRequest(
+        idFields: idFields,
+        fragment: const graphql.Fragment(
+          fragmentName: 'FileResponse',
+          document: documentNodeFragmentFileResponse,
+        ),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Fragment$FileResponse.fromJson(result);
   }
 }

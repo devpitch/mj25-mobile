@@ -30,6 +30,18 @@ mutation rsvp($input: CreateGuestInput!) {
     }
 }
 
+mutation confirmUpload($input: UploadConfirmInput!) {
+    confirmUpload(input: $input) {
+        ...FileResponse
+    }
+}
+
+mutation UploadRequest($input: UploadRequestInput!) {
+    uploadRequest(input: $input) {
+        ...FileResponse
+    }
+}
+
 
 ### GROUP RENTAL ###
 
