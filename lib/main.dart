@@ -9,10 +9,11 @@ import 'config/theme/app_theme.dart';
 import 'config/theme/theme_provider.dart';
 import 'cores/local_data/local_data.dart';
 import 'cores/utils/config_reader.dart';
+import 'injections/injector.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await configureDependencies();
   await ConfigReader.initialize();
   await LocalDataHandler.init();
   // await HelperFunctions.createDirectories();

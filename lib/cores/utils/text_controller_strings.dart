@@ -1,9 +1,9 @@
 class TextControllerStrings {
   static const String phoneNumber = "phoneNumber";
+  static const String otp = "otp";
+  static const String password = "password";
   static const String referalCode = "referal_code";
   static const String amount = "startup_amount";
-  static const String otp = "otp";
-  static const String nin = "nin";
   static const String bvn = "bvn";
   static const String email = "email";
   static const String info = "info";

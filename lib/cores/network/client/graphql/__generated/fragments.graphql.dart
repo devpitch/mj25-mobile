@@ -1,5 +1,5 @@
 // ignore_for_file: type=lint
-import 'package:event_handler/common/network/client/graphql/scalar.dart';
+import 'package:event_handler/cores/network/client/graphql/scalar.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
 import 'schema.graphql.dart';

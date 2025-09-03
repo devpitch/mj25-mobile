@@ -61,6 +61,7 @@ dependencies:
   dotted_border: ^3.1.0
   modal_bottom_sheet: ^3.0.0
   fresh_graphql: ^0.6.1
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,7 @@ dev_dependencies:
   graphql_codegen: ^2.0.0
   freezed: ^3.2.0
   json_serializable: ^6.11.0
+  injectable_generator: ^2.8.1
 
 
   icons_launcher: ^3.0.2

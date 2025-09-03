@@ -3,7 +3,7 @@ import 'package:event_handler/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-getTextController(key) =>
+TextEditingController? getTextController(key) =>
     genRef!.read(textControllersProvider.notifier).getTextController(key);
 
 class TextControllersNotifier
@@ -53,19 +53,13 @@ class TextControllersNotifier
     initializeTextController([
       TextControllerStrings.phoneNumber,
       TextControllerStrings.otp,
-      TextControllerStrings.nin,
-      TextControllerStrings.dateOfBirth,
-      TextControllerStrings.amount,
-      TextControllerStrings.email,
-      TextControllerStrings.info,
-      TextControllerStrings.firstName,
-      TextControllerStrings.lastName,
-      TextControllerStrings.referalCode,
+      TextControllerStrings.password,
     ]);
   }
 }
 
-final textControllersProvider = StateNotifierProvider<
-  TextControllersNotifier,
-  Map<String, TextEditingController>
->((ref) => TextControllersNotifier());
+final textControllersProvider =
+    StateNotifierProvider<
+      TextControllersNotifier,
+      Map<String, TextEditingController>
+    >((ref) => TextControllersNotifier());

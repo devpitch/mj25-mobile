@@ -1,4 +1,5 @@
 import 'package:event_handler/config/theme/app_theme.dart';
+import 'package:event_handler/cores/providers/text_controllers.dart';
 import 'package:event_handler/cores/utils/assets_mangment.dart';
 import 'package:event_handler/cores/utils/constants.dart';
 import 'package:event_handler/cores/utils/extensions.dart';
@@ -15,6 +16,7 @@ class SplashScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     useEffect(() {
       Future.microtask(() {
+        ref.read(textControllersProvider.notifier).initializeStartups();
         ref.read(authProvider.notifier).navigateUser(context);
       });
       return null;

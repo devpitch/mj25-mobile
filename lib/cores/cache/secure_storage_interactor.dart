@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:event_handler/cores/cache/secure_storage.dart';
+import 'package:event_handler/modules/authentication/models/responses/login_response.dart';
 import 'package:injectable/injectable.dart';
 // import 'package:event_handler/cores/cache/secure_storage.dart';
 
@@ -7,7 +10,11 @@ abstract class SecureStorageInteractor {
 
   Future<String?> get refreshToken;
 
+  Future<UserResponse?> get savedUser;
+
   Future<void> saveToken(String token);
+
+  Future<void> saveUser(UserResponse token);
 
   Future<DateTime?> get savedSessionExpiryDate;
 
@@ -50,12 +57,29 @@ class SecureStorageInteractorImpl implements SecureStorageInteractor {
   }
 
   @override
+  Future<UserResponse?> get savedUser async {
+    final userInfo = await _secureStorage.read(
+      key: _SecureStorageKeys.savedUser,
+    );
+    if (userInfo == null) return null;
+    return UserResponse.fromJson(jsonDecode(userInfo));
+  }
+
+  @override
   Future<void> saveSessionExpiryDate(DateTime date) async {
     final savedDate = date.toIso8601String();
 
     await _secureStorage.write(
       key: _SecureStorageKeys.sessionExpiryDate,
       value: savedDate,
+    );
+  }
+
+  @override
+  Future<void> saveUser(UserResponse user) async {
+    await _secureStorage.write(
+      key: _SecureStorageKeys.savedUser,
+      value: jsonEncode(user.toJson()),
     );
   }
 
@@ -89,6 +113,7 @@ class _SecureStorageKeys {
   static const user = 'user';
   static const token = 'token';
   static const phone = 'phone';
+  static const savedUser = 'savedUser';
   static const refreshToken = 'refreshToken';
   static const sessionExpiryDate = 'sessionExpiryDate';
 }

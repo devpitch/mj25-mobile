@@ -9,11 +9,13 @@ class AppFooterBox extends StatelessWidget {
   final Function()? onTapped;
   final Widget? child;
   final double? bottomPadding;
+  final bool? isLoading;
   const AppFooterBox({
     super.key,
     this.buttonText,
     this.onTapped,
     this.child,
+    this.isLoading,
     this.bottomPadding,
   });
 
@@ -32,6 +34,7 @@ class AppFooterBox extends StatelessWidget {
             EventButton(
               width: double.infinity,
               text: buttonText!,
+              isLoading: isLoading ?? false,
               onClick: onTapped,
             ),
           (bottomPadding ?? 40).verticalSpace,
