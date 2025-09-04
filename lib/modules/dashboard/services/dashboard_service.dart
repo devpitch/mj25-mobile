@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:event_handler/modules/dashboard/domain/dashboard_repository.dart';
+import 'package:event_handler/modules/dashboard/models/request/add_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/create_invitation_link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
@@ -32,11 +33,20 @@ class DashboardService {
     }
   }
 
-  Future deleteGuest(String guestId) async {
+  Future<GuestResponse?> deleteGuest(String guestId) async {
     try {
       return await _repo.deleteGuest(guestId);
     } catch (e) {
       log(":::: This is the error from deleting guest:::: $e");
+      return null;
+    }
+  }
+
+  Future<GuestResponse?> attachGuest(AddGuestRequestModel request) async {
+    try {
+      return await _repo.attachGuest(request);
+    } catch (e) {
+      log(":::: This is the error from attaching guest:::: $e");
       return null;
     }
   }

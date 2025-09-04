@@ -5053,3 +5053,476 @@ class _CopyWithStubImpl$Mutation$deleteGuest$deleteGuest<TRes>
 
   call({String? $_id, String? $__typename}) => _res;
 }
+
+class Variables$Mutation$attachGuest {
+  factory Variables$Mutation$attachGuest({
+    required Input$AttachGuestInput input,
+  }) => Variables$Mutation$attachGuest._({r'input': input});
+
+  Variables$Mutation$attachGuest._(this._$data);
+
+  factory Variables$Mutation$attachGuest.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] = Input$AttachGuestInput.fromJson(
+      (l$input as Map<String, dynamic>),
+    );
+    return Variables$Mutation$attachGuest._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$AttachGuestInput get input =>
+      (_$data['input'] as Input$AttachGuestInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$attachGuest<Variables$Mutation$attachGuest>
+  get copyWith => CopyWith$Variables$Mutation$attachGuest(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables$Mutation$attachGuest ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$attachGuest<TRes> {
+  factory CopyWith$Variables$Mutation$attachGuest(
+    Variables$Mutation$attachGuest instance,
+    TRes Function(Variables$Mutation$attachGuest) then,
+  ) = _CopyWithImpl$Variables$Mutation$attachGuest;
+
+  factory CopyWith$Variables$Mutation$attachGuest.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$attachGuest;
+
+  TRes call({Input$AttachGuestInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$attachGuest<TRes>
+    implements CopyWith$Variables$Mutation$attachGuest<TRes> {
+  _CopyWithImpl$Variables$Mutation$attachGuest(this._instance, this._then);
+
+  final Variables$Mutation$attachGuest _instance;
+
+  final TRes Function(Variables$Mutation$attachGuest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) => _then(
+    Variables$Mutation$attachGuest._({
+      ..._instance._$data,
+      if (input != _undefined && input != null)
+        'input': (input as Input$AttachGuestInput),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Variables$Mutation$attachGuest<TRes>
+    implements CopyWith$Variables$Mutation$attachGuest<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$attachGuest(this._res);
+
+  TRes _res;
+
+  call({Input$AttachGuestInput? input}) => _res;
+}
+
+class Mutation$attachGuest {
+  Mutation$attachGuest({
+    required this.attachGuest,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$attachGuest.fromJson(Map<String, dynamic> json) {
+    final l$attachGuest = json['attachGuest'];
+    final l$$__typename = json['__typename'];
+    return Mutation$attachGuest(
+      attachGuest: Fragment$GuestResponse.fromJson(
+        (l$attachGuest as Map<String, dynamic>),
+      ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment$GuestResponse attachGuest;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$attachGuest = attachGuest;
+    _resultData['attachGuest'] = l$attachGuest.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$attachGuest = attachGuest;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$attachGuest, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation$attachGuest || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$attachGuest = attachGuest;
+    final lOther$attachGuest = other.attachGuest;
+    if (l$attachGuest != lOther$attachGuest) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$attachGuest on Mutation$attachGuest {
+  CopyWith$Mutation$attachGuest<Mutation$attachGuest> get copyWith =>
+      CopyWith$Mutation$attachGuest(this, (i) => i);
+}
+
+abstract class CopyWith$Mutation$attachGuest<TRes> {
+  factory CopyWith$Mutation$attachGuest(
+    Mutation$attachGuest instance,
+    TRes Function(Mutation$attachGuest) then,
+  ) = _CopyWithImpl$Mutation$attachGuest;
+
+  factory CopyWith$Mutation$attachGuest.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$attachGuest;
+
+  TRes call({Fragment$GuestResponse? attachGuest, String? $__typename});
+  CopyWith$Fragment$GuestResponse<TRes> get attachGuest;
+}
+
+class _CopyWithImpl$Mutation$attachGuest<TRes>
+    implements CopyWith$Mutation$attachGuest<TRes> {
+  _CopyWithImpl$Mutation$attachGuest(this._instance, this._then);
+
+  final Mutation$attachGuest _instance;
+
+  final TRes Function(Mutation$attachGuest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? attachGuest = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation$attachGuest(
+      attachGuest: attachGuest == _undefined || attachGuest == null
+          ? _instance.attachGuest
+          : (attachGuest as Fragment$GuestResponse),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith$Fragment$GuestResponse<TRes> get attachGuest {
+    final local$attachGuest = _instance.attachGuest;
+    return CopyWith$Fragment$GuestResponse(
+      local$attachGuest,
+      (e) => call(attachGuest: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl$Mutation$attachGuest<TRes>
+    implements CopyWith$Mutation$attachGuest<TRes> {
+  _CopyWithStubImpl$Mutation$attachGuest(this._res);
+
+  TRes _res;
+
+  call({Fragment$GuestResponse? attachGuest, String? $__typename}) => _res;
+
+  CopyWith$Fragment$GuestResponse<TRes> get attachGuest =>
+      CopyWith$Fragment$GuestResponse.stub(_res);
+}
+
+const documentNodeMutationattachGuest = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'attachGuest'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'input')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'AttachGuestInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'attachGuest'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'input'),
+                value: VariableNode(name: NameNode(value: 'input')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'GuestResponse'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionGuestResponse,
+    fragmentDefinitionGuestLinkResponse,
+  ],
+);
+Mutation$attachGuest _parserFn$Mutation$attachGuest(
+  Map<String, dynamic> data,
+) => Mutation$attachGuest.fromJson(data);
+typedef OnMutationCompleted$Mutation$attachGuest =
+    FutureOr<void> Function(Map<String, dynamic>?, Mutation$attachGuest?);
+
+class Options$Mutation$attachGuest
+    extends graphql.MutationOptions<Mutation$attachGuest> {
+  Options$Mutation$attachGuest({
+    String? operationName,
+    required Variables$Mutation$attachGuest variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$attachGuest? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$attachGuest? onCompleted,
+    graphql.OnMutationUpdate<Mutation$attachGuest>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null ? null : _parserFn$Mutation$attachGuest(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationattachGuest,
+         parserFn: _parserFn$Mutation$attachGuest,
+       );
+
+  final OnMutationCompleted$Mutation$attachGuest? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+class WatchOptions$Mutation$attachGuest
+    extends graphql.WatchQueryOptions<Mutation$attachGuest> {
+  WatchOptions$Mutation$attachGuest({
+    String? operationName,
+    required Variables$Mutation$attachGuest variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$attachGuest? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         document: documentNodeMutationattachGuest,
+         pollInterval: pollInterval,
+         eagerlyFetchResults: eagerlyFetchResults,
+         carryForwardDataOnException: carryForwardDataOnException,
+         fetchResults: fetchResults,
+         parserFn: _parserFn$Mutation$attachGuest,
+       );
+}
+
+extension ClientExtension$Mutation$attachGuest on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$attachGuest>> mutate$attachGuest(
+    Options$Mutation$attachGuest options,
+  ) async => await this.mutate(options);
+  graphql.ObservableQuery<Mutation$attachGuest> watchMutation$attachGuest(
+    WatchOptions$Mutation$attachGuest options,
+  ) => this.watchMutation(options);
+}
+
+class Mutation$attachGuest$HookResult {
+  Mutation$attachGuest$HookResult(this.runMutation, this.result);
+
+  final RunMutation$Mutation$attachGuest runMutation;
+
+  final graphql.QueryResult<Mutation$attachGuest> result;
+}
+
+Mutation$attachGuest$HookResult useMutation$attachGuest([
+  WidgetOptions$Mutation$attachGuest? options,
+]) {
+  final result = graphql_flutter.useMutation(
+    options ?? WidgetOptions$Mutation$attachGuest(),
+  );
+  return Mutation$attachGuest$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+          variables.toJson(),
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+        ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$attachGuest> useWatchMutation$attachGuest(
+  WatchOptions$Mutation$attachGuest options,
+) => graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$attachGuest
+    extends graphql.MutationOptions<Mutation$attachGuest> {
+  WidgetOptions$Mutation$attachGuest({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$attachGuest? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$attachGuest? onCompleted,
+    graphql.OnMutationUpdate<Mutation$attachGuest>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null ? null : _parserFn$Mutation$attachGuest(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationattachGuest,
+         parserFn: _parserFn$Mutation$attachGuest,
+       );
+
+  final OnMutationCompleted$Mutation$attachGuest? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+typedef RunMutation$Mutation$attachGuest =
+    graphql.MultiSourceResult<Mutation$attachGuest> Function(
+      Variables$Mutation$attachGuest, {
+      Object? optimisticResult,
+      Mutation$attachGuest? typedOptimisticResult,
+    });
+typedef Builder$Mutation$attachGuest =
+    widgets.Widget Function(
+      RunMutation$Mutation$attachGuest,
+      graphql.QueryResult<Mutation$attachGuest>?,
+    );
+
+class Mutation$attachGuest$Widget
+    extends graphql_flutter.Mutation<Mutation$attachGuest> {
+  Mutation$attachGuest$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$attachGuest? options,
+    required Builder$Mutation$attachGuest builder,
+  }) : super(
+         key: key,
+         options: options ?? WidgetOptions$Mutation$attachGuest(),
+         builder: (run, result) => builder(
+           (variables, {optimisticResult, typedOptimisticResult}) => run(
+             variables.toJson(),
+             optimisticResult:
+                 optimisticResult ?? typedOptimisticResult?.toJson(),
+           ),
+           result,
+         ),
+       );
+}

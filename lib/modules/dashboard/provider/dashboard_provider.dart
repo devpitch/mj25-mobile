@@ -9,8 +9,10 @@ import 'package:event_handler/cores/utils/image_service.dart';
 import 'package:event_handler/cores/utils/rydmie_alerts.dart';
 import 'package:event_handler/cores/utils/text_controller_strings.dart';
 import 'package:event_handler/cores/widgets/app_bottom_sheet.dart';
+import 'package:event_handler/cores/widgets/custom_dropdown.dart';
 import 'package:event_handler/injections/injector.dart';
 import 'package:event_handler/main.dart';
+import 'package:event_handler/modules/dashboard/models/request/add_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/create_invitation_link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
@@ -31,6 +33,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       activeTab: data["activeTab"],
       selectedLinkType: data["selectedLinkType"],
       activeInviteLink: data["activeInviteLink"],
+      selectedTitle: data["selectedTitle"],
     );
   }
 
@@ -224,12 +227,125 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     }
   }
 
+  Future<void> attachGuest(BuildContext context) async {
+    try {
+      state = state.copyWith(isAddingGuest: true);
+
+      String? title = state.selectedTitle?.label;
+      String firstName = getTextController(
+        TextControllerStrings.firstName,
+      )!.text.trim();
+      String lastName = getTextController(
+        TextControllerStrings.lastName,
+      )!.text.trim();
+      String phone = getTextController(
+        TextControllerStrings.phoneNumber,
+      )!.text.trim();
+      String email = getTextController(
+        TextControllerStrings.email,
+      )!.text.trim();
+
+      // ✅ Run validation before proceeding
+      final validationError = validateGuestInput(
+        title: title,
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+        email: email,
+      );
+
+      if (validationError != null) {
+        EventAlert.showError(context, message: validationError);
+        return;
+      }
+
+      // Build request if inputs are valid
+      final request = AddGuestRequestModel(
+        code: state.activeInviteLink!.code!,
+        guest: GuestInput(
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phoneNumber: phone,
+          title: title!,
+        ),
+      );
+
+      final GuestResponse? response = await _service.attachGuest(request);
+
+      if (response != null) {
+        EventAlert.showSuccess(context, message: "Guest added successfully");
+        _attachGuestToList(response);
+        getInvitationLinks(showLoader: false);
+      }
+    } catch (e) {
+      log(":::: There is an error during guest attach :::: $e");
+      EventAlert.showError(
+        context,
+        message: "Something went wrong. Please try again.",
+      );
+    } finally {
+      state = state.copyWith(isAddingGuest: false);
+    }
+  }
+
+  // Validation logic extracted
+  String? validateGuestInput({
+    required String? title,
+    required String firstName,
+    required String lastName,
+    required String phone,
+    required String email,
+  }) {
+    if (title == null || title.isEmpty) {
+      return "Please select a title";
+    }
+    if (firstName.isEmpty) {
+      return "First name is required";
+    }
+    if (lastName.isEmpty) {
+      return "Last name is required";
+    }
+    if (phone.isEmpty) {
+      return "Phone number is required";
+    }
+    if (!RegExp(r'^\+?[0-9]{7,15}$').hasMatch(phone)) {
+      return "Enter a valid phone number";
+    }
+    if (email.isEmpty) {
+      return "Email is required";
+    }
+    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
+      return "Enter a valid email address";
+    }
+    return null; // ✅ Valid
+  }
+
   _removeGuestFromList(GuestResponse guestInfo) {
     final currentList = state.activeInviteLink;
 
     currentList?.guests?.remove(guestInfo);
 
     state = state.copyWith(activeInviteLink: currentList);
+  }
+
+  _attachGuestToList(GuestResponse response) {
+    final currentLink = state.activeInviteLink;
+
+    if (currentLink != null) {
+      currentLink.guests?.add(response);
+      state = state.copyWith(activeInviteLink: currentLink);
+    }
+  }
+
+  initiateAddNewGuest() {
+    genRef!.read(textControllersProvider.notifier).initializeTextController([
+      TextControllerStrings.firstName,
+      TextControllerStrings.lastName,
+      TextControllerStrings.email,
+      TextControllerStrings.phoneNumber,
+    ]);
+    state = state.copyWith(clearAddGuest: "yes");
   }
 }
 
@@ -252,6 +368,8 @@ class DashboardState {
   final InvitationLinkResponse? activeInviteLink;
   final List<InvitationLinkResponse>? selectedLinks;
   final bool? isDeletingGuest;
+  final bool? isAddingGuest;
+  final DropdownItem? selectedTitle;
 
   DashboardState({
     this.activeTab = "Links",
@@ -264,6 +382,8 @@ class DashboardState {
     this.activeInviteLink,
     this.selectedLinks,
     this.isDeletingGuest,
+    this.selectedTitle,
+    this.isAddingGuest,
   });
 
   DashboardState copyWith({
@@ -278,6 +398,9 @@ class DashboardState {
     InvitationLinkResponse? activeInviteLink,
     List<InvitationLinkResponse>? selectedLinks,
     bool? isDeletingGuest,
+    DropdownItem? selectedTitle,
+    String? clearAddGuest,
+    bool? isAddingGuest,
   }) {
     return DashboardState(
       activeTab: activeTab ?? this.activeTab,
@@ -292,6 +415,10 @@ class DashboardState {
       activeInviteLink: activeInviteLink ?? this.activeInviteLink,
       selectedLinks: selectedLinks ?? this.selectedLinks,
       isDeletingGuest: isDeletingGuest ?? this.isDeletingGuest,
+      selectedTitle: clearAddGuest == "yes"
+          ? null
+          : selectedTitle ?? this.selectedTitle,
+      isAddingGuest: isAddingGuest ?? this.isAddingGuest,
     );
   }
 }

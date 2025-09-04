@@ -8,6 +8,7 @@ import 'package:event_handler/cores/network/client/graphql/__generated/mutation.
 import 'package:event_handler/cores/network/client/graphql/__generated/query.graphql.dart';
 import 'package:event_handler/cores/network/client/graphql/__generated/schema.graphql.dart';
 import 'package:event_handler/cores/network/models/DataHolder.dart';
+import 'package:event_handler/modules/dashboard/models/request/add_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/create_invitation_link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
@@ -20,7 +21,9 @@ abstract class DashboardRepository {
 
   Future createInvitationLink(CreateInvitationLinkRequestModel request);
 
-  Future deleteGuest(String id);
+  Future<GuestResponse?> attachGuest(AddGuestRequestModel request);
+
+  Future<GuestResponse?> deleteGuest(String id);
   // Future<UploadUrlResponse?> getSelfieUploadUrl();
 }
 
@@ -79,7 +82,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
   }
 
   @override
-  deleteGuest(String guestId) async {
+  Future<GuestResponse?> deleteGuest(String guestId) async {
     final response = await handleQueryResult(
       queryBuilder: () => _client.client.mutate$deleteGuest(
         Options$Mutation$deleteGuest(
@@ -94,10 +97,33 @@ class DashboardRepositoryImpl implements DashboardRepository {
       "::::Response from delete guest link :::: ${response.parsedData?.toJson()}",
     );
 
-    // if (response.parsedData?.toJson() != null) {
-    //   return response.parsedData?.toJson()['generateInviteLink'];
-    // }
-    //
-    // return null;
+    if (response.parsedData?.toJson() != null) {
+      return GuestResponse.fromJson(
+        response.parsedData?.toJson()['deleteGuest'],
+      );
+    }
+
+    return null;
+  }
+
+  @override
+  Future<GuestResponse?> attachGuest(AddGuestRequestModel request) async {
+    final response = await handleQueryResult(
+      queryBuilder: () => _client.client.mutate$attachGuest(
+        Options$Mutation$attachGuest(variables: request.toVariables),
+      ),
+    );
+
+    log(
+      "::::Response from attaching of guest :::: ${response.parsedData?.toJson()}",
+    );
+
+    if (response.parsedData?.toJson() != null) {
+      return GuestResponse.fromJson(
+        response.parsedData?.toJson()['attachGuest'],
+      );
+    }
+
+    return null;
   }
 }

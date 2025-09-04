@@ -73,6 +73,7 @@ class InvitationLinkScreen extends ConsumerWidget {
                             fillColor: context.contentPrimary,
                             text: "Add New Guest",
                             onClick: () {
+                              notifier.initiateAddNewGuest();
                               Get.toNamed(AppRouter.addGuestView);
                             },
                           ),

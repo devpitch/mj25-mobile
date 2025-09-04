@@ -67,6 +67,9 @@ enum LinkStatusEnum {
 
   """Link has been generated on a printed invitation card"""
   PRINTED
+
+  """Link has been shared"""
+  SHARED
 }
 
 """
@@ -308,6 +311,9 @@ type Query {
   """Get a single invitation link."""
   invitationLink(input: SimpleInput!): InvitationLinkResponse!
 
+  """Update a single invitation link."""
+  updateInvitationLink(input: UpdateInvitationLinkInput!): InvitationLinkResponse!
+
   """
   Get a single Invitation Card. This could refer to the e-copy or printed copy
   that has/does not yet have an associated guest record
@@ -393,6 +399,36 @@ input InvitationFilterInput {
 input SimpleInput {
   """Unique Identifier"""
   code: String!
+}
+
+"""Update invitation link input"""
+input UpdateInvitationLinkInput {
+  """Invitation link ID"""
+  _id: ID!
+
+  """Unique code"""
+  code: String
+
+  """Total number of guests allowed for link"""
+  guestSize: Int = 1
+
+  """Total number of guests allowed for each entry"""
+  guestPerEntry: Int = 1
+
+  """Total number of guests registered for link"""
+  guestsRegistered: Int
+
+  """Link type"""
+  type: LinkTypeEnum = PRIVATE
+
+  """Link status"""
+  status: LinkStatusEnum
+
+  """Date created"""
+  createdAt: DateTime
+
+  """Date updated"""
+  updatedAt: DateTime
 }
 
 """Fetch guest input with guest code and first 3 letter of surname"""

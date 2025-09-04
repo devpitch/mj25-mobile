@@ -48,7 +48,7 @@ class LinkItemBox extends StatelessWidget {
           20.horizontalSpace,
           IconBuilder(
             iconPath: AppImage.refer,
-            size: 14,
+            size: 18,
             onTapped: () {
               genRef!.read(dashboardProvider.notifier).updateState({
                 "activeInviteLink": linkInfo,

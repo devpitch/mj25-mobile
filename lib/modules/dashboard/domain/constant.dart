@@ -18,8 +18,14 @@ final List<InvitationLinkResponse> dummyInvitationLinks = List.generate(
 );
 
 final inviteLinkList = ["PUBLIC", "PRIVATE", "GUEST", "PRINT"];
+final titleList = ["Mr.", "Mrs.", "Miss", "Ms.", "Dr", "Enginer."];
 
 List<DropdownItem> inviteLinkItems = List.generate(
   inviteLinkList.length,
   (index) => DropdownItem(label: inviteLinkList[index]),
+).toList();
+
+List<DropdownItem> titles = List.generate(
+  titleList.length,
+  (index) => DropdownItem(label: titleList[index]),
 ).toList();

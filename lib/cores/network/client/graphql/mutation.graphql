@@ -72,6 +72,12 @@ mutation deleteGuest($input: DeleteGuestInput!) {
     }
 }
 
+mutation attachGuest($input: AttachGuestInput!) {
+    attachGuest(input: $input) {
+        ...GuestResponse
+    }
+}
+
 
 ### GROUP RENTAL ###
 
