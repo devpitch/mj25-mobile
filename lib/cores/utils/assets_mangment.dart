@@ -4,6 +4,7 @@ const String svgBaseUrl = 'assets/svgs/';
 class AppImage {
   static const String symbol = "${imageBaseUrl}symbol.png";
   static const String refer = "${imageBaseUrl}refer.png";
+  static const String inviteLink = "${imageBaseUrl}invite-link.png";
   static const String check = "${imageBaseUrl}check.png";
   static const String guestUser = "${imageBaseUrl}guest-user.png";
   static const String checkTicked = "${imageBaseUrl}check-ticked.png";

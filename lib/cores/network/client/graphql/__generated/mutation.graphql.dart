@@ -3285,3 +3285,1771 @@ class Mutation$UploadRequest$Widget
          ),
        );
 }
+
+class Variables$Mutation$sddTagsToFiles {
+  factory Variables$Mutation$sddTagsToFiles({
+    required Input$AttachGuestInput input,
+  }) => Variables$Mutation$sddTagsToFiles._({r'input': input});
+
+  Variables$Mutation$sddTagsToFiles._(this._$data);
+
+  factory Variables$Mutation$sddTagsToFiles.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] = Input$AttachGuestInput.fromJson(
+      (l$input as Map<String, dynamic>),
+    );
+    return Variables$Mutation$sddTagsToFiles._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$AttachGuestInput get input =>
+      (_$data['input'] as Input$AttachGuestInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$sddTagsToFiles<Variables$Mutation$sddTagsToFiles>
+  get copyWith => CopyWith$Variables$Mutation$sddTagsToFiles(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables$Mutation$sddTagsToFiles ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$sddTagsToFiles<TRes> {
+  factory CopyWith$Variables$Mutation$sddTagsToFiles(
+    Variables$Mutation$sddTagsToFiles instance,
+    TRes Function(Variables$Mutation$sddTagsToFiles) then,
+  ) = _CopyWithImpl$Variables$Mutation$sddTagsToFiles;
+
+  factory CopyWith$Variables$Mutation$sddTagsToFiles.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$sddTagsToFiles;
+
+  TRes call({Input$AttachGuestInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$sddTagsToFiles<TRes>
+    implements CopyWith$Variables$Mutation$sddTagsToFiles<TRes> {
+  _CopyWithImpl$Variables$Mutation$sddTagsToFiles(this._instance, this._then);
+
+  final Variables$Mutation$sddTagsToFiles _instance;
+
+  final TRes Function(Variables$Mutation$sddTagsToFiles) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) => _then(
+    Variables$Mutation$sddTagsToFiles._({
+      ..._instance._$data,
+      if (input != _undefined && input != null)
+        'input': (input as Input$AttachGuestInput),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Variables$Mutation$sddTagsToFiles<TRes>
+    implements CopyWith$Variables$Mutation$sddTagsToFiles<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$sddTagsToFiles(this._res);
+
+  TRes _res;
+
+  call({Input$AttachGuestInput? input}) => _res;
+}
+
+class Mutation$sddTagsToFiles {
+  Mutation$sddTagsToFiles({
+    required this.attachGuest,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$sddTagsToFiles.fromJson(Map<String, dynamic> json) {
+    final l$attachGuest = json['attachGuest'];
+    final l$$__typename = json['__typename'];
+    return Mutation$sddTagsToFiles(
+      attachGuest: Fragment$GuestResponse.fromJson(
+        (l$attachGuest as Map<String, dynamic>),
+      ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment$GuestResponse attachGuest;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$attachGuest = attachGuest;
+    _resultData['attachGuest'] = l$attachGuest.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$attachGuest = attachGuest;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$attachGuest, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation$sddTagsToFiles || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$attachGuest = attachGuest;
+    final lOther$attachGuest = other.attachGuest;
+    if (l$attachGuest != lOther$attachGuest) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$sddTagsToFiles on Mutation$sddTagsToFiles {
+  CopyWith$Mutation$sddTagsToFiles<Mutation$sddTagsToFiles> get copyWith =>
+      CopyWith$Mutation$sddTagsToFiles(this, (i) => i);
+}
+
+abstract class CopyWith$Mutation$sddTagsToFiles<TRes> {
+  factory CopyWith$Mutation$sddTagsToFiles(
+    Mutation$sddTagsToFiles instance,
+    TRes Function(Mutation$sddTagsToFiles) then,
+  ) = _CopyWithImpl$Mutation$sddTagsToFiles;
+
+  factory CopyWith$Mutation$sddTagsToFiles.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$sddTagsToFiles;
+
+  TRes call({Fragment$GuestResponse? attachGuest, String? $__typename});
+  CopyWith$Fragment$GuestResponse<TRes> get attachGuest;
+}
+
+class _CopyWithImpl$Mutation$sddTagsToFiles<TRes>
+    implements CopyWith$Mutation$sddTagsToFiles<TRes> {
+  _CopyWithImpl$Mutation$sddTagsToFiles(this._instance, this._then);
+
+  final Mutation$sddTagsToFiles _instance;
+
+  final TRes Function(Mutation$sddTagsToFiles) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? attachGuest = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation$sddTagsToFiles(
+      attachGuest: attachGuest == _undefined || attachGuest == null
+          ? _instance.attachGuest
+          : (attachGuest as Fragment$GuestResponse),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith$Fragment$GuestResponse<TRes> get attachGuest {
+    final local$attachGuest = _instance.attachGuest;
+    return CopyWith$Fragment$GuestResponse(
+      local$attachGuest,
+      (e) => call(attachGuest: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl$Mutation$sddTagsToFiles<TRes>
+    implements CopyWith$Mutation$sddTagsToFiles<TRes> {
+  _CopyWithStubImpl$Mutation$sddTagsToFiles(this._res);
+
+  TRes _res;
+
+  call({Fragment$GuestResponse? attachGuest, String? $__typename}) => _res;
+
+  CopyWith$Fragment$GuestResponse<TRes> get attachGuest =>
+      CopyWith$Fragment$GuestResponse.stub(_res);
+}
+
+const documentNodeMutationsddTagsToFiles = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'sddTagsToFiles'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'input')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'AttachGuestInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'attachGuest'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'input'),
+                value: VariableNode(name: NameNode(value: 'input')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'GuestResponse'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionGuestResponse,
+    fragmentDefinitionGuestLinkResponse,
+  ],
+);
+Mutation$sddTagsToFiles _parserFn$Mutation$sddTagsToFiles(
+  Map<String, dynamic> data,
+) => Mutation$sddTagsToFiles.fromJson(data);
+typedef OnMutationCompleted$Mutation$sddTagsToFiles =
+    FutureOr<void> Function(Map<String, dynamic>?, Mutation$sddTagsToFiles?);
+
+class Options$Mutation$sddTagsToFiles
+    extends graphql.MutationOptions<Mutation$sddTagsToFiles> {
+  Options$Mutation$sddTagsToFiles({
+    String? operationName,
+    required Variables$Mutation$sddTagsToFiles variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$sddTagsToFiles? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$sddTagsToFiles? onCompleted,
+    graphql.OnMutationUpdate<Mutation$sddTagsToFiles>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null ? null : _parserFn$Mutation$sddTagsToFiles(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationsddTagsToFiles,
+         parserFn: _parserFn$Mutation$sddTagsToFiles,
+       );
+
+  final OnMutationCompleted$Mutation$sddTagsToFiles? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+class WatchOptions$Mutation$sddTagsToFiles
+    extends graphql.WatchQueryOptions<Mutation$sddTagsToFiles> {
+  WatchOptions$Mutation$sddTagsToFiles({
+    String? operationName,
+    required Variables$Mutation$sddTagsToFiles variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$sddTagsToFiles? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         document: documentNodeMutationsddTagsToFiles,
+         pollInterval: pollInterval,
+         eagerlyFetchResults: eagerlyFetchResults,
+         carryForwardDataOnException: carryForwardDataOnException,
+         fetchResults: fetchResults,
+         parserFn: _parserFn$Mutation$sddTagsToFiles,
+       );
+}
+
+extension ClientExtension$Mutation$sddTagsToFiles on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$sddTagsToFiles>> mutate$sddTagsToFiles(
+    Options$Mutation$sddTagsToFiles options,
+  ) async => await this.mutate(options);
+  graphql.ObservableQuery<Mutation$sddTagsToFiles> watchMutation$sddTagsToFiles(
+    WatchOptions$Mutation$sddTagsToFiles options,
+  ) => this.watchMutation(options);
+}
+
+class Mutation$sddTagsToFiles$HookResult {
+  Mutation$sddTagsToFiles$HookResult(this.runMutation, this.result);
+
+  final RunMutation$Mutation$sddTagsToFiles runMutation;
+
+  final graphql.QueryResult<Mutation$sddTagsToFiles> result;
+}
+
+Mutation$sddTagsToFiles$HookResult useMutation$sddTagsToFiles([
+  WidgetOptions$Mutation$sddTagsToFiles? options,
+]) {
+  final result = graphql_flutter.useMutation(
+    options ?? WidgetOptions$Mutation$sddTagsToFiles(),
+  );
+  return Mutation$sddTagsToFiles$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+          variables.toJson(),
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+        ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$sddTagsToFiles>
+useWatchMutation$sddTagsToFiles(WatchOptions$Mutation$sddTagsToFiles options) =>
+    graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$sddTagsToFiles
+    extends graphql.MutationOptions<Mutation$sddTagsToFiles> {
+  WidgetOptions$Mutation$sddTagsToFiles({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$sddTagsToFiles? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$sddTagsToFiles? onCompleted,
+    graphql.OnMutationUpdate<Mutation$sddTagsToFiles>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null ? null : _parserFn$Mutation$sddTagsToFiles(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationsddTagsToFiles,
+         parserFn: _parserFn$Mutation$sddTagsToFiles,
+       );
+
+  final OnMutationCompleted$Mutation$sddTagsToFiles? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+typedef RunMutation$Mutation$sddTagsToFiles =
+    graphql.MultiSourceResult<Mutation$sddTagsToFiles> Function(
+      Variables$Mutation$sddTagsToFiles, {
+      Object? optimisticResult,
+      Mutation$sddTagsToFiles? typedOptimisticResult,
+    });
+typedef Builder$Mutation$sddTagsToFiles =
+    widgets.Widget Function(
+      RunMutation$Mutation$sddTagsToFiles,
+      graphql.QueryResult<Mutation$sddTagsToFiles>?,
+    );
+
+class Mutation$sddTagsToFiles$Widget
+    extends graphql_flutter.Mutation<Mutation$sddTagsToFiles> {
+  Mutation$sddTagsToFiles$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$sddTagsToFiles? options,
+    required Builder$Mutation$sddTagsToFiles builder,
+  }) : super(
+         key: key,
+         options: options ?? WidgetOptions$Mutation$sddTagsToFiles(),
+         builder: (run, result) => builder(
+           (variables, {optimisticResult, typedOptimisticResult}) => run(
+             variables.toJson(),
+             optimisticResult:
+                 optimisticResult ?? typedOptimisticResult?.toJson(),
+           ),
+           result,
+         ),
+       );
+}
+
+class Variables$Mutation$RemoveFileTag {
+  factory Variables$Mutation$RemoveFileTag({
+    required Input$UpdateGuestInput input,
+  }) => Variables$Mutation$RemoveFileTag._({r'input': input});
+
+  Variables$Mutation$RemoveFileTag._(this._$data);
+
+  factory Variables$Mutation$RemoveFileTag.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] = Input$UpdateGuestInput.fromJson(
+      (l$input as Map<String, dynamic>),
+    );
+    return Variables$Mutation$RemoveFileTag._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$UpdateGuestInput get input =>
+      (_$data['input'] as Input$UpdateGuestInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$RemoveFileTag<Variables$Mutation$RemoveFileTag>
+  get copyWith => CopyWith$Variables$Mutation$RemoveFileTag(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables$Mutation$RemoveFileTag ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$RemoveFileTag<TRes> {
+  factory CopyWith$Variables$Mutation$RemoveFileTag(
+    Variables$Mutation$RemoveFileTag instance,
+    TRes Function(Variables$Mutation$RemoveFileTag) then,
+  ) = _CopyWithImpl$Variables$Mutation$RemoveFileTag;
+
+  factory CopyWith$Variables$Mutation$RemoveFileTag.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$RemoveFileTag;
+
+  TRes call({Input$UpdateGuestInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$RemoveFileTag<TRes>
+    implements CopyWith$Variables$Mutation$RemoveFileTag<TRes> {
+  _CopyWithImpl$Variables$Mutation$RemoveFileTag(this._instance, this._then);
+
+  final Variables$Mutation$RemoveFileTag _instance;
+
+  final TRes Function(Variables$Mutation$RemoveFileTag) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) => _then(
+    Variables$Mutation$RemoveFileTag._({
+      ..._instance._$data,
+      if (input != _undefined && input != null)
+        'input': (input as Input$UpdateGuestInput),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Variables$Mutation$RemoveFileTag<TRes>
+    implements CopyWith$Variables$Mutation$RemoveFileTag<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$RemoveFileTag(this._res);
+
+  TRes _res;
+
+  call({Input$UpdateGuestInput? input}) => _res;
+}
+
+class Mutation$RemoveFileTag {
+  Mutation$RemoveFileTag({
+    required this.updateGuest,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$RemoveFileTag.fromJson(Map<String, dynamic> json) {
+    final l$updateGuest = json['updateGuest'];
+    final l$$__typename = json['__typename'];
+    return Mutation$RemoveFileTag(
+      updateGuest: Mutation$RemoveFileTag$updateGuest.fromJson(
+        (l$updateGuest as Map<String, dynamic>),
+      ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$RemoveFileTag$updateGuest updateGuest;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$updateGuest = updateGuest;
+    _resultData['updateGuest'] = l$updateGuest.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$updateGuest = updateGuest;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$updateGuest, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation$RemoveFileTag || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$updateGuest = updateGuest;
+    final lOther$updateGuest = other.updateGuest;
+    if (l$updateGuest != lOther$updateGuest) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$RemoveFileTag on Mutation$RemoveFileTag {
+  CopyWith$Mutation$RemoveFileTag<Mutation$RemoveFileTag> get copyWith =>
+      CopyWith$Mutation$RemoveFileTag(this, (i) => i);
+}
+
+abstract class CopyWith$Mutation$RemoveFileTag<TRes> {
+  factory CopyWith$Mutation$RemoveFileTag(
+    Mutation$RemoveFileTag instance,
+    TRes Function(Mutation$RemoveFileTag) then,
+  ) = _CopyWithImpl$Mutation$RemoveFileTag;
+
+  factory CopyWith$Mutation$RemoveFileTag.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$RemoveFileTag;
+
+  TRes call({
+    Mutation$RemoveFileTag$updateGuest? updateGuest,
+    String? $__typename,
+  });
+  CopyWith$Mutation$RemoveFileTag$updateGuest<TRes> get updateGuest;
+}
+
+class _CopyWithImpl$Mutation$RemoveFileTag<TRes>
+    implements CopyWith$Mutation$RemoveFileTag<TRes> {
+  _CopyWithImpl$Mutation$RemoveFileTag(this._instance, this._then);
+
+  final Mutation$RemoveFileTag _instance;
+
+  final TRes Function(Mutation$RemoveFileTag) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? updateGuest = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation$RemoveFileTag(
+      updateGuest: updateGuest == _undefined || updateGuest == null
+          ? _instance.updateGuest
+          : (updateGuest as Mutation$RemoveFileTag$updateGuest),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith$Mutation$RemoveFileTag$updateGuest<TRes> get updateGuest {
+    final local$updateGuest = _instance.updateGuest;
+    return CopyWith$Mutation$RemoveFileTag$updateGuest(
+      local$updateGuest,
+      (e) => call(updateGuest: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl$Mutation$RemoveFileTag<TRes>
+    implements CopyWith$Mutation$RemoveFileTag<TRes> {
+  _CopyWithStubImpl$Mutation$RemoveFileTag(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$RemoveFileTag$updateGuest? updateGuest,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith$Mutation$RemoveFileTag$updateGuest<TRes> get updateGuest =>
+      CopyWith$Mutation$RemoveFileTag$updateGuest.stub(_res);
+}
+
+const documentNodeMutationRemoveFileTag = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'RemoveFileTag'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'input')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'UpdateGuestInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'updateGuest'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'input'),
+                value: VariableNode(name: NameNode(value: 'input')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: '_id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+  ],
+);
+Mutation$RemoveFileTag _parserFn$Mutation$RemoveFileTag(
+  Map<String, dynamic> data,
+) => Mutation$RemoveFileTag.fromJson(data);
+typedef OnMutationCompleted$Mutation$RemoveFileTag =
+    FutureOr<void> Function(Map<String, dynamic>?, Mutation$RemoveFileTag?);
+
+class Options$Mutation$RemoveFileTag
+    extends graphql.MutationOptions<Mutation$RemoveFileTag> {
+  Options$Mutation$RemoveFileTag({
+    String? operationName,
+    required Variables$Mutation$RemoveFileTag variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$RemoveFileTag? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$RemoveFileTag? onCompleted,
+    graphql.OnMutationUpdate<Mutation$RemoveFileTag>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null ? null : _parserFn$Mutation$RemoveFileTag(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationRemoveFileTag,
+         parserFn: _parserFn$Mutation$RemoveFileTag,
+       );
+
+  final OnMutationCompleted$Mutation$RemoveFileTag? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+class WatchOptions$Mutation$RemoveFileTag
+    extends graphql.WatchQueryOptions<Mutation$RemoveFileTag> {
+  WatchOptions$Mutation$RemoveFileTag({
+    String? operationName,
+    required Variables$Mutation$RemoveFileTag variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$RemoveFileTag? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         document: documentNodeMutationRemoveFileTag,
+         pollInterval: pollInterval,
+         eagerlyFetchResults: eagerlyFetchResults,
+         carryForwardDataOnException: carryForwardDataOnException,
+         fetchResults: fetchResults,
+         parserFn: _parserFn$Mutation$RemoveFileTag,
+       );
+}
+
+extension ClientExtension$Mutation$RemoveFileTag on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$RemoveFileTag>> mutate$RemoveFileTag(
+    Options$Mutation$RemoveFileTag options,
+  ) async => await this.mutate(options);
+  graphql.ObservableQuery<Mutation$RemoveFileTag> watchMutation$RemoveFileTag(
+    WatchOptions$Mutation$RemoveFileTag options,
+  ) => this.watchMutation(options);
+}
+
+class Mutation$RemoveFileTag$HookResult {
+  Mutation$RemoveFileTag$HookResult(this.runMutation, this.result);
+
+  final RunMutation$Mutation$RemoveFileTag runMutation;
+
+  final graphql.QueryResult<Mutation$RemoveFileTag> result;
+}
+
+Mutation$RemoveFileTag$HookResult useMutation$RemoveFileTag([
+  WidgetOptions$Mutation$RemoveFileTag? options,
+]) {
+  final result = graphql_flutter.useMutation(
+    options ?? WidgetOptions$Mutation$RemoveFileTag(),
+  );
+  return Mutation$RemoveFileTag$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+          variables.toJson(),
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+        ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$RemoveFileTag> useWatchMutation$RemoveFileTag(
+  WatchOptions$Mutation$RemoveFileTag options,
+) => graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$RemoveFileTag
+    extends graphql.MutationOptions<Mutation$RemoveFileTag> {
+  WidgetOptions$Mutation$RemoveFileTag({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$RemoveFileTag? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$RemoveFileTag? onCompleted,
+    graphql.OnMutationUpdate<Mutation$RemoveFileTag>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null ? null : _parserFn$Mutation$RemoveFileTag(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationRemoveFileTag,
+         parserFn: _parserFn$Mutation$RemoveFileTag,
+       );
+
+  final OnMutationCompleted$Mutation$RemoveFileTag? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+typedef RunMutation$Mutation$RemoveFileTag =
+    graphql.MultiSourceResult<Mutation$RemoveFileTag> Function(
+      Variables$Mutation$RemoveFileTag, {
+      Object? optimisticResult,
+      Mutation$RemoveFileTag? typedOptimisticResult,
+    });
+typedef Builder$Mutation$RemoveFileTag =
+    widgets.Widget Function(
+      RunMutation$Mutation$RemoveFileTag,
+      graphql.QueryResult<Mutation$RemoveFileTag>?,
+    );
+
+class Mutation$RemoveFileTag$Widget
+    extends graphql_flutter.Mutation<Mutation$RemoveFileTag> {
+  Mutation$RemoveFileTag$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$RemoveFileTag? options,
+    required Builder$Mutation$RemoveFileTag builder,
+  }) : super(
+         key: key,
+         options: options ?? WidgetOptions$Mutation$RemoveFileTag(),
+         builder: (run, result) => builder(
+           (variables, {optimisticResult, typedOptimisticResult}) => run(
+             variables.toJson(),
+             optimisticResult:
+                 optimisticResult ?? typedOptimisticResult?.toJson(),
+           ),
+           result,
+         ),
+       );
+}
+
+class Mutation$RemoveFileTag$removeFileTag {
+  Mutation$RemoveFileTag$removeFileTag({
+    required this.$_id,
+    this.$__typename = 'FileResponse',
+  });
+
+  factory Mutation$RemoveFileTag$removeFileTag.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$$_id = json['_id'];
+    final l$$__typename = json['__typename'];
+    return Mutation$RemoveFileTag$removeFileTag(
+      $_id: (l$$_id as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String $_id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$$_id = $_id;
+    _resultData['_id'] = l$$_id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_id = $_id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$$_id, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation$RemoveFileTag$removeFileTag ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_id = $_id;
+    final lOther$$_id = other.$_id;
+    if (l$$_id != lOther$$_id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$RemoveFileTag$removeFileTag
+    on Mutation$RemoveFileTag$removeFileTag {
+  CopyWith$Mutation$RemoveFileTag$removeFileTag<
+    Mutation$RemoveFileTag$removeFileTag
+  >
+  get copyWith => CopyWith$Mutation$RemoveFileTag$removeFileTag(this, (i) => i);
+}
+
+abstract class CopyWith$Mutation$RemoveFileTag$removeFileTag<TRes> {
+  factory CopyWith$Mutation$RemoveFileTag$removeFileTag(
+    Mutation$RemoveFileTag$removeFileTag instance,
+    TRes Function(Mutation$RemoveFileTag$removeFileTag) then,
+  ) = _CopyWithImpl$Mutation$RemoveFileTag$removeFileTag;
+
+  factory CopyWith$Mutation$RemoveFileTag$removeFileTag.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$RemoveFileTag$removeFileTag;
+
+  TRes call({String? $_id, String? $__typename});
+}
+
+class _CopyWithImpl$Mutation$RemoveFileTag$removeFileTag<TRes>
+    implements CopyWith$Mutation$RemoveFileTag$removeFileTag<TRes> {
+  _CopyWithImpl$Mutation$RemoveFileTag$removeFileTag(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$RemoveFileTag$removeFileTag _instance;
+
+  final TRes Function(Mutation$RemoveFileTag$removeFileTag) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? $_id = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Mutation$RemoveFileTag$removeFileTag(
+          $_id: $_id == _undefined || $_id == null
+              ? _instance.$_id
+              : ($_id as String),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
+}
+
+class _CopyWithStubImpl$Mutation$RemoveFileTag$removeFileTag<TRes>
+    implements CopyWith$Mutation$RemoveFileTag$removeFileTag<TRes> {
+  _CopyWithStubImpl$Mutation$RemoveFileTag$removeFileTag(this._res);
+
+  TRes _res;
+
+  call({String? $_id, String? $__typename}) => _res;
+}
+
+class Mutation$RemoveFileTag$updateGuest {
+  Mutation$RemoveFileTag$updateGuest({
+    required this.$_id,
+    this.$__typename = 'GuestResponse',
+  });
+
+  factory Mutation$RemoveFileTag$updateGuest.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$$_id = json['_id'];
+    final l$$__typename = json['__typename'];
+    return Mutation$RemoveFileTag$updateGuest(
+      $_id: (l$$_id as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String $_id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$$_id = $_id;
+    _resultData['_id'] = l$$_id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_id = $_id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$$_id, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation$RemoveFileTag$updateGuest ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_id = $_id;
+    final lOther$$_id = other.$_id;
+    if (l$$_id != lOther$$_id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$RemoveFileTag$updateGuest
+    on Mutation$RemoveFileTag$updateGuest {
+  CopyWith$Mutation$RemoveFileTag$updateGuest<
+    Mutation$RemoveFileTag$updateGuest
+  >
+  get copyWith => CopyWith$Mutation$RemoveFileTag$updateGuest(this, (i) => i);
+}
+
+abstract class CopyWith$Mutation$RemoveFileTag$updateGuest<TRes> {
+  factory CopyWith$Mutation$RemoveFileTag$updateGuest(
+    Mutation$RemoveFileTag$updateGuest instance,
+    TRes Function(Mutation$RemoveFileTag$updateGuest) then,
+  ) = _CopyWithImpl$Mutation$RemoveFileTag$updateGuest;
+
+  factory CopyWith$Mutation$RemoveFileTag$updateGuest.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$RemoveFileTag$updateGuest;
+
+  TRes call({String? $_id, String? $__typename});
+}
+
+class _CopyWithImpl$Mutation$RemoveFileTag$updateGuest<TRes>
+    implements CopyWith$Mutation$RemoveFileTag$updateGuest<TRes> {
+  _CopyWithImpl$Mutation$RemoveFileTag$updateGuest(this._instance, this._then);
+
+  final Mutation$RemoveFileTag$updateGuest _instance;
+
+  final TRes Function(Mutation$RemoveFileTag$updateGuest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? $_id = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Mutation$RemoveFileTag$updateGuest(
+          $_id: $_id == _undefined || $_id == null
+              ? _instance.$_id
+              : ($_id as String),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
+}
+
+class _CopyWithStubImpl$Mutation$RemoveFileTag$updateGuest<TRes>
+    implements CopyWith$Mutation$RemoveFileTag$updateGuest<TRes> {
+  _CopyWithStubImpl$Mutation$RemoveFileTag$updateGuest(this._res);
+
+  TRes _res;
+
+  call({String? $_id, String? $__typename}) => _res;
+}
+
+class Variables$Mutation$deleteGuest {
+  factory Variables$Mutation$deleteGuest({
+    required Input$DeleteGuestInput input,
+  }) => Variables$Mutation$deleteGuest._({r'input': input});
+
+  Variables$Mutation$deleteGuest._(this._$data);
+
+  factory Variables$Mutation$deleteGuest.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] = Input$DeleteGuestInput.fromJson(
+      (l$input as Map<String, dynamic>),
+    );
+    return Variables$Mutation$deleteGuest._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$DeleteGuestInput get input =>
+      (_$data['input'] as Input$DeleteGuestInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$deleteGuest<Variables$Mutation$deleteGuest>
+  get copyWith => CopyWith$Variables$Mutation$deleteGuest(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables$Mutation$deleteGuest ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$deleteGuest<TRes> {
+  factory CopyWith$Variables$Mutation$deleteGuest(
+    Variables$Mutation$deleteGuest instance,
+    TRes Function(Variables$Mutation$deleteGuest) then,
+  ) = _CopyWithImpl$Variables$Mutation$deleteGuest;
+
+  factory CopyWith$Variables$Mutation$deleteGuest.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$deleteGuest;
+
+  TRes call({Input$DeleteGuestInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$deleteGuest<TRes>
+    implements CopyWith$Variables$Mutation$deleteGuest<TRes> {
+  _CopyWithImpl$Variables$Mutation$deleteGuest(this._instance, this._then);
+
+  final Variables$Mutation$deleteGuest _instance;
+
+  final TRes Function(Variables$Mutation$deleteGuest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) => _then(
+    Variables$Mutation$deleteGuest._({
+      ..._instance._$data,
+      if (input != _undefined && input != null)
+        'input': (input as Input$DeleteGuestInput),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Variables$Mutation$deleteGuest<TRes>
+    implements CopyWith$Variables$Mutation$deleteGuest<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$deleteGuest(this._res);
+
+  TRes _res;
+
+  call({Input$DeleteGuestInput? input}) => _res;
+}
+
+class Mutation$deleteGuest {
+  Mutation$deleteGuest({
+    required this.deleteGuest,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$deleteGuest.fromJson(Map<String, dynamic> json) {
+    final l$deleteGuest = json['deleteGuest'];
+    final l$$__typename = json['__typename'];
+    return Mutation$deleteGuest(
+      deleteGuest: Mutation$deleteGuest$deleteGuest.fromJson(
+        (l$deleteGuest as Map<String, dynamic>),
+      ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$deleteGuest$deleteGuest deleteGuest;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$deleteGuest = deleteGuest;
+    _resultData['deleteGuest'] = l$deleteGuest.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$deleteGuest = deleteGuest;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$deleteGuest, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation$deleteGuest || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$deleteGuest = deleteGuest;
+    final lOther$deleteGuest = other.deleteGuest;
+    if (l$deleteGuest != lOther$deleteGuest) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$deleteGuest on Mutation$deleteGuest {
+  CopyWith$Mutation$deleteGuest<Mutation$deleteGuest> get copyWith =>
+      CopyWith$Mutation$deleteGuest(this, (i) => i);
+}
+
+abstract class CopyWith$Mutation$deleteGuest<TRes> {
+  factory CopyWith$Mutation$deleteGuest(
+    Mutation$deleteGuest instance,
+    TRes Function(Mutation$deleteGuest) then,
+  ) = _CopyWithImpl$Mutation$deleteGuest;
+
+  factory CopyWith$Mutation$deleteGuest.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$deleteGuest;
+
+  TRes call({
+    Mutation$deleteGuest$deleteGuest? deleteGuest,
+    String? $__typename,
+  });
+  CopyWith$Mutation$deleteGuest$deleteGuest<TRes> get deleteGuest;
+}
+
+class _CopyWithImpl$Mutation$deleteGuest<TRes>
+    implements CopyWith$Mutation$deleteGuest<TRes> {
+  _CopyWithImpl$Mutation$deleteGuest(this._instance, this._then);
+
+  final Mutation$deleteGuest _instance;
+
+  final TRes Function(Mutation$deleteGuest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? deleteGuest = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation$deleteGuest(
+      deleteGuest: deleteGuest == _undefined || deleteGuest == null
+          ? _instance.deleteGuest
+          : (deleteGuest as Mutation$deleteGuest$deleteGuest),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith$Mutation$deleteGuest$deleteGuest<TRes> get deleteGuest {
+    final local$deleteGuest = _instance.deleteGuest;
+    return CopyWith$Mutation$deleteGuest$deleteGuest(
+      local$deleteGuest,
+      (e) => call(deleteGuest: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl$Mutation$deleteGuest<TRes>
+    implements CopyWith$Mutation$deleteGuest<TRes> {
+  _CopyWithStubImpl$Mutation$deleteGuest(this._res);
+
+  TRes _res;
+
+  call({Mutation$deleteGuest$deleteGuest? deleteGuest, String? $__typename}) =>
+      _res;
+
+  CopyWith$Mutation$deleteGuest$deleteGuest<TRes> get deleteGuest =>
+      CopyWith$Mutation$deleteGuest$deleteGuest.stub(_res);
+}
+
+const documentNodeMutationdeleteGuest = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'deleteGuest'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'input')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'DeleteGuestInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'deleteGuest'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'input'),
+                value: VariableNode(name: NameNode(value: 'input')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: '_id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+  ],
+);
+Mutation$deleteGuest _parserFn$Mutation$deleteGuest(
+  Map<String, dynamic> data,
+) => Mutation$deleteGuest.fromJson(data);
+typedef OnMutationCompleted$Mutation$deleteGuest =
+    FutureOr<void> Function(Map<String, dynamic>?, Mutation$deleteGuest?);
+
+class Options$Mutation$deleteGuest
+    extends graphql.MutationOptions<Mutation$deleteGuest> {
+  Options$Mutation$deleteGuest({
+    String? operationName,
+    required Variables$Mutation$deleteGuest variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$deleteGuest? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$deleteGuest? onCompleted,
+    graphql.OnMutationUpdate<Mutation$deleteGuest>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null ? null : _parserFn$Mutation$deleteGuest(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationdeleteGuest,
+         parserFn: _parserFn$Mutation$deleteGuest,
+       );
+
+  final OnMutationCompleted$Mutation$deleteGuest? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+class WatchOptions$Mutation$deleteGuest
+    extends graphql.WatchQueryOptions<Mutation$deleteGuest> {
+  WatchOptions$Mutation$deleteGuest({
+    String? operationName,
+    required Variables$Mutation$deleteGuest variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$deleteGuest? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         document: documentNodeMutationdeleteGuest,
+         pollInterval: pollInterval,
+         eagerlyFetchResults: eagerlyFetchResults,
+         carryForwardDataOnException: carryForwardDataOnException,
+         fetchResults: fetchResults,
+         parserFn: _parserFn$Mutation$deleteGuest,
+       );
+}
+
+extension ClientExtension$Mutation$deleteGuest on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$deleteGuest>> mutate$deleteGuest(
+    Options$Mutation$deleteGuest options,
+  ) async => await this.mutate(options);
+  graphql.ObservableQuery<Mutation$deleteGuest> watchMutation$deleteGuest(
+    WatchOptions$Mutation$deleteGuest options,
+  ) => this.watchMutation(options);
+}
+
+class Mutation$deleteGuest$HookResult {
+  Mutation$deleteGuest$HookResult(this.runMutation, this.result);
+
+  final RunMutation$Mutation$deleteGuest runMutation;
+
+  final graphql.QueryResult<Mutation$deleteGuest> result;
+}
+
+Mutation$deleteGuest$HookResult useMutation$deleteGuest([
+  WidgetOptions$Mutation$deleteGuest? options,
+]) {
+  final result = graphql_flutter.useMutation(
+    options ?? WidgetOptions$Mutation$deleteGuest(),
+  );
+  return Mutation$deleteGuest$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+          variables.toJson(),
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+        ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$deleteGuest> useWatchMutation$deleteGuest(
+  WatchOptions$Mutation$deleteGuest options,
+) => graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$deleteGuest
+    extends graphql.MutationOptions<Mutation$deleteGuest> {
+  WidgetOptions$Mutation$deleteGuest({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$deleteGuest? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$deleteGuest? onCompleted,
+    graphql.OnMutationUpdate<Mutation$deleteGuest>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null ? null : _parserFn$Mutation$deleteGuest(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationdeleteGuest,
+         parserFn: _parserFn$Mutation$deleteGuest,
+       );
+
+  final OnMutationCompleted$Mutation$deleteGuest? onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+typedef RunMutation$Mutation$deleteGuest =
+    graphql.MultiSourceResult<Mutation$deleteGuest> Function(
+      Variables$Mutation$deleteGuest, {
+      Object? optimisticResult,
+      Mutation$deleteGuest? typedOptimisticResult,
+    });
+typedef Builder$Mutation$deleteGuest =
+    widgets.Widget Function(
+      RunMutation$Mutation$deleteGuest,
+      graphql.QueryResult<Mutation$deleteGuest>?,
+    );
+
+class Mutation$deleteGuest$Widget
+    extends graphql_flutter.Mutation<Mutation$deleteGuest> {
+  Mutation$deleteGuest$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$deleteGuest? options,
+    required Builder$Mutation$deleteGuest builder,
+  }) : super(
+         key: key,
+         options: options ?? WidgetOptions$Mutation$deleteGuest(),
+         builder: (run, result) => builder(
+           (variables, {optimisticResult, typedOptimisticResult}) => run(
+             variables.toJson(),
+             optimisticResult:
+                 optimisticResult ?? typedOptimisticResult?.toJson(),
+           ),
+           result,
+         ),
+       );
+}
+
+class Mutation$deleteGuest$deleteGuest {
+  Mutation$deleteGuest$deleteGuest({
+    required this.$_id,
+    this.$__typename = 'GuestResponse',
+  });
+
+  factory Mutation$deleteGuest$deleteGuest.fromJson(Map<String, dynamic> json) {
+    final l$$_id = json['_id'];
+    final l$$__typename = json['__typename'];
+    return Mutation$deleteGuest$deleteGuest(
+      $_id: (l$$_id as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String $_id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$$_id = $_id;
+    _resultData['_id'] = l$$_id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_id = $_id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$$_id, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation$deleteGuest$deleteGuest ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_id = $_id;
+    final lOther$$_id = other.$_id;
+    if (l$$_id != lOther$$_id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$deleteGuest$deleteGuest
+    on Mutation$deleteGuest$deleteGuest {
+  CopyWith$Mutation$deleteGuest$deleteGuest<Mutation$deleteGuest$deleteGuest>
+  get copyWith => CopyWith$Mutation$deleteGuest$deleteGuest(this, (i) => i);
+}
+
+abstract class CopyWith$Mutation$deleteGuest$deleteGuest<TRes> {
+  factory CopyWith$Mutation$deleteGuest$deleteGuest(
+    Mutation$deleteGuest$deleteGuest instance,
+    TRes Function(Mutation$deleteGuest$deleteGuest) then,
+  ) = _CopyWithImpl$Mutation$deleteGuest$deleteGuest;
+
+  factory CopyWith$Mutation$deleteGuest$deleteGuest.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$deleteGuest$deleteGuest;
+
+  TRes call({String? $_id, String? $__typename});
+}
+
+class _CopyWithImpl$Mutation$deleteGuest$deleteGuest<TRes>
+    implements CopyWith$Mutation$deleteGuest$deleteGuest<TRes> {
+  _CopyWithImpl$Mutation$deleteGuest$deleteGuest(this._instance, this._then);
+
+  final Mutation$deleteGuest$deleteGuest _instance;
+
+  final TRes Function(Mutation$deleteGuest$deleteGuest) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? $_id = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Mutation$deleteGuest$deleteGuest(
+          $_id: $_id == _undefined || $_id == null
+              ? _instance.$_id
+              : ($_id as String),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
+}
+
+class _CopyWithStubImpl$Mutation$deleteGuest$deleteGuest<TRes>
+    implements CopyWith$Mutation$deleteGuest$deleteGuest<TRes> {
+  _CopyWithStubImpl$Mutation$deleteGuest$deleteGuest(this._res);
+
+  TRes _res;
+
+  call({String? $_id, String? $__typename}) => _res;
+}

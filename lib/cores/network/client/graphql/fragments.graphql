@@ -44,6 +44,10 @@ fragment InvitationLinkResponse on InvitationLinkResponse{
     status
     createdAt
     updatedAt
+    inviteUrl
+    guests {
+        ...GuestResponse
+    }
 }
 
 fragment UserResponse on UserResponse {

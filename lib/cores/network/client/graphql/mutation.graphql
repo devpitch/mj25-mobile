@@ -42,6 +42,36 @@ mutation UploadRequest($input: UploadRequestInput!) {
     }
 }
 
+mutation sddTagsToFiles($input: TagFileInput!) {
+    addTagsToFiles(input: $input) {
+        ...FileResponse
+    }
+}
+
+mutation sddTagsToFiles($input: AttachGuestInput!) {
+    attachGuest(input: $input) {
+        ...GuestResponse
+    }
+}
+
+mutation RemoveFileTag($input: RemoveFileTagInput!) {
+    removeFileTag(input: $input) {
+        _id
+    }
+}
+
+mutation RemoveFileTag($input: UpdateGuestInput!) {
+    updateGuest(input: $input) {
+        _id
+    }
+}
+
+mutation deleteGuest($input: DeleteGuestInput!) {
+    deleteGuest(input: $input) {
+        _id
+    }
+}
+
 
 ### GROUP RENTAL ###
 

@@ -35,6 +35,10 @@ class $AssetsImagesGen {
   AssetGenImage get guestUser =>
       const AssetGenImage('assets/images/guest-user.png');
 
+  /// File path: assets/images/invite-link.png
+  AssetGenImage get inviteLink =>
+      const AssetGenImage('assets/images/invite-link.png');
+
   /// File path: assets/images/refer.png
   AssetGenImage get refer => const AssetGenImage('assets/images/refer.png');
 
@@ -46,6 +50,7 @@ class $AssetsImagesGen {
     checkTicked,
     check,
     guestUser,
+    inviteLink,
     refer,
     symbol,
   ];

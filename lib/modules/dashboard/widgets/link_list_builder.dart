@@ -1,21 +1,39 @@
-import 'package:event_handler/config/route/route_mapping.dart';
-import 'package:event_handler/config/theme/app_colors.dart';
 import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/utils/assets_mangment.dart';
 import 'package:event_handler/cores/utils/icon_builder.dart';
 import 'package:event_handler/cores/widgets/custom_text.dart';
 import 'package:event_handler/cores/widgets/rydmie_button.dart';
 import 'package:event_handler/main.dart';
+import 'package:event_handler/modules/dashboard/domain/constant.dart';
+import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
 import 'package:event_handler/modules/dashboard/provider/dashboard_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
-class LinkListBuilder extends StatelessWidget {
+import 'dashboard_widgets_exporter.dart';
+
+class LinkListBuilder extends HookConsumerWidget {
   const LinkListBuilder({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.read(dashboardProvider.notifier);
+    final state = ref.watch(dashboardProvider);
+    final bool isLoading = state.loadingLinks ?? false;
+
+    final List<InvitationLinkResponse> dataList = isLoading
+        ? dummyInvitationLinks
+        : state.invitationLinks?.items ?? [];
+
+    useEffect(() {
+      Future.microtask(() {
+        notifier.getInvitationLinks();
+      });
+    }, []);
+
     return Column(
       children: [
         10.verticalSpace,
@@ -30,56 +48,40 @@ class LinkListBuilder extends StatelessWidget {
                 .openSheet(context: context, type: "generateLink");
           },
         ),
-        Expanded(
-          child: ListView.separated(
-            shrinkWrap: true,
-            padding: EdgeInsets.only(bottom: 100, top: 15),
-            itemBuilder: (cxt, index) => LinkItemBox(),
-            separatorBuilder: (_, __) => 10.verticalSpace,
-            itemCount: 15,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class LinkItemBox extends StatelessWidget {
-  const LinkItemBox({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 72,
-      width: double.infinity,
-      alignment: Alignment.center,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomText(
-                text: "mj.url/xyz123",
-                weight: FontWeight.w500,
-                color: ThemeColors.contentPrimary,
-                size: 16,
+        if (dataList.isEmpty && !isLoading)
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconBuilder(iconPath: AppImage.inviteLink, size: 80),
+                15.verticalSpace,
+                CustomText(text: "Invitation links will shown here."),
+                30.verticalSpace,
+                EventButton(
+                  width: 150,
+                  text: "Reload",
+                  onClick: () {
+                    notifier.getInvitationLinks();
+                  },
+                ),
+              ],
+            ),
+          )
+        else
+          Expanded(
+            child: Skeletonizer(
+              enabled: isLoading,
+              child: ListView.separated(
+                shrinkWrap: true,
+                padding: EdgeInsets.only(bottom: 100, top: 15),
+                itemBuilder: (cxt, index) =>
+                    LinkItemBox(linkInfo: dataList[index]),
+                separatorBuilder: (_, __) => 10.verticalSpace,
+                itemCount: dataList.length,
               ),
-              CustomText(text: "Used", color: ThemeColors.contentTertiary),
-            ],
+            ),
           ),
-          10.horizontalSpace,
-          IconBuilder(
-            iconPath: AppImage.refer,
-            size: 14,
-            onTapped: () {
-              Get.toNamed(AppRouter.linkInvitationView);
-            },
-          ),
-        ],
-      ),
+      ],
     );
   }
 }

@@ -575,6 +575,131 @@ class _CopyWithStubImpl$Input$FetchGuestInput<TRes>
   call({String? code, String? first3Letters}) => _res;
 }
 
+class Input$FetchGalleryInput {
+  factory Input$FetchGalleryInput({String? code, String? first3Letters}) =>
+      Input$FetchGalleryInput._({
+        if (code != null) r'code': code,
+        if (first3Letters != null) r'first3Letters': first3Letters,
+      });
+
+  Input$FetchGalleryInput._(this._$data);
+
+  factory Input$FetchGalleryInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('code')) {
+      final l$code = data['code'];
+      result$data['code'] = (l$code as String?);
+    }
+    if (data.containsKey('first3Letters')) {
+      final l$first3Letters = data['first3Letters'];
+      result$data['first3Letters'] = (l$first3Letters as String?);
+    }
+    return Input$FetchGalleryInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get code => (_$data['code'] as String?);
+
+  String? get first3Letters => (_$data['first3Letters'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('code')) {
+      final l$code = code;
+      result$data['code'] = l$code;
+    }
+    if (_$data.containsKey('first3Letters')) {
+      final l$first3Letters = first3Letters;
+      result$data['first3Letters'] = l$first3Letters;
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$FetchGalleryInput<Input$FetchGalleryInput> get copyWith =>
+      CopyWith$Input$FetchGalleryInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input$FetchGalleryInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$code = code;
+    final lOther$code = other.code;
+    if (_$data.containsKey('code') != other._$data.containsKey('code')) {
+      return false;
+    }
+    if (l$code != lOther$code) {
+      return false;
+    }
+    final l$first3Letters = first3Letters;
+    final lOther$first3Letters = other.first3Letters;
+    if (_$data.containsKey('first3Letters') !=
+        other._$data.containsKey('first3Letters')) {
+      return false;
+    }
+    if (l$first3Letters != lOther$first3Letters) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$code = code;
+    final l$first3Letters = first3Letters;
+    return Object.hashAll([
+      _$data.containsKey('code') ? l$code : const {},
+      _$data.containsKey('first3Letters') ? l$first3Letters : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$FetchGalleryInput<TRes> {
+  factory CopyWith$Input$FetchGalleryInput(
+    Input$FetchGalleryInput instance,
+    TRes Function(Input$FetchGalleryInput) then,
+  ) = _CopyWithImpl$Input$FetchGalleryInput;
+
+  factory CopyWith$Input$FetchGalleryInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$FetchGalleryInput;
+
+  TRes call({String? code, String? first3Letters});
+}
+
+class _CopyWithImpl$Input$FetchGalleryInput<TRes>
+    implements CopyWith$Input$FetchGalleryInput<TRes> {
+  _CopyWithImpl$Input$FetchGalleryInput(this._instance, this._then);
+
+  final Input$FetchGalleryInput _instance;
+
+  final TRes Function(Input$FetchGalleryInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? code = _undefined, Object? first3Letters = _undefined}) =>
+      _then(
+        Input$FetchGalleryInput._({
+          ..._instance._$data,
+          if (code != _undefined) 'code': (code as String?),
+          if (first3Letters != _undefined)
+            'first3Letters': (first3Letters as String?),
+        }),
+      );
+}
+
+class _CopyWithStubImpl$Input$FetchGalleryInput<TRes>
+    implements CopyWith$Input$FetchGalleryInput<TRes> {
+  _CopyWithStubImpl$Input$FetchGalleryInput(this._res);
+
+  TRes _res;
+
+  call({String? code, String? first3Letters}) => _res;
+}
+
 class Input$LoginInput {
   factory Input$LoginInput({required String phone, required String password}) =>
       Input$LoginInput._({r'phone': phone, r'password': password});
@@ -1228,6 +1353,532 @@ class _CopyWithStubImpl$Input$GuestInput<TRes>
   }) => _res;
 }
 
+class Input$AttachGuestInput {
+  factory Input$AttachGuestInput({
+    required Input$GuestInput guest,
+    required String code,
+  }) => Input$AttachGuestInput._({r'guest': guest, r'code': code});
+
+  Input$AttachGuestInput._(this._$data);
+
+  factory Input$AttachGuestInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$guest = data['guest'];
+    result$data['guest'] = Input$GuestInput.fromJson(
+      (l$guest as Map<String, dynamic>),
+    );
+    final l$code = data['code'];
+    result$data['code'] = (l$code as String);
+    return Input$AttachGuestInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$GuestInput get guest => (_$data['guest'] as Input$GuestInput);
+
+  String get code => (_$data['code'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$guest = guest;
+    result$data['guest'] = l$guest.toJson();
+    final l$code = code;
+    result$data['code'] = l$code;
+    return result$data;
+  }
+
+  CopyWith$Input$AttachGuestInput<Input$AttachGuestInput> get copyWith =>
+      CopyWith$Input$AttachGuestInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input$AttachGuestInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$guest = guest;
+    final lOther$guest = other.guest;
+    if (l$guest != lOther$guest) {
+      return false;
+    }
+    final l$code = code;
+    final lOther$code = other.code;
+    if (l$code != lOther$code) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$guest = guest;
+    final l$code = code;
+    return Object.hashAll([l$guest, l$code]);
+  }
+}
+
+abstract class CopyWith$Input$AttachGuestInput<TRes> {
+  factory CopyWith$Input$AttachGuestInput(
+    Input$AttachGuestInput instance,
+    TRes Function(Input$AttachGuestInput) then,
+  ) = _CopyWithImpl$Input$AttachGuestInput;
+
+  factory CopyWith$Input$AttachGuestInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$AttachGuestInput;
+
+  TRes call({Input$GuestInput? guest, String? code});
+  CopyWith$Input$GuestInput<TRes> get guest;
+}
+
+class _CopyWithImpl$Input$AttachGuestInput<TRes>
+    implements CopyWith$Input$AttachGuestInput<TRes> {
+  _CopyWithImpl$Input$AttachGuestInput(this._instance, this._then);
+
+  final Input$AttachGuestInput _instance;
+
+  final TRes Function(Input$AttachGuestInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? guest = _undefined, Object? code = _undefined}) => _then(
+    Input$AttachGuestInput._({
+      ..._instance._$data,
+      if (guest != _undefined && guest != null)
+        'guest': (guest as Input$GuestInput),
+      if (code != _undefined && code != null) 'code': (code as String),
+    }),
+  );
+
+  CopyWith$Input$GuestInput<TRes> get guest {
+    final local$guest = _instance.guest;
+    return CopyWith$Input$GuestInput(local$guest, (e) => call(guest: e));
+  }
+}
+
+class _CopyWithStubImpl$Input$AttachGuestInput<TRes>
+    implements CopyWith$Input$AttachGuestInput<TRes> {
+  _CopyWithStubImpl$Input$AttachGuestInput(this._res);
+
+  TRes _res;
+
+  call({Input$GuestInput? guest, String? code}) => _res;
+
+  CopyWith$Input$GuestInput<TRes> get guest =>
+      CopyWith$Input$GuestInput.stub(_res);
+}
+
+class Input$UpdateGuestInput {
+  factory Input$UpdateGuestInput({
+    String? $_id,
+    String? invitationLinkId,
+    String? phone,
+    String? title,
+    String? firstName,
+    String? lastName,
+    String? email,
+    bool? isOnBoarded,
+    bool? isInEvent,
+    bool? isGifted,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) => Input$UpdateGuestInput._({
+    if ($_id != null) r'_id': $_id,
+    if (invitationLinkId != null) r'invitationLinkId': invitationLinkId,
+    if (phone != null) r'phone': phone,
+    if (title != null) r'title': title,
+    if (firstName != null) r'firstName': firstName,
+    if (lastName != null) r'lastName': lastName,
+    if (email != null) r'email': email,
+    if (isOnBoarded != null) r'isOnBoarded': isOnBoarded,
+    if (isInEvent != null) r'isInEvent': isInEvent,
+    if (isGifted != null) r'isGifted': isGifted,
+    if (createdAt != null) r'createdAt': createdAt,
+    if (updatedAt != null) r'updatedAt': updatedAt,
+  });
+
+  Input$UpdateGuestInput._(this._$data);
+
+  factory Input$UpdateGuestInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_id')) {
+      final l$$_id = data['_id'];
+      result$data['_id'] = (l$$_id as String?);
+    }
+    if (data.containsKey('invitationLinkId')) {
+      final l$invitationLinkId = data['invitationLinkId'];
+      result$data['invitationLinkId'] = (l$invitationLinkId as String?);
+    }
+    if (data.containsKey('phone')) {
+      final l$phone = data['phone'];
+      result$data['phone'] = (l$phone as String?);
+    }
+    if (data.containsKey('title')) {
+      final l$title = data['title'];
+      result$data['title'] = (l$title as String?);
+    }
+    if (data.containsKey('firstName')) {
+      final l$firstName = data['firstName'];
+      result$data['firstName'] = (l$firstName as String?);
+    }
+    if (data.containsKey('lastName')) {
+      final l$lastName = data['lastName'];
+      result$data['lastName'] = (l$lastName as String?);
+    }
+    if (data.containsKey('email')) {
+      final l$email = data['email'];
+      result$data['email'] = (l$email as String?);
+    }
+    if (data.containsKey('isOnBoarded')) {
+      final l$isOnBoarded = data['isOnBoarded'];
+      result$data['isOnBoarded'] = (l$isOnBoarded as bool?);
+    }
+    if (data.containsKey('isInEvent')) {
+      final l$isInEvent = data['isInEvent'];
+      result$data['isInEvent'] = (l$isInEvent as bool?);
+    }
+    if (data.containsKey('isGifted')) {
+      final l$isGifted = data['isGifted'];
+      result$data['isGifted'] = (l$isGifted as bool?);
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = l$createdAt == null
+          ? null
+          : dateTimeFromJson(l$createdAt);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = l$updatedAt == null
+          ? null
+          : dateTimeFromJson(l$updatedAt);
+    }
+    return Input$UpdateGuestInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get $_id => (_$data['_id'] as String?);
+
+  String? get invitationLinkId => (_$data['invitationLinkId'] as String?);
+
+  String? get phone => (_$data['phone'] as String?);
+
+  String? get title => (_$data['title'] as String?);
+
+  String? get firstName => (_$data['firstName'] as String?);
+
+  String? get lastName => (_$data['lastName'] as String?);
+
+  String? get email => (_$data['email'] as String?);
+
+  bool? get isOnBoarded => (_$data['isOnBoarded'] as bool?);
+
+  bool? get isInEvent => (_$data['isInEvent'] as bool?);
+
+  bool? get isGifted => (_$data['isGifted'] as bool?);
+
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_id')) {
+      final l$$_id = $_id;
+      result$data['_id'] = l$$_id;
+    }
+    if (_$data.containsKey('invitationLinkId')) {
+      final l$invitationLinkId = invitationLinkId;
+      result$data['invitationLinkId'] = l$invitationLinkId;
+    }
+    if (_$data.containsKey('phone')) {
+      final l$phone = phone;
+      result$data['phone'] = l$phone;
+    }
+    if (_$data.containsKey('title')) {
+      final l$title = title;
+      result$data['title'] = l$title;
+    }
+    if (_$data.containsKey('firstName')) {
+      final l$firstName = firstName;
+      result$data['firstName'] = l$firstName;
+    }
+    if (_$data.containsKey('lastName')) {
+      final l$lastName = lastName;
+      result$data['lastName'] = l$lastName;
+    }
+    if (_$data.containsKey('email')) {
+      final l$email = email;
+      result$data['email'] = l$email;
+    }
+    if (_$data.containsKey('isOnBoarded')) {
+      final l$isOnBoarded = isOnBoarded;
+      result$data['isOnBoarded'] = l$isOnBoarded;
+    }
+    if (_$data.containsKey('isInEvent')) {
+      final l$isInEvent = isInEvent;
+      result$data['isInEvent'] = l$isInEvent;
+    }
+    if (_$data.containsKey('isGifted')) {
+      final l$isGifted = isGifted;
+      result$data['isGifted'] = l$isGifted;
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt == null
+          ? null
+          : dateTimeToJson(l$createdAt);
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt == null
+          ? null
+          : dateTimeToJson(l$updatedAt);
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$UpdateGuestInput<Input$UpdateGuestInput> get copyWith =>
+      CopyWith$Input$UpdateGuestInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input$UpdateGuestInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_id = $_id;
+    final lOther$$_id = other.$_id;
+    if (_$data.containsKey('_id') != other._$data.containsKey('_id')) {
+      return false;
+    }
+    if (l$$_id != lOther$$_id) {
+      return false;
+    }
+    final l$invitationLinkId = invitationLinkId;
+    final lOther$invitationLinkId = other.invitationLinkId;
+    if (_$data.containsKey('invitationLinkId') !=
+        other._$data.containsKey('invitationLinkId')) {
+      return false;
+    }
+    if (l$invitationLinkId != lOther$invitationLinkId) {
+      return false;
+    }
+    final l$phone = phone;
+    final lOther$phone = other.phone;
+    if (_$data.containsKey('phone') != other._$data.containsKey('phone')) {
+      return false;
+    }
+    if (l$phone != lOther$phone) {
+      return false;
+    }
+    final l$title = title;
+    final lOther$title = other.title;
+    if (_$data.containsKey('title') != other._$data.containsKey('title')) {
+      return false;
+    }
+    if (l$title != lOther$title) {
+      return false;
+    }
+    final l$firstName = firstName;
+    final lOther$firstName = other.firstName;
+    if (_$data.containsKey('firstName') !=
+        other._$data.containsKey('firstName')) {
+      return false;
+    }
+    if (l$firstName != lOther$firstName) {
+      return false;
+    }
+    final l$lastName = lastName;
+    final lOther$lastName = other.lastName;
+    if (_$data.containsKey('lastName') !=
+        other._$data.containsKey('lastName')) {
+      return false;
+    }
+    if (l$lastName != lOther$lastName) {
+      return false;
+    }
+    final l$email = email;
+    final lOther$email = other.email;
+    if (_$data.containsKey('email') != other._$data.containsKey('email')) {
+      return false;
+    }
+    if (l$email != lOther$email) {
+      return false;
+    }
+    final l$isOnBoarded = isOnBoarded;
+    final lOther$isOnBoarded = other.isOnBoarded;
+    if (_$data.containsKey('isOnBoarded') !=
+        other._$data.containsKey('isOnBoarded')) {
+      return false;
+    }
+    if (l$isOnBoarded != lOther$isOnBoarded) {
+      return false;
+    }
+    final l$isInEvent = isInEvent;
+    final lOther$isInEvent = other.isInEvent;
+    if (_$data.containsKey('isInEvent') !=
+        other._$data.containsKey('isInEvent')) {
+      return false;
+    }
+    if (l$isInEvent != lOther$isInEvent) {
+      return false;
+    }
+    final l$isGifted = isGifted;
+    final lOther$isGifted = other.isGifted;
+    if (_$data.containsKey('isGifted') !=
+        other._$data.containsKey('isGifted')) {
+      return false;
+    }
+    if (l$isGifted != lOther$isGifted) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_id = $_id;
+    final l$invitationLinkId = invitationLinkId;
+    final l$phone = phone;
+    final l$title = title;
+    final l$firstName = firstName;
+    final l$lastName = lastName;
+    final l$email = email;
+    final l$isOnBoarded = isOnBoarded;
+    final l$isInEvent = isInEvent;
+    final l$isGifted = isGifted;
+    final l$createdAt = createdAt;
+    final l$updatedAt = updatedAt;
+    return Object.hashAll([
+      _$data.containsKey('_id') ? l$$_id : const {},
+      _$data.containsKey('invitationLinkId') ? l$invitationLinkId : const {},
+      _$data.containsKey('phone') ? l$phone : const {},
+      _$data.containsKey('title') ? l$title : const {},
+      _$data.containsKey('firstName') ? l$firstName : const {},
+      _$data.containsKey('lastName') ? l$lastName : const {},
+      _$data.containsKey('email') ? l$email : const {},
+      _$data.containsKey('isOnBoarded') ? l$isOnBoarded : const {},
+      _$data.containsKey('isInEvent') ? l$isInEvent : const {},
+      _$data.containsKey('isGifted') ? l$isGifted : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$UpdateGuestInput<TRes> {
+  factory CopyWith$Input$UpdateGuestInput(
+    Input$UpdateGuestInput instance,
+    TRes Function(Input$UpdateGuestInput) then,
+  ) = _CopyWithImpl$Input$UpdateGuestInput;
+
+  factory CopyWith$Input$UpdateGuestInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$UpdateGuestInput;
+
+  TRes call({
+    String? $_id,
+    String? invitationLinkId,
+    String? phone,
+    String? title,
+    String? firstName,
+    String? lastName,
+    String? email,
+    bool? isOnBoarded,
+    bool? isInEvent,
+    bool? isGifted,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  });
+}
+
+class _CopyWithImpl$Input$UpdateGuestInput<TRes>
+    implements CopyWith$Input$UpdateGuestInput<TRes> {
+  _CopyWithImpl$Input$UpdateGuestInput(this._instance, this._then);
+
+  final Input$UpdateGuestInput _instance;
+
+  final TRes Function(Input$UpdateGuestInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_id = _undefined,
+    Object? invitationLinkId = _undefined,
+    Object? phone = _undefined,
+    Object? title = _undefined,
+    Object? firstName = _undefined,
+    Object? lastName = _undefined,
+    Object? email = _undefined,
+    Object? isOnBoarded = _undefined,
+    Object? isInEvent = _undefined,
+    Object? isGifted = _undefined,
+    Object? createdAt = _undefined,
+    Object? updatedAt = _undefined,
+  }) => _then(
+    Input$UpdateGuestInput._({
+      ..._instance._$data,
+      if ($_id != _undefined) '_id': ($_id as String?),
+      if (invitationLinkId != _undefined)
+        'invitationLinkId': (invitationLinkId as String?),
+      if (phone != _undefined) 'phone': (phone as String?),
+      if (title != _undefined) 'title': (title as String?),
+      if (firstName != _undefined) 'firstName': (firstName as String?),
+      if (lastName != _undefined) 'lastName': (lastName as String?),
+      if (email != _undefined) 'email': (email as String?),
+      if (isOnBoarded != _undefined) 'isOnBoarded': (isOnBoarded as bool?),
+      if (isInEvent != _undefined) 'isInEvent': (isInEvent as bool?),
+      if (isGifted != _undefined) 'isGifted': (isGifted as bool?),
+      if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+      if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Input$UpdateGuestInput<TRes>
+    implements CopyWith$Input$UpdateGuestInput<TRes> {
+  _CopyWithStubImpl$Input$UpdateGuestInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? $_id,
+    String? invitationLinkId,
+    String? phone,
+    String? title,
+    String? firstName,
+    String? lastName,
+    String? email,
+    bool? isOnBoarded,
+    bool? isInEvent,
+    bool? isGifted,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) => _res;
+}
+
 class Input$CreateInvitationLinkInput {
   factory Input$CreateInvitationLinkInput({
     int? guestSize,
@@ -1518,6 +2169,95 @@ class _CopyWithStubImpl$Input$CreatePrintCardInput<TRes>
   TRes _res;
 
   call({int? count}) => _res;
+}
+
+class Input$DeleteGuestInput {
+  factory Input$DeleteGuestInput({required String $_id}) =>
+      Input$DeleteGuestInput._({r'_id': $_id});
+
+  Input$DeleteGuestInput._(this._$data);
+
+  factory Input$DeleteGuestInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$$_id = data['_id'];
+    result$data['_id'] = (l$$_id as String);
+    return Input$DeleteGuestInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get $_id => (_$data['_id'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$$_id = $_id;
+    result$data['_id'] = l$$_id;
+    return result$data;
+  }
+
+  CopyWith$Input$DeleteGuestInput<Input$DeleteGuestInput> get copyWith =>
+      CopyWith$Input$DeleteGuestInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input$DeleteGuestInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_id = $_id;
+    final lOther$$_id = other.$_id;
+    if (l$$_id != lOther$$_id) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_id = $_id;
+    return Object.hashAll([l$$_id]);
+  }
+}
+
+abstract class CopyWith$Input$DeleteGuestInput<TRes> {
+  factory CopyWith$Input$DeleteGuestInput(
+    Input$DeleteGuestInput instance,
+    TRes Function(Input$DeleteGuestInput) then,
+  ) = _CopyWithImpl$Input$DeleteGuestInput;
+
+  factory CopyWith$Input$DeleteGuestInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$DeleteGuestInput;
+
+  TRes call({String? $_id});
+}
+
+class _CopyWithImpl$Input$DeleteGuestInput<TRes>
+    implements CopyWith$Input$DeleteGuestInput<TRes> {
+  _CopyWithImpl$Input$DeleteGuestInput(this._instance, this._then);
+
+  final Input$DeleteGuestInput _instance;
+
+  final TRes Function(Input$DeleteGuestInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? $_id = _undefined}) => _then(
+    Input$DeleteGuestInput._({
+      ..._instance._$data,
+      if ($_id != _undefined && $_id != null) '_id': ($_id as String),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Input$DeleteGuestInput<TRes>
+    implements CopyWith$Input$DeleteGuestInput<TRes> {
+  _CopyWithStubImpl$Input$DeleteGuestInput(this._res);
+
+  TRes _res;
+
+  call({String? $_id}) => _res;
 }
 
 class Input$UploadRequestInput {

@@ -7,15 +7,17 @@ import 'package:event_handler/cores/network/client/api_client.dart';
 import 'package:event_handler/cores/network/client/graphql/__generated/mutation.graphql.dart';
 import 'package:event_handler/cores/network/client/graphql/__generated/query.graphql.dart';
 import 'package:event_handler/cores/network/models/DataHolder.dart';
-import 'package:event_handler/cores/utils/helper_functions.dart';
-import 'package:event_handler/modules/authentication/models/request/login_request_model.dart';
-import 'package:event_handler/modules/authentication/models/responses/login_response.dart';
+import 'package:event_handler/modules/dashboard/models/request/create_invitation_link_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class DashboardRepository {
-  Future<LoginResponse?> login({required LoginRequestModel request});
+  Future<PaginatedInvitationLinkResponse?> getInvitationLinks({
+    required LinkRequestModel request,
+  });
 
-  Future<UserResponse?> getMe();
+  Future createInvitationLink(CreateInvitationLinkRequestModel request);
   // Future<UploadUrlResponse?> getSelfieUploadUrl();
 }
 
@@ -32,90 +34,44 @@ class DashboardRepositoryImpl implements DashboardRepository {
   final DataHolder _dataHolder;
 
   @override
-  Future<LoginResponse?> login({required LoginRequestModel request}) async {
+  Future<PaginatedInvitationLinkResponse?> getInvitationLinks({
+    required LinkRequestModel request,
+  }) async {
     final response = await handleQueryResult(
-      queryBuilder: () => _client.client.mutate$login(
-        Options$Mutation$login(variables: request.toVariables),
+      queryBuilder: () => _client.client.query$invitationLinks(
+        Options$Query$invitationLinks(variables: request.toVariables),
       ),
     );
 
     log(
-      ":::This is from the login response ::: ${jsonEncode(response.parsedData?.toJson()['login'])}",
+      ":::This is from getting invitationLink response ::: ${jsonEncode(response.parsedData?.toJson()['invitationLinks'])}",
     );
-    final data = response.parsedData?.toJson()['login'] != null
-        ? LoginResponse.fromJson(response.parsedData?.toJson()['login'])
-        : null;
 
-    if (data != null) {
-      _saveSessionData(data);
-    }
+    final data = response.parsedData?.toJson()['invitationLinks'] != null
+        ? PaginatedInvitationLinkResponse.fromJson(
+            response.parsedData?.toJson()['invitationLinks'],
+          )
+        : null;
 
     return data;
   }
 
   @override
-  Future<UserResponse?> getMe() async {
+  createInvitationLink(CreateInvitationLinkRequestModel request) async {
     final response = await handleQueryResult(
-      queryBuilder: () => _client.client.query$me(),
+      queryBuilder: () => _client.client.mutate$generateInviteLink(
+        Options$Mutation$generateInviteLink(variables: request.toVariables),
+      ),
     );
 
     log(
-      "::::Response from the app user's info:::: ${response.parsedData?.toJson()}",
+      "::::Response from the invitation Link generation:::: ${response.parsedData?.toJson()}",
     );
 
     if (response.parsedData?.toJson() != null) {
-      UserResponse userInfo = UserResponse.fromJson(
-        response.parsedData?.toJson()['me'],
-      );
-
-      _secureStorageInteractor.saveUser(userInfo);
-      return userInfo;
+      return response.parsedData?.toJson()['generateInviteLink'];
     }
 
     return null;
-  }
-
-  // @override
-  // Future<UploadUrlResponse?> getSelfieUploadUrl() async {
-  //   final response = await handleQueryResult(
-  //     queryBuilder: () => _client.client.query$getSelfieUploadUrl(),
-  //   );
-  //
-  //   log(
-  //     "::::Response from the get selfie Upload:::: ${response.parsedData?.toJson()}",
-  //   );
-  //
-  //   if (response.parsedData?.toJson() != null) {
-  //     return UploadUrlResponse.fromJson(
-  //       response.parsedData?.toJson()['getSelfieUploadUrl'],
-  //     );
-  //   }
-  //
-  //   return null;
-  // }
-
-  void _saveSessionData(LoginResponse loginResponse) {
-    _secureStorageInteractor.saveRefreshToken(
-      loginResponse.refreshToken!.token!,
-    );
-    _secureStorageInteractor.saveToken(loginResponse.accessToken!.token!);
-    _secureStorageInteractor.saveUser(loginResponse.user!);
-
-    _dataHolder.token = loginResponse.accessToken!.token;
-    _dataHolder.refreshToken = loginResponse.refreshToken!.token;
-    _dataHolder.userId = loginResponse.user!.id;
-
-    log(
-      "::: The normal expiry date is ${loginResponse.accessToken!.expiresAt}",
-    );
-    final expiryDate = HelperFunctions.getDateTimeFromLoginExpiryDate(
-      loginResponse.accessToken!.expiresAt!,
-    );
-
-    log("::: The expiry date is $expiryDate");
-
-    if (expiryDate != null) {
-      _secureStorageInteractor.saveSessionExpiryDate(expiryDate);
-    }
   }
 }

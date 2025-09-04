@@ -1360,6 +1360,8 @@ const documentNodeQueryinvitationLink = DocumentNode(
       ),
     ),
     fragmentDefinitionInvitationLinkResponse,
+    fragmentDefinitionGuestResponse,
+    fragmentDefinitionGuestLinkResponse,
   ],
 );
 Query$invitationLink _parserFn$Query$invitationLink(
@@ -1866,6 +1868,8 @@ const documentNodeQueryinvitationLinks = DocumentNode(
       ),
     ),
     fragmentDefinitionInvitationLinkResponse,
+    fragmentDefinitionGuestResponse,
+    fragmentDefinitionGuestLinkResponse,
   ],
 );
 Query$invitationLinks _parserFn$Query$invitationLinks(
@@ -2500,4 +2504,1177 @@ class Query$me$Widget extends graphql_flutter.Query<Query$me> {
          options: options ?? Options$Query$me(),
          builder: builder,
        );
+}
+
+class Variables$Query$invitation {
+  factory Variables$Query$invitation({required Input$SimpleInput input}) =>
+      Variables$Query$invitation._({r'input': input});
+
+  Variables$Query$invitation._(this._$data);
+
+  factory Variables$Query$invitation.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] = Input$SimpleInput.fromJson(
+      (l$input as Map<String, dynamic>),
+    );
+    return Variables$Query$invitation._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$SimpleInput get input => (_$data['input'] as Input$SimpleInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Query$invitation<Variables$Query$invitation>
+  get copyWith => CopyWith$Variables$Query$invitation(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables$Query$invitation ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Query$invitation<TRes> {
+  factory CopyWith$Variables$Query$invitation(
+    Variables$Query$invitation instance,
+    TRes Function(Variables$Query$invitation) then,
+  ) = _CopyWithImpl$Variables$Query$invitation;
+
+  factory CopyWith$Variables$Query$invitation.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$invitation;
+
+  TRes call({Input$SimpleInput? input});
+}
+
+class _CopyWithImpl$Variables$Query$invitation<TRes>
+    implements CopyWith$Variables$Query$invitation<TRes> {
+  _CopyWithImpl$Variables$Query$invitation(this._instance, this._then);
+
+  final Variables$Query$invitation _instance;
+
+  final TRes Function(Variables$Query$invitation) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) => _then(
+    Variables$Query$invitation._({
+      ..._instance._$data,
+      if (input != _undefined && input != null)
+        'input': (input as Input$SimpleInput),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Variables$Query$invitation<TRes>
+    implements CopyWith$Variables$Query$invitation<TRes> {
+  _CopyWithStubImpl$Variables$Query$invitation(this._res);
+
+  TRes _res;
+
+  call({Input$SimpleInput? input}) => _res;
+}
+
+class Query$invitation {
+  Query$invitation({required this.invitation, this.$__typename = 'Query'});
+
+  factory Query$invitation.fromJson(Map<String, dynamic> json) {
+    final l$invitation = json['invitation'];
+    final l$$__typename = json['__typename'];
+    return Query$invitation(
+      invitation: Fragment$GuestLinkResponse.fromJson(
+        (l$invitation as Map<String, dynamic>),
+      ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment$GuestLinkResponse invitation;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$invitation = invitation;
+    _resultData['invitation'] = l$invitation.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$invitation = invitation;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$invitation, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query$invitation || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$invitation = invitation;
+    final lOther$invitation = other.invitation;
+    if (l$invitation != lOther$invitation) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$invitation on Query$invitation {
+  CopyWith$Query$invitation<Query$invitation> get copyWith =>
+      CopyWith$Query$invitation(this, (i) => i);
+}
+
+abstract class CopyWith$Query$invitation<TRes> {
+  factory CopyWith$Query$invitation(
+    Query$invitation instance,
+    TRes Function(Query$invitation) then,
+  ) = _CopyWithImpl$Query$invitation;
+
+  factory CopyWith$Query$invitation.stub(TRes res) =
+      _CopyWithStubImpl$Query$invitation;
+
+  TRes call({Fragment$GuestLinkResponse? invitation, String? $__typename});
+  CopyWith$Fragment$GuestLinkResponse<TRes> get invitation;
+}
+
+class _CopyWithImpl$Query$invitation<TRes>
+    implements CopyWith$Query$invitation<TRes> {
+  _CopyWithImpl$Query$invitation(this._instance, this._then);
+
+  final Query$invitation _instance;
+
+  final TRes Function(Query$invitation) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? invitation = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query$invitation(
+      invitation: invitation == _undefined || invitation == null
+          ? _instance.invitation
+          : (invitation as Fragment$GuestLinkResponse),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith$Fragment$GuestLinkResponse<TRes> get invitation {
+    final local$invitation = _instance.invitation;
+    return CopyWith$Fragment$GuestLinkResponse(
+      local$invitation,
+      (e) => call(invitation: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl$Query$invitation<TRes>
+    implements CopyWith$Query$invitation<TRes> {
+  _CopyWithStubImpl$Query$invitation(this._res);
+
+  TRes _res;
+
+  call({Fragment$GuestLinkResponse? invitation, String? $__typename}) => _res;
+
+  CopyWith$Fragment$GuestLinkResponse<TRes> get invitation =>
+      CopyWith$Fragment$GuestLinkResponse.stub(_res);
+}
+
+const documentNodeQueryinvitation = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'invitation'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'input')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'SimpleInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'invitation'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'input'),
+                value: VariableNode(name: NameNode(value: 'input')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'GuestLinkResponse'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionGuestLinkResponse,
+  ],
+);
+Query$invitation _parserFn$Query$invitation(Map<String, dynamic> data) =>
+    Query$invitation.fromJson(data);
+typedef OnQueryComplete$Query$invitation =
+    FutureOr<void> Function(Map<String, dynamic>?, Query$invitation?);
+
+class Options$Query$invitation extends graphql.QueryOptions<Query$invitation> {
+  Options$Query$invitation({
+    String? operationName,
+    required Variables$Query$invitation variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$invitation? typedOptimisticResult,
+    Duration? pollInterval,
+    graphql.Context? context,
+    OnQueryComplete$Query$invitation? onComplete,
+    graphql.OnQueryError? onError,
+  }) : onCompleteWithParsed = onComplete,
+       super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         pollInterval: pollInterval,
+         context: context,
+         onComplete: onComplete == null
+             ? null
+             : (data) => onComplete(
+                 data,
+                 data == null ? null : _parserFn$Query$invitation(data),
+               ),
+         onError: onError,
+         document: documentNodeQueryinvitation,
+         parserFn: _parserFn$Query$invitation,
+       );
+
+  final OnQueryComplete$Query$invitation? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onComplete == null
+        ? super.properties
+        : super.properties.where((property) => property != onComplete),
+    onCompleteWithParsed,
+  ];
+}
+
+class WatchOptions$Query$invitation
+    extends graphql.WatchQueryOptions<Query$invitation> {
+  WatchOptions$Query$invitation({
+    String? operationName,
+    required Variables$Query$invitation variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$invitation? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         document: documentNodeQueryinvitation,
+         pollInterval: pollInterval,
+         eagerlyFetchResults: eagerlyFetchResults,
+         carryForwardDataOnException: carryForwardDataOnException,
+         fetchResults: fetchResults,
+         parserFn: _parserFn$Query$invitation,
+       );
+}
+
+class FetchMoreOptions$Query$invitation extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$invitation({
+    required graphql.UpdateQuery updateQuery,
+    required Variables$Query$invitation variables,
+  }) : super(
+         updateQuery: updateQuery,
+         variables: variables.toJson(),
+         document: documentNodeQueryinvitation,
+       );
+}
+
+extension ClientExtension$Query$invitation on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$invitation>> query$invitation(
+    Options$Query$invitation options,
+  ) async => await this.query(options);
+  graphql.ObservableQuery<Query$invitation> watchQuery$invitation(
+    WatchOptions$Query$invitation options,
+  ) => this.watchQuery(options);
+  void writeQuery$invitation({
+    required Query$invitation data,
+    required Variables$Query$invitation variables,
+    bool broadcast = true,
+  }) => this.writeQuery(
+    graphql.Request(
+      operation: graphql.Operation(document: documentNodeQueryinvitation),
+      variables: variables.toJson(),
+    ),
+    data: data.toJson(),
+    broadcast: broadcast,
+  );
+  Query$invitation? readQuery$invitation({
+    required Variables$Query$invitation variables,
+    bool optimistic = true,
+  }) {
+    final result = this.readQuery(
+      graphql.Request(
+        operation: graphql.Operation(document: documentNodeQueryinvitation),
+        variables: variables.toJson(),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Query$invitation.fromJson(result);
+  }
+}
+
+graphql_flutter.QueryHookResult<Query$invitation> useQuery$invitation(
+  Options$Query$invitation options,
+) => graphql_flutter.useQuery(options);
+graphql.ObservableQuery<Query$invitation> useWatchQuery$invitation(
+  WatchOptions$Query$invitation options,
+) => graphql_flutter.useWatchQuery(options);
+
+class Query$invitation$Widget extends graphql_flutter.Query<Query$invitation> {
+  Query$invitation$Widget({
+    widgets.Key? key,
+    required Options$Query$invitation options,
+    required graphql_flutter.QueryBuilder<Query$invitation> builder,
+  }) : super(key: key, options: options, builder: builder);
+}
+
+class Variables$Query$galleryFilesAdmin {
+  factory Variables$Query$galleryFilesAdmin({
+    required Input$FetchGalleryInput input,
+    required int limit,
+    required int page,
+    required String search,
+  }) => Variables$Query$galleryFilesAdmin._({
+    r'input': input,
+    r'limit': limit,
+    r'page': page,
+    r'search': search,
+  });
+
+  Variables$Query$galleryFilesAdmin._(this._$data);
+
+  factory Variables$Query$galleryFilesAdmin.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] = Input$FetchGalleryInput.fromJson(
+      (l$input as Map<String, dynamic>),
+    );
+    final l$limit = data['limit'];
+    result$data['limit'] = (l$limit as int);
+    final l$page = data['page'];
+    result$data['page'] = (l$page as int);
+    final l$search = data['search'];
+    result$data['search'] = (l$search as String);
+    return Variables$Query$galleryFilesAdmin._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$FetchGalleryInput get input =>
+      (_$data['input'] as Input$FetchGalleryInput);
+
+  int get limit => (_$data['limit'] as int);
+
+  int get page => (_$data['page'] as int);
+
+  String get search => (_$data['search'] as String);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    final l$limit = limit;
+    result$data['limit'] = l$limit;
+    final l$page = page;
+    result$data['page'] = l$page;
+    final l$search = search;
+    result$data['search'] = l$search;
+    return result$data;
+  }
+
+  CopyWith$Variables$Query$galleryFilesAdmin<Variables$Query$galleryFilesAdmin>
+  get copyWith => CopyWith$Variables$Query$galleryFilesAdmin(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables$Query$galleryFilesAdmin ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    final l$limit = limit;
+    final lOther$limit = other.limit;
+    if (l$limit != lOther$limit) {
+      return false;
+    }
+    final l$page = page;
+    final lOther$page = other.page;
+    if (l$page != lOther$page) {
+      return false;
+    }
+    final l$search = search;
+    final lOther$search = other.search;
+    if (l$search != lOther$search) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    final l$limit = limit;
+    final l$page = page;
+    final l$search = search;
+    return Object.hashAll([l$input, l$limit, l$page, l$search]);
+  }
+}
+
+abstract class CopyWith$Variables$Query$galleryFilesAdmin<TRes> {
+  factory CopyWith$Variables$Query$galleryFilesAdmin(
+    Variables$Query$galleryFilesAdmin instance,
+    TRes Function(Variables$Query$galleryFilesAdmin) then,
+  ) = _CopyWithImpl$Variables$Query$galleryFilesAdmin;
+
+  factory CopyWith$Variables$Query$galleryFilesAdmin.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Query$galleryFilesAdmin;
+
+  TRes call({
+    Input$FetchGalleryInput? input,
+    int? limit,
+    int? page,
+    String? search,
+  });
+}
+
+class _CopyWithImpl$Variables$Query$galleryFilesAdmin<TRes>
+    implements CopyWith$Variables$Query$galleryFilesAdmin<TRes> {
+  _CopyWithImpl$Variables$Query$galleryFilesAdmin(this._instance, this._then);
+
+  final Variables$Query$galleryFilesAdmin _instance;
+
+  final TRes Function(Variables$Query$galleryFilesAdmin) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? input = _undefined,
+    Object? limit = _undefined,
+    Object? page = _undefined,
+    Object? search = _undefined,
+  }) => _then(
+    Variables$Query$galleryFilesAdmin._({
+      ..._instance._$data,
+      if (input != _undefined && input != null)
+        'input': (input as Input$FetchGalleryInput),
+      if (limit != _undefined && limit != null) 'limit': (limit as int),
+      if (page != _undefined && page != null) 'page': (page as int),
+      if (search != _undefined && search != null) 'search': (search as String),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Variables$Query$galleryFilesAdmin<TRes>
+    implements CopyWith$Variables$Query$galleryFilesAdmin<TRes> {
+  _CopyWithStubImpl$Variables$Query$galleryFilesAdmin(this._res);
+
+  TRes _res;
+
+  call({
+    Input$FetchGalleryInput? input,
+    int? limit,
+    int? page,
+    String? search,
+  }) => _res;
+}
+
+class Query$galleryFilesAdmin {
+  Query$galleryFilesAdmin({
+    required this.galleryFilesAdmin,
+    this.$__typename = 'Query',
+  });
+
+  factory Query$galleryFilesAdmin.fromJson(Map<String, dynamic> json) {
+    final l$galleryFilesAdmin = json['galleryFilesAdmin'];
+    final l$$__typename = json['__typename'];
+    return Query$galleryFilesAdmin(
+      galleryFilesAdmin: Query$galleryFilesAdmin$galleryFilesAdmin.fromJson(
+        (l$galleryFilesAdmin as Map<String, dynamic>),
+      ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Query$galleryFilesAdmin$galleryFilesAdmin galleryFilesAdmin;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$galleryFilesAdmin = galleryFilesAdmin;
+    _resultData['galleryFilesAdmin'] = l$galleryFilesAdmin.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$galleryFilesAdmin = galleryFilesAdmin;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$galleryFilesAdmin, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query$galleryFilesAdmin || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$galleryFilesAdmin = galleryFilesAdmin;
+    final lOther$galleryFilesAdmin = other.galleryFilesAdmin;
+    if (l$galleryFilesAdmin != lOther$galleryFilesAdmin) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$galleryFilesAdmin on Query$galleryFilesAdmin {
+  CopyWith$Query$galleryFilesAdmin<Query$galleryFilesAdmin> get copyWith =>
+      CopyWith$Query$galleryFilesAdmin(this, (i) => i);
+}
+
+abstract class CopyWith$Query$galleryFilesAdmin<TRes> {
+  factory CopyWith$Query$galleryFilesAdmin(
+    Query$galleryFilesAdmin instance,
+    TRes Function(Query$galleryFilesAdmin) then,
+  ) = _CopyWithImpl$Query$galleryFilesAdmin;
+
+  factory CopyWith$Query$galleryFilesAdmin.stub(TRes res) =
+      _CopyWithStubImpl$Query$galleryFilesAdmin;
+
+  TRes call({
+    Query$galleryFilesAdmin$galleryFilesAdmin? galleryFilesAdmin,
+    String? $__typename,
+  });
+  CopyWith$Query$galleryFilesAdmin$galleryFilesAdmin<TRes>
+  get galleryFilesAdmin;
+}
+
+class _CopyWithImpl$Query$galleryFilesAdmin<TRes>
+    implements CopyWith$Query$galleryFilesAdmin<TRes> {
+  _CopyWithImpl$Query$galleryFilesAdmin(this._instance, this._then);
+
+  final Query$galleryFilesAdmin _instance;
+
+  final TRes Function(Query$galleryFilesAdmin) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? galleryFilesAdmin = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query$galleryFilesAdmin(
+      galleryFilesAdmin:
+          galleryFilesAdmin == _undefined || galleryFilesAdmin == null
+          ? _instance.galleryFilesAdmin
+          : (galleryFilesAdmin as Query$galleryFilesAdmin$galleryFilesAdmin),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith$Query$galleryFilesAdmin$galleryFilesAdmin<TRes>
+  get galleryFilesAdmin {
+    final local$galleryFilesAdmin = _instance.galleryFilesAdmin;
+    return CopyWith$Query$galleryFilesAdmin$galleryFilesAdmin(
+      local$galleryFilesAdmin,
+      (e) => call(galleryFilesAdmin: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl$Query$galleryFilesAdmin<TRes>
+    implements CopyWith$Query$galleryFilesAdmin<TRes> {
+  _CopyWithStubImpl$Query$galleryFilesAdmin(this._res);
+
+  TRes _res;
+
+  call({
+    Query$galleryFilesAdmin$galleryFilesAdmin? galleryFilesAdmin,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith$Query$galleryFilesAdmin$galleryFilesAdmin<TRes>
+  get galleryFilesAdmin =>
+      CopyWith$Query$galleryFilesAdmin$galleryFilesAdmin.stub(_res);
+}
+
+const documentNodeQuerygalleryFilesAdmin = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'galleryFilesAdmin'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'input')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'FetchGalleryInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'page')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'search')),
+          type: NamedTypeNode(name: NameNode(value: 'String'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'galleryFilesAdmin'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'input'),
+                value: VariableNode(name: NameNode(value: 'input')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'page'),
+                value: VariableNode(name: NameNode(value: 'page')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'search'),
+                value: VariableNode(name: NameNode(value: 'search')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'items'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'FileResponse'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: 'limit'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'page'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionFileResponse,
+    fragmentDefinitionGuestResponse,
+    fragmentDefinitionGuestLinkResponse,
+  ],
+);
+Query$galleryFilesAdmin _parserFn$Query$galleryFilesAdmin(
+  Map<String, dynamic> data,
+) => Query$galleryFilesAdmin.fromJson(data);
+typedef OnQueryComplete$Query$galleryFilesAdmin =
+    FutureOr<void> Function(Map<String, dynamic>?, Query$galleryFilesAdmin?);
+
+class Options$Query$galleryFilesAdmin
+    extends graphql.QueryOptions<Query$galleryFilesAdmin> {
+  Options$Query$galleryFilesAdmin({
+    String? operationName,
+    required Variables$Query$galleryFilesAdmin variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$galleryFilesAdmin? typedOptimisticResult,
+    Duration? pollInterval,
+    graphql.Context? context,
+    OnQueryComplete$Query$galleryFilesAdmin? onComplete,
+    graphql.OnQueryError? onError,
+  }) : onCompleteWithParsed = onComplete,
+       super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         pollInterval: pollInterval,
+         context: context,
+         onComplete: onComplete == null
+             ? null
+             : (data) => onComplete(
+                 data,
+                 data == null ? null : _parserFn$Query$galleryFilesAdmin(data),
+               ),
+         onError: onError,
+         document: documentNodeQuerygalleryFilesAdmin,
+         parserFn: _parserFn$Query$galleryFilesAdmin,
+       );
+
+  final OnQueryComplete$Query$galleryFilesAdmin? onCompleteWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onComplete == null
+        ? super.properties
+        : super.properties.where((property) => property != onComplete),
+    onCompleteWithParsed,
+  ];
+}
+
+class WatchOptions$Query$galleryFilesAdmin
+    extends graphql.WatchQueryOptions<Query$galleryFilesAdmin> {
+  WatchOptions$Query$galleryFilesAdmin({
+    String? operationName,
+    required Variables$Query$galleryFilesAdmin variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Query$galleryFilesAdmin? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         document: documentNodeQuerygalleryFilesAdmin,
+         pollInterval: pollInterval,
+         eagerlyFetchResults: eagerlyFetchResults,
+         carryForwardDataOnException: carryForwardDataOnException,
+         fetchResults: fetchResults,
+         parserFn: _parserFn$Query$galleryFilesAdmin,
+       );
+}
+
+class FetchMoreOptions$Query$galleryFilesAdmin
+    extends graphql.FetchMoreOptions {
+  FetchMoreOptions$Query$galleryFilesAdmin({
+    required graphql.UpdateQuery updateQuery,
+    required Variables$Query$galleryFilesAdmin variables,
+  }) : super(
+         updateQuery: updateQuery,
+         variables: variables.toJson(),
+         document: documentNodeQuerygalleryFilesAdmin,
+       );
+}
+
+extension ClientExtension$Query$galleryFilesAdmin on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Query$galleryFilesAdmin>> query$galleryFilesAdmin(
+    Options$Query$galleryFilesAdmin options,
+  ) async => await this.query(options);
+  graphql.ObservableQuery<Query$galleryFilesAdmin> watchQuery$galleryFilesAdmin(
+    WatchOptions$Query$galleryFilesAdmin options,
+  ) => this.watchQuery(options);
+  void writeQuery$galleryFilesAdmin({
+    required Query$galleryFilesAdmin data,
+    required Variables$Query$galleryFilesAdmin variables,
+    bool broadcast = true,
+  }) => this.writeQuery(
+    graphql.Request(
+      operation: graphql.Operation(
+        document: documentNodeQuerygalleryFilesAdmin,
+      ),
+      variables: variables.toJson(),
+    ),
+    data: data.toJson(),
+    broadcast: broadcast,
+  );
+  Query$galleryFilesAdmin? readQuery$galleryFilesAdmin({
+    required Variables$Query$galleryFilesAdmin variables,
+    bool optimistic = true,
+  }) {
+    final result = this.readQuery(
+      graphql.Request(
+        operation: graphql.Operation(
+          document: documentNodeQuerygalleryFilesAdmin,
+        ),
+        variables: variables.toJson(),
+      ),
+      optimistic: optimistic,
+    );
+    return result == null ? null : Query$galleryFilesAdmin.fromJson(result);
+  }
+}
+
+graphql_flutter.QueryHookResult<Query$galleryFilesAdmin>
+useQuery$galleryFilesAdmin(Options$Query$galleryFilesAdmin options) =>
+    graphql_flutter.useQuery(options);
+graphql.ObservableQuery<Query$galleryFilesAdmin>
+useWatchQuery$galleryFilesAdmin(WatchOptions$Query$galleryFilesAdmin options) =>
+    graphql_flutter.useWatchQuery(options);
+
+class Query$galleryFilesAdmin$Widget
+    extends graphql_flutter.Query<Query$galleryFilesAdmin> {
+  Query$galleryFilesAdmin$Widget({
+    widgets.Key? key,
+    required Options$Query$galleryFilesAdmin options,
+    required graphql_flutter.QueryBuilder<Query$galleryFilesAdmin> builder,
+  }) : super(key: key, options: options, builder: builder);
+}
+
+class Query$galleryFilesAdmin$galleryFilesAdmin {
+  Query$galleryFilesAdmin$galleryFilesAdmin({
+    this.items,
+    required this.limit,
+    required this.page,
+    this.$__typename = 'PaginatedGalleryResponse',
+  });
+
+  factory Query$galleryFilesAdmin$galleryFilesAdmin.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$items = json['items'];
+    final l$limit = json['limit'];
+    final l$page = json['page'];
+    final l$$__typename = json['__typename'];
+    return Query$galleryFilesAdmin$galleryFilesAdmin(
+      items: (l$items as List<dynamic>?)
+          ?.map(
+            (e) => Fragment$FileResponse.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+      limit: (l$limit as int),
+      page: (l$page as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Fragment$FileResponse>? items;
+
+  final int limit;
+
+  final int page;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$items = items;
+    _resultData['items'] = l$items?.map((e) => e.toJson()).toList();
+    final l$limit = limit;
+    _resultData['limit'] = l$limit;
+    final l$page = page;
+    _resultData['page'] = l$page;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$items = items;
+    final l$limit = limit;
+    final l$page = page;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$items == null ? null : Object.hashAll(l$items.map((v) => v)),
+      l$limit,
+      l$page,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query$galleryFilesAdmin$galleryFilesAdmin ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$items = items;
+    final lOther$items = other.items;
+    if (l$items != null && lOther$items != null) {
+      if (l$items.length != lOther$items.length) {
+        return false;
+      }
+      for (int i = 0; i < l$items.length; i++) {
+        final l$items$entry = l$items[i];
+        final lOther$items$entry = lOther$items[i];
+        if (l$items$entry != lOther$items$entry) {
+          return false;
+        }
+      }
+    } else if (l$items != lOther$items) {
+      return false;
+    }
+    final l$limit = limit;
+    final lOther$limit = other.limit;
+    if (l$limit != lOther$limit) {
+      return false;
+    }
+    final l$page = page;
+    final lOther$page = other.page;
+    if (l$page != lOther$page) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Query$galleryFilesAdmin$galleryFilesAdmin
+    on Query$galleryFilesAdmin$galleryFilesAdmin {
+  CopyWith$Query$galleryFilesAdmin$galleryFilesAdmin<
+    Query$galleryFilesAdmin$galleryFilesAdmin
+  >
+  get copyWith =>
+      CopyWith$Query$galleryFilesAdmin$galleryFilesAdmin(this, (i) => i);
+}
+
+abstract class CopyWith$Query$galleryFilesAdmin$galleryFilesAdmin<TRes> {
+  factory CopyWith$Query$galleryFilesAdmin$galleryFilesAdmin(
+    Query$galleryFilesAdmin$galleryFilesAdmin instance,
+    TRes Function(Query$galleryFilesAdmin$galleryFilesAdmin) then,
+  ) = _CopyWithImpl$Query$galleryFilesAdmin$galleryFilesAdmin;
+
+  factory CopyWith$Query$galleryFilesAdmin$galleryFilesAdmin.stub(TRes res) =
+      _CopyWithStubImpl$Query$galleryFilesAdmin$galleryFilesAdmin;
+
+  TRes call({
+    List<Fragment$FileResponse>? items,
+    int? limit,
+    int? page,
+    String? $__typename,
+  });
+  TRes items(
+    Iterable<Fragment$FileResponse>? Function(
+      Iterable<CopyWith$Fragment$FileResponse<Fragment$FileResponse>>?,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl$Query$galleryFilesAdmin$galleryFilesAdmin<TRes>
+    implements CopyWith$Query$galleryFilesAdmin$galleryFilesAdmin<TRes> {
+  _CopyWithImpl$Query$galleryFilesAdmin$galleryFilesAdmin(
+    this._instance,
+    this._then,
+  );
+
+  final Query$galleryFilesAdmin$galleryFilesAdmin _instance;
+
+  final TRes Function(Query$galleryFilesAdmin$galleryFilesAdmin) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? items = _undefined,
+    Object? limit = _undefined,
+    Object? page = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query$galleryFilesAdmin$galleryFilesAdmin(
+      items: items == _undefined
+          ? _instance.items
+          : (items as List<Fragment$FileResponse>?),
+      limit: limit == _undefined || limit == null
+          ? _instance.limit
+          : (limit as int),
+      page: page == _undefined || page == null ? _instance.page : (page as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  TRes items(
+    Iterable<Fragment$FileResponse>? Function(
+      Iterable<CopyWith$Fragment$FileResponse<Fragment$FileResponse>>?,
+    )
+    _fn,
+  ) => call(
+    items: _fn(
+      _instance.items?.map((e) => CopyWith$Fragment$FileResponse(e, (i) => i)),
+    )?.toList(),
+  );
+}
+
+class _CopyWithStubImpl$Query$galleryFilesAdmin$galleryFilesAdmin<TRes>
+    implements CopyWith$Query$galleryFilesAdmin$galleryFilesAdmin<TRes> {
+  _CopyWithStubImpl$Query$galleryFilesAdmin$galleryFilesAdmin(this._res);
+
+  TRes _res;
+
+  call({
+    List<Fragment$FileResponse>? items,
+    int? limit,
+    int? page,
+    String? $__typename,
+  }) => _res;
+
+  items(_fn) => _res;
 }

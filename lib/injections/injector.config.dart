@@ -24,6 +24,7 @@ import '../cores/cache/secure_storage_interactor.dart' as _i812;
 import '../cores/network/client/api_client.dart' as _i885;
 import '../cores/network/models/DataHolder.dart' as _i623;
 import '../modules/authentication/domain/auth_repository.dart' as _i499;
+import '../modules/dashboard/domain/dashboard_repository.dart' as _i932;
 import 'injector.dart' as _i811;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -58,6 +59,13 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i812.SecureStorageInteractor>(
       () => _i812.SecureStorageInteractorImpl(gh<_i992.SecureStorage>()),
+    );
+    gh.lazySingleton<_i932.DashboardRepository>(
+      () => _i932.DashboardRepositoryImpl(
+        gh<_i885.ApiClient>(),
+        gh<_i812.SecureStorageInteractor>(),
+        gh<_i623.DataHolder>(),
+      ),
     );
     gh.lazySingleton<_i499.AuthRepository>(
       () => _i499.AuthRepositoryImpl(

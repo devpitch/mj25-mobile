@@ -38,3 +38,19 @@ query me {
         ...UserResponse
     }
 }
+
+query invitation($input: SimpleInput!) {
+    invitation(input: $input) {
+        ...GuestLinkResponse
+    }
+}
+
+query galleryFilesAdmin($input: FetchGalleryInput!, $limit: Int!, $page: Int!, $search: String!) {
+    galleryFilesAdmin(input: $input, limit: $limit, page: $page, search: $search) {
+        items {
+            ...FileResponse
+        }
+        limit
+        page
+    }
+}

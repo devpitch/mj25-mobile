@@ -202,7 +202,7 @@ extension ClientExtension$Fragment$TokenResponse on graphql.GraphQLClient {
 class Fragment$GuestResponse {
   Fragment$GuestResponse({
     required this.$_id,
-    required this.invitationLinkId,
+    this.invitationLinkId,
     required this.phone,
     required this.title,
     required this.firstName,
@@ -213,7 +213,7 @@ class Fragment$GuestResponse {
     required this.isGifted,
     required this.createdAt,
     required this.updatedAt,
-    required this.link,
+    this.link,
     this.$__typename = 'GuestResponse',
   });
 
@@ -234,7 +234,7 @@ class Fragment$GuestResponse {
     final l$$__typename = json['__typename'];
     return Fragment$GuestResponse(
       $_id: (l$$_id as String),
-      invitationLinkId: (l$invitationLinkId as String),
+      invitationLinkId: (l$invitationLinkId as String?),
       phone: (l$phone as String),
       title: (l$title as String),
       firstName: (l$firstName as String),
@@ -245,16 +245,18 @@ class Fragment$GuestResponse {
       isGifted: (l$isGifted as bool),
       createdAt: dateTimeFromJson(l$createdAt),
       updatedAt: dateTimeFromJson(l$updatedAt),
-      link: Fragment$GuestLinkResponse.fromJson(
-        (l$link as Map<String, dynamic>),
-      ),
+      link: l$link == null
+          ? null
+          : Fragment$GuestLinkResponse.fromJson(
+              (l$link as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
 
   final String $_id;
 
-  final String invitationLinkId;
+  final String? invitationLinkId;
 
   final String phone;
 
@@ -276,7 +278,7 @@ class Fragment$GuestResponse {
 
   final DateTime updatedAt;
 
-  final Fragment$GuestLinkResponse link;
+  final Fragment$GuestLinkResponse? link;
 
   final String $__typename;
 
@@ -307,7 +309,7 @@ class Fragment$GuestResponse {
     final l$updatedAt = updatedAt;
     _resultData['updatedAt'] = dateTimeToJson(l$updatedAt);
     final l$link = link;
-    _resultData['link'] = l$link.toJson();
+    _resultData['link'] = l$link?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -492,10 +494,9 @@ class _CopyWithImpl$Fragment$GuestResponse<TRes>
       $_id: $_id == _undefined || $_id == null
           ? _instance.$_id
           : ($_id as String),
-      invitationLinkId:
-          invitationLinkId == _undefined || invitationLinkId == null
+      invitationLinkId: invitationLinkId == _undefined
           ? _instance.invitationLinkId
-          : (invitationLinkId as String),
+          : (invitationLinkId as String?),
       phone: phone == _undefined || phone == null
           ? _instance.phone
           : (phone as String),
@@ -524,9 +525,9 @@ class _CopyWithImpl$Fragment$GuestResponse<TRes>
       updatedAt: updatedAt == _undefined || updatedAt == null
           ? _instance.updatedAt
           : (updatedAt as DateTime),
-      link: link == _undefined || link == null
+      link: link == _undefined
           ? _instance.link
-          : (link as Fragment$GuestLinkResponse),
+          : (link as Fragment$GuestLinkResponse?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -535,10 +536,9 @@ class _CopyWithImpl$Fragment$GuestResponse<TRes>
 
   CopyWith$Fragment$GuestLinkResponse<TRes> get link {
     final local$link = _instance.link;
-    return CopyWith$Fragment$GuestLinkResponse(
-      local$link,
-      (e) => call(link: e),
-    );
+    return local$link == null
+        ? CopyWith$Fragment$GuestLinkResponse.stub(_then(_instance))
+        : CopyWith$Fragment$GuestLinkResponse(local$link, (e) => call(link: e));
   }
 }
 
@@ -736,9 +736,9 @@ extension ClientExtension$Fragment$GuestResponse on graphql.GraphQLClient {
 class Fragment$GuestLinkResponse {
   Fragment$GuestLinkResponse({
     required this.$_id,
-    required this.guestId,
+    this.guestId,
     required this.code,
-    required this.invitationCardUrl,
+    this.invitationCardUrl,
     required this.type,
     required this.status,
     required this.createdAt,
@@ -760,9 +760,9 @@ class Fragment$GuestLinkResponse {
     final l$$__typename = json['__typename'];
     return Fragment$GuestLinkResponse(
       $_id: (l$$_id as String),
-      guestId: (l$guestId as String),
+      guestId: (l$guestId as String?),
       code: (l$code as String),
-      invitationCardUrl: (l$invitationCardUrl as String),
+      invitationCardUrl: (l$invitationCardUrl as String?),
       type: fromJson$Enum$LinkTypeEnum((l$type as String)),
       status: fromJson$Enum$LinkStatusEnum((l$status as String)),
       createdAt: dateTimeFromJson(l$createdAt),
@@ -774,11 +774,11 @@ class Fragment$GuestLinkResponse {
 
   final String $_id;
 
-  final String guestId;
+  final String? guestId;
 
   final String code;
 
-  final String invitationCardUrl;
+  final String? invitationCardUrl;
 
   final Enum$LinkTypeEnum type;
 
@@ -961,16 +961,13 @@ class _CopyWithImpl$Fragment$GuestLinkResponse<TRes>
       $_id: $_id == _undefined || $_id == null
           ? _instance.$_id
           : ($_id as String),
-      guestId: guestId == _undefined || guestId == null
-          ? _instance.guestId
-          : (guestId as String),
+      guestId: guestId == _undefined ? _instance.guestId : (guestId as String?),
       code: code == _undefined || code == null
           ? _instance.code
           : (code as String),
-      invitationCardUrl:
-          invitationCardUrl == _undefined || invitationCardUrl == null
+      invitationCardUrl: invitationCardUrl == _undefined
           ? _instance.invitationCardUrl
-          : (invitationCardUrl as String),
+          : (invitationCardUrl as String?),
       type: type == _undefined || type == null
           ? _instance.type
           : (type as Enum$LinkTypeEnum),
@@ -1146,6 +1143,8 @@ class Fragment$InvitationLinkResponse {
     required this.status,
     required this.createdAt,
     required this.updatedAt,
+    required this.inviteUrl,
+    required this.guests,
     this.$__typename = 'InvitationLinkResponse',
   });
 
@@ -1159,6 +1158,8 @@ class Fragment$InvitationLinkResponse {
     final l$status = json['status'];
     final l$createdAt = json['createdAt'];
     final l$updatedAt = json['updatedAt'];
+    final l$inviteUrl = json['inviteUrl'];
+    final l$guests = json['guests'];
     final l$$__typename = json['__typename'];
     return Fragment$InvitationLinkResponse(
       $_id: (l$$_id as String),
@@ -1170,6 +1171,12 @@ class Fragment$InvitationLinkResponse {
       status: fromJson$Enum$LinkStatusEnum((l$status as String)),
       createdAt: dateTimeFromJson(l$createdAt),
       updatedAt: dateTimeFromJson(l$updatedAt),
+      inviteUrl: (l$inviteUrl as String),
+      guests: (l$guests as List<dynamic>)
+          .map(
+            (e) => Fragment$GuestResponse.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1191,6 +1198,10 @@ class Fragment$InvitationLinkResponse {
   final DateTime createdAt;
 
   final DateTime updatedAt;
+
+  final String inviteUrl;
+
+  final List<Fragment$GuestResponse> guests;
 
   final String $__typename;
 
@@ -1214,6 +1225,10 @@ class Fragment$InvitationLinkResponse {
     _resultData['createdAt'] = dateTimeToJson(l$createdAt);
     final l$updatedAt = updatedAt;
     _resultData['updatedAt'] = dateTimeToJson(l$updatedAt);
+    final l$inviteUrl = inviteUrl;
+    _resultData['inviteUrl'] = l$inviteUrl;
+    final l$guests = guests;
+    _resultData['guests'] = l$guests.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1230,6 +1245,8 @@ class Fragment$InvitationLinkResponse {
     final l$status = status;
     final l$createdAt = createdAt;
     final l$updatedAt = updatedAt;
+    final l$inviteUrl = inviteUrl;
+    final l$guests = guests;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$$_id,
@@ -1241,6 +1258,8 @@ class Fragment$InvitationLinkResponse {
       l$status,
       l$createdAt,
       l$updatedAt,
+      l$inviteUrl,
+      Object.hashAll(l$guests.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -1299,6 +1318,23 @@ class Fragment$InvitationLinkResponse {
     if (l$updatedAt != lOther$updatedAt) {
       return false;
     }
+    final l$inviteUrl = inviteUrl;
+    final lOther$inviteUrl = other.inviteUrl;
+    if (l$inviteUrl != lOther$inviteUrl) {
+      return false;
+    }
+    final l$guests = guests;
+    final lOther$guests = other.guests;
+    if (l$guests.length != lOther$guests.length) {
+      return false;
+    }
+    for (int i = 0; i < l$guests.length; i++) {
+      final l$guests$entry = l$guests[i];
+      final lOther$guests$entry = lOther$guests[i];
+      if (l$guests$entry != lOther$guests$entry) {
+        return false;
+      }
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -1333,8 +1369,16 @@ abstract class CopyWith$Fragment$InvitationLinkResponse<TRes> {
     Enum$LinkStatusEnum? status,
     DateTime? createdAt,
     DateTime? updatedAt,
+    String? inviteUrl,
+    List<Fragment$GuestResponse>? guests,
     String? $__typename,
   });
+  TRes guests(
+    Iterable<Fragment$GuestResponse> Function(
+      Iterable<CopyWith$Fragment$GuestResponse<Fragment$GuestResponse>>,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl$Fragment$InvitationLinkResponse<TRes>
@@ -1357,6 +1401,8 @@ class _CopyWithImpl$Fragment$InvitationLinkResponse<TRes>
     Object? status = _undefined,
     Object? createdAt = _undefined,
     Object? updatedAt = _undefined,
+    Object? inviteUrl = _undefined,
+    Object? guests = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Fragment$InvitationLinkResponse(
@@ -1388,10 +1434,27 @@ class _CopyWithImpl$Fragment$InvitationLinkResponse<TRes>
       updatedAt: updatedAt == _undefined || updatedAt == null
           ? _instance.updatedAt
           : (updatedAt as DateTime),
+      inviteUrl: inviteUrl == _undefined || inviteUrl == null
+          ? _instance.inviteUrl
+          : (inviteUrl as String),
+      guests: guests == _undefined || guests == null
+          ? _instance.guests
+          : (guests as List<Fragment$GuestResponse>),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
     ),
+  );
+
+  TRes guests(
+    Iterable<Fragment$GuestResponse> Function(
+      Iterable<CopyWith$Fragment$GuestResponse<Fragment$GuestResponse>>,
+    )
+    _fn,
+  ) => call(
+    guests: _fn(
+      _instance.guests.map((e) => CopyWith$Fragment$GuestResponse(e, (i) => i)),
+    ).toList(),
   );
 }
 
@@ -1411,8 +1474,12 @@ class _CopyWithStubImpl$Fragment$InvitationLinkResponse<TRes>
     Enum$LinkStatusEnum? status,
     DateTime? createdAt,
     DateTime? updatedAt,
+    String? inviteUrl,
+    List<Fragment$GuestResponse>? guests,
     String? $__typename,
   }) => _res;
+
+  guests(_fn) => _res;
 }
 
 const fragmentDefinitionInvitationLinkResponse = FragmentDefinitionNode(
@@ -1490,6 +1557,34 @@ const fragmentDefinitionInvitationLinkResponse = FragmentDefinitionNode(
         selectionSet: null,
       ),
       FieldNode(
+        name: NameNode(value: 'inviteUrl'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'guests'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'GuestResponse'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
+        ),
+      ),
+      FieldNode(
         name: NameNode(value: '__typename'),
         alias: null,
         arguments: [],
@@ -1500,7 +1595,11 @@ const fragmentDefinitionInvitationLinkResponse = FragmentDefinitionNode(
   ),
 );
 const documentNodeFragmentInvitationLinkResponse = DocumentNode(
-  definitions: [fragmentDefinitionInvitationLinkResponse],
+  definitions: [
+    fragmentDefinitionInvitationLinkResponse,
+    fragmentDefinitionGuestResponse,
+    fragmentDefinitionGuestLinkResponse,
+  ],
 );
 
 extension ClientExtension$Fragment$InvitationLinkResponse
