@@ -1,4 +1,5 @@
 export 'app_bottom_nav_box.dart';
+export 'guest_invitation_item_box.dart';
 export 'guest_list_builder.dart';
 export 'guest_list_sheet.dart';
 export 'guet_recent_scanned_builder.dart';

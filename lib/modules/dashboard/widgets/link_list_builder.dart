@@ -30,23 +30,32 @@ class LinkListBuilder extends HookConsumerWidget {
 
     useEffect(() {
       Future.microtask(() {
-        notifier.getInvitationLinks();
+        if (dataList.isEmpty) {
+          notifier.getInvitationLinks();
+        }
       });
     }, []);
 
     return Column(
       children: [
         10.verticalSpace,
-        EventButton(
-          width: double.infinity,
-          fillColor: context.contentSecondary,
-          textColor: context.contentPrimary,
-          text: "Generate Invitation Link",
-          onClick: () {
-            genRef!
-                .read(dashboardProvider.notifier)
-                .openSheet(context: context, type: "generateLink");
-          },
+        Row(
+          children: [
+            Flexible(
+              child: EventButton(
+                width: double.infinity,
+                fillColor: context.contentSecondary,
+                textColor: context.contentPrimary,
+                text: "Generate Invitation Link",
+                onClick: () {
+                  genRef!
+                      .read(dashboardProvider.notifier)
+                      .openSheet(context: context, type: "generateLink");
+                },
+              ),
+            ),
+            12.horizontalSpace,
+          ],
         ),
         if (dataList.isEmpty && !isLoading)
           Expanded(

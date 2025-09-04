@@ -1,51 +1,67 @@
 import 'package:event_handler/config/route/route_mapping.dart';
-import 'package:event_handler/config/theme/app_colors.dart';
 import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/utils/assets_mangment.dart';
 import 'package:event_handler/cores/utils/constants.dart';
 import 'package:event_handler/cores/utils/extensions.dart';
+import 'package:event_handler/cores/utils/helper_functions.dart';
 import 'package:event_handler/cores/utils/icon_builder.dart';
 import 'package:event_handler/cores/widgets/app_footer_box.dart';
 import 'package:event_handler/cores/widgets/app_header.dart';
 import 'package:event_handler/cores/widgets/custom_text.dart';
 import 'package:event_handler/cores/widgets/rydmie_button.dart';
+import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
+import 'package:event_handler/modules/dashboard/provider/dashboard_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class InvitationLinkScreen extends StatelessWidget {
+import '../widgets/dashboard_widgets_exporter.dart';
+
+class InvitationLinkScreen extends ConsumerWidget {
   const InvitationLinkScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(dashboardProvider);
+    final notifier = ref.read(dashboardProvider.notifier);
+    final InvitationLinkResponse activeLink = state.activeInviteLink!;
+    final bool canAddGuest =
+        activeLink.guestsRegistered! < activeLink.guestSize!;
+
     return Scaffold(
       appBar: AppBar(
         title: AppHeaderText(label: "Invitation Link"),
         centerTitle: true,
       ),
-      bottomSheet: AppFooterBox(
-        child: Column(
-          children: [
-            EventButton(
-              width: double.infinity,
-              textColor: context.contentSecondary,
-              fillColor: context.contentPrimary,
-              text: "Add New Guest",
-              onClick: () {
-                Get.toNamed(AppRouter.addGuestView);
-              },
-            ),
-            8.verticalSpace,
-            EventButton(
-              width: double.infinity,
-              fillColor: context.contentNegative,
-              textColor: context.backgroundColor,
-              text: "Delete Guests",
-              onClick: () {},
-            ),
-          ],
-        ),
-      ),
+      bottomSheet: (activeLink.guests?.isNotEmpty ?? false)
+          ? AppFooterBox(
+              child: Column(
+                children: [
+                  if (canAddGuest)
+                    EventButton(
+                      width: double.infinity,
+                      textColor: context.contentSecondary,
+                      fillColor: context.contentPrimary,
+                      text: "Add New Guest",
+                      onClick: () {
+                        Get.toNamed(AppRouter.addGuestView);
+                      },
+                    ),
+                  if (state.selectedLinks?.isNotEmpty ?? false) ...[
+                    8.verticalSpace,
+                    EventButton(
+                      width: double.infinity,
+                      fillColor: context.contentNegative,
+                      textColor: context.backgroundColor,
+                      text: "Delete Guests",
+                      onClick: () {},
+                    ),
+                  ],
+                ],
+              ),
+            )
+          : null,
       body: Container(
         height: context.deviceHeight,
         width: context.deviceWidth,
@@ -62,84 +78,61 @@ class InvitationLinkScreen extends StatelessWidget {
               width: double.infinity,
               alignment: Alignment.center,
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomText(
-                    text: "https://mj.url/invite/12345",
-                    weight: FontWeight.w500,
-                    color: ThemeColors.contentPrimary,
-                    size: 16,
+                  Expanded(
+                    child: CustomText(
+                      text: activeLink.inviteUrl!,
+                      weight: FontWeight.w500,
+                      color: context.contentLink,
+                      size: 13,
+                    ),
                   ),
 
                   IconBuilder(
                     iconPath: AppImage.copyIcon,
                     size: 14,
                     onTapped: () {
-                      // Get.toNamed(AppRouter.guestDetailsView);
+                      HelperFunctions.copyToClipboard(
+                        item: activeLink.inviteUrl!,
+                      );
                     },
                   ),
                 ],
               ),
             ),
-            AppHeaderText(label: "Guests"),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.only(bottom: 100, top: 15),
-              itemBuilder: (cxt, index) => GuestInvitationItemBox(),
-              separatorBuilder: (_, __) => 10.verticalSpace,
-              itemCount: 3,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class GuestInvitationItemBox extends StatelessWidget {
-  const GuestInvitationItemBox({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 72,
-      width: double.infinity,
-      alignment: Alignment.center,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomText(
-                text: "Sarah Jones",
-                weight: FontWeight.w500,
-                color: ThemeColors.contentPrimary,
-                size: 16,
+            if (activeLink.guests?.isNotEmpty ?? false) ...[
+              AppHeaderText(label: "Guests"),
+              ListView.separated(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.only(bottom: 100, top: 15),
+                itemBuilder: (cxt, index) => GuestInvitationItemBox(
+                  guestInfo: activeLink.guests![index],
+                ),
+                separatorBuilder: (_, __) => 10.verticalSpace,
+                itemCount: activeLink.guests!.length,
               ),
-              CustomText(
-                text: "sarah.jones@email.com",
-                color: ThemeColors.contentTertiary,
-              ),
-              CustomText(
-                text: "555-123-4567",
-                color: ThemeColors.contentTertiary,
+            ] else ...[
+              Expanded(
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomText(
+                        text: "No guest added yet.",
+                        size: 16,
+                        weight: FontWeight.w600,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
-          ),
-          10.horizontalSpace,
-          IconBuilder(
-            iconPath: AppImage.deleteIcon,
-            size: 14,
-            onTapped: () {
-              // Get.toNamed(AppRouter.guestDetailsView);
-            },
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -30,6 +30,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     state = state.copyWith(
       activeTab: data["activeTab"],
       selectedLinkType: data["selectedLinkType"],
+      activeInviteLink: data["activeInviteLink"],
     );
   }
 
@@ -205,6 +206,8 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       state = state.copyWith(isGeneratingLink: false);
     }
   }
+
+  deleteGuest({required GuestResponse guestInfo}) async {}
 }
 
 void _showError(BuildContext context, String message) {
@@ -223,6 +226,8 @@ class DashboardState {
   final bool? isGeneratingLink;
   final PaginatedInvitationLinkResponse? invitationLinks;
   final String? selectedLinkType;
+  final InvitationLinkResponse? activeInviteLink;
+  final List<InvitationLinkResponse>? selectedLinks;
 
   DashboardState({
     this.activeTab = "Links",
@@ -232,6 +237,8 @@ class DashboardState {
     this.invitationLinks,
     this.selectedLinkType,
     this.isGeneratingLink,
+    this.activeInviteLink,
+    this.selectedLinks,
   });
 
   DashboardState copyWith({
@@ -243,6 +250,8 @@ class DashboardState {
     String? selectedLinkType,
     String? clearLinkGen,
     bool? isGeneratingLink,
+    InvitationLinkResponse? activeInviteLink,
+    List<InvitationLinkResponse>? selectedLinks,
   }) {
     return DashboardState(
       activeTab: activeTab ?? this.activeTab,
@@ -254,6 +263,8 @@ class DashboardState {
           ? null
           : selectedLinkType ?? this.selectedLinkType,
       isGeneratingLink: isGeneratingLink ?? this.isGeneratingLink,
+      activeInviteLink: activeInviteLink ?? this.activeInviteLink,
+      selectedLinks: selectedLinks ?? this.selectedLinks,
     );
   }
 }
