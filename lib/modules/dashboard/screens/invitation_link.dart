@@ -11,6 +11,7 @@ import 'package:event_handler/cores/widgets/custom_text.dart';
 import 'package:event_handler/cores/widgets/rydmie_button.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
 import 'package:event_handler/modules/dashboard/provider/dashboard_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -28,112 +29,302 @@ class InvitationLinkScreen extends ConsumerWidget {
     final InvitationLinkResponse activeLink = state.activeInviteLink!;
     final bool canAddGuest =
         activeLink.guestsRegistered! < activeLink.guestSize!;
+    final bool isDeleting = state.isDeletingGuest ?? false;
 
     return Scaffold(
       appBar: AppBar(
-        title: AppHeaderText(label: "Invitation Link"),
+        title: const AppHeaderText(label: "Invitation Link"),
         centerTitle: true,
       ),
-      bottomSheet: (activeLink.guests?.isNotEmpty ?? false)
-          ? AppFooterBox(
-              child: Column(
-                children: [
-                  if (canAddGuest)
-                    EventButton(
-                      width: double.infinity,
-                      textColor: context.contentSecondary,
-                      fillColor: context.contentPrimary,
-                      text: "Add New Guest",
-                      onClick: () {
-                        Get.toNamed(AppRouter.addGuestView);
-                      },
+
+      /// Animated Bottom Sheet
+      bottomSheet: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 350),
+            transitionBuilder: (child, anim) => SizeTransition(
+              sizeFactor: anim,
+              axisAlignment: -1,
+              child: child,
+            ),
+            child: isDeleting
+                ? Container(
+                    key: const ValueKey("deleting"),
+                    color: context.backgroundColor,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CupertinoActivityIndicator(
+                          color: context.contentSecondary,
+                          radius: 15,
+                        ),
+                      ],
+                    ).paddingOnly(bottom: 30),
+                  )
+                : AppFooterBox(
+                    key: const ValueKey("footer"),
+                    child: Column(
+                      children: [
+                        if (canAddGuest)
+                          EventButton(
+                            width: double.infinity,
+                            textColor: context.contentSecondary,
+                            fillColor: context.contentPrimary,
+                            text: "Add New Guest",
+                            onClick: () {
+                              Get.toNamed(AppRouter.addGuestView);
+                            },
+                          ),
+                        if (state.selectedLinks?.isNotEmpty ?? false) ...[
+                          8.verticalSpace,
+                          EventButton(
+                            width: double.infinity,
+                            fillColor: context.contentNegative,
+                            textColor: context.backgroundColor,
+                            text: "Delete Guests",
+                            onClick: () {},
+                          ),
+                        ],
+                      ],
                     ),
-                  if (state.selectedLinks?.isNotEmpty ?? false) ...[
-                    8.verticalSpace,
-                    EventButton(
-                      width: double.infinity,
-                      fillColor: context.contentNegative,
-                      textColor: context.backgroundColor,
-                      text: "Delete Guests",
-                      onClick: () {},
-                    ),
-                  ],
-                ],
-              ),
-            )
-          : null,
+                  ),
+          ),
+        ],
+      ),
+
       body: Container(
         height: context.deviceHeight,
         width: context.deviceWidth,
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: AppConstants.pageHorizontalPadding,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             10.verticalSpace,
-            AppHeaderText(label: "Link"),
-            Container(
-              height: 72,
-              width: double.infinity,
-              alignment: Alignment.center,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: CustomText(
-                      text: activeLink.inviteUrl!,
-                      weight: FontWeight.w500,
-                      color: context.contentLink,
-                      size: 13,
-                    ),
-                  ),
+            const AppHeaderText(label: "Link"),
 
-                  IconBuilder(
-                    iconPath: AppImage.copyIcon,
-                    size: 14,
-                    onTapped: () {
-                      HelperFunctions.copyToClipboard(
-                        item: activeLink.inviteUrl!,
-                      );
-                    },
-                  ),
-                ],
+            /// Invitation link with fade animation
+            AnimatedOpacity(
+              opacity: activeLink.inviteUrl?.isNotEmpty ?? false ? 1 : 0,
+              duration: const Duration(milliseconds: 400),
+              child: Container(
+                height: 72,
+                width: double.infinity,
+                alignment: Alignment.center,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: CustomText(
+                        text: activeLink.inviteUrl!,
+                        weight: FontWeight.w500,
+                        color: context.contentLink,
+                        size: 13,
+                      ),
+                    ),
+                    IconBuilder(
+                      iconPath: AppImage.copyIcon,
+                      size: 14,
+                      onTapped: () {
+                        HelperFunctions.copyToClipboard(
+                          item: activeLink.inviteUrl!,
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
-            if (activeLink.guests?.isNotEmpty ?? false) ...[
-              AppHeaderText(label: "Guests"),
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.only(bottom: 100, top: 15),
-                itemBuilder: (cxt, index) => GuestInvitationItemBox(
-                  guestInfo: activeLink.guests![index],
-                ),
-                separatorBuilder: (_, __) => 10.verticalSpace,
-                itemCount: activeLink.guests!.length,
-              ),
-            ] else ...[
-              Expanded(
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomText(
-                        text: "No guest added yet.",
-                        size: 16,
-                        weight: FontWeight.w600,
+
+            /// Guests Section with AnimatedSwitcher
+            Expanded(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 400),
+                transitionBuilder: (child, anim) => SlideTransition(
+                  position:
+                      Tween<Offset>(
+                        begin: const Offset(0.1, 0.1),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(parent: anim, curve: Curves.easeOut),
                       ),
-                    ],
-                  ),
+                  child: FadeTransition(opacity: anim, child: child),
                 ),
+                child: (activeLink.guests?.isNotEmpty ?? false)
+                    ? Column(
+                        key: const ValueKey("guests"),
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const AppHeaderText(label: "Guests"),
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsets.only(
+                              bottom: 100,
+                              top: 15,
+                            ),
+                            itemBuilder: (cxt, index) => GuestInvitationItemBox(
+                              guestInfo: activeLink.guests![index],
+                            ),
+                            separatorBuilder: (_, __) => 10.verticalSpace,
+                            itemCount: activeLink.guests!.length,
+                          ),
+                        ],
+                      )
+                    : Center(
+                        key: const ValueKey("noGuests"),
+                        child: CustomText(
+                          text: "No guest added yet.",
+                          size: 16,
+                          weight: FontWeight.w600,
+                        ),
+                      ),
               ),
-            ],
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+///
+///
+///
+///
+// class InvitationLinkScreen extends ConsumerWidget {
+//   const InvitationLinkScreen({super.key});
+//
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     final state = ref.watch(dashboardProvider);
+//     final notifier = ref.read(dashboardProvider.notifier);
+//     final InvitationLinkResponse activeLink = state.activeInviteLink!;
+//     final bool canAddGuest =
+//         activeLink.guestsRegistered! < activeLink.guestSize!;
+//     final bool isDeleting = state.isDeletingGuest ?? false;
+//
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: AppHeaderText(label: "Invitation Link"),
+//         centerTitle: true,
+//       ),
+//       bottomSheet: isDeleting
+//           ? Container(
+//               color: context.backgroundColor,
+//               child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.center,
+//                 children: [
+//                   CupertinoActivityIndicator(
+//                     color: context.contentSecondary,
+//                     radius: 15,
+//                   ),
+//                 ],
+//               ).paddingOnly(bottom: 30),
+//             )
+//           : (activeLink.guests?.isNotEmpty ?? false)
+//           ? AppFooterBox(
+//               child: Column(
+//                 children: [
+//                   if (canAddGuest)
+//                     EventButton(
+//                       width: double.infinity,
+//                       textColor: context.contentSecondary,
+//                       fillColor: context.contentPrimary,
+//                       text: "Add New Guest",
+//                       onClick: () {
+//                         Get.toNamed(AppRouter.addGuestView);
+//                       },
+//                     ),
+//                   if (state.selectedLinks?.isNotEmpty ?? false) ...[
+//                     8.verticalSpace,
+//                     EventButton(
+//                       width: double.infinity,
+//                       fillColor: context.contentNegative,
+//                       textColor: context.backgroundColor,
+//                       text: "Delete Guests",
+//                       onClick: () {},
+//                     ),
+//                   ],
+//                 ],
+//               ),
+//             )
+//           : null,
+//       body: Container(
+//         height: context.deviceHeight,
+//         width: context.deviceWidth,
+//         padding: EdgeInsets.symmetric(
+//           horizontal: AppConstants.pageHorizontalPadding,
+//         ),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             10.verticalSpace,
+//             AppHeaderText(label: "Link"),
+//             Container(
+//               height: 72,
+//               width: double.infinity,
+//               alignment: Alignment.center,
+//               child: Row(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Expanded(
+//                     child: CustomText(
+//                       text: activeLink.inviteUrl!,
+//                       weight: FontWeight.w500,
+//                       color: context.contentLink,
+//                       size: 13,
+//                     ),
+//                   ),
+//
+//                   IconBuilder(
+//                     iconPath: AppImage.copyIcon,
+//                     size: 14,
+//                     onTapped: () {
+//                       HelperFunctions.copyToClipboard(
+//                         item: activeLink.inviteUrl!,
+//                       );
+//                     },
+//                   ),
+//                 ],
+//               ),
+//             ),
+//             if (activeLink.guests?.isNotEmpty ?? false) ...[
+//               AppHeaderText(label: "Guests"),
+//               ListView.separated(
+//                 shrinkWrap: true,
+//                 physics: const NeverScrollableScrollPhysics(),
+//                 padding: EdgeInsets.only(bottom: 100, top: 15),
+//                 itemBuilder: (cxt, index) => GuestInvitationItemBox(
+//                   guestInfo: activeLink.guests![index],
+//                 ),
+//                 separatorBuilder: (_, __) => 10.verticalSpace,
+//                 itemCount: activeLink.guests!.length,
+//               ),
+//             ] else ...[
+//               Expanded(
+//                 child: SizedBox(
+//                   width: double.infinity,
+//                   child: Column(
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     children: [
+//                       CustomText(
+//                         text: "No guest added yet.",
+//                         size: 16,
+//                         weight: FontWeight.w600,
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

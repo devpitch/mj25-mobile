@@ -50,7 +50,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       )!.text.trim();
 
       if (number.isEmpty || password.isEmpty) {
-        RydmieAlert.showWarning(context, message: "Please fill in all fields");
+        EventAlert.showWarning(context, message: "Please fill in all fields");
         return;
       }
 
@@ -63,7 +63,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
       if (response != null) {
         Get.toNamed(AppRouter.dashboardView);
-        RydmieAlert.showSuccess(context, message: "Login Successful");
+        EventAlert.showSuccess(context, message: "Login Successful");
         getMe();
       }
     } catch (e) {

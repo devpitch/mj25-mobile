@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 const kFlushBarDuration = 4;
 
-class RydmieAlert {
-  RydmieAlert._();
+class EventAlert {
+  EventAlert._();
 
   static Flushbar<dynamic>? _currentFlushbar;
 

@@ -198,7 +198,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
         String message = response["message"] ?? "Link generated successfully";
         getInvitationLinks(showLoader: false);
         Navigator.pop(context);
-        RydmieAlert.showSuccess(context, message: message);
+        EventAlert.showSuccess(context, message: message);
       }
     } catch (e) {
       log(":::: There is an error during link generation :::: $e");
@@ -207,11 +207,34 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     }
   }
 
-  deleteGuest({required GuestResponse guestInfo}) async {}
+  deleteGuest(BuildContext context, {required GuestResponse guestInfo}) async {
+    try {
+      state = state.copyWith(isDeletingGuest: true);
+      final response = await _service.deleteGuest(guestInfo.id!);
+
+      if (response != null) {
+        EventAlert.showSuccess(context, message: "Guest deleted successfully");
+        getInvitationLinks(showLoader: false);
+        _removeGuestFromList(guestInfo);
+      }
+    } catch (e) {
+      log(":::: There is an error during guest deletion :::: $e");
+    } finally {
+      state = state.copyWith(isDeletingGuest: false);
+    }
+  }
+
+  _removeGuestFromList(GuestResponse guestInfo) {
+    final currentList = state.activeInviteLink;
+
+    currentList?.guests?.remove(guestInfo);
+
+    state = state.copyWith(activeInviteLink: currentList);
+  }
 }
 
 void _showError(BuildContext context, String message) {
-  RydmieAlert.showWarning(context, message: message);
+  EventAlert.showWarning(context, message: message);
 }
 
 final dashboardProvider = StateNotifierProvider(
@@ -228,6 +251,7 @@ class DashboardState {
   final String? selectedLinkType;
   final InvitationLinkResponse? activeInviteLink;
   final List<InvitationLinkResponse>? selectedLinks;
+  final bool? isDeletingGuest;
 
   DashboardState({
     this.activeTab = "Links",
@@ -239,6 +263,7 @@ class DashboardState {
     this.isGeneratingLink,
     this.activeInviteLink,
     this.selectedLinks,
+    this.isDeletingGuest,
   });
 
   DashboardState copyWith({
@@ -252,6 +277,7 @@ class DashboardState {
     bool? isGeneratingLink,
     InvitationLinkResponse? activeInviteLink,
     List<InvitationLinkResponse>? selectedLinks,
+    bool? isDeletingGuest,
   }) {
     return DashboardState(
       activeTab: activeTab ?? this.activeTab,
@@ -265,6 +291,7 @@ class DashboardState {
       isGeneratingLink: isGeneratingLink ?? this.isGeneratingLink,
       activeInviteLink: activeInviteLink ?? this.activeInviteLink,
       selectedLinks: selectedLinks ?? this.selectedLinks,
+      isDeletingGuest: isDeletingGuest ?? this.isDeletingGuest,
     );
   }
 }

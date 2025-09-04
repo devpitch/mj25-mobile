@@ -31,4 +31,13 @@ class DashboardService {
       return null;
     }
   }
+
+  Future deleteGuest(String guestId) async {
+    try {
+      return await _repo.deleteGuest(guestId);
+    } catch (e) {
+      log(":::: This is the error from deleting guest:::: $e");
+      return null;
+    }
+  }
 }

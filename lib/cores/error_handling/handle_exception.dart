@@ -53,7 +53,7 @@ Future<dynamic> handleException(
   title = kErrorString;
   description = exception.message ?? kGenericErrorString;
   log(":::::: The exception is 4");
-  RydmieAlert.showError(context, title: title, message: description);
+  EventAlert.showError(context, title: title, message: description);
   log(":::::: The exception is 5");
   throw exception;
   // return null;

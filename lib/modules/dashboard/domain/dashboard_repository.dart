@@ -6,6 +6,7 @@ import 'package:event_handler/cores/error_handling/handle_query_result.dart';
 import 'package:event_handler/cores/network/client/api_client.dart';
 import 'package:event_handler/cores/network/client/graphql/__generated/mutation.graphql.dart';
 import 'package:event_handler/cores/network/client/graphql/__generated/query.graphql.dart';
+import 'package:event_handler/cores/network/client/graphql/__generated/schema.graphql.dart';
 import 'package:event_handler/cores/network/models/DataHolder.dart';
 import 'package:event_handler/modules/dashboard/models/request/create_invitation_link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
@@ -18,6 +19,8 @@ abstract class DashboardRepository {
   });
 
   Future createInvitationLink(CreateInvitationLinkRequestModel request);
+
+  Future deleteGuest(String id);
   // Future<UploadUrlResponse?> getSelfieUploadUrl();
 }
 
@@ -73,5 +76,28 @@ class DashboardRepositoryImpl implements DashboardRepository {
     }
 
     return null;
+  }
+
+  @override
+  deleteGuest(String guestId) async {
+    final response = await handleQueryResult(
+      queryBuilder: () => _client.client.mutate$deleteGuest(
+        Options$Mutation$deleteGuest(
+          variables: Variables$Mutation$deleteGuest(
+            input: Input$DeleteGuestInput.fromJson({"_id": guestId}),
+          ),
+        ),
+      ),
+    );
+
+    log(
+      "::::Response from delete guest link :::: ${response.parsedData?.toJson()}",
+    );
+
+    // if (response.parsedData?.toJson() != null) {
+    //   return response.parsedData?.toJson()['generateInviteLink'];
+    // }
+    //
+    // return null;
   }
 }

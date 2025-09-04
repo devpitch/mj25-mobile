@@ -51,7 +51,7 @@ class GuestInvitationItemBox extends StatelessWidget {
             onTapped: () {
               genRef!
                   .read(dashboardProvider.notifier)
-                  .deleteGuest(guestInfo: guestInfo);
+                  .deleteGuest(context, guestInfo: guestInfo);
               // Get.toNamed(AppRouter.guestDetailsView);
             },
           ),
