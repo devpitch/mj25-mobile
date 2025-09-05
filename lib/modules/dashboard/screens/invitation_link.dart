@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:event_handler/config/route/route_mapping.dart';
 import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/utils/assets_mangment.dart';
@@ -28,8 +30,10 @@ class InvitationLinkScreen extends ConsumerWidget {
     final notifier = ref.read(dashboardProvider.notifier);
     final InvitationLinkResponse activeLink = state.activeInviteLink!;
     final bool canAddGuest =
-        activeLink.guestsRegistered! < activeLink.guestSize!;
+        (activeLink.guests?.length ?? 0) < activeLink.guestSize!;
     final bool isDeleting = state.isDeletingGuest ?? false;
+
+    log("::: This is the active link ::: ${activeLink.guestSize}");
 
     return Scaffold(
       appBar: AppBar(
@@ -38,60 +42,80 @@ class InvitationLinkScreen extends ConsumerWidget {
       ),
 
       /// Animated Bottom Sheet
-      bottomSheet: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 350),
-            transitionBuilder: (child, anim) => SizeTransition(
-              sizeFactor: anim,
-              axisAlignment: -1,
-              child: child,
-            ),
-            child: isDeleting
-                ? Container(
-                    key: const ValueKey("deleting"),
-                    color: context.backgroundColor,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CupertinoActivityIndicator(
-                          color: context.contentSecondary,
-                          radius: 15,
-                        ),
-                      ],
-                    ).paddingOnly(bottom: 30),
-                  )
-                : AppFooterBox(
-                    key: const ValueKey("footer"),
-                    child: Column(
-                      children: [
-                        if (canAddGuest)
-                          EventButton(
-                            width: double.infinity,
-                            textColor: context.contentSecondary,
-                            fillColor: context.contentPrimary,
-                            text: "Add New Guest",
-                            onClick: () {
-                              notifier.initiateAddNewGuest();
-                              Get.toNamed(AppRouter.addGuestView);
-                            },
-                          ),
-                        if (state.selectedLinks?.isNotEmpty ?? false) ...[
-                          8.verticalSpace,
-                          EventButton(
-                            width: double.infinity,
-                            fillColor: context.contentNegative,
-                            textColor: context.backgroundColor,
-                            text: "Delete Guests",
-                            onClick: () {},
+      bottomSheet: Container(
+        color: context.backgroundColor,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 350),
+              transitionBuilder: (child, anim) => SizeTransition(
+                sizeFactor: anim,
+                axisAlignment: -1,
+                child: child,
+              ),
+              child: isDeleting
+                  ? Container(
+                      key: const ValueKey("deleting"),
+                      color: context.backgroundColor,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CupertinoActivityIndicator(
+                            color: context.contentSecondary,
+                            radius: 15,
                           ),
                         ],
-                      ],
+                      ).paddingOnly(bottom: 30),
+                    )
+                  : AppFooterBox(
+                      key: const ValueKey("footer"),
+                      child: Column(
+                        children: [
+                          if (canAddGuest)
+                            EventButton(
+                              width: double.infinity,
+                              textColor: context.contentSecondary,
+                              fillColor: context.contentPrimary,
+                              text: "Add New Guest",
+                              onClick: () {
+                                ref
+                                        .read(
+                                          globalBuildContextProvider.notifier,
+                                        )
+                                        .state =
+                                    context;
+                                notifier.initiateAddNewGuest();
+                                Get.toNamed(AppRouter.addGuestView);
+                              },
+                            ),
+                          if (state.selectedGuests?.isNotEmpty ?? false) ...[
+                            8.verticalSpace,
+                            EventButton(
+                              width: double.infinity,
+                              fillColor: context.contentNegative,
+                              textColor: context.backgroundColor,
+                              text: "Delete Guests",
+                              onClick: () {
+                                ref
+                                        .read(
+                                          globalBuildContextProvider.notifier,
+                                        )
+                                        .state =
+                                    context;
+                                notifier.openSheet(
+                                  context: context,
+                                  type: "deleteGuests",
+                                );
+                              },
+                            ),
+                          ],
+                        ],
+                      ),
                     ),
-                  ),
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
 
       body: Container(

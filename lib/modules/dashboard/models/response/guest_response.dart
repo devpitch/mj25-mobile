@@ -76,4 +76,10 @@ class GuestResponse {
       '__typename': typename,
     };
   }
+
+  @override
+  bool operator ==(covariant GuestResponse other) => other.id == id;
+
+  @override
+  int get hashCode => id.hashCode;
 }

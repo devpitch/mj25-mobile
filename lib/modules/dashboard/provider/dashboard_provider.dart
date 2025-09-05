@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'package:event_handler/config/route/route_mapping.dart';
 import 'package:event_handler/cores/providers/text_controllers.dart';
+import 'package:event_handler/cores/utils/custom_dialog.dart';
 import 'package:event_handler/cores/utils/image_service.dart';
 import 'package:event_handler/cores/utils/rydmie_alerts.dart';
 import 'package:event_handler/cores/utils/text_controller_strings.dart';
@@ -24,6 +25,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../cores/utils/constants.dart' show globalBuildContextProvider;
 import '../widgets/dashboard_widgets_exporter.dart';
 
 class DashboardNotifier extends StateNotifier<DashboardState> {
@@ -106,7 +108,11 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     }
   }
 
-  openSheet({required BuildContext context, required String type}) async {
+  openSheet({
+    required BuildContext context,
+    required String type,
+    dynamic value,
+  }) async {
     try {
       switch (type) {
         case "generateLink":
@@ -132,6 +138,16 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
               context,
               title: "Tag Guests",
               child: GuestListSheet(),
+            );
+            break;
+          }
+        case "confirmDelete":
+        case "deleteGuests":
+          {
+            showCustomDialog(
+              context,
+              child: ConfirmGuestDeleteBox(guestInfo: value as GuestResponse?),
+              allowDismissal: false,
             );
             break;
           }
@@ -212,20 +228,34 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     }
   }
 
-  deleteGuest(BuildContext context, {required GuestResponse guestInfo}) async {
+  deleteGuest(
+    BuildContext context, {
+    required GuestResponse guestInfo,
+    bool fromList = false,
+  }) async {
     try {
-      state = state.copyWith(isDeletingGuest: true);
+      if (!fromList) {
+        state = state.copyWith(isDeletingGuest: true);
+      }
+
       final response = await _service.deleteGuest(guestInfo.id!);
 
       if (response != null) {
-        EventAlert.showSuccess(context, message: "Guest deleted successfully");
-        getInvitationLinks(showLoader: false);
+        if (!fromList) {
+          EventAlert.showSuccess(
+            genRef!.read(globalBuildContextProvider) ?? context,
+            message: "Guest deleted successfully",
+          );
+          getInvitationLinks(showLoader: false);
+        }
         _removeGuestFromList(guestInfo);
       }
     } catch (e) {
       log(":::: There is an error during guest deletion :::: $e");
     } finally {
-      state = state.copyWith(isDeletingGuest: false);
+      if (!fromList) {
+        state = state.copyWith(isDeletingGuest: false);
+      }
     }
   }
 
@@ -357,9 +387,40 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     getTextController(TextControllerStrings.phoneNumber)!.clear();
     state = state.copyWith(clearAddGuest: "yes");
   }
+
+  updateSelectedGuest(String guestId) {
+    final currentList = state.selectedGuests ?? [];
+    if (currentList.contains(guestId) ?? false) {
+      currentList.remove(guestId);
+    } else {
+      currentList.add(guestId);
+    }
+    log(":::: currentList is ::: ::: $currentList");
+    state = state.copyWith(selectedGuests: currentList);
+  }
+
+  deleteGuests(BuildContext context) async {
+    try {
+      state = state.copyWith(isDeletingGuest: true);
+      List<String> guestIds = state.selectedGuests ?? [];
+
+      for (String guestId in guestIds) {
+        await deleteGuest(
+          context,
+          guestInfo: GuestResponse(id: guestId),
+          fromList: guestIds.last != guestId,
+        );
+      }
+      state = state.copyWith(selectedGuests: []);
+    } catch (e) {
+      log(":::: There is an error during guest deletion :::: $e");
+    } finally {
+      state = state.copyWith(isDeletingGuest: false);
+    }
+  }
 }
 
-void _showError(BuildContext context, String message) {
+void _showError(BuildContext context, String message) async {
   EventAlert.showWarning(context, message: message);
 }
 
@@ -376,7 +437,7 @@ class DashboardState {
   final PaginatedInvitationLinkResponse? invitationLinks;
   final String? selectedLinkType;
   final InvitationLinkResponse? activeInviteLink;
-  final List<InvitationLinkResponse>? selectedLinks;
+  final List<String>? selectedGuests;
   final bool? isDeletingGuest;
   final bool? isAddingGuest;
   final DropdownItem? selectedTitle;
@@ -390,7 +451,7 @@ class DashboardState {
     this.selectedLinkType,
     this.isGeneratingLink,
     this.activeInviteLink,
-    this.selectedLinks,
+    this.selectedGuests,
     this.isDeletingGuest,
     this.selectedTitle,
     this.isAddingGuest,
@@ -406,7 +467,7 @@ class DashboardState {
     String? clearLinkGen,
     bool? isGeneratingLink,
     InvitationLinkResponse? activeInviteLink,
-    List<InvitationLinkResponse>? selectedLinks,
+    List<String>? selectedGuests,
     bool? isDeletingGuest,
     DropdownItem? selectedTitle,
     String? clearAddGuest,
@@ -423,7 +484,7 @@ class DashboardState {
           : selectedLinkType ?? this.selectedLinkType,
       isGeneratingLink: isGeneratingLink ?? this.isGeneratingLink,
       activeInviteLink: activeInviteLink ?? this.activeInviteLink,
-      selectedLinks: selectedLinks ?? this.selectedLinks,
+      selectedGuests: selectedGuests ?? this.selectedGuests,
       isDeletingGuest: isDeletingGuest ?? this.isDeletingGuest,
       selectedTitle: clearAddGuest == "yes"
           ? null

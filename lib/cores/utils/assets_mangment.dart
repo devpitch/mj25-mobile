@@ -20,5 +20,7 @@ class AppImage {
   static const String deleteIcon = "${svgBaseUrl}delete.svg";
   static const String uploadIcon = "${svgBaseUrl}upload.svg";
   static const String searchIcon = "${svgBaseUrl}search.svg";
+  static const String caution = "${svgBaseUrl}caution.svg";
+  static const String filter = "${svgBaseUrl}filter.svg";
   static const String attendanceIcon = "${svgBaseUrl}attendance.svg";
 }
