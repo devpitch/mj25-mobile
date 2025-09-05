@@ -11,7 +11,9 @@ import 'package:event_handler/cores/network/models/DataHolder.dart';
 import 'package:event_handler/modules/dashboard/models/request/add_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/create_invitation_link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
+import 'package:event_handler/modules/dashboard/models/response/rsvp_model.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class DashboardRepository {
@@ -22,6 +24,8 @@ abstract class DashboardRepository {
   Future createInvitationLink(CreateInvitationLinkRequestModel request);
 
   Future<GuestResponse?> attachGuest(AddGuestRequestModel request);
+
+  Future<RsvpResponse?> rsvp(AddGuestRequestModel request);
 
   Future<GuestResponse?> deleteGuest(String id);
   // Future<UploadUrlResponse?> getSelfieUploadUrl();
@@ -122,6 +126,25 @@ class DashboardRepositoryImpl implements DashboardRepository {
       return GuestResponse.fromJson(
         response.parsedData?.toJson()['attachGuest'],
       );
+    }
+
+    return null;
+  }
+
+  @override
+  Future<RsvpResponse?> rsvp(AddGuestRequestModel request) async {
+    final response = await handleQueryResult(
+      queryBuilder: () => _client.client.mutate$rsvp(
+        Options$Mutation$rsvp(variables: request.toRscvVariables),
+      ),
+    );
+
+    log(
+      "::::Response from rsvp :::: ${jsonEncode(response.parsedData?.toJson())}",
+    );
+
+    if (response.parsedData?.toJson() != null) {
+      return RsvpResponse.fromJson(response.parsedData!.toJson());
     }
 
     return null;

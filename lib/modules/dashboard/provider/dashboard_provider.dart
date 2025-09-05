@@ -15,7 +15,9 @@ import 'package:event_handler/main.dart';
 import 'package:event_handler/modules/dashboard/models/request/add_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/create_invitation_link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
+import 'package:event_handler/modules/dashboard/models/response/rsvp_model.dart';
 import 'package:event_handler/modules/dashboard/models/upload_image_model.dart';
 import 'package:event_handler/modules/dashboard/services/dashboard_service.dart';
 import 'package:flutter/material.dart';
@@ -261,7 +263,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
 
       // Build request if inputs are valid
       final request = AddGuestRequestModel(
-        code: state.activeInviteLink!.code!,
+        code: state.activeInviteLink!.id!,
         guest: GuestInput(
           firstName: firstName,
           lastName: lastName,
@@ -271,11 +273,14 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
         ),
       );
 
-      final GuestResponse? response = await _service.attachGuest(request);
+      final RsvpResponse? response = await _service.rsvp(request);
 
       if (response != null) {
+        Navigator.pop(context);
         EventAlert.showSuccess(context, message: "Guest added successfully");
-        _attachGuestToList(response);
+        if (response.rsvp?.isNotEmpty ?? false) {
+          _attachGuestToList(response.rsvp!.first);
+        }
         getInvitationLinks(showLoader: false);
       }
     } catch (e) {
@@ -345,6 +350,11 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       TextControllerStrings.email,
       TextControllerStrings.phoneNumber,
     ]);
+
+    getTextController(TextControllerStrings.firstName)!.clear();
+    getTextController(TextControllerStrings.lastName)!.clear();
+    getTextController(TextControllerStrings.email)!.clear();
+    getTextController(TextControllerStrings.phoneNumber)!.clear();
     state = state.copyWith(clearAddGuest: "yes");
   }
 }

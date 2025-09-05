@@ -1,5 +1,6 @@
 import 'package:event_handler/cores/network/client/graphql/enums/link_status_enum.dart';
 import 'package:event_handler/cores/network/client/graphql/enums/link_type_enum.dart';
+import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 
 class PaginatedInvitationLinkResponse {
   final List<InvitationLinkResponse>? items;
@@ -95,80 +96,80 @@ class InvitationLinkResponse {
   }
 }
 
-class GuestResponse {
-  final String? id;
-  final String? invitationLinkId;
-  final String? phone;
-  final String? title;
-  final String? firstName;
-  final String? lastName;
-  final String? email;
-  final bool? isOnBoarded;
-  final bool? isInEvent;
-  final bool? isGifted;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-  final String? link;
-
-  GuestResponse({
-    this.id,
-    this.invitationLinkId,
-    this.phone,
-    this.title,
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.isOnBoarded,
-    this.isInEvent,
-    this.isGifted,
-    this.createdAt,
-    this.updatedAt,
-    this.link,
-  });
-
-  factory GuestResponse.fromJson(Map<String, dynamic> json) {
-    return GuestResponse(
-      id: json['_id'] as String?,
-      invitationLinkId: json['invitationLinkId'] as String?,
-      phone: json['phone'] as String?,
-      title: json['title'] as String?,
-      firstName: json['firstName'] as String?,
-      lastName: json['lastName'] as String?,
-      email: json['email'] as String?,
-      isOnBoarded: json['isOnBoarded'] as bool?,
-      isInEvent: json['isInEvent'] as bool?,
-      isGifted: json['isGifted'] as bool?,
-      createdAt: json['createdAt'] != null
-          ? DateTime.parse(json['createdAt'])
-          : null,
-      updatedAt: json['updatedAt'] != null
-          ? DateTime.parse(json['updatedAt'])
-          : null,
-      link: json['link'] as String?,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      '_id': id,
-      'invitationLinkId': invitationLinkId,
-      'phone': phone,
-      'title': title,
-      'firstName': firstName,
-      'lastName': lastName,
-      'email': email,
-      'isOnBoarded': isOnBoarded,
-      'isInEvent': isInEvent,
-      'isGifted': isGifted,
-      'createdAt': createdAt?.toIso8601String(),
-      'updatedAt': updatedAt?.toIso8601String(),
-      'link': link,
-    };
-  }
-
-  @override
-  bool operator ==(covariant GuestResponse other) => other.id == id;
-
-  @override
-  int get hashCode => id.hashCode;
-}
+// class GuestResponse {
+//   final String? id;
+//   final String? invitationLinkId;
+//   final String? phone;
+//   final String? title;
+//   final String? firstName;
+//   final String? lastName;
+//   final String? email;
+//   final bool? isOnBoarded;
+//   final bool? isInEvent;
+//   final bool? isGifted;
+//   final DateTime? createdAt;
+//   final DateTime? updatedAt;
+//   final String? link;
+//
+//   GuestResponse({
+//     this.id,
+//     this.invitationLinkId,
+//     this.phone,
+//     this.title,
+//     this.firstName,
+//     this.lastName,
+//     this.email,
+//     this.isOnBoarded,
+//     this.isInEvent,
+//     this.isGifted,
+//     this.createdAt,
+//     this.updatedAt,
+//     this.link,
+//   });
+//
+//   factory GuestResponse.fromJson(Map<String, dynamic> json) {
+//     return GuestResponse(
+//       id: json['_id'] as String?,
+//       invitationLinkId: json['invitationLinkId'] as String?,
+//       phone: json['phone'] as String?,
+//       title: json['title'] as String?,
+//       firstName: json['firstName'] as String?,
+//       lastName: json['lastName'] as String?,
+//       email: json['email'] as String?,
+//       isOnBoarded: json['isOnBoarded'] as bool?,
+//       isInEvent: json['isInEvent'] as bool?,
+//       isGifted: json['isGifted'] as bool?,
+//       createdAt: json['createdAt'] != null
+//           ? DateTime.parse(json['createdAt'])
+//           : null,
+//       updatedAt: json['updatedAt'] != null
+//           ? DateTime.parse(json['updatedAt'])
+//           : null,
+//       link: json['link'] as String?,
+//     );
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     return {
+//       '_id': id,
+//       'invitationLinkId': invitationLinkId,
+//       'phone': phone,
+//       'title': title,
+//       'firstName': firstName,
+//       'lastName': lastName,
+//       'email': email,
+//       'isOnBoarded': isOnBoarded,
+//       'isInEvent': isInEvent,
+//       'isGifted': isGifted,
+//       'createdAt': createdAt?.toIso8601String(),
+//       'updatedAt': updatedAt?.toIso8601String(),
+//       'link': link,
+//     };
+//   }
+//
+//   @override
+//   bool operator ==(covariant GuestResponse other) => other.id == id;
+//
+//   @override
+//   int get hashCode => id.hashCode;
+// }

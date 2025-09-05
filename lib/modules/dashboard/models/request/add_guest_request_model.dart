@@ -14,10 +14,24 @@ class AddGuestRequestModel {
     return {'code': code, 'guest': guest.toJson()};
   }
 
+  Map<String, dynamic> toRscvJson() {
+    return {
+      'invitationLinkId': code,
+      'guests': [guest.toJson()],
+    };
+  }
+
   Variables$Mutation$attachGuest get toVariables {
     log("::: The request is ::: ${jsonEncode(toJson())}");
     return Variables$Mutation$attachGuest(
       input: Input$AttachGuestInput.fromJson(toJson()),
+    );
+  }
+
+  Variables$Mutation$rsvp get toRscvVariables {
+    log("::: The request is ::: ${jsonEncode(toJson())}");
+    return Variables$Mutation$rsvp(
+      input: Input$CreateGuestInput.fromJson(toRscvJson()),
     );
   }
 }
