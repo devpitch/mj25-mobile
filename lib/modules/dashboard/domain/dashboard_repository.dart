@@ -13,6 +13,7 @@ import 'package:event_handler/modules/dashboard/models/request/create_invitation
 import 'package:event_handler/modules/dashboard/models/request/guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/guests_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/update_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
@@ -31,6 +32,8 @@ abstract class DashboardRepository {
   Future<RsvpResponse?> rsvp(AddGuestRequestModel request);
 
   Future<GuestResponse?> guest(GuestRequestModel request);
+
+  Future<GuestResponse?> updateGuest(UpdateGuestRequestModel request);
 
   Future<GuestsResponse?> guests(GuestsRequestModel request);
 
@@ -111,6 +114,27 @@ class DashboardRepositoryImpl implements DashboardRepository {
     if (response.parsedData?.toJson() != null) {
       return GuestResponse.fromJson(
         response.parsedData?.toJson()['deleteGuest'],
+      );
+    }
+
+    return null;
+  }
+
+  @override
+  Future<GuestResponse?> updateGuest(UpdateGuestRequestModel request) async {
+    final response = await handleQueryResult(
+      queryBuilder: () => _client.client.mutate$updateGuest(
+        Options$Mutation$updateGuest(variables: request.toVariables),
+      ),
+    );
+
+    log(
+      "::::Response from update guest link :::: ${response.parsedData?.toJson()}",
+    );
+
+    if (response.parsedData?.toJson() != null) {
+      return GuestResponse.fromJson(
+        response.parsedData?.toJson()['updateGuest'],
       );
     }
 

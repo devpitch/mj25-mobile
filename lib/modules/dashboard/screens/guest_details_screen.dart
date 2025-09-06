@@ -1,15 +1,19 @@
 import 'package:event_handler/config/theme/app_colors.dart';
 import 'package:event_handler/config/theme/app_theme.dart';
+import 'package:event_handler/cores/network/client/graphql/enums/user_type_enum.dart';
 import 'package:event_handler/cores/utils/assets_mangment.dart';
 import 'package:event_handler/cores/utils/constants.dart';
 import 'package:event_handler/cores/utils/extensions.dart';
 import 'package:event_handler/cores/utils/hex_color.dart';
 import 'package:event_handler/cores/utils/icon_builder.dart';
+import 'package:event_handler/cores/utils/rydmie_alerts.dart';
 import 'package:event_handler/cores/widgets/custom_text.dart';
 import 'package:event_handler/main.dart';
+import 'package:event_handler/modules/authentication/provider/auth_provider.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/provider/dashboard_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -80,7 +84,7 @@ class GuestDetailsScreen extends ConsumerWidget {
   }
 }
 
-class GuestDetailsItemBox extends StatelessWidget {
+class GuestDetailsItemBox extends HookWidget {
   final String label;
   final bool isSelected;
   const GuestDetailsItemBox({
@@ -91,11 +95,22 @@ class GuestDetailsItemBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isActive = useState(isSelected);
+    final userInfo = genRef!.read(authProvider).userInfo!;
+
     return GestureDetector(
       onTap: () {
+        if (userInfo.type != UserTypeEnum.SUPER_ADMIN && isActive.value) {
+          EventAlert.showWarning(
+            context,
+            message: "You are not authorized to perform this action.",
+          );
+          return;
+        }
         genRef!
             .read(dashboardProvider.notifier)
-            .updateGuestStatus(context, label);
+            .updateGuest(context, type: label, value: !isActive.value);
+        isActive.value = !isActive.value;
       },
       child: Container(
         height: 56,
@@ -107,13 +122,13 @@ class GuestDetailsItemBox extends StatelessWidget {
             CustomText(
               text: label,
               weight: FontWeight.w500,
-              color: isSelected
+              color: isActive.value
                   ? context.contentTertiary
                   : ThemeColors.contentPrimary,
               size: 16,
             ),
             IconBuilder(
-              iconPath: isSelected ? AppImage.checkTicked : AppImage.check,
+              iconPath: isActive.value ? AppImage.checkTicked : AppImage.check,
               size: 20,
             ),
           ],

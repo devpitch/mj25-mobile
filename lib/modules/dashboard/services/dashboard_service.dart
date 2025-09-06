@@ -6,6 +6,7 @@ import 'package:event_handler/modules/dashboard/models/request/create_invitation
 import 'package:event_handler/modules/dashboard/models/request/guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/guests_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/update_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
@@ -43,6 +44,15 @@ class DashboardService {
       return await _repo.deleteGuest(guestId);
     } catch (e) {
       log(":::: This is the error from deleting guest:::: $e");
+      return null;
+    }
+  }
+
+  Future<GuestResponse?> updateGuest(UpdateGuestRequestModel request) async {
+    try {
+      return await _repo.updateGuest(request);
+    } catch (e) {
+      log(":::: This is the error from updating guest:::: $e");
       return null;
     }
   }

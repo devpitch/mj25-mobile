@@ -78,6 +78,14 @@ mutation attachGuest($input: AttachGuestInput!) {
     }
 }
 
+mutation updateGuest($input: UpdateGuestInput!) {
+    updateGuest(input: $input) {
+        _id
+        isGifted
+        isInEvent
+        isOnBoarded
+    }
+}
 
 ### GROUP RENTAL ###
 

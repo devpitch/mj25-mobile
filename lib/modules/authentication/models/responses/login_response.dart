@@ -1,3 +1,5 @@
+import 'package:event_handler/cores/network/client/graphql/enums/user_type_enum.dart';
+
 class LoginResponse {
   final UserResponse? user;
   final TokenResponse? accessToken;
@@ -40,7 +42,7 @@ class UserResponse {
   final String? firstName;
   final String? lastName;
   final String? email;
-  final String? type;
+  final UserTypeEnum? type;
   final String? createdAt;
   final String? updatedAt;
   final String? typename;
@@ -64,7 +66,7 @@ class UserResponse {
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
       email: json['email'] as String?,
-      type: json['type'] as String?,
+      type: json['type'] != null ? userTypeEnumFromJson(json['type']) : null,
       createdAt: json['createdAt'] as String?,
       updatedAt: json['updatedAt'] as String?,
       typename: json['__typename'] as String?,
@@ -78,7 +80,7 @@ class UserResponse {
       'firstName': firstName,
       'lastName': lastName,
       'email': email,
-      'type': type,
+      'type': userTypeEnumToJson(type),
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       '__typename': typename,

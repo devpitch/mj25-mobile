@@ -21,6 +21,7 @@ import 'package:event_handler/modules/dashboard/models/request/create_invitation
 import 'package:event_handler/modules/dashboard/models/request/guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/guests_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/update_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/rsvp_model.dart';
@@ -344,6 +345,33 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       if (!fromList) {
         state = state.copyWith(isDeletingGuest: false);
       }
+    }
+  }
+
+  updateGuest(
+    BuildContext context, {
+    required String type,
+    required bool value,
+  }) async {
+    try {
+      UpdateGuestRequestModel requestModel = UpdateGuestRequestModel(
+        isGifted: type == "Gift Collected" ? value : null,
+        isInEvent: type == "Event Entrance" ? value : null,
+        isOnBoarded: type == "Bus Onboarded" ? value : null,
+        id: state.activeGuest!.id!,
+      );
+
+      final GuestResponse? response = await _service.updateGuest(requestModel);
+
+      if (response != null) {
+        EventAlert.showSuccess(
+          genRef!.read(globalBuildContextProvider) ?? context,
+          message: "Guest updated successfully",
+        );
+        getGuests(showLoader: false);
+      }
+    } catch (e) {
+      log(":::: There is an error during guest deletion :::: $e");
     }
   }
 
