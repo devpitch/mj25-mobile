@@ -18,6 +18,7 @@ class DashboardState {
   final InvitationLinkResponse? activeInviteLink;
   final List<String>? selectedGuests;
   final bool? isDeletingGuest;
+  final bool? loadingMoreGuests;
   final bool? isAddingGuest;
   // final DropdownItem? selectedTitle;
   final String? selectedFilterType;
@@ -81,6 +82,7 @@ class DashboardState {
     this.activeGuest,
     this.guestActionType,
     this.loadingMoreLinks,
+    this.loadingMoreGuests,
   });
 
   DashboardState copyWith({
@@ -124,6 +126,7 @@ class DashboardState {
     GuestResponse? activeGuest,
     String? guestActionType,
     bool? loadingMoreLinks,
+    bool? loadingMoreGuests,
   }) {
     return DashboardState(
       activeTab: activeTab ?? this.activeTab,
@@ -184,6 +187,7 @@ class DashboardState {
       activeGuest: activeGuest ?? this.activeGuest,
       guestActionType: guestActionType ?? this.guestActionType,
       loadingMoreLinks: loadingMoreLinks ?? this.loadingMoreLinks,
+      loadingMoreGuests: loadingMoreGuests ?? this.loadingMoreGuests,
     );
   }
 }

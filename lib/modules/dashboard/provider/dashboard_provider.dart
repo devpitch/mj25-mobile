@@ -153,23 +153,40 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     }
   }
 
-  getGuests({bool showLoader = true}) async {
+  getGuests({bool showLoader = true, bool nextPage = false}) async {
     try {
       if ((!showLoader && (state.guestList?.guests?.items?.isEmpty ?? false)) ||
           showLoader) {
-        state = state.copyWith(loadingGuests: true);
+        state = state.copyWith(
+          loadingGuests: true,
+          loadingMoreGuests: nextPage,
+        );
+      }
+
+      int page = 1;
+      if (nextPage) {
+        page = state.invitationLinks?.page ?? 1;
+        page++;
       }
 
       GuestsRequestModel request = GuestsRequestModel(
         limit: 50,
-        page: 1,
+        page: page,
         search: "",
       );
 
       final GuestsResponse? response = await _service.guests(request);
 
       if (response != null) {
-        state = state.copyWith(guestList: response);
+        if (nextPage) {
+          final currentList = state.guestList?.guests?.items ?? [];
+          currentList.addAll(response.guests?.items ?? []);
+          state = state.copyWith(
+            guestList: response.guests?.copyWith(items: currentList),
+          );
+        } else {
+          state = state.copyWith(guestList: response);
+        }
       }
     } catch (e) {
       log("There is an error from get guests flow::: e");

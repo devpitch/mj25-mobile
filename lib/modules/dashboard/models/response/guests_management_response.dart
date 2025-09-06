@@ -16,6 +16,10 @@ class GuestsResponse {
   Map<String, dynamic> toJson() {
     return {'guests': guests?.toJson()};
   }
+
+  GuestsResponse copyWith({GuestsData? guests}) {
+    return GuestsResponse(guests: guests ?? this.guests);
+  }
 }
 
 class GuestsData {
@@ -35,5 +39,9 @@ class GuestsData {
 
   Map<String, dynamic> toJson() {
     return {'items': items?.map((x) => x.toJson()).toList()};
+  }
+
+  copyWith({required List<GuestResponse> items}) {
+    return GuestsData(items: items);
   }
 }
