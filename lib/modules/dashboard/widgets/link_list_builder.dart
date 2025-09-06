@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/utils/assets_mangment.dart';
 import 'package:event_handler/cores/utils/icon_builder.dart';
@@ -7,7 +9,7 @@ import 'package:event_handler/main.dart';
 import 'package:event_handler/modules/dashboard/domain/constant.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
 import 'package:event_handler/modules/dashboard/provider/dashboard_provider.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,20 +24,45 @@ class LinkListBuilder extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.read(dashboardProvider.notifier);
     final state = ref.watch(dashboardProvider);
+
     final bool isLoading = state.loadingLinks ?? false;
     final bool appliedFilter = state.guestFilters?.keys.isNotEmpty ?? false;
+    final bool hasNextPage =
+        (state.invitationLinks?.items?.length ?? 0) % 50 == 0;
 
-    final List<InvitationLinkResponse> dataList = isLoading
+    final List<InvitationLinkResponse> dataList =
+        isLoading && (state.invitationLinks?.items?.isEmpty ?? true)
         ? dummyInvitationLinks
         : state.invitationLinks?.items ?? [];
 
+    // Scroll controller for pagination
+    final scrollController = useScrollController();
+
+    // Initial load
     useEffect(() {
       Future.microtask(() {
         if (dataList.isEmpty) {
           notifier.getInvitationLinks();
         }
       });
+      return null;
     }, []);
+
+    // Pagination listener
+    useEffect(() {
+      void scrollListener() {
+        if (scrollController.position.pixels >=
+                scrollController.position.maxScrollExtent - 200 &&
+            !(state.loadingMoreLinks ?? false) &&
+            hasNextPage) {
+          log(":::: you called pagination :::::::");
+          notifier.getInvitationLinks(nextPage: true);
+        }
+      }
+
+      scrollController.addListener(scrollListener);
+      return () => scrollController.removeListener(scrollListener);
+    }, [scrollController, state.loadingMoreLinks, hasNextPage]);
 
     return Column(
       children: [
@@ -100,12 +127,26 @@ class LinkListBuilder extends HookConsumerWidget {
             child: Skeletonizer(
               enabled: isLoading,
               child: ListView.separated(
-                shrinkWrap: true,
-                padding: EdgeInsets.only(bottom: 100, top: 15),
-                itemBuilder: (cxt, index) =>
-                    LinkItemBox(linkInfo: dataList[index]),
+                controller: scrollController,
+                padding: const EdgeInsets.only(bottom: 100, top: 15),
+                itemBuilder: (cxt, index) {
+                  if (index == dataList.length &&
+                      (state.loadingMoreLinks ?? false)) {
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        child: CupertinoActivityIndicator(
+                          color: context.contentPrimary,
+                        ),
+                      ),
+                    );
+                  }
+                  return LinkItemBox(linkInfo: dataList[index]);
+                },
                 separatorBuilder: (_, __) => 10.verticalSpace,
-                itemCount: dataList.length,
+                itemCount:
+                    dataList.length +
+                    ((state.loadingMoreLinks ?? false) ? 1 : 0),
               ),
             ),
           ),
@@ -113,3 +154,105 @@ class LinkListBuilder extends HookConsumerWidget {
     );
   }
 }
+
+///
+///
+///
+// class LinkListBuilder extends HookConsumerWidget {
+//   const LinkListBuilder({super.key});
+//
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     final notifier = ref.read(dashboardProvider.notifier);
+//     final state = ref.watch(dashboardProvider);
+//     final bool isLoading = state.loadingLinks ?? false;
+//     final bool appliedFilter = state.guestFilters?.keys.isNotEmpty ?? false;
+//
+//     final List<InvitationLinkResponse> dataList = isLoading
+//         ? dummyInvitationLinks
+//         : state.invitationLinks?.items ?? [];
+//
+//     useEffect(() {
+//       Future.microtask(() {
+//         if (dataList.isEmpty) {
+//           notifier.getInvitationLinks();
+//         }
+//       });
+//     }, []);
+//
+//     return Column(
+//       children: [
+//         10.verticalSpace,
+//         Row(
+//           children: [
+//             Flexible(
+//               child: EventButton(
+//                 width: double.infinity,
+//                 fillColor: context.contentSecondary,
+//                 textColor: context.contentPrimary,
+//                 text: "Generate Invitation Link",
+//                 onClick: () {
+//                   genRef!
+//                       .read(dashboardProvider.notifier)
+//                       .openSheet(context: context, type: "generateLink");
+//                 },
+//               ),
+//             ),
+//             12.horizontalSpace,
+//             IconBuilder(
+//               iconPath: AppImage.filter,
+//               size: 40,
+//               color: context.contentSecondary,
+//               onTapped: () {
+//                 genRef!
+//                     .read(dashboardProvider.notifier)
+//                     .openSheet(context: context, type: "filter");
+//               },
+//             ),
+//           ],
+//         ),
+//         if (dataList.isEmpty && !isLoading)
+//           Expanded(
+//             child: Column(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 IconBuilder(iconPath: AppImage.inviteLink, size: 80),
+//                 15.verticalSpace,
+//                 CustomText(
+//                   text: appliedFilter
+//                       ? "No item found"
+//                       : "Invitation links will shown here.",
+//                 ),
+//                 30.verticalSpace,
+//                 EventButton(
+//                   width: 150,
+//                   text: appliedFilter ? "Clear Filter" : "Reload",
+//                   onClick: () {
+//                     if (appliedFilter) {
+//                       notifier.clearFilter();
+//                     } else {
+//                       notifier.getInvitationLinks();
+//                     }
+//                   },
+//                 ),
+//               ],
+//             ),
+//           )
+//         else
+//           Expanded(
+//             child: Skeletonizer(
+//               enabled: isLoading,
+//               child: ListView.separated(
+//                 shrinkWrap: true,
+//                 padding: EdgeInsets.only(bottom: 100, top: 15),
+//                 itemBuilder: (cxt, index) =>
+//                     LinkItemBox(linkInfo: dataList[index]),
+//                 separatorBuilder: (_, __) => 10.verticalSpace,
+//                 itemCount: dataList.length,
+//               ),
+//             ),
+//           ),
+//       ],
+//     );
+//   }
+// }

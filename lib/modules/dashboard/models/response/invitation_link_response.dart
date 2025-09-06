@@ -26,6 +26,18 @@ class PaginatedInvitationLinkResponse {
       'page': page,
     };
   }
+
+  PaginatedInvitationLinkResponse copyWith({
+    List<InvitationLinkResponse>? items,
+    int? limit,
+    int? page,
+  }) {
+    return PaginatedInvitationLinkResponse(
+      items: items ?? this.items,
+      limit: limit ?? this.limit,
+      page: page ?? this.page,
+    );
+  }
 }
 
 class InvitationLinkResponse {

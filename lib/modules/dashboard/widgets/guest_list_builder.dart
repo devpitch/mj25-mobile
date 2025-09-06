@@ -3,6 +3,7 @@ import 'package:event_handler/cores/providers/text_controllers.dart';
 import 'package:event_handler/cores/utils/assets_mangment.dart';
 import 'package:event_handler/cores/utils/constants.dart';
 import 'package:event_handler/cores/utils/custom_textfield.dart';
+import 'package:event_handler/cores/utils/extensions.dart';
 import 'package:event_handler/cores/utils/hex_color.dart';
 import 'package:event_handler/cores/utils/icon_builder.dart';
 import 'package:event_handler/cores/utils/text_controller_strings.dart';
@@ -55,38 +56,39 @@ class GuestListBuilder extends HookConsumerWidget {
       return null;
     }, []);
 
-    return Column(
-      children: [
-        10.verticalSpace,
+    return SizedBox(
+      height: context.deviceHeight,
+      child: Column(
+        children: [
+          10.verticalSpace,
 
-        EventButton(
-          width: double.infinity,
-          fillColor: context.contentSecondary,
-          textColor: context.contentPrimary,
-          text: "Scan QR Code",
-          isLoading: state.loadingGuest ?? false,
-          onClick: () {
-            ref.read(globalBuildContextProvider.notifier).state = context;
-            notifier.scanQrCode(context);
-          },
-        ),
-
-        // 🔹 Filter/Search input
-        20.verticalSpace,
-        CustomLabelTextField(
-          hintText: "Search guests...",
-          hintColor: HexColor("#5E8C73"),
-          textCtrl: getTextController(TextControllerStrings.search),
-          onChange: (val) => searchQuery.value = val?.trim() ?? "",
-          prefixIcon: IconBuilder(
-            iconPath: AppImage.searchIcon,
-            color: context.contentPrimary,
+          EventButton(
+            width: double.infinity,
+            fillColor: context.contentSecondary,
+            textColor: context.contentPrimary,
+            text: "Scan QR Code",
+            isLoading: state.loadingGuest ?? false,
+            onClick: () {
+              ref.read(globalBuildContextProvider.notifier).state = context;
+              notifier.scanQrCode(context);
+            },
           ),
-        ),
 
-        if (filteredList.isEmpty && !isLoading)
-          Expanded(
-            child: Column(
+          // 🔹 Filter/Search input
+          20.verticalSpace,
+          CustomLabelTextField(
+            hintText: "Search guests...",
+            hintColor: HexColor("#5E8C73"),
+            textCtrl: getTextController(TextControllerStrings.search),
+            onChange: (val) => searchQuery.value = val?.trim() ?? "",
+            prefixIcon: IconBuilder(
+              iconPath: AppImage.searchIcon,
+              color: context.contentPrimary,
+            ),
+          ),
+
+          if (filteredList.isEmpty && !isLoading)
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconBuilder(iconPath: AppImage.guestUser, size: 80),
@@ -103,23 +105,24 @@ class GuestListBuilder extends HookConsumerWidget {
                   ),
                 ],
               ],
-            ),
-          )
-        else
-          Skeletonizer(
-            enabled: isLoading,
-            child: Expanded(
-              child: ListView.separated(
-                shrinkWrap: true,
-                padding: const EdgeInsets.only(bottom: 100, top: 15),
-                itemBuilder: (cxt, index) =>
-                    GuestItemBox(guestInfo: filteredList[index]),
-                separatorBuilder: (_, __) => 10.verticalSpace,
-                itemCount: filteredList.length,
+            )
+          else
+            Flexible(
+              child: Skeletonizer(
+                enabled: isLoading,
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  // physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.only(bottom: 100, top: 15),
+                  itemBuilder: (cxt, index) =>
+                      GuestItemBox(guestInfo: filteredList[index]),
+                  separatorBuilder: (_, __) => 10.verticalSpace,
+                  itemCount: filteredList.length,
+                ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }

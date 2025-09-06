@@ -97,24 +97,35 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
 
   getInvitationLinks({
     bool showLoader = true,
+    bool nextPage = false,
     LinkRequestModel? queryRequest,
   }) async {
     try {
       if ((!showLoader && (state.invitationLinks?.items?.isEmpty ?? false)) ||
           showLoader) {
-        state = state.copyWith(loadingLinks: true);
+        state = state.copyWith(
+          loadingLinks: !nextPage,
+          loadingMoreLinks: nextPage,
+        );
+      }
+
+      int page = 1;
+      if (nextPage) {
+        page = state.invitationLinks?.page ?? 1;
+        page++;
       }
 
       LinkRequestModel request =
           queryRequest ??
           LinkRequestModel(
             limit: 50,
-            page: 1,
+            page: page,
             search: "",
             input: InvitationFilterInput(),
           );
 
-      final response = await _service.getInvitationLink(request);
+      final PaginatedInvitationLinkResponse? response = await _service
+          .getInvitationLink(request);
 
       if (response != null) {
         final guestFilter = state.guestFilters ?? {};
@@ -122,15 +133,24 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
           guestFilter['applied'] = true;
         }
 
-        state = state.copyWith(
-          invitationLinks: response,
-          guestFilters: guestFilter,
-        );
+        if (nextPage) {
+          final currentList = state.invitationLinks?.items ?? [];
+          currentList.addAll(response.items ?? []);
+          state = state.copyWith(
+            invitationLinks: response.copyWith(items: currentList),
+            guestFilters: guestFilter,
+          );
+        } else {
+          state = state.copyWith(
+            invitationLinks: response,
+            guestFilters: guestFilter,
+          );
+        }
       }
     } catch (e) {
       log("There is an error from get invitation flow::: e");
     } finally {
-      state = state.copyWith(loadingLinks: false);
+      state = state.copyWith(loadingLinks: false, loadingMoreLinks: false);
     }
   }
 

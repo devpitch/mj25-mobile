@@ -42,6 +42,7 @@ class DashboardState {
   final GuestsResponse? guestList;
   final GuestResponse? activeGuest;
   final String? guestActionType;
+  final bool? loadingMoreLinks;
 
   DashboardState({
     this.activeTab = "Links",
@@ -80,6 +81,7 @@ class DashboardState {
     this.guestList,
     this.activeGuest,
     this.guestActionType,
+    this.loadingMoreLinks,
   });
 
   DashboardState copyWith({
@@ -122,6 +124,7 @@ class DashboardState {
     GuestsResponse? guestList,
     GuestResponse? activeGuest,
     String? guestActionType,
+    bool? loadingMoreLinks,
   }) {
     return DashboardState(
       activeTab: activeTab ?? this.activeTab,
@@ -181,6 +184,7 @@ class DashboardState {
       guestList: guestList ?? this.guestList,
       activeGuest: activeGuest ?? this.activeGuest,
       guestActionType: guestActionType ?? this.guestActionType,
+      loadingMoreLinks: loadingMoreLinks ?? this.loadingMoreLinks,
     );
   }
 }
