@@ -169,7 +169,7 @@ class HelperFunctions {
         ShareParams(text: item, subject: description),
       );
       if (result.status == ShareResultStatus.success) {
-        showStyledToast(message: "File shared successfully.");
+        showStyledToast(message: "Link shared successfully.");
         return true;
       }
     } else {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/providers/text_controllers.dart';
 import 'package:event_handler/cores/utils/constants.dart';
@@ -7,6 +9,7 @@ import 'package:event_handler/cores/utils/hex_color.dart';
 import 'package:event_handler/cores/utils/text_controller_strings.dart';
 import 'package:event_handler/cores/widgets/app_footer_box.dart';
 import 'package:event_handler/cores/widgets/custom_text.dart';
+import 'package:event_handler/cores/widgets/phone_number_formatter/formatted_phone_box.dart';
 import 'package:event_handler/modules/authentication/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,14 +45,23 @@ class LoginScreen extends ConsumerWidget {
           child: Column(
             children: [
               20.verticalSpace,
-              CustomLabelTextField(
-                hintText: "Email",
-                hintColor: HexColor("#5E8C73"),
-                textCtrl: getTextController(TextControllerStrings.phoneNumber),
+              // CustomLabelTextField(
+              //   hintText: "Phone Number",
+              //   keyboardType: TextInputType.phone,
+              //   hintColor: HexColor("#5E8C73"),
+              //   textCtrl: getTextController(TextControllerStrings.phoneNumber),
+              // ),
+              FormattedPhoneNumberBox(
+                onNumberChange: (number) {
+                  getTextController(TextControllerStrings.phoneNumber)!.text =
+                      number.phoneNumber ?? "";
+                  log("::: The number is ${number.phoneNumber}");
+                },
               ),
               20.verticalSpace,
               CustomLabelTextField(
                 hintText: "Password",
+                isPassword: true,
                 hintColor: HexColor("#5E8C73"),
                 textCtrl: getTextController(TextControllerStrings.password),
               ),

@@ -47,7 +47,6 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       activeTab: data["activeTab"],
       selectedLinkType: data["selectedLinkType"],
       activeInviteLink: data["activeInviteLink"],
-      selectedTitle: data["selectedTitle"],
       selectedFilterType: data["selectedFilterType"],
       selectedFilterStatus: data["selectedFilterStatus"],
       activeGuest: data["activeGuest"],
@@ -436,7 +435,9 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     try {
       state = state.copyWith(isAddingGuest: true);
 
-      String? title = state.selectedTitle?.label;
+      String? title = getTextController(
+        TextControllerStrings.title,
+      )!.text.trim();
       String firstName = getTextController(
         TextControllerStrings.firstName,
       )!.text.trim();
@@ -456,7 +457,6 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
         firstName: firstName,
         lastName: lastName,
         phone: phone,
-        email: email,
       );
 
       if (validationError != null) {
@@ -500,7 +500,9 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     try {
       state = state.copyWith(isAddingGuest: true);
 
-      String? title = state.selectedTitle?.label;
+      String? title = getTextController(
+        TextControllerStrings.title,
+      )!.text.trim();
       String firstName = getTextController(
         TextControllerStrings.firstName,
       )!.text.trim();
@@ -520,7 +522,6 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
         firstName: firstName,
         lastName: lastName,
         phone: phone,
-        email: email,
       );
 
       if (validationError != null) {
@@ -567,7 +568,6 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     required String firstName,
     required String lastName,
     required String phone,
-    required String email,
   }) {
     if (title == null || title.isEmpty) {
       return "Please select a title";
@@ -583,12 +583,6 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     }
     if (!RegExp(r'^\+?[0-9]{7,15}$').hasMatch(phone)) {
       return "Enter a valid phone number";
-    }
-    if (email.isEmpty) {
-      return "Email is required";
-    }
-    if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
-      return "Enter a valid email address";
     }
     return null; // ✅ Valid
   }
@@ -615,6 +609,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       TextControllerStrings.firstName,
       TextControllerStrings.lastName,
       TextControllerStrings.email,
+      TextControllerStrings.title,
       TextControllerStrings.phoneNumber,
     ]);
 
@@ -695,6 +690,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
           final pickedDate = await HelperFunctions.pickDate(
             context,
             isBirthDate: false,
+            initialDate: DateTime(DateTime.now().year - 3),
             lastDate: DateTime.now(),
           );
           if (pickedDate != null) {
@@ -711,6 +707,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
             context,
             isBirthDate: false,
             lastDate: DateTime.now(),
+            initialDate: DateTime(DateTime.now().year - 3),
           );
           if (pickedDate != null) {
             final formatedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
@@ -726,6 +723,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
             context,
             isBirthDate: false,
             lastDate: DateTime.now(),
+            initialDate: DateTime(DateTime.now().year - 3),
           );
           if (pickedDate != null) {
             final formatedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
@@ -741,6 +739,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
             context,
             isBirthDate: false,
             lastDate: DateTime.now(),
+            initialDate: DateTime(DateTime.now().year - 3),
           );
           if (pickedDate != null) {
             final formatedDate = DateFormat('yyyy-MM-dd').format(pickedDate);

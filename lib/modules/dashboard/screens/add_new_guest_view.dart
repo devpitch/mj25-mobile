@@ -7,8 +7,6 @@ import 'package:event_handler/cores/utils/hex_color.dart';
 import 'package:event_handler/cores/utils/text_controller_strings.dart';
 import 'package:event_handler/cores/widgets/app_footer_box.dart';
 import 'package:event_handler/cores/widgets/app_header.dart';
-import 'package:event_handler/cores/widgets/custom_dropdown.dart';
-import 'package:event_handler/modules/dashboard/domain/constant.dart';
 import 'package:event_handler/modules/dashboard/provider/dashboard_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -52,18 +50,26 @@ class AddNewGuestScreen extends ConsumerWidget {
           child: Column(
             children: [
               20.verticalSpace,
-              CustomLabelDropDown(
-                hintText: "Select",
-                items: titles,
+              CustomLabelTextField(
+                hintText: "Enter title",
                 labelText: "Title",
-                borderColor: Colors.transparent,
-                isOutline: true,
-                selectedText: state.selectedTitle?.label,
-                fillColor: HexColor("#5E8C73").withValues(alpha: .1),
-                onChange: (value) {
-                  notifier.updateState({"selectedTitle": value});
-                },
+                textCtrl: getTextController(TextControllerStrings.title),
+                isRequired: true,
+                textInputAction: TextInputAction.next,
+                hintColor: HexColor("#5E8C73"),
               ),
+              // CustomLabelDropDown(
+              //   hintText: "Select",
+              //   items: titles,
+              //   labelText: "Title",
+              //   borderColor: Colors.transparent,
+              //   isOutline: true,
+              //   selectedText: state.selectedTitle?.label,
+              //   fillColor: HexColor("#5E8C73").withValues(alpha: .1),
+              //   onChange: (value) {
+              //     notifier.updateState({"selectedTitle": value});
+              //   },
+              // ),
               20.verticalSpace,
               CustomLabelTextField(
                 hintText: "Enter first name",
@@ -97,7 +103,6 @@ class AddNewGuestScreen extends ConsumerWidget {
                 labelText: "Email Address",
                 textInputAction: TextInputAction.done,
                 textCtrl: getTextController(TextControllerStrings.email),
-                isRequired: true,
                 hintColor: HexColor("#5E8C73"),
               ),
               150.verticalSpace,

@@ -56,7 +56,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       }
 
       LoginRequestModel request = LoginRequestModel(
-        phone: number,
+        phone: number.replaceFirst("+234", "+234-"),
         password: password,
       );
 

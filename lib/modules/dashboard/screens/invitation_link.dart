@@ -5,7 +5,6 @@ import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/utils/assets_mangment.dart';
 import 'package:event_handler/cores/utils/constants.dart';
 import 'package:event_handler/cores/utils/extensions.dart';
-import 'package:event_handler/cores/utils/helper_functions.dart';
 import 'package:event_handler/cores/utils/icon_builder.dart';
 import 'package:event_handler/cores/widgets/app_footer_box.dart';
 import 'package:event_handler/cores/widgets/app_header.dart';
@@ -126,6 +125,7 @@ class InvitationLinkScreen extends ConsumerWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             10.verticalSpace,
             const AppHeaderText(label: "Link"),
@@ -151,12 +151,12 @@ class InvitationLinkScreen extends ConsumerWidget {
                       ),
                     ),
                     IconBuilder(
-                      iconPath: AppImage.copyIcon,
+                      iconPath: AppImage.refer,
                       size: 14,
                       onTapped: () {
-                        HelperFunctions.copyToClipboard(
-                          item: activeLink.inviteUrl!,
-                        );
+                        ref
+                            .read(dashboardProvider.notifier)
+                            .shareLink(context, linkInfo: activeLink);
                       },
                     ),
                   ],
@@ -166,7 +166,7 @@ class InvitationLinkScreen extends ConsumerWidget {
             const AppHeaderText(label: "Guests"),
 
             /// Guests Section with AnimatedSwitcher
-            Expanded(
+            Flexible(
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 400),
                 transitionBuilder: (child, anim) => SlideTransition(
@@ -182,6 +182,7 @@ class InvitationLinkScreen extends ConsumerWidget {
                 child: (activeLink.guests?.isNotEmpty ?? false)
                     ? SingleChildScrollView(
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           key: const ValueKey("guests"),
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

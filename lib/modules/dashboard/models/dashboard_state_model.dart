@@ -1,4 +1,3 @@
-import 'package:event_handler/cores/widgets/custom_dropdown.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
@@ -20,7 +19,7 @@ class DashboardState {
   final List<String>? selectedGuests;
   final bool? isDeletingGuest;
   final bool? isAddingGuest;
-  final DropdownItem? selectedTitle;
+  // final DropdownItem? selectedTitle;
   final String? selectedFilterType;
   final String? selectedFilterStatus;
   TextEditingController? filterCode;
@@ -55,7 +54,7 @@ class DashboardState {
     this.activeInviteLink,
     this.selectedGuests,
     this.isDeletingGuest,
-    this.selectedTitle,
+    // this.selectedTitle,
     this.isAddingGuest,
     this.filterCode,
     this.filterGuestPerEntry,
@@ -96,7 +95,7 @@ class DashboardState {
     InvitationLinkResponse? activeInviteLink,
     List<String>? selectedGuests,
     bool? isDeletingGuest,
-    DropdownItem? selectedTitle,
+    // DropdownItem? selectedTitle,
     String? clearAddGuest,
     bool? isAddingGuest,
     TextEditingController? filterCode,
@@ -139,9 +138,9 @@ class DashboardState {
       activeInviteLink: activeInviteLink ?? this.activeInviteLink,
       selectedGuests: selectedGuests ?? this.selectedGuests,
       isDeletingGuest: isDeletingGuest ?? this.isDeletingGuest,
-      selectedTitle: clearAddGuest == "yes"
-          ? null
-          : selectedTitle ?? this.selectedTitle,
+      // selectedTitle: clearAddGuest == "yes"
+      //     ? null
+      //     : selectedTitle ?? this.selectedTitle,
       isAddingGuest: isAddingGuest ?? this.isAddingGuest,
       filterCode: filterCode ?? this.filterCode,
       filterGuestPerEntry: clearFilter == "yes"
