@@ -21,9 +21,11 @@ import 'package:event_handler/modules/dashboard/models/request/create_invitation
 import 'package:event_handler/modules/dashboard/models/request/guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/guests_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/link_update_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/update_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
+import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/rsvp_model.dart';
 import 'package:event_handler/modules/dashboard/models/upload_image_model.dart';
 import 'package:event_handler/modules/dashboard/services/dashboard_service.dart';
@@ -324,6 +326,29 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       }
     } catch (e) {
       log(":::: There is an error during link generation :::: $e");
+    } finally {
+      state = state.copyWith(isGeneratingLink: false);
+    }
+  }
+
+  updateLinkSharedState(
+    BuildContext context, {
+    required String id,
+    String? code,
+  }) async {
+    try {
+      // Build request model only after successful validation
+      final request = LinkUpdateRequestModel(
+        id: id,
+        status: LinkStatusEnum.SHARED,
+        code: code,
+      );
+
+      final response = await _service.updateInvitationLink(request);
+
+      if (response != null) {}
+    } catch (e) {
+      log(":::: There is an error during link sharing :::: $e");
     } finally {
       state = state.copyWith(isGeneratingLink: false);
     }
@@ -923,6 +948,24 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       log(":::: There is an error during guest deletion :::: $e");
     } finally {
       state = state.copyWith(loadingGuest: false);
+    }
+  }
+
+  shareLink(
+    BuildContext context, {
+    required InvitationLinkResponse linkInfo,
+  }) async {
+    try {
+      bool res = await HelperFunctions.shareItem(
+        isFile: false,
+        item: linkInfo.inviteUrl!,
+      );
+
+      if (res) {
+        updateLinkSharedState(context, id: linkInfo.id!, code: linkInfo.code);
+      }
+    } catch (e) {
+      log(":::: There is an error during link share :::: $e");
     }
   }
 }

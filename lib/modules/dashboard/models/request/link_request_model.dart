@@ -15,15 +15,6 @@ class LinkRequestModel {
     this.input,
   });
 
-  // factory LinkRequestModel.fromJson(Map<String, dynamic> json) {
-  //   return LinkRequestModel(
-  //     limit: json['limit'] as int,
-  //     page: json['page'] as int,
-  //     search: json['search'] as String,
-  //     input: InvitationFilterInput.fromJson(json['input']),
-  //   );
-  // }
-
   Map<String, dynamic> toJson() {
     return {
       'limit': limit,

@@ -50,7 +50,7 @@ class GuestListBuilder extends HookConsumerWidget {
     // 🔹 Initial fetch
     useEffect(() {
       Future.microtask(() {
-        notifier.getGuests();
+        notifier.getGuests(showLoader: filteredList.isEmpty);
       });
       return null;
     }, []);

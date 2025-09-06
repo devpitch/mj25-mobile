@@ -6,6 +6,7 @@ import 'package:event_handler/modules/dashboard/models/request/create_invitation
 import 'package:event_handler/modules/dashboard/models/request/guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/guests_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/link_update_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/update_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
@@ -71,6 +72,15 @@ class DashboardService {
       return await _repo.attachGuest(request);
     } catch (e) {
       log(":::: This is the error from attaching guest:::: $e");
+      return null;
+    }
+  }
+
+  Future updateInvitationLink(LinkUpdateRequestModel request) async {
+    try {
+      return await _repo.updateInvitationLink(request);
+    } catch (e) {
+      log(":::: This is the error from updating invitation link:::: $e");
       return null;
     }
   }

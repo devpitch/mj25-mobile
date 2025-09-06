@@ -13,6 +13,7 @@ import 'package:event_handler/modules/dashboard/models/request/create_invitation
 import 'package:event_handler/modules/dashboard/models/request/guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/guests_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/link_update_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/update_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
@@ -36,6 +37,8 @@ abstract class DashboardRepository {
   Future<GuestResponse?> updateGuest(UpdateGuestRequestModel request);
 
   Future<GuestsResponse?> guests(GuestsRequestModel request);
+
+  Future updateInvitationLink(LinkUpdateRequestModel request);
 
   Future<GuestResponse?> deleteGuest(String id);
 
@@ -240,6 +243,24 @@ class DashboardRepositoryImpl implements DashboardRepository {
 
     if (response.parsedData?.toJson() != null) {
       return GuestsResponse.fromJson(response.parsedData!.toJson());
+    }
+
+    return null;
+  }
+
+  Future updateInvitationLink(LinkUpdateRequestModel request) async {
+    final response = await handleQueryResult(
+      queryBuilder: () => _client.client.mutate$updateInvitationLink(
+        Options$Mutation$updateInvitationLink(variables: request.toVariables),
+      ),
+    );
+
+    log(
+      "::::Response from updating link :::: ${jsonEncode(response.parsedData?.toJson())}",
+    );
+
+    if (response.parsedData?.toJson() != null) {
+      // return GuestsResponse.fromJson(response.parsedData!.toJson()["updateInvitationLink);
     }
 
     return null;

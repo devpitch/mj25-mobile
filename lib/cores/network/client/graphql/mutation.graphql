@@ -87,6 +87,13 @@ mutation updateGuest($input: UpdateGuestInput!) {
     }
 }
 
+mutation updateInvitationLink($input: UpdateInvitationLinkInput!) {
+    updateInvitationLink(input: $input) {
+        _id
+        __typename
+    }
+}
+
 ### GROUP RENTAL ###
 
 ################################################################

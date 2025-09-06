@@ -31,6 +31,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
     if (sessionExpiryDate != null &&
         HelperFunctions.checkIfDateIsInTheFuture(sessionExpiryDate)) {
+      await Future.delayed(const Duration(milliseconds: 500));
       getMe();
       return Get.toNamed(AppRouter.dashboardView);
     }
@@ -62,6 +63,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       final response = await _service.login(request);
 
       if (response != null) {
+        await Future.delayed(const Duration(milliseconds: 500));
         Get.toNamed(AppRouter.dashboardView);
         EventAlert.showSuccess(context, message: "Login Successful");
         getMe();
@@ -85,6 +87,16 @@ class AuthNotifier extends StateNotifier<AuthState> {
     } finally {
       state = state.copyWith(isLoading: false);
     }
+  }
+
+  logoutUser(BuildContext context) async {
+    final secureStorageInteractor = getIt<SecureStorageInteractor>();
+    await secureStorageInteractor.onLogout();
+
+    Get.offNamedUntil(
+      AppRouter.loginPage,
+      ModalRoute.withName(AppRouter.loginPage),
+    );
   }
 }
 

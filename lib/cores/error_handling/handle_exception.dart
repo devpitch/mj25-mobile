@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:event_handler/cores/utils/rydmie_alerts.dart';
 import 'package:event_handler/main.dart';
+import 'package:event_handler/modules/authentication/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -41,7 +42,7 @@ Future<dynamic> handleException(
 
   //TODO: handle user unauthorized error e.g, logout user, clear cache, reset providers, etc
 
-  if (exception.message == "Unauthenticated") {
+  if (exception.message == "Unauthorized") {
     log("::::I entered the unauthorized block");
     _handleUnAuthorizedException(context);
     return null;
@@ -62,7 +63,7 @@ Future<dynamic> handleException(
 void _handleUnAuthorizedException(BuildContext context) async {
   //handle user unauthorized error e.g, logout user, clear cache, reset providers, etc
 
-  // await AppConstants.genRef!.read(authProvider.notifier).logoutUser(context);
+  await genRef!.read(authProvider.notifier).logoutUser(context);
 }
 
 // proxy to avoid name clash with extension method

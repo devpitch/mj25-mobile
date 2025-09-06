@@ -6204,3 +6204,637 @@ class _CopyWithStubImpl$Mutation$updateGuest$updateGuest<TRes>
     String? $__typename,
   }) => _res;
 }
+
+class Variables$Mutation$updateInvitationLink {
+  factory Variables$Mutation$updateInvitationLink({
+    required Input$UpdateInvitationLinkInput input,
+  }) => Variables$Mutation$updateInvitationLink._({r'input': input});
+
+  Variables$Mutation$updateInvitationLink._(this._$data);
+
+  factory Variables$Mutation$updateInvitationLink.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$input = data['input'];
+    result$data['input'] = Input$UpdateInvitationLinkInput.fromJson(
+      (l$input as Map<String, dynamic>),
+    );
+    return Variables$Mutation$updateInvitationLink._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input$UpdateInvitationLinkInput get input =>
+      (_$data['input'] as Input$UpdateInvitationLinkInput);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$input = input;
+    result$data['input'] = l$input.toJson();
+    return result$data;
+  }
+
+  CopyWith$Variables$Mutation$updateInvitationLink<
+    Variables$Mutation$updateInvitationLink
+  >
+  get copyWith =>
+      CopyWith$Variables$Mutation$updateInvitationLink(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables$Mutation$updateInvitationLink ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (l$input != lOther$input) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$input = input;
+    return Object.hashAll([l$input]);
+  }
+}
+
+abstract class CopyWith$Variables$Mutation$updateInvitationLink<TRes> {
+  factory CopyWith$Variables$Mutation$updateInvitationLink(
+    Variables$Mutation$updateInvitationLink instance,
+    TRes Function(Variables$Mutation$updateInvitationLink) then,
+  ) = _CopyWithImpl$Variables$Mutation$updateInvitationLink;
+
+  factory CopyWith$Variables$Mutation$updateInvitationLink.stub(TRes res) =
+      _CopyWithStubImpl$Variables$Mutation$updateInvitationLink;
+
+  TRes call({Input$UpdateInvitationLinkInput? input});
+}
+
+class _CopyWithImpl$Variables$Mutation$updateInvitationLink<TRes>
+    implements CopyWith$Variables$Mutation$updateInvitationLink<TRes> {
+  _CopyWithImpl$Variables$Mutation$updateInvitationLink(
+    this._instance,
+    this._then,
+  );
+
+  final Variables$Mutation$updateInvitationLink _instance;
+
+  final TRes Function(Variables$Mutation$updateInvitationLink) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? input = _undefined}) => _then(
+    Variables$Mutation$updateInvitationLink._({
+      ..._instance._$data,
+      if (input != _undefined && input != null)
+        'input': (input as Input$UpdateInvitationLinkInput),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Variables$Mutation$updateInvitationLink<TRes>
+    implements CopyWith$Variables$Mutation$updateInvitationLink<TRes> {
+  _CopyWithStubImpl$Variables$Mutation$updateInvitationLink(this._res);
+
+  TRes _res;
+
+  call({Input$UpdateInvitationLinkInput? input}) => _res;
+}
+
+class Mutation$updateInvitationLink {
+  Mutation$updateInvitationLink({
+    required this.updateInvitationLink,
+    this.$__typename = 'Mutation',
+  });
+
+  factory Mutation$updateInvitationLink.fromJson(Map<String, dynamic> json) {
+    final l$updateInvitationLink = json['updateInvitationLink'];
+    final l$$__typename = json['__typename'];
+    return Mutation$updateInvitationLink(
+      updateInvitationLink:
+          Mutation$updateInvitationLink$updateInvitationLink.fromJson(
+            (l$updateInvitationLink as Map<String, dynamic>),
+          ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation$updateInvitationLink$updateInvitationLink updateInvitationLink;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$updateInvitationLink = updateInvitationLink;
+    _resultData['updateInvitationLink'] = l$updateInvitationLink.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$updateInvitationLink = updateInvitationLink;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$updateInvitationLink, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation$updateInvitationLink ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$updateInvitationLink = updateInvitationLink;
+    final lOther$updateInvitationLink = other.updateInvitationLink;
+    if (l$updateInvitationLink != lOther$updateInvitationLink) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$updateInvitationLink
+    on Mutation$updateInvitationLink {
+  CopyWith$Mutation$updateInvitationLink<Mutation$updateInvitationLink>
+  get copyWith => CopyWith$Mutation$updateInvitationLink(this, (i) => i);
+}
+
+abstract class CopyWith$Mutation$updateInvitationLink<TRes> {
+  factory CopyWith$Mutation$updateInvitationLink(
+    Mutation$updateInvitationLink instance,
+    TRes Function(Mutation$updateInvitationLink) then,
+  ) = _CopyWithImpl$Mutation$updateInvitationLink;
+
+  factory CopyWith$Mutation$updateInvitationLink.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$updateInvitationLink;
+
+  TRes call({
+    Mutation$updateInvitationLink$updateInvitationLink? updateInvitationLink,
+    String? $__typename,
+  });
+  CopyWith$Mutation$updateInvitationLink$updateInvitationLink<TRes>
+  get updateInvitationLink;
+}
+
+class _CopyWithImpl$Mutation$updateInvitationLink<TRes>
+    implements CopyWith$Mutation$updateInvitationLink<TRes> {
+  _CopyWithImpl$Mutation$updateInvitationLink(this._instance, this._then);
+
+  final Mutation$updateInvitationLink _instance;
+
+  final TRes Function(Mutation$updateInvitationLink) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? updateInvitationLink = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation$updateInvitationLink(
+      updateInvitationLink:
+          updateInvitationLink == _undefined || updateInvitationLink == null
+          ? _instance.updateInvitationLink
+          : (updateInvitationLink
+                as Mutation$updateInvitationLink$updateInvitationLink),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith$Mutation$updateInvitationLink$updateInvitationLink<TRes>
+  get updateInvitationLink {
+    final local$updateInvitationLink = _instance.updateInvitationLink;
+    return CopyWith$Mutation$updateInvitationLink$updateInvitationLink(
+      local$updateInvitationLink,
+      (e) => call(updateInvitationLink: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl$Mutation$updateInvitationLink<TRes>
+    implements CopyWith$Mutation$updateInvitationLink<TRes> {
+  _CopyWithStubImpl$Mutation$updateInvitationLink(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation$updateInvitationLink$updateInvitationLink? updateInvitationLink,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith$Mutation$updateInvitationLink$updateInvitationLink<TRes>
+  get updateInvitationLink =>
+      CopyWith$Mutation$updateInvitationLink$updateInvitationLink.stub(_res);
+}
+
+const documentNodeMutationupdateInvitationLink = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'updateInvitationLink'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'input')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'UpdateInvitationLinkInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'updateInvitationLink'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'input'),
+                value: VariableNode(name: NameNode(value: 'input')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: '_id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+  ],
+);
+Mutation$updateInvitationLink _parserFn$Mutation$updateInvitationLink(
+  Map<String, dynamic> data,
+) => Mutation$updateInvitationLink.fromJson(data);
+typedef OnMutationCompleted$Mutation$updateInvitationLink =
+    FutureOr<void> Function(
+      Map<String, dynamic>?,
+      Mutation$updateInvitationLink?,
+    );
+
+class Options$Mutation$updateInvitationLink
+    extends graphql.MutationOptions<Mutation$updateInvitationLink> {
+  Options$Mutation$updateInvitationLink({
+    String? operationName,
+    required Variables$Mutation$updateInvitationLink variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$updateInvitationLink? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$updateInvitationLink? onCompleted,
+    graphql.OnMutationUpdate<Mutation$updateInvitationLink>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null
+                     ? null
+                     : _parserFn$Mutation$updateInvitationLink(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationupdateInvitationLink,
+         parserFn: _parserFn$Mutation$updateInvitationLink,
+       );
+
+  final OnMutationCompleted$Mutation$updateInvitationLink?
+  onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+class WatchOptions$Mutation$updateInvitationLink
+    extends graphql.WatchQueryOptions<Mutation$updateInvitationLink> {
+  WatchOptions$Mutation$updateInvitationLink({
+    String? operationName,
+    required Variables$Mutation$updateInvitationLink variables,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$updateInvitationLink? typedOptimisticResult,
+    graphql.Context? context,
+    Duration? pollInterval,
+    bool? eagerlyFetchResults,
+    bool carryForwardDataOnException = true,
+    bool fetchResults = false,
+  }) : super(
+         variables: variables.toJson(),
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         document: documentNodeMutationupdateInvitationLink,
+         pollInterval: pollInterval,
+         eagerlyFetchResults: eagerlyFetchResults,
+         carryForwardDataOnException: carryForwardDataOnException,
+         fetchResults: fetchResults,
+         parserFn: _parserFn$Mutation$updateInvitationLink,
+       );
+}
+
+extension ClientExtension$Mutation$updateInvitationLink
+    on graphql.GraphQLClient {
+  Future<graphql.QueryResult<Mutation$updateInvitationLink>>
+  mutate$updateInvitationLink(
+    Options$Mutation$updateInvitationLink options,
+  ) async => await this.mutate(options);
+  graphql.ObservableQuery<Mutation$updateInvitationLink>
+  watchMutation$updateInvitationLink(
+    WatchOptions$Mutation$updateInvitationLink options,
+  ) => this.watchMutation(options);
+}
+
+class Mutation$updateInvitationLink$HookResult {
+  Mutation$updateInvitationLink$HookResult(this.runMutation, this.result);
+
+  final RunMutation$Mutation$updateInvitationLink runMutation;
+
+  final graphql.QueryResult<Mutation$updateInvitationLink> result;
+}
+
+Mutation$updateInvitationLink$HookResult useMutation$updateInvitationLink([
+  WidgetOptions$Mutation$updateInvitationLink? options,
+]) {
+  final result = graphql_flutter.useMutation(
+    options ?? WidgetOptions$Mutation$updateInvitationLink(),
+  );
+  return Mutation$updateInvitationLink$HookResult(
+    (variables, {optimisticResult, typedOptimisticResult}) =>
+        result.runMutation(
+          variables.toJson(),
+          optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+        ),
+    result.result,
+  );
+}
+
+graphql.ObservableQuery<Mutation$updateInvitationLink>
+useWatchMutation$updateInvitationLink(
+  WatchOptions$Mutation$updateInvitationLink options,
+) => graphql_flutter.useWatchMutation(options);
+
+class WidgetOptions$Mutation$updateInvitationLink
+    extends graphql.MutationOptions<Mutation$updateInvitationLink> {
+  WidgetOptions$Mutation$updateInvitationLink({
+    String? operationName,
+    graphql.FetchPolicy? fetchPolicy,
+    graphql.ErrorPolicy? errorPolicy,
+    graphql.CacheRereadPolicy? cacheRereadPolicy,
+    Object? optimisticResult,
+    Mutation$updateInvitationLink? typedOptimisticResult,
+    graphql.Context? context,
+    OnMutationCompleted$Mutation$updateInvitationLink? onCompleted,
+    graphql.OnMutationUpdate<Mutation$updateInvitationLink>? update,
+    graphql.OnError? onError,
+  }) : onCompletedWithParsed = onCompleted,
+       super(
+         operationName: operationName,
+         fetchPolicy: fetchPolicy,
+         errorPolicy: errorPolicy,
+         cacheRereadPolicy: cacheRereadPolicy,
+         optimisticResult: optimisticResult ?? typedOptimisticResult?.toJson(),
+         context: context,
+         onCompleted: onCompleted == null
+             ? null
+             : (data) => onCompleted(
+                 data,
+                 data == null
+                     ? null
+                     : _parserFn$Mutation$updateInvitationLink(data),
+               ),
+         update: update,
+         onError: onError,
+         document: documentNodeMutationupdateInvitationLink,
+         parserFn: _parserFn$Mutation$updateInvitationLink,
+       );
+
+  final OnMutationCompleted$Mutation$updateInvitationLink?
+  onCompletedWithParsed;
+
+  @override
+  List<Object?> get properties => [
+    ...super.onCompleted == null
+        ? super.properties
+        : super.properties.where((property) => property != onCompleted),
+    onCompletedWithParsed,
+  ];
+}
+
+typedef RunMutation$Mutation$updateInvitationLink =
+    graphql.MultiSourceResult<Mutation$updateInvitationLink> Function(
+      Variables$Mutation$updateInvitationLink, {
+      Object? optimisticResult,
+      Mutation$updateInvitationLink? typedOptimisticResult,
+    });
+typedef Builder$Mutation$updateInvitationLink =
+    widgets.Widget Function(
+      RunMutation$Mutation$updateInvitationLink,
+      graphql.QueryResult<Mutation$updateInvitationLink>?,
+    );
+
+class Mutation$updateInvitationLink$Widget
+    extends graphql_flutter.Mutation<Mutation$updateInvitationLink> {
+  Mutation$updateInvitationLink$Widget({
+    widgets.Key? key,
+    WidgetOptions$Mutation$updateInvitationLink? options,
+    required Builder$Mutation$updateInvitationLink builder,
+  }) : super(
+         key: key,
+         options: options ?? WidgetOptions$Mutation$updateInvitationLink(),
+         builder: (run, result) => builder(
+           (variables, {optimisticResult, typedOptimisticResult}) => run(
+             variables.toJson(),
+             optimisticResult:
+                 optimisticResult ?? typedOptimisticResult?.toJson(),
+           ),
+           result,
+         ),
+       );
+}
+
+class Mutation$updateInvitationLink$updateInvitationLink {
+  Mutation$updateInvitationLink$updateInvitationLink({
+    required this.$_id,
+    this.$__typename = 'InvitationLinkResponse',
+  });
+
+  factory Mutation$updateInvitationLink$updateInvitationLink.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$$_id = json['_id'];
+    final l$$__typename = json['__typename'];
+    return Mutation$updateInvitationLink$updateInvitationLink(
+      $_id: (l$$_id as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String $_id;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$$_id = $_id;
+    _resultData['_id'] = l$$_id;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_id = $_id;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$$_id, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation$updateInvitationLink$updateInvitationLink ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_id = $_id;
+    final lOther$$_id = other.$_id;
+    if (l$$_id != lOther$$_id) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$updateInvitationLink$updateInvitationLink
+    on Mutation$updateInvitationLink$updateInvitationLink {
+  CopyWith$Mutation$updateInvitationLink$updateInvitationLink<
+    Mutation$updateInvitationLink$updateInvitationLink
+  >
+  get copyWith => CopyWith$Mutation$updateInvitationLink$updateInvitationLink(
+    this,
+    (i) => i,
+  );
+}
+
+abstract class CopyWith$Mutation$updateInvitationLink$updateInvitationLink<
+  TRes
+> {
+  factory CopyWith$Mutation$updateInvitationLink$updateInvitationLink(
+    Mutation$updateInvitationLink$updateInvitationLink instance,
+    TRes Function(Mutation$updateInvitationLink$updateInvitationLink) then,
+  ) = _CopyWithImpl$Mutation$updateInvitationLink$updateInvitationLink;
+
+  factory CopyWith$Mutation$updateInvitationLink$updateInvitationLink.stub(
+    TRes res,
+  ) = _CopyWithStubImpl$Mutation$updateInvitationLink$updateInvitationLink;
+
+  TRes call({String? $_id, String? $__typename});
+}
+
+class _CopyWithImpl$Mutation$updateInvitationLink$updateInvitationLink<TRes>
+    implements
+        CopyWith$Mutation$updateInvitationLink$updateInvitationLink<TRes> {
+  _CopyWithImpl$Mutation$updateInvitationLink$updateInvitationLink(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$updateInvitationLink$updateInvitationLink _instance;
+
+  final TRes Function(Mutation$updateInvitationLink$updateInvitationLink) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? $_id = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Mutation$updateInvitationLink$updateInvitationLink(
+          $_id: $_id == _undefined || $_id == null
+              ? _instance.$_id
+              : ($_id as String),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
+}
+
+class _CopyWithStubImpl$Mutation$updateInvitationLink$updateInvitationLink<TRes>
+    implements
+        CopyWith$Mutation$updateInvitationLink$updateInvitationLink<TRes> {
+  _CopyWithStubImpl$Mutation$updateInvitationLink$updateInvitationLink(
+    this._res,
+  );
+
+  TRes _res;
+
+  call({String? $_id, String? $__typename}) => _res;
+}

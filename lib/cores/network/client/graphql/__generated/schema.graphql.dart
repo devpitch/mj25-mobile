@@ -468,337 +468,6 @@ class _CopyWithStubImpl$Input$SimpleInput<TRes>
   call({String? code}) => _res;
 }
 
-class Input$UpdateInvitationLinkInput {
-  factory Input$UpdateInvitationLinkInput({
-    required String $_id,
-    String? code,
-    int? guestSize,
-    int? guestPerEntry,
-    int? guestsRegistered,
-    Enum$LinkTypeEnum? type,
-    Enum$LinkStatusEnum? status,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  }) => Input$UpdateInvitationLinkInput._({
-    r'_id': $_id,
-    if (code != null) r'code': code,
-    if (guestSize != null) r'guestSize': guestSize,
-    if (guestPerEntry != null) r'guestPerEntry': guestPerEntry,
-    if (guestsRegistered != null) r'guestsRegistered': guestsRegistered,
-    if (type != null) r'type': type,
-    if (status != null) r'status': status,
-    if (createdAt != null) r'createdAt': createdAt,
-    if (updatedAt != null) r'updatedAt': updatedAt,
-  });
-
-  Input$UpdateInvitationLinkInput._(this._$data);
-
-  factory Input$UpdateInvitationLinkInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$$_id = data['_id'];
-    result$data['_id'] = (l$$_id as String);
-    if (data.containsKey('code')) {
-      final l$code = data['code'];
-      result$data['code'] = (l$code as String?);
-    }
-    if (data.containsKey('guestSize')) {
-      final l$guestSize = data['guestSize'];
-      result$data['guestSize'] = (l$guestSize as int?);
-    }
-    if (data.containsKey('guestPerEntry')) {
-      final l$guestPerEntry = data['guestPerEntry'];
-      result$data['guestPerEntry'] = (l$guestPerEntry as int?);
-    }
-    if (data.containsKey('guestsRegistered')) {
-      final l$guestsRegistered = data['guestsRegistered'];
-      result$data['guestsRegistered'] = (l$guestsRegistered as int?);
-    }
-    if (data.containsKey('type')) {
-      final l$type = data['type'];
-      result$data['type'] = l$type == null
-          ? null
-          : fromJson$Enum$LinkTypeEnum((l$type as String));
-    }
-    if (data.containsKey('status')) {
-      final l$status = data['status'];
-      result$data['status'] = l$status == null
-          ? null
-          : fromJson$Enum$LinkStatusEnum((l$status as String));
-    }
-    if (data.containsKey('createdAt')) {
-      final l$createdAt = data['createdAt'];
-      result$data['createdAt'] = l$createdAt == null
-          ? null
-          : dateTimeFromJson(l$createdAt);
-    }
-    if (data.containsKey('updatedAt')) {
-      final l$updatedAt = data['updatedAt'];
-      result$data['updatedAt'] = l$updatedAt == null
-          ? null
-          : dateTimeFromJson(l$updatedAt);
-    }
-    return Input$UpdateInvitationLinkInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String get $_id => (_$data['_id'] as String);
-
-  String? get code => (_$data['code'] as String?);
-
-  int? get guestSize => (_$data['guestSize'] as int?);
-
-  int? get guestPerEntry => (_$data['guestPerEntry'] as int?);
-
-  int? get guestsRegistered => (_$data['guestsRegistered'] as int?);
-
-  Enum$LinkTypeEnum? get type => (_$data['type'] as Enum$LinkTypeEnum?);
-
-  Enum$LinkStatusEnum? get status => (_$data['status'] as Enum$LinkStatusEnum?);
-
-  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
-
-  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$$_id = $_id;
-    result$data['_id'] = l$$_id;
-    if (_$data.containsKey('code')) {
-      final l$code = code;
-      result$data['code'] = l$code;
-    }
-    if (_$data.containsKey('guestSize')) {
-      final l$guestSize = guestSize;
-      result$data['guestSize'] = l$guestSize;
-    }
-    if (_$data.containsKey('guestPerEntry')) {
-      final l$guestPerEntry = guestPerEntry;
-      result$data['guestPerEntry'] = l$guestPerEntry;
-    }
-    if (_$data.containsKey('guestsRegistered')) {
-      final l$guestsRegistered = guestsRegistered;
-      result$data['guestsRegistered'] = l$guestsRegistered;
-    }
-    if (_$data.containsKey('type')) {
-      final l$type = type;
-      result$data['type'] = l$type == null
-          ? null
-          : toJson$Enum$LinkTypeEnum(l$type);
-    }
-    if (_$data.containsKey('status')) {
-      final l$status = status;
-      result$data['status'] = l$status == null
-          ? null
-          : toJson$Enum$LinkStatusEnum(l$status);
-    }
-    if (_$data.containsKey('createdAt')) {
-      final l$createdAt = createdAt;
-      result$data['createdAt'] = l$createdAt == null
-          ? null
-          : dateTimeToJson(l$createdAt);
-    }
-    if (_$data.containsKey('updatedAt')) {
-      final l$updatedAt = updatedAt;
-      result$data['updatedAt'] = l$updatedAt == null
-          ? null
-          : dateTimeToJson(l$updatedAt);
-    }
-    return result$data;
-  }
-
-  CopyWith$Input$UpdateInvitationLinkInput<Input$UpdateInvitationLinkInput>
-  get copyWith => CopyWith$Input$UpdateInvitationLinkInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input$UpdateInvitationLinkInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_id = $_id;
-    final lOther$$_id = other.$_id;
-    if (l$$_id != lOther$$_id) {
-      return false;
-    }
-    final l$code = code;
-    final lOther$code = other.code;
-    if (_$data.containsKey('code') != other._$data.containsKey('code')) {
-      return false;
-    }
-    if (l$code != lOther$code) {
-      return false;
-    }
-    final l$guestSize = guestSize;
-    final lOther$guestSize = other.guestSize;
-    if (_$data.containsKey('guestSize') !=
-        other._$data.containsKey('guestSize')) {
-      return false;
-    }
-    if (l$guestSize != lOther$guestSize) {
-      return false;
-    }
-    final l$guestPerEntry = guestPerEntry;
-    final lOther$guestPerEntry = other.guestPerEntry;
-    if (_$data.containsKey('guestPerEntry') !=
-        other._$data.containsKey('guestPerEntry')) {
-      return false;
-    }
-    if (l$guestPerEntry != lOther$guestPerEntry) {
-      return false;
-    }
-    final l$guestsRegistered = guestsRegistered;
-    final lOther$guestsRegistered = other.guestsRegistered;
-    if (_$data.containsKey('guestsRegistered') !=
-        other._$data.containsKey('guestsRegistered')) {
-      return false;
-    }
-    if (l$guestsRegistered != lOther$guestsRegistered) {
-      return false;
-    }
-    final l$type = type;
-    final lOther$type = other.type;
-    if (_$data.containsKey('type') != other._$data.containsKey('type')) {
-      return false;
-    }
-    if (l$type != lOther$type) {
-      return false;
-    }
-    final l$status = status;
-    final lOther$status = other.status;
-    if (_$data.containsKey('status') != other._$data.containsKey('status')) {
-      return false;
-    }
-    if (l$status != lOther$status) {
-      return false;
-    }
-    final l$createdAt = createdAt;
-    final lOther$createdAt = other.createdAt;
-    if (_$data.containsKey('createdAt') !=
-        other._$data.containsKey('createdAt')) {
-      return false;
-    }
-    if (l$createdAt != lOther$createdAt) {
-      return false;
-    }
-    final l$updatedAt = updatedAt;
-    final lOther$updatedAt = other.updatedAt;
-    if (_$data.containsKey('updatedAt') !=
-        other._$data.containsKey('updatedAt')) {
-      return false;
-    }
-    if (l$updatedAt != lOther$updatedAt) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_id = $_id;
-    final l$code = code;
-    final l$guestSize = guestSize;
-    final l$guestPerEntry = guestPerEntry;
-    final l$guestsRegistered = guestsRegistered;
-    final l$type = type;
-    final l$status = status;
-    final l$createdAt = createdAt;
-    final l$updatedAt = updatedAt;
-    return Object.hashAll([
-      l$$_id,
-      _$data.containsKey('code') ? l$code : const {},
-      _$data.containsKey('guestSize') ? l$guestSize : const {},
-      _$data.containsKey('guestPerEntry') ? l$guestPerEntry : const {},
-      _$data.containsKey('guestsRegistered') ? l$guestsRegistered : const {},
-      _$data.containsKey('type') ? l$type : const {},
-      _$data.containsKey('status') ? l$status : const {},
-      _$data.containsKey('createdAt') ? l$createdAt : const {},
-      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith$Input$UpdateInvitationLinkInput<TRes> {
-  factory CopyWith$Input$UpdateInvitationLinkInput(
-    Input$UpdateInvitationLinkInput instance,
-    TRes Function(Input$UpdateInvitationLinkInput) then,
-  ) = _CopyWithImpl$Input$UpdateInvitationLinkInput;
-
-  factory CopyWith$Input$UpdateInvitationLinkInput.stub(TRes res) =
-      _CopyWithStubImpl$Input$UpdateInvitationLinkInput;
-
-  TRes call({
-    String? $_id,
-    String? code,
-    int? guestSize,
-    int? guestPerEntry,
-    int? guestsRegistered,
-    Enum$LinkTypeEnum? type,
-    Enum$LinkStatusEnum? status,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  });
-}
-
-class _CopyWithImpl$Input$UpdateInvitationLinkInput<TRes>
-    implements CopyWith$Input$UpdateInvitationLinkInput<TRes> {
-  _CopyWithImpl$Input$UpdateInvitationLinkInput(this._instance, this._then);
-
-  final Input$UpdateInvitationLinkInput _instance;
-
-  final TRes Function(Input$UpdateInvitationLinkInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_id = _undefined,
-    Object? code = _undefined,
-    Object? guestSize = _undefined,
-    Object? guestPerEntry = _undefined,
-    Object? guestsRegistered = _undefined,
-    Object? type = _undefined,
-    Object? status = _undefined,
-    Object? createdAt = _undefined,
-    Object? updatedAt = _undefined,
-  }) => _then(
-    Input$UpdateInvitationLinkInput._({
-      ..._instance._$data,
-      if ($_id != _undefined && $_id != null) '_id': ($_id as String),
-      if (code != _undefined) 'code': (code as String?),
-      if (guestSize != _undefined) 'guestSize': (guestSize as int?),
-      if (guestPerEntry != _undefined) 'guestPerEntry': (guestPerEntry as int?),
-      if (guestsRegistered != _undefined)
-        'guestsRegistered': (guestsRegistered as int?),
-      if (type != _undefined) 'type': (type as Enum$LinkTypeEnum?),
-      if (status != _undefined) 'status': (status as Enum$LinkStatusEnum?),
-      if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
-      if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl$Input$UpdateInvitationLinkInput<TRes>
-    implements CopyWith$Input$UpdateInvitationLinkInput<TRes> {
-  _CopyWithStubImpl$Input$UpdateInvitationLinkInput(this._res);
-
-  TRes _res;
-
-  call({
-    String? $_id,
-    String? code,
-    int? guestSize,
-    int? guestPerEntry,
-    int? guestsRegistered,
-    Enum$LinkTypeEnum? type,
-    Enum$LinkStatusEnum? status,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  }) => _res;
-}
-
 class Input$FetchGuestInput {
   factory Input$FetchGuestInput({String? code, String? first3Letters}) =>
       Input$FetchGuestInput._({
@@ -2518,6 +2187,337 @@ class _CopyWithStubImpl$Input$CreatePrintCardInput<TRes>
   TRes _res;
 
   call({int? count}) => _res;
+}
+
+class Input$UpdateInvitationLinkInput {
+  factory Input$UpdateInvitationLinkInput({
+    required String $_id,
+    String? code,
+    int? guestSize,
+    int? guestPerEntry,
+    int? guestsRegistered,
+    Enum$LinkTypeEnum? type,
+    Enum$LinkStatusEnum? status,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) => Input$UpdateInvitationLinkInput._({
+    r'_id': $_id,
+    if (code != null) r'code': code,
+    if (guestSize != null) r'guestSize': guestSize,
+    if (guestPerEntry != null) r'guestPerEntry': guestPerEntry,
+    if (guestsRegistered != null) r'guestsRegistered': guestsRegistered,
+    if (type != null) r'type': type,
+    if (status != null) r'status': status,
+    if (createdAt != null) r'createdAt': createdAt,
+    if (updatedAt != null) r'updatedAt': updatedAt,
+  });
+
+  Input$UpdateInvitationLinkInput._(this._$data);
+
+  factory Input$UpdateInvitationLinkInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$$_id = data['_id'];
+    result$data['_id'] = (l$$_id as String);
+    if (data.containsKey('code')) {
+      final l$code = data['code'];
+      result$data['code'] = (l$code as String?);
+    }
+    if (data.containsKey('guestSize')) {
+      final l$guestSize = data['guestSize'];
+      result$data['guestSize'] = (l$guestSize as int?);
+    }
+    if (data.containsKey('guestPerEntry')) {
+      final l$guestPerEntry = data['guestPerEntry'];
+      result$data['guestPerEntry'] = (l$guestPerEntry as int?);
+    }
+    if (data.containsKey('guestsRegistered')) {
+      final l$guestsRegistered = data['guestsRegistered'];
+      result$data['guestsRegistered'] = (l$guestsRegistered as int?);
+    }
+    if (data.containsKey('type')) {
+      final l$type = data['type'];
+      result$data['type'] = l$type == null
+          ? null
+          : fromJson$Enum$LinkTypeEnum((l$type as String));
+    }
+    if (data.containsKey('status')) {
+      final l$status = data['status'];
+      result$data['status'] = l$status == null
+          ? null
+          : fromJson$Enum$LinkStatusEnum((l$status as String));
+    }
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = l$createdAt == null
+          ? null
+          : dateTimeFromJson(l$createdAt);
+    }
+    if (data.containsKey('updatedAt')) {
+      final l$updatedAt = data['updatedAt'];
+      result$data['updatedAt'] = l$updatedAt == null
+          ? null
+          : dateTimeFromJson(l$updatedAt);
+    }
+    return Input$UpdateInvitationLinkInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String get $_id => (_$data['_id'] as String);
+
+  String? get code => (_$data['code'] as String?);
+
+  int? get guestSize => (_$data['guestSize'] as int?);
+
+  int? get guestPerEntry => (_$data['guestPerEntry'] as int?);
+
+  int? get guestsRegistered => (_$data['guestsRegistered'] as int?);
+
+  Enum$LinkTypeEnum? get type => (_$data['type'] as Enum$LinkTypeEnum?);
+
+  Enum$LinkStatusEnum? get status => (_$data['status'] as Enum$LinkStatusEnum?);
+
+  DateTime? get createdAt => (_$data['createdAt'] as DateTime?);
+
+  DateTime? get updatedAt => (_$data['updatedAt'] as DateTime?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$$_id = $_id;
+    result$data['_id'] = l$$_id;
+    if (_$data.containsKey('code')) {
+      final l$code = code;
+      result$data['code'] = l$code;
+    }
+    if (_$data.containsKey('guestSize')) {
+      final l$guestSize = guestSize;
+      result$data['guestSize'] = l$guestSize;
+    }
+    if (_$data.containsKey('guestPerEntry')) {
+      final l$guestPerEntry = guestPerEntry;
+      result$data['guestPerEntry'] = l$guestPerEntry;
+    }
+    if (_$data.containsKey('guestsRegistered')) {
+      final l$guestsRegistered = guestsRegistered;
+      result$data['guestsRegistered'] = l$guestsRegistered;
+    }
+    if (_$data.containsKey('type')) {
+      final l$type = type;
+      result$data['type'] = l$type == null
+          ? null
+          : toJson$Enum$LinkTypeEnum(l$type);
+    }
+    if (_$data.containsKey('status')) {
+      final l$status = status;
+      result$data['status'] = l$status == null
+          ? null
+          : toJson$Enum$LinkStatusEnum(l$status);
+    }
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt == null
+          ? null
+          : dateTimeToJson(l$createdAt);
+    }
+    if (_$data.containsKey('updatedAt')) {
+      final l$updatedAt = updatedAt;
+      result$data['updatedAt'] = l$updatedAt == null
+          ? null
+          : dateTimeToJson(l$updatedAt);
+    }
+    return result$data;
+  }
+
+  CopyWith$Input$UpdateInvitationLinkInput<Input$UpdateInvitationLinkInput>
+  get copyWith => CopyWith$Input$UpdateInvitationLinkInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input$UpdateInvitationLinkInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_id = $_id;
+    final lOther$$_id = other.$_id;
+    if (l$$_id != lOther$$_id) {
+      return false;
+    }
+    final l$code = code;
+    final lOther$code = other.code;
+    if (_$data.containsKey('code') != other._$data.containsKey('code')) {
+      return false;
+    }
+    if (l$code != lOther$code) {
+      return false;
+    }
+    final l$guestSize = guestSize;
+    final lOther$guestSize = other.guestSize;
+    if (_$data.containsKey('guestSize') !=
+        other._$data.containsKey('guestSize')) {
+      return false;
+    }
+    if (l$guestSize != lOther$guestSize) {
+      return false;
+    }
+    final l$guestPerEntry = guestPerEntry;
+    final lOther$guestPerEntry = other.guestPerEntry;
+    if (_$data.containsKey('guestPerEntry') !=
+        other._$data.containsKey('guestPerEntry')) {
+      return false;
+    }
+    if (l$guestPerEntry != lOther$guestPerEntry) {
+      return false;
+    }
+    final l$guestsRegistered = guestsRegistered;
+    final lOther$guestsRegistered = other.guestsRegistered;
+    if (_$data.containsKey('guestsRegistered') !=
+        other._$data.containsKey('guestsRegistered')) {
+      return false;
+    }
+    if (l$guestsRegistered != lOther$guestsRegistered) {
+      return false;
+    }
+    final l$type = type;
+    final lOther$type = other.type;
+    if (_$data.containsKey('type') != other._$data.containsKey('type')) {
+      return false;
+    }
+    if (l$type != lOther$type) {
+      return false;
+    }
+    final l$status = status;
+    final lOther$status = other.status;
+    if (_$data.containsKey('status') != other._$data.containsKey('status')) {
+      return false;
+    }
+    if (l$status != lOther$status) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
+      return false;
+    }
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (_$data.containsKey('updatedAt') !=
+        other._$data.containsKey('updatedAt')) {
+      return false;
+    }
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_id = $_id;
+    final l$code = code;
+    final l$guestSize = guestSize;
+    final l$guestPerEntry = guestPerEntry;
+    final l$guestsRegistered = guestsRegistered;
+    final l$type = type;
+    final l$status = status;
+    final l$createdAt = createdAt;
+    final l$updatedAt = updatedAt;
+    return Object.hashAll([
+      l$$_id,
+      _$data.containsKey('code') ? l$code : const {},
+      _$data.containsKey('guestSize') ? l$guestSize : const {},
+      _$data.containsKey('guestPerEntry') ? l$guestPerEntry : const {},
+      _$data.containsKey('guestsRegistered') ? l$guestsRegistered : const {},
+      _$data.containsKey('type') ? l$type : const {},
+      _$data.containsKey('status') ? l$status : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('updatedAt') ? l$updatedAt : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith$Input$UpdateInvitationLinkInput<TRes> {
+  factory CopyWith$Input$UpdateInvitationLinkInput(
+    Input$UpdateInvitationLinkInput instance,
+    TRes Function(Input$UpdateInvitationLinkInput) then,
+  ) = _CopyWithImpl$Input$UpdateInvitationLinkInput;
+
+  factory CopyWith$Input$UpdateInvitationLinkInput.stub(TRes res) =
+      _CopyWithStubImpl$Input$UpdateInvitationLinkInput;
+
+  TRes call({
+    String? $_id,
+    String? code,
+    int? guestSize,
+    int? guestPerEntry,
+    int? guestsRegistered,
+    Enum$LinkTypeEnum? type,
+    Enum$LinkStatusEnum? status,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  });
+}
+
+class _CopyWithImpl$Input$UpdateInvitationLinkInput<TRes>
+    implements CopyWith$Input$UpdateInvitationLinkInput<TRes> {
+  _CopyWithImpl$Input$UpdateInvitationLinkInput(this._instance, this._then);
+
+  final Input$UpdateInvitationLinkInput _instance;
+
+  final TRes Function(Input$UpdateInvitationLinkInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_id = _undefined,
+    Object? code = _undefined,
+    Object? guestSize = _undefined,
+    Object? guestPerEntry = _undefined,
+    Object? guestsRegistered = _undefined,
+    Object? type = _undefined,
+    Object? status = _undefined,
+    Object? createdAt = _undefined,
+    Object? updatedAt = _undefined,
+  }) => _then(
+    Input$UpdateInvitationLinkInput._({
+      ..._instance._$data,
+      if ($_id != _undefined && $_id != null) '_id': ($_id as String),
+      if (code != _undefined) 'code': (code as String?),
+      if (guestSize != _undefined) 'guestSize': (guestSize as int?),
+      if (guestPerEntry != _undefined) 'guestPerEntry': (guestPerEntry as int?),
+      if (guestsRegistered != _undefined)
+        'guestsRegistered': (guestsRegistered as int?),
+      if (type != _undefined) 'type': (type as Enum$LinkTypeEnum?),
+      if (status != _undefined) 'status': (status as Enum$LinkStatusEnum?),
+      if (createdAt != _undefined) 'createdAt': (createdAt as DateTime?),
+      if (updatedAt != _undefined) 'updatedAt': (updatedAt as DateTime?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl$Input$UpdateInvitationLinkInput<TRes>
+    implements CopyWith$Input$UpdateInvitationLinkInput<TRes> {
+  _CopyWithStubImpl$Input$UpdateInvitationLinkInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? $_id,
+    String? code,
+    int? guestSize,
+    int? guestPerEntry,
+    int? guestsRegistered,
+    Enum$LinkTypeEnum? type,
+    Enum$LinkStatusEnum? status,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) => _res;
 }
 
 class Input$DeleteGuestInput {

@@ -131,44 +131,55 @@ class HelperFunctions {
   //   );
   // }
 
-  static Future<void> shareItem({
+  static Future<bool> shareItem({
     required bool isFile,
     String? item,
     XFile? file,
     String? description,
   }) async {
     if (isFile) {
-      _shareFile(file, description);
+      return _shareFile(file, description);
     } else {
-      _shareText(item, description);
+      return _shareText(item, description);
     }
   }
 
-  static Future<void> _shareFile(XFile? file, String? description) async {
+  static Future<bool> _shareFile(XFile? file, String? description) async {
     if (file != null && file.path.isNotEmpty) {
       final result = await sharePlus.share(
         ShareParams(files: [file], text: description),
       );
       if (result.status == ShareResultStatus.success) {
         showStyledToast(message: "File shared successfully.");
+        return true;
       }
     } else {
       showStyledToast(
         message: "Invalid operation: file cannot be null or empty.",
         isError: true,
       );
+      return false;
     }
+    return false;
   }
 
-  static Future<void> _shareText(String? item, String? description) async {
+  static Future<bool> _shareText(String? item, String? description) async {
     if (item != null && item.isNotEmpty) {
-      await sharePlus.share(ShareParams(text: item, subject: description));
+      final result = await sharePlus.share(
+        ShareParams(text: item, subject: description),
+      );
+      if (result.status == ShareResultStatus.success) {
+        showStyledToast(message: "File shared successfully.");
+        return true;
+      }
     } else {
       showStyledToast(
         message: "Item attribute cannot be empty.",
         isError: true,
       );
+      return false;
     }
+    return false;
   }
 
   static String? encodeQueryParameters(Map<String, String> params) {

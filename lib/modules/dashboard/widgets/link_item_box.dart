@@ -16,47 +16,56 @@ class LinkItemBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 72,
-      width: double.infinity,
-      alignment: Alignment.center,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Flexible(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomText(
-                  text: linkInfo.inviteUrl ?? "",
-                  weight: FontWeight.w600,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  color: ThemeColors.contentPrimary,
-                  size: 13,
-                ),
-                CustomText(
-                  text: "${linkInfo.status?.title.replaceAll("_", " ")}",
-                  color: ThemeColors.contentTertiary,
-                  size: 12,
-                ),
-              ],
+    return GestureDetector(
+      onTap: () {
+        genRef!.read(dashboardProvider.notifier).updateState({
+          "activeInviteLink": linkInfo,
+        });
+        Get.toNamed(AppRouter.linkInvitationView);
+      },
+      child: Container(
+        height: 72,
+        width: double.infinity,
+        color: ThemeColors.backgroundPrimary,
+        alignment: Alignment.center,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomText(
+                    text: linkInfo.inviteUrl ?? "",
+                    weight: FontWeight.w600,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    color: ThemeColors.contentPrimary,
+                    size: 13,
+                  ),
+                  CustomText(
+                    text: "${linkInfo.status?.title.replaceAll("_", " ")}",
+                    color: ThemeColors.contentTertiary,
+                    size: 12,
+                  ),
+                ],
+              ),
             ),
-          ),
-          20.horizontalSpace,
-          IconBuilder(
-            iconPath: AppImage.refer,
-            size: 18,
-            onTapped: () {
-              genRef!.read(dashboardProvider.notifier).updateState({
-                "activeInviteLink": linkInfo,
-              });
-              Get.toNamed(AppRouter.linkInvitationView);
-            },
-          ),
-        ],
+            20.horizontalSpace,
+            IconBuilder(
+              iconPath: AppImage.refer,
+              size: 18,
+              onTapped: () {
+                genRef!
+                    .read(dashboardProvider.notifier)
+                    .shareLink(context, linkInfo: linkInfo);
+                // Get.toNamed(AppRouter.linkInvitationView);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
