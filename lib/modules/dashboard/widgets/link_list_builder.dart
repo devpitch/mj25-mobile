@@ -23,6 +23,7 @@ class LinkListBuilder extends HookConsumerWidget {
     final notifier = ref.read(dashboardProvider.notifier);
     final state = ref.watch(dashboardProvider);
     final bool isLoading = state.loadingLinks ?? false;
+    final bool appliedFilter = state.guestFilters?.keys.isNotEmpty ??  false;
 
     final List<InvitationLinkResponse> dataList = isLoading
         ? dummyInvitationLinks
@@ -55,6 +56,16 @@ class LinkListBuilder extends HookConsumerWidget {
               ),
             ),
             12.horizontalSpace,
+            IconBuilder(
+              iconPath: AppImage.filter,
+              size: 40,
+              color: context.contentSecondary,
+              onTapped: () {
+                genRef!
+                    .read(dashboardProvider.notifier)
+                    .openSheet(context: context, type: "filter");
+              },
+            ),
           ],
         ),
         if (dataList.isEmpty && !isLoading)
@@ -64,13 +75,17 @@ class LinkListBuilder extends HookConsumerWidget {
               children: [
                 IconBuilder(iconPath: AppImage.inviteLink, size: 80),
                 15.verticalSpace,
-                CustomText(text: "Invitation links will shown here."),
+                CustomText(text: appliedFilter ? "No item found" : "Invitation links will shown here."),
                 30.verticalSpace,
                 EventButton(
                   width: 150,
-                  text: "Reload",
+                  text: appliedFilter ?   "Clear Filter" : "Reload",
                   onClick: () {
-                    notifier.getInvitationLinks();
+                    if(appliedFilter){
+                      notifier.clearFilter();
+                    }else {
+                      notifier.getInvitationLinks();
+                    }
                   },
                 ),
               ],

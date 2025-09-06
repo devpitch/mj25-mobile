@@ -1514,10 +1514,12 @@ class Variables$Query$invitationLinks {
     required int limit,
     required int page,
     required String search,
+    Input$InvitationFilterInput? input,
   }) => Variables$Query$invitationLinks._({
     r'limit': limit,
     r'page': page,
     r'search': search,
+    if (input != null) r'input': input,
   });
 
   Variables$Query$invitationLinks._(this._$data);
@@ -1530,6 +1532,14 @@ class Variables$Query$invitationLinks {
     result$data['page'] = (l$page as int);
     final l$search = data['search'];
     result$data['search'] = (l$search as String);
+    if (data.containsKey('input')) {
+      final l$input = data['input'];
+      result$data['input'] = l$input == null
+          ? null
+          : Input$InvitationFilterInput.fromJson(
+              (l$input as Map<String, dynamic>),
+            );
+    }
     return Variables$Query$invitationLinks._(result$data);
   }
 
@@ -1541,6 +1551,9 @@ class Variables$Query$invitationLinks {
 
   String get search => (_$data['search'] as String);
 
+  Input$InvitationFilterInput? get input =>
+      (_$data['input'] as Input$InvitationFilterInput?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$limit = limit;
@@ -1549,6 +1562,10 @@ class Variables$Query$invitationLinks {
     result$data['page'] = l$page;
     final l$search = search;
     result$data['search'] = l$search;
+    if (_$data.containsKey('input')) {
+      final l$input = input;
+      result$data['input'] = l$input?.toJson();
+    }
     return result$data;
   }
 
@@ -1579,6 +1596,14 @@ class Variables$Query$invitationLinks {
     if (l$search != lOther$search) {
       return false;
     }
+    final l$input = input;
+    final lOther$input = other.input;
+    if (_$data.containsKey('input') != other._$data.containsKey('input')) {
+      return false;
+    }
+    if (l$input != lOther$input) {
+      return false;
+    }
     return true;
   }
 
@@ -1587,7 +1612,13 @@ class Variables$Query$invitationLinks {
     final l$limit = limit;
     final l$page = page;
     final l$search = search;
-    return Object.hashAll([l$limit, l$page, l$search]);
+    final l$input = input;
+    return Object.hashAll([
+      l$limit,
+      l$page,
+      l$search,
+      _$data.containsKey('input') ? l$input : const {},
+    ]);
   }
 }
 
@@ -1600,7 +1631,12 @@ abstract class CopyWith$Variables$Query$invitationLinks<TRes> {
   factory CopyWith$Variables$Query$invitationLinks.stub(TRes res) =
       _CopyWithStubImpl$Variables$Query$invitationLinks;
 
-  TRes call({int? limit, int? page, String? search});
+  TRes call({
+    int? limit,
+    int? page,
+    String? search,
+    Input$InvitationFilterInput? input,
+  });
 }
 
 class _CopyWithImpl$Variables$Query$invitationLinks<TRes>
@@ -1617,12 +1653,14 @@ class _CopyWithImpl$Variables$Query$invitationLinks<TRes>
     Object? limit = _undefined,
     Object? page = _undefined,
     Object? search = _undefined,
+    Object? input = _undefined,
   }) => _then(
     Variables$Query$invitationLinks._({
       ..._instance._$data,
       if (limit != _undefined && limit != null) 'limit': (limit as int),
       if (page != _undefined && page != null) 'page': (page as int),
       if (search != _undefined && search != null) 'search': (search as String),
+      if (input != _undefined) 'input': (input as Input$InvitationFilterInput?),
     }),
   );
 }
@@ -1633,7 +1671,12 @@ class _CopyWithStubImpl$Variables$Query$invitationLinks<TRes>
 
   TRes _res;
 
-  call({int? limit, int? page, String? search}) => _res;
+  call({
+    int? limit,
+    int? page,
+    String? search,
+    Input$InvitationFilterInput? input,
+  }) => _res;
 }
 
 class Query$invitationLinks {
@@ -1788,6 +1831,15 @@ const documentNodeQueryinvitationLinks = DocumentNode(
           defaultValue: DefaultValueNode(value: null),
           directives: [],
         ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'input')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'InvitationFilterInput'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
       ],
       directives: [],
       selectionSet: SelectionSetNode(
@@ -1807,6 +1859,10 @@ const documentNodeQueryinvitationLinks = DocumentNode(
               ArgumentNode(
                 name: NameNode(value: 'search'),
                 value: VariableNode(name: NameNode(value: 'search')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'input'),
+                value: VariableNode(name: NameNode(value: 'input')),
               ),
             ],
             directives: [],

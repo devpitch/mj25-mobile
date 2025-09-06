@@ -12,7 +12,10 @@ enum LinkStatusEnum {
   INACTIVE,
 
   /// Link has been printed
-  PRINTED;
+  PRINTED,
+
+  /// Link has been printed
+  SHARED;
 
   @override
   String toString() {
@@ -27,6 +30,8 @@ enum LinkStatusEnum {
         return 'INACTIVE';
       case LinkStatusEnum.PRINTED:
         return 'PRINTED';
+      case LinkStatusEnum.SHARED:
+        return 'SHARED';
     }
   }
 
@@ -42,6 +47,8 @@ enum LinkStatusEnum {
         return 'Inactive';
       case LinkStatusEnum.PRINTED:
         return 'Printed';
+      case LinkStatusEnum.SHARED:
+        return 'Shared';
     }
   }
 }

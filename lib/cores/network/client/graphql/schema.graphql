@@ -434,10 +434,10 @@ input UpdateInvitationLinkInput {
 """Fetch guest input with guest code and first 3 letter of surname"""
 input FetchGuestInput {
   """Guest invitation card code"""
-  code: String!
+  code: String
 
   """Guest first 3 letter of surname"""
-  first3Letters: String!
+  first3Letters: String
 }
 
 """Fetch guest input with guest code and first 3 letter of surname"""
@@ -456,7 +456,7 @@ type Mutation {
   """Create an Admin user"""
   createAdmin(input: CreateUserInput!): UserResponse!
 
-  """Refresh user access and refresh tokens.."""
+  """Refresh user access and refresh tokens."""
   refreshToken: LoginResponse!
 
   """Guests details submitted."""

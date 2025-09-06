@@ -800,35 +800,43 @@ class _CopyWithStubImpl$Input$UpdateInvitationLinkInput<TRes>
 }
 
 class Input$FetchGuestInput {
-  factory Input$FetchGuestInput({
-    required String code,
-    required String first3Letters,
-  }) =>
-      Input$FetchGuestInput._({r'code': code, r'first3Letters': first3Letters});
+  factory Input$FetchGuestInput({String? code, String? first3Letters}) =>
+      Input$FetchGuestInput._({
+        if (code != null) r'code': code,
+        if (first3Letters != null) r'first3Letters': first3Letters,
+      });
 
   Input$FetchGuestInput._(this._$data);
 
   factory Input$FetchGuestInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    final l$code = data['code'];
-    result$data['code'] = (l$code as String);
-    final l$first3Letters = data['first3Letters'];
-    result$data['first3Letters'] = (l$first3Letters as String);
+    if (data.containsKey('code')) {
+      final l$code = data['code'];
+      result$data['code'] = (l$code as String?);
+    }
+    if (data.containsKey('first3Letters')) {
+      final l$first3Letters = data['first3Letters'];
+      result$data['first3Letters'] = (l$first3Letters as String?);
+    }
     return Input$FetchGuestInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  String get code => (_$data['code'] as String);
+  String? get code => (_$data['code'] as String?);
 
-  String get first3Letters => (_$data['first3Letters'] as String);
+  String? get first3Letters => (_$data['first3Letters'] as String?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    final l$code = code;
-    result$data['code'] = l$code;
-    final l$first3Letters = first3Letters;
-    result$data['first3Letters'] = l$first3Letters;
+    if (_$data.containsKey('code')) {
+      final l$code = code;
+      result$data['code'] = l$code;
+    }
+    if (_$data.containsKey('first3Letters')) {
+      final l$first3Letters = first3Letters;
+      result$data['first3Letters'] = l$first3Letters;
+    }
     return result$data;
   }
 
@@ -845,11 +853,18 @@ class Input$FetchGuestInput {
     }
     final l$code = code;
     final lOther$code = other.code;
+    if (_$data.containsKey('code') != other._$data.containsKey('code')) {
+      return false;
+    }
     if (l$code != lOther$code) {
       return false;
     }
     final l$first3Letters = first3Letters;
     final lOther$first3Letters = other.first3Letters;
+    if (_$data.containsKey('first3Letters') !=
+        other._$data.containsKey('first3Letters')) {
+      return false;
+    }
     if (l$first3Letters != lOther$first3Letters) {
       return false;
     }
@@ -860,7 +875,10 @@ class Input$FetchGuestInput {
   int get hashCode {
     final l$code = code;
     final l$first3Letters = first3Letters;
-    return Object.hashAll([l$code, l$first3Letters]);
+    return Object.hashAll([
+      _$data.containsKey('code') ? l$code : const {},
+      _$data.containsKey('first3Letters') ? l$first3Letters : const {},
+    ]);
   }
 }
 
@@ -890,9 +908,9 @@ class _CopyWithImpl$Input$FetchGuestInput<TRes>
       _then(
         Input$FetchGuestInput._({
           ..._instance._$data,
-          if (code != _undefined && code != null) 'code': (code as String),
-          if (first3Letters != _undefined && first3Letters != null)
-            'first3Letters': (first3Letters as String),
+          if (code != _undefined) 'code': (code as String?),
+          if (first3Letters != _undefined)
+            'first3Letters': (first3Letters as String?),
         }),
       );
 }

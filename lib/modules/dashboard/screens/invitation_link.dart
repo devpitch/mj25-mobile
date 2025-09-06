@@ -163,6 +163,7 @@ class InvitationLinkScreen extends ConsumerWidget {
                 ),
               ),
             ),
+            const AppHeaderText(label: "Guests"),
 
             /// Guests Section with AnimatedSwitcher
             Expanded(
@@ -179,25 +180,27 @@ class InvitationLinkScreen extends ConsumerWidget {
                   child: FadeTransition(opacity: anim, child: child),
                 ),
                 child: (activeLink.guests?.isNotEmpty ?? false)
-                    ? Column(
-                        key: const ValueKey("guests"),
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const AppHeaderText(label: "Guests"),
-                          ListView.separated(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: const EdgeInsets.only(
-                              bottom: 100,
-                              top: 15,
+                    ? SingleChildScrollView(
+                        child: Column(
+                          key: const ValueKey("guests"),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ListView.separated(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: const EdgeInsets.only(
+                                bottom: 100,
+                                top: 15,
+                              ),
+                              itemBuilder: (cxt, index) =>
+                                  GuestInvitationItemBox(
+                                    guestInfo: activeLink.guests![index],
+                                  ),
+                              separatorBuilder: (_, __) => 10.verticalSpace,
+                              itemCount: activeLink.guests!.length,
                             ),
-                            itemBuilder: (cxt, index) => GuestInvitationItemBox(
-                              guestInfo: activeLink.guests![index],
-                            ),
-                            separatorBuilder: (_, __) => 10.verticalSpace,
-                            itemCount: activeLink.guests!.length,
-                          ),
-                        ],
+                          ],
+                        ),
                       )
                     : Center(
                         key: const ValueKey("noGuests"),

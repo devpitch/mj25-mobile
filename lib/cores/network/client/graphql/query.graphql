@@ -23,8 +23,8 @@ query invitationLink($input: SimpleInput!) {
     }
 }
 
-query invitationLinks($limit: Int!, $page: Int!, $search: String!) {
-    invitationLinks(limit: $limit, page: $page, search: $search) {
+query invitationLinks($limit: Int!, $page: Int!, $search: String!, $input: InvitationFilterInput) {
+    invitationLinks(limit: $limit, page: $page, search: $search, input: $input) {
         items {
             ...InvitationLinkResponse
         }

@@ -4,26 +4,30 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:event_handler/config/route/route_mapping.dart';
+import 'package:event_handler/cores/network/client/graphql/enums/link_status_enum.dart';
+import 'package:event_handler/cores/network/client/graphql/enums/link_type_enum.dart';
 import 'package:event_handler/cores/providers/text_controllers.dart';
 import 'package:event_handler/cores/utils/custom_dialog.dart';
+import 'package:event_handler/cores/utils/helper_functions.dart';
 import 'package:event_handler/cores/utils/image_service.dart';
 import 'package:event_handler/cores/utils/rydmie_alerts.dart';
 import 'package:event_handler/cores/utils/text_controller_strings.dart';
 import 'package:event_handler/cores/widgets/app_bottom_sheet.dart';
-import 'package:event_handler/cores/widgets/custom_dropdown.dart';
 import 'package:event_handler/injections/injector.dart';
 import 'package:event_handler/main.dart';
+import 'package:event_handler/modules/dashboard/models/dashboard_state_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/add_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/create_invitation_link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
-import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/rsvp_model.dart';
 import 'package:event_handler/modules/dashboard/models/upload_image_model.dart';
 import 'package:event_handler/modules/dashboard/services/dashboard_service.dart';
+import 'package:event_handler/modules/dashboard/widgets/filter_list_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../../cores/utils/constants.dart' show globalBuildContextProvider;
 import '../widgets/dashboard_widgets_exporter.dart';
@@ -38,6 +42,8 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       selectedLinkType: data["selectedLinkType"],
       activeInviteLink: data["activeInviteLink"],
       selectedTitle: data["selectedTitle"],
+      selectedFilterType: data["selectedFilterType"],
+      selectedFilterStatus: data["selectedFilterStatus"],
     );
   }
 
@@ -82,24 +88,37 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     }
   }
 
-  getInvitationLinks({bool showLoader = true}) async {
+  getInvitationLinks({
+    bool showLoader = true,
+    LinkRequestModel? queryRequest,
+  }) async {
     try {
       if ((!showLoader && (state.invitationLinks?.items?.isEmpty ?? false)) ||
           showLoader) {
         state = state.copyWith(loadingLinks: true);
       }
 
-      LinkRequestModel request = LinkRequestModel(
-        limit: 50,
-        page: 1,
-        search: "",
-        input: InvitationFilterInput(),
-      );
+      LinkRequestModel request =
+          queryRequest ??
+          LinkRequestModel(
+            limit: 50,
+            page: 1,
+            search: "",
+            input: InvitationFilterInput(),
+          );
 
       final response = await _service.getInvitationLink(request);
 
       if (response != null) {
-        state = state.copyWith(invitationLinks: response);
+        final guestFilter = state.guestFilters ?? {};
+        if (queryRequest != null) {
+          guestFilter['applied'] = true;
+        }
+
+        state = state.copyWith(
+          invitationLinks: response,
+          guestFilters: guestFilter,
+        );
       }
     } catch (e) {
       log("There is an error from get invitation flow::: e");
@@ -148,6 +167,16 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
               context,
               child: ConfirmGuestDeleteBox(guestInfo: value as GuestResponse?),
               allowDismissal: false,
+            );
+            break;
+          }
+        case "filter":
+          {
+            await _initiateFilter();
+            AppBottomSheet.show(
+              context,
+              title: "Filter",
+              child: GuestFilterSheet(),
             );
             break;
           }
@@ -418,6 +447,275 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       state = state.copyWith(isDeletingGuest: false);
     }
   }
+
+  manageFilter(BuildContext context, {required String type}) async {
+    final Map<String, dynamic> guestFilters = state.guestFilters ?? {};
+
+    switch (type) {
+      case "Code":
+        {
+          guestFilters[type] = state.filterCode!.text.trim() ?? "";
+          break;
+        }
+      case "GuestPerEntry":
+        {
+          guestFilters[type] = state.filterGuestPerEntry!.text.trim() ?? "";
+          break;
+        }
+      case "GuestSize":
+        {
+          guestFilters[type] = state.filterGuestsSize!.text.trim() ?? "";
+          break;
+        }
+      case "GuestRegistered":
+        {
+          guestFilters[type] = state.filterGuestRegistered!.text.trim() ?? "";
+          break;
+        }
+      case "Type":
+        {
+          guestFilters[type] = state.selectedFilterType;
+          break;
+        }
+      case "Status":
+        {
+          guestFilters[type] = state.selectedFilterStatus;
+          break;
+        }
+      case "createdSince":
+        {
+          final pickedDate = await HelperFunctions.pickDate(
+            context,
+            isBirthDate: false,
+            lastDate: DateTime.now(),
+          );
+          if (pickedDate != null) {
+            final formatedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+            state.createdSinceCtrl!.text = formatedDate;
+            state = state.copyWith(filterCreatedSince: pickedDate);
+            guestFilters[type] = formatedDate;
+          }
+          break;
+        }
+      case "createdUtil":
+        {
+          final pickedDate = await HelperFunctions.pickDate(
+            context,
+            isBirthDate: false,
+            lastDate: DateTime.now(),
+          );
+          if (pickedDate != null) {
+            final formatedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+            state.createdUtilCtrl!.text = formatedDate;
+            state = state.copyWith(filterCreatedUntil: pickedDate);
+            guestFilters[type] = formatedDate;
+          }
+          break;
+        }
+      case "updatedSince":
+        {
+          final pickedDate = await HelperFunctions.pickDate(
+            context,
+            isBirthDate: false,
+            lastDate: DateTime.now(),
+          );
+          if (pickedDate != null) {
+            final formatedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+            state.updatedSinceCtrl!.text = formatedDate;
+            state = state.copyWith(filterUpdatedSince: pickedDate);
+            guestFilters[type] = formatedDate;
+          }
+          break;
+        }
+      case "updatedUtil":
+        {
+          final pickedDate = await HelperFunctions.pickDate(
+            context,
+            isBirthDate: false,
+            lastDate: DateTime.now(),
+          );
+          if (pickedDate != null) {
+            final formatedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+            state.updatedUtilCtrl!.text = formatedDate;
+            state = state.copyWith(filterUpdatedUntil: pickedDate);
+            guestFilters[type] = formatedDate;
+          }
+          break;
+        }
+    }
+
+    if (guestFilters["applied"] == null) {
+      guestFilters['applied'] = false;
+    }
+
+    state = state.copyWith(guestFilters: guestFilters);
+
+    log("::::The current filterInfo is :: $guestFilters");
+  }
+
+  Future _initiateFilter() async {
+    state = state.copyWith(
+      filterCode: TextEditingController(),
+      filterGuestPerEntry: TextEditingController(),
+      filterGuestsSize: TextEditingController(),
+      filterGuestRegistered: TextEditingController(),
+      createdUtilCtrl: TextEditingController(),
+      createdSinceCtrl: TextEditingController(),
+      updatedUtilCtrl: TextEditingController(),
+      updatedSinceCtrl: TextEditingController(),
+      clearFilter: "yes",
+    );
+
+    final currentData = state.guestFilters ?? {};
+    if (currentData["applied"] == true) {
+      currentData.forEach((key, value) {
+        switch (key) {
+          case "Code":
+            {
+              state.filterCode!.text = value ?? "";
+              break;
+            }
+          case "GuestPerEntry":
+            {
+              state.filterGuestPerEntry!.text = value ?? "";
+              break;
+            }
+          case "GuestSize":
+            {
+              state.filterGuestsSize!.text = value ?? "";
+              break;
+            }
+          case "GuestRegistered":
+            {
+              state.filterGuestRegistered!.text = value ?? "";
+              break;
+            }
+          case "Type":
+            {
+              state = state.copyWith(selectedFilterType: value);
+              break;
+            }
+          case "Status":
+            {
+              state = state.copyWith(selectedFilterStatus: value);
+              break;
+            }
+          case "createdSince":
+            {
+              state.createdSinceCtrl!.text = value ?? "";
+              state = state.copyWith(
+                filterCreatedSince: value != null
+                    ? DateTime.tryParse(value)
+                    : null,
+              );
+              break;
+            }
+          case "createdUtil":
+            {
+              state.createdUtilCtrl!.text = value ?? "";
+              state = state.copyWith(
+                filterCreatedUntil: value != null
+                    ? DateTime.tryParse(value)
+                    : null,
+              );
+              break;
+            }
+          case "updatedSince":
+            {
+              state.updatedSinceCtrl!.text = value ?? "";
+              state = state.copyWith(
+                filterUpdatedSince: value != null
+                    ? DateTime.tryParse(value)
+                    : null,
+              );
+              break;
+            }
+          case "updatedUtil":
+            {
+              state.updatedUtilCtrl!.text = value ?? "";
+              state = state.copyWith(
+                filterUpdatedUntil: value != null
+                    ? DateTime.tryParse(value)
+                    : null,
+              );
+              break;
+            }
+        }
+      });
+    }
+  }
+
+  applyFilter(BuildContext context) async {
+    try {
+      if (!validateAtLeastOneFilterSelected()) {
+        EventAlert.showWarning(
+          context,
+          message: "Please select at least one filter.",
+        );
+        return;
+      }
+
+      LinkRequestModel request = LinkRequestModel(
+        limit: 30,
+        page: 1,
+        search: "",
+        input: InvitationFilterInput(
+          code: state.filterCode?.text.trim(),
+          createdSince: state.filterCreatedSince,
+          createdUntil: state.filterCreatedUntil,
+          guestPerEntry: int.tryParse(
+            state.filterGuestPerEntry?.text.trim() ?? "",
+          ),
+          guestSize: int.tryParse(state.filterGuestsSize?.text.trim() ?? ""),
+          guestsRegistered: int.tryParse(
+            state.filterGuestRegistered?.text.trim() ?? "",
+          ),
+          status: state.selectedFilterStatus != null
+              ? linkStatusEnumFromJson(
+                  state.selectedFilterStatus?.toUpperCase().replaceAll(
+                    " ",
+                    "_",
+                  ),
+                )
+              : null,
+          type: state.selectedFilterType != null
+              ? linkTypeEnumFromJson(
+                  state.selectedFilterType?.toUpperCase().replaceAll(" ", "_"),
+                )
+              : null,
+          updatedSince: state.filterUpdatedSince,
+          updatedUntil: state.filterUpdatedUntil,
+        ),
+      );
+      log("::::: Applying filter 10");
+      log("::::The explore request info: ${jsonEncode(request.toJson())}");
+      Navigator.pop(context);
+      await getInvitationLinks(showLoader: true, queryRequest: request);
+    } catch (e) {
+      log("::::: There is an error in advance search $e");
+    } finally {
+      state = state.copyWith(applyingFilter: false);
+    }
+  }
+
+  bool validateAtLeastOneFilterSelected() {
+    return (state.filterCode?.text.trim().isNotEmpty ?? false) ||
+        (state.filterCreatedSince != null) ||
+        (state.filterCreatedUntil != null) ||
+        (state.filterGuestPerEntry?.text.trim().isNotEmpty ?? false) ||
+        (state.filterGuestsSize?.text.trim().isNotEmpty ?? false) ||
+        (state.filterGuestRegistered?.text.trim().isNotEmpty ?? false) ||
+        (state.selectedFilterStatus != null) ||
+        (state.selectedFilterType != null) ||
+        (state.filterUpdatedSince != null) ||
+        (state.filterUpdatedUntil != null);
+  }
+
+  clearFilter() {
+    state = state.copyWith(guestFilters: {});
+    _initiateFilter();
+    getInvitationLinks(showLoader: true);
+  }
 }
 
 void _showError(BuildContext context, String message) async {
@@ -427,69 +725,3 @@ void _showError(BuildContext context, String message) async {
 final dashboardProvider = StateNotifierProvider(
   (_) => DashboardNotifier(DashboardService(getIt())),
 );
-
-class DashboardState {
-  final String activeTab;
-  final List<UploadImageModel>? images;
-  final UploadImageModel? activeImage;
-  final bool? loadingLinks;
-  final bool? isGeneratingLink;
-  final PaginatedInvitationLinkResponse? invitationLinks;
-  final String? selectedLinkType;
-  final InvitationLinkResponse? activeInviteLink;
-  final List<String>? selectedGuests;
-  final bool? isDeletingGuest;
-  final bool? isAddingGuest;
-  final DropdownItem? selectedTitle;
-
-  DashboardState({
-    this.activeTab = "Links",
-    this.images,
-    this.activeImage,
-    this.loadingLinks,
-    this.invitationLinks,
-    this.selectedLinkType,
-    this.isGeneratingLink,
-    this.activeInviteLink,
-    this.selectedGuests,
-    this.isDeletingGuest,
-    this.selectedTitle,
-    this.isAddingGuest,
-  });
-
-  DashboardState copyWith({
-    String? activeTab,
-    List<UploadImageModel>? images,
-    UploadImageModel? activeImage,
-    bool? loadingLinks,
-    PaginatedInvitationLinkResponse? invitationLinks,
-    String? selectedLinkType,
-    String? clearLinkGen,
-    bool? isGeneratingLink,
-    InvitationLinkResponse? activeInviteLink,
-    List<String>? selectedGuests,
-    bool? isDeletingGuest,
-    DropdownItem? selectedTitle,
-    String? clearAddGuest,
-    bool? isAddingGuest,
-  }) {
-    return DashboardState(
-      activeTab: activeTab ?? this.activeTab,
-      images: images ?? this.images,
-      activeImage: activeImage ?? this.activeImage,
-      loadingLinks: loadingLinks ?? this.loadingLinks,
-      invitationLinks: invitationLinks ?? this.invitationLinks,
-      selectedLinkType: clearLinkGen == "yes"
-          ? null
-          : selectedLinkType ?? this.selectedLinkType,
-      isGeneratingLink: isGeneratingLink ?? this.isGeneratingLink,
-      activeInviteLink: activeInviteLink ?? this.activeInviteLink,
-      selectedGuests: selectedGuests ?? this.selectedGuests,
-      isDeletingGuest: isDeletingGuest ?? this.isDeletingGuest,
-      selectedTitle: clearAddGuest == "yes"
-          ? null
-          : selectedTitle ?? this.selectedTitle,
-      isAddingGuest: isAddingGuest ?? this.isAddingGuest,
-    );
-  }
-}

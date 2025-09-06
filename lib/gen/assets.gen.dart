@@ -65,11 +65,17 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/attendance.svg
   String get attendance => 'assets/svgs/attendance.svg';
 
+  /// File path: assets/svgs/caution.svg
+  String get caution => 'assets/svgs/caution.svg';
+
   /// File path: assets/svgs/copy.svg
   String get copy => 'assets/svgs/copy.svg';
 
   /// File path: assets/svgs/delete.svg
   String get delete => 'assets/svgs/delete.svg';
+
+  /// File path: assets/svgs/filter.svg
+  String get filter => 'assets/svgs/filter.svg';
 
   /// File path: assets/svgs/generate.svg
   String get generate => 'assets/svgs/generate.svg';
@@ -96,8 +102,10 @@ class $AssetsSvgsGen {
   List<String> get values => [
     addUser,
     attendance,
+    caution,
     copy,
     delete,
+    filter,
     generate,
     guest,
     link,
