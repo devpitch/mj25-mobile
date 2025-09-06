@@ -9,7 +9,7 @@ class TextControllerStrings {
   static const String info = "info";
   static const String firstName = "first_name";
   static const String lastName = "last_name";
-  static const String message = "message";
+  static const String search = "search";
   static const String title = "title";
   static const String guestCount = "guest_count";
   static const String linkCount = "link_count";

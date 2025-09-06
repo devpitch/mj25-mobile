@@ -3,8 +3,11 @@ import 'dart:developer';
 import 'package:event_handler/modules/dashboard/domain/dashboard_repository.dart';
 import 'package:event_handler/modules/dashboard/models/request/add_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/create_invitation_link_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/guest_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/guests_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
+import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/rsvp_model.dart';
 
@@ -58,6 +61,24 @@ class DashboardService {
       return await _repo.rsvp(request);
     } catch (e) {
       log("::::   This is the error from rsvp:::: $e");
+      return null;
+    }
+  }
+
+  Future<GuestsResponse?> guests(GuestsRequestModel request) async {
+    try {
+      return await _repo.guests(request);
+    } catch (e) {
+      log("::::   This is the error from guests fetching:::: $e");
+      return null;
+    }
+  }
+
+  Future<GuestResponse?> guest(GuestRequestModel request) async {
+    try {
+      return await _repo.guest(request);
+    } catch (e) {
+      log("::::   This is the error from guest fetching:::: $e");
       return null;
     }
   }

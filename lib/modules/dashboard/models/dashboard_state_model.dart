@@ -1,4 +1,6 @@
 import 'package:event_handler/cores/widgets/custom_dropdown.dart';
+import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
+import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
 import 'package:event_handler/modules/dashboard/models/upload_image_model.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,8 @@ class DashboardState {
   final List<UploadImageModel>? images;
   final UploadImageModel? activeImage;
   final bool? loadingLinks;
+  final bool? loadingGuests;
+  final bool? loadingGuest;
   final bool? isGeneratingLink;
   final bool? applyingFilter;
   final PaginatedInvitationLinkResponse? invitationLinks;
@@ -35,6 +39,8 @@ class DashboardState {
   final String? filterStatus;
   final String? filterType;
   final Map<String, dynamic>? guestFilters;
+  final GuestsResponse? guestList;
+  final GuestResponse? activeGuest;
 
   DashboardState({
     this.activeTab = "Links",
@@ -68,6 +74,10 @@ class DashboardState {
     this.selectedFilterStatus,
     this.selectedFilterType,
     this.applyingFilter,
+    this.loadingGuests,
+    this.loadingGuest,
+    this.guestList,
+    this.activeGuest,
   });
 
   DashboardState copyWith({
@@ -105,6 +115,10 @@ class DashboardState {
     String? selectedFilterStatus,
     String? selectedFilterType,
     bool? applyingFilter,
+    bool? loadingGuests,
+    bool? loadingGuest,
+    GuestsResponse? guestList,
+    GuestResponse? activeGuest,
   }) {
     return DashboardState(
       activeTab: activeTab ?? this.activeTab,
@@ -159,6 +173,10 @@ class DashboardState {
           ? null
           : selectedFilterType ?? this.selectedFilterType,
       applyingFilter: applyingFilter ?? this.applyingFilter,
+      loadingGuests: loadingGuests ?? this.loadingGuests,
+      loadingGuest: loadingGuest ?? this.loadingGuest,
+      guestList: guestList ?? this.guestList,
+      activeGuest: activeGuest ?? this.activeGuest,
     );
   }
 }

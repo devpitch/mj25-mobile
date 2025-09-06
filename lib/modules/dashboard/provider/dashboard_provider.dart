@@ -18,8 +18,11 @@ import 'package:event_handler/main.dart';
 import 'package:event_handler/modules/dashboard/models/dashboard_state_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/add_guest_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/create_invitation_link_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/guest_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/guests_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
+import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/rsvp_model.dart';
 import 'package:event_handler/modules/dashboard/models/upload_image_model.dart';
 import 'package:event_handler/modules/dashboard/services/dashboard_service.dart';
@@ -44,6 +47,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       selectedTitle: data["selectedTitle"],
       selectedFilterType: data["selectedFilterType"],
       selectedFilterStatus: data["selectedFilterStatus"],
+      activeGuest: data["activeGuest"],
     );
   }
 
@@ -124,6 +128,61 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       log("There is an error from get invitation flow::: e");
     } finally {
       state = state.copyWith(loadingLinks: false);
+    }
+  }
+
+  getGuests({bool showLoader = true}) async {
+    try {
+      if (
+      // (!showLoader && (state.invitationLinks?.items?.isEmpty ?? false)) ||
+      showLoader) {
+        state = state.copyWith(loadingGuests: true);
+      }
+
+      GuestsRequestModel request = GuestsRequestModel(
+        limit: 50,
+        page: 1,
+        search: "",
+      );
+
+      final GuestsResponse? response = await _service.guests(request);
+
+      if (response != null) {
+        state = state.copyWith(guestList: response);
+      }
+    } catch (e) {
+      log("There is an error from get guests flow::: e");
+    } finally {
+      state = state.copyWith(loadingGuests: false);
+    }
+  }
+
+  getGuest({
+    bool showLoader = true,
+    required String guestCode,
+    required String first3Letters,
+  }) async {
+    try {
+      if (
+      // (!showLoader && (state.invitationLinks?.items?.isEmpty ?? false)) ||
+      showLoader) {
+        state = state.copyWith(loadingGuest: true);
+      }
+
+      GuestRequestModel request = GuestRequestModel(
+        code: guestCode,
+        first3Letters: first3Letters,
+      );
+
+      final response = await _service.guest(request);
+
+      if (response != null) {
+        state = state.copyWith(activeGuest: response);
+      }
+    } catch (e) {
+      log("There is an error from get guest flow::: e");
+    } finally {
+      state = state.copyWith(loadingGuests: false);
     }
   }
 
@@ -716,6 +775,8 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     _initiateFilter();
     getInvitationLinks(showLoader: true);
   }
+
+  updateGuestStatus(BuildContext context, String label) {}
 }
 
 void _showError(BuildContext context, String message) async {

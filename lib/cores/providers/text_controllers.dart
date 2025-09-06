@@ -54,6 +54,7 @@ class TextControllersNotifier
       TextControllerStrings.phoneNumber,
       TextControllerStrings.otp,
       TextControllerStrings.password,
+      TextControllerStrings.search,
     ]);
   }
 }
