@@ -1,5 +1,6 @@
 export 'app_bottom_nav_box.dart';
 export 'confirm_delete_dialog.dart';
+export 'guest_attach_request_sheet.dart';
 export 'guest_invitation_item_box.dart';
 export 'guest_list_builder.dart';
 export 'guest_list_sheet.dart';

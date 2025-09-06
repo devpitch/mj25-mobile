@@ -63,6 +63,7 @@ dependencies:
   fresh_graphql: ^0.6.1
   shared_preferences: ^2.5.3
   expandable: ^5.0.1
+  flutter_barcode_scanner_plus: ^3.0.8
 
 dev_dependencies:
   flutter_test:

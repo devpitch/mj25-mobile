@@ -38,6 +38,8 @@ abstract class DashboardRepository {
   Future<GuestsResponse?> guests(GuestsRequestModel request);
 
   Future<GuestResponse?> deleteGuest(String id);
+
+  Future invitation(String code);
   // Future<UploadUrlResponse?> getSelfieUploadUrl();
 }
 
@@ -121,6 +123,31 @@ class DashboardRepositoryImpl implements DashboardRepository {
   }
 
   @override
+  Future invitation(String code) async {
+    final response = await handleQueryResult(
+      queryBuilder: () => _client.client.query$invitation(
+        Options$Query$invitation(
+          variables: Variables$Query$invitation(
+            input: Input$SimpleInput(code: code),
+          ),
+        ),
+      ),
+    );
+
+    log(
+      "::::Response from guest card link :::: ${response.parsedData?.toJson()["invitation"]}",
+    );
+
+    if (response.parsedData?.toJson() != null) {
+      // return GuestResponse.fromJson(
+      //   response.parsedData?.toJson()['deleteGuest'],
+      // );
+    }
+
+    return null;
+  }
+
+  @override
   Future<GuestResponse?> updateGuest(UpdateGuestRequestModel request) async {
     final response = await handleQueryResult(
       queryBuilder: () => _client.client.mutate$updateGuest(
@@ -186,6 +213,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
       queryBuilder: () => _client.client.query$guest(
         Options$Query$guest(variables: request.toVariables),
       ),
+      showError: false,
     );
 
     log(

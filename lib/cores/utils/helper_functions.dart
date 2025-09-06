@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io' show Platform, exit;
 import 'dart:math' show Random;
 
@@ -7,6 +8,7 @@ import 'package:event_handler/cores/widgets/custom_text.dart';
 import 'package:event_handler/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner_plus/flutter_barcode_scanner_plus.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter_svg/svg.dart';
@@ -350,5 +352,25 @@ class HelperFunctions {
     final m = (d.inMinutes % 60).toString().padLeft(2, '0');
     final s = (d.inSeconds % 60).toString().padLeft(2, '0');
     return "$h:$m:$s";
+  }
+
+  static Future<String?>? scanBarcode() async {
+    String barcodeScanRes = "";
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+        '#ff6666',
+        'Cancel',
+        true,
+        ScanMode.BARCODE,
+      );
+      if (barcodeScanRes == "-1") {
+        return null;
+      }
+      log("::::: the scan barcode is ::::: $barcodeScanRes");
+      return barcodeScanRes;
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+      return null;
+    }
   }
 }

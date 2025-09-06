@@ -21,16 +21,25 @@ class AddNewGuestScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardProvider);
     final notifier = ref.read(dashboardProvider.notifier);
+    final bool isAttaching = state.guestActionType == "qrCodeScan";
 
     return Scaffold(
       backgroundColor: context.backgroundColor,
-      appBar: AppBar(title: AppHeaderText(label: "Add Guest Details")),
+      appBar: AppBar(
+        title: AppHeaderText(
+          label: isAttaching ? "Attach Guest" : "Add Guest Details",
+        ),
+      ),
       bottomSheet: AppFooterBox(
         bottomPadding: 20,
         isLoading: state.isAddingGuest ?? false,
-        buttonText: "Add Guest",
+        buttonText: isAttaching ? "Attach Guest" : "Add Guest",
         onTapped: () {
-          notifier.attachGuest(context);
+          if (isAttaching) {
+            notifier.attachGuest(context);
+          } else {
+            notifier.inviteGuest(context);
+          }
         },
       ),
       body: Container(

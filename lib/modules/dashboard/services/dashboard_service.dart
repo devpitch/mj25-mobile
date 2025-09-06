@@ -48,6 +48,15 @@ class DashboardService {
     }
   }
 
+  Future<Object?> guestScan(GuestRequestModel request) async {
+    try {
+      return await _repo.guest(request);
+    } catch (e) {
+      log(":::: This is the error from guest scan $e");
+      return e;
+    }
+  }
+
   Future<GuestResponse?> updateGuest(UpdateGuestRequestModel request) async {
     try {
       return await _repo.updateGuest(request);
@@ -84,12 +93,12 @@ class DashboardService {
     }
   }
 
-  Future<GuestResponse?> guest(GuestRequestModel request) async {
-    try {
-      return await _repo.guest(request);
-    } catch (e) {
-      log("::::   This is the error from guest fetching:::: $e");
-      return null;
-    }
-  }
+  // Future<GuestResponse?> guest(GuestRequestModel request) async {
+  //   try {
+  //     return await _repo.guest(request);
+  //   } catch (e) {
+  //     log("::::   This is the error from guest fetching:::: $e");
+  //     return null;
+  //   }
+  // }
 }

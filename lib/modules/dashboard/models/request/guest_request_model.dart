@@ -11,6 +11,6 @@ class GuestRequestModel {
   }
 
   Variables$Query$guest get toVariables {
-    return Variables$Query$guest.fromJson(toJson());
+    return Variables$Query$guest.fromJson({"input": toJson()});
   }
 }

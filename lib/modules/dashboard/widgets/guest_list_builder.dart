@@ -1,6 +1,7 @@
 import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/providers/text_controllers.dart';
 import 'package:event_handler/cores/utils/assets_mangment.dart';
+import 'package:event_handler/cores/utils/constants.dart';
 import 'package:event_handler/cores/utils/custom_textfield.dart';
 import 'package:event_handler/cores/utils/hex_color.dart';
 import 'package:event_handler/cores/utils/icon_builder.dart';
@@ -63,7 +64,11 @@ class GuestListBuilder extends HookConsumerWidget {
           fillColor: context.contentSecondary,
           textColor: context.contentPrimary,
           text: "Scan QR Code",
-          onClick: () {},
+          isLoading: state.loadingGuest ?? false,
+          onClick: () {
+            ref.read(globalBuildContextProvider.notifier).state = context;
+            notifier.scanQrCode(context);
+          },
         ),
 
         // 🔹 Filter/Search input

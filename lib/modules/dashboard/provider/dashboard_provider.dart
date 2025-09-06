@@ -134,9 +134,8 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
 
   getGuests({bool showLoader = true}) async {
     try {
-      if (
-      // (!showLoader && (state.invitationLinks?.items?.isEmpty ?? false)) ||
-      showLoader) {
+      if ((!showLoader && (state.guestList?.guests?.items?.isEmpty ?? false)) ||
+          showLoader) {
         state = state.copyWith(loadingGuests: true);
       }
 
@@ -175,11 +174,11 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
         first3Letters: first3Letters,
       );
 
-      final response = await _service.guest(request);
-
-      if (response != null) {
-        state = state.copyWith(activeGuest: response);
-      }
+      final response = await _service.guestScan(request);
+      //
+      // if (response != null) {
+      //   state = state.copyWith(activeGuest: response);
+      // }
     } catch (e) {
       log("There is an error from get guest flow::: e");
     } finally {
@@ -217,6 +216,19 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
               context,
               title: "Tag Guests",
               child: GuestListSheet(),
+            );
+            break;
+          }
+        case "qrCodeScan":
+          {
+            state = state.copyWith(
+              guestActionType: "qrCodeScan",
+              activeGuest: GuestResponse(id: value),
+            );
+            AppBottomSheet.show(
+              context,
+              title: "Guest Request",
+              child: GuestAttachRequestSheet(),
             );
             break;
           }
@@ -376,6 +388,70 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
   }
 
   Future<void> attachGuest(BuildContext context) async {
+    try {
+      state = state.copyWith(isAddingGuest: true);
+
+      String? title = state.selectedTitle?.label;
+      String firstName = getTextController(
+        TextControllerStrings.firstName,
+      )!.text.trim();
+      String lastName = getTextController(
+        TextControllerStrings.lastName,
+      )!.text.trim();
+      String phone = getTextController(
+        TextControllerStrings.phoneNumber,
+      )!.text.trim();
+      String email = getTextController(
+        TextControllerStrings.email,
+      )!.text.trim();
+
+      // ✅ Run validation before proceeding
+      final validationError = validateGuestInput(
+        title: title,
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+        email: email,
+      );
+
+      if (validationError != null) {
+        EventAlert.showError(context, message: validationError);
+        return;
+      }
+
+      // Build request if inputs are valid
+      final request = AddGuestRequestModel(
+        code: state.activeGuest!.id!,
+        guest: GuestInput(
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phoneNumber: phone,
+          title: title!,
+        ),
+      );
+
+      final GuestResponse? response = await _service.attachGuest(request);
+
+      if (response != null) {
+        Navigator.pop(context);
+        EventAlert.showSuccess(context, message: "Guest attached successfully");
+        state = state.copyWith(activeGuest: response);
+        Get.toNamed(AppRouter.guestDetailsView);
+        getGuests(showLoader: false);
+      }
+    } catch (e) {
+      log(":::: There is an error during guest attach :::: $e");
+      EventAlert.showError(
+        context,
+        message: "Something went wrong. Please try again.",
+      );
+    } finally {
+      state = state.copyWith(isAddingGuest: false);
+    }
+  }
+
+  Future<void> inviteGuest(BuildContext context) async {
     try {
       state = state.copyWith(isAddingGuest: true);
 
@@ -804,7 +880,51 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     getInvitationLinks(showLoader: true);
   }
 
-  updateGuestStatus(BuildContext context, String label) {}
+  scanQrCode(BuildContext context) async {
+    try {
+      final String? qrCode = await HelperFunctions.scanBarcode();
+      if (qrCode != null) {
+        String cardCode = qrCode.split("=").last;
+        loadGuestLink(cardCode);
+        log(":::: The code is ::: $qrCode");
+      }
+    } catch (e) {
+      log(":::: There is an error during qr scan :::: $e");
+    }
+  }
+
+  loadGuestLink(String code) async {
+    try {
+      state = state.copyWith(loadingGuest: true);
+      log("::: The code is :::: $code");
+      GuestRequestModel request = GuestRequestModel(code: code);
+
+      final response = await _service.guestScan(request);
+
+      if (response is GuestResponse) {
+        state = state.copyWith(activeGuest: response);
+        Get.toNamed(AppRouter.guestDetailsView);
+      }
+      if (response is Map && response["message"] != null) {
+        if (response['code'] == "NEEDS_ATTACHMENT") {
+          EventAlert.showWarning(
+            genRef!.read(globalBuildContextProvider)!,
+            message: response['message'],
+          );
+
+          openSheet(
+            context: genRef!.read(globalBuildContextProvider)!,
+            type: "qrCodeScan",
+            value: code,
+          );
+        }
+      }
+    } catch (e) {
+      log(":::: There is an error during guest deletion :::: $e");
+    } finally {
+      state = state.copyWith(loadingGuest: false);
+    }
+  }
 }
 
 void _showError(BuildContext context, String message) async {
