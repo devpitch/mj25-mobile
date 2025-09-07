@@ -1,5 +1,6 @@
 import 'package:event_handler/config/route/route_mapping.dart';
 import 'package:event_handler/config/theme/app_colors.dart';
+import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/utils/assets_mangment.dart';
 import 'package:event_handler/cores/utils/icon_builder.dart';
 import 'package:event_handler/cores/widgets/custom_text.dart';
@@ -45,10 +46,67 @@ class LinkItemBox extends StatelessWidget {
                     color: ThemeColors.contentPrimary,
                     size: 13,
                   ),
-                  CustomText(
-                    text: "${linkInfo.status?.title.replaceAll("_", " ")}",
-                    color: ThemeColors.contentTertiary,
-                    size: 12,
+                  8.verticalSpace,
+                  Row(
+                    children: [
+                      Row(
+                        children: [
+                          IconBuilder(iconPath: AppImage.status, size: 15),
+                          5.horizontalSpace,
+                          CustomText(
+                            text:
+                                "${linkInfo.status?.title.replaceAll("_", " ")}"
+                                    .toUpperCase(),
+                            color: ThemeColors.contentTertiary,
+                            size: 12,
+                            weight: FontWeight.w800,
+                          ),
+                        ],
+                      ),
+                      15.horizontalSpace,
+                      Row(
+                        children: [
+                          IconBuilder(iconPath: AppImage.size, size: 15),
+                          5.horizontalSpace,
+                          CustomText(
+                            text: "${linkInfo.guestSize}".toUpperCase(),
+                            color: ThemeColors.contentTertiary,
+                            size: 12,
+                            weight: FontWeight.w800,
+                          ),
+                        ],
+                      ),
+                      15.horizontalSpace,
+                      Row(
+                        children: [
+                          IconBuilder(iconPath: AppImage.registered, size: 15),
+                          5.horizontalSpace,
+                          CustomText(
+                            text: "${linkInfo.guestsRegistered}".toUpperCase(),
+                            color: ThemeColors.contentTertiary,
+                            size: 12,
+                            weight: FontWeight.w800,
+                          ),
+                        ],
+                      ),
+                      15.horizontalSpace,
+                      Row(
+                        children: [
+                          IconBuilder(
+                            iconPath: AppImage.entry,
+                            size: 15,
+                            color: context.contentSecondary,
+                          ),
+                          5.horizontalSpace,
+                          CustomText(
+                            text: "${linkInfo.guestPerEntry}".toUpperCase(),
+                            color: ThemeColors.contentTertiary,
+                            size: 12,
+                            weight: FontWeight.w800,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),

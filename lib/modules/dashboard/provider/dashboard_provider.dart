@@ -382,7 +382,9 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
 
       final response = await _service.updateInvitationLink(request);
 
-      if (response != null) {}
+      if (response != null) {
+        _updateLinkStatus(linkId: id, status: LinkStatusEnum.SHARED);
+      }
     } catch (e) {
       log(":::: There is an error during link sharing :::: $e");
     } finally {
@@ -1003,6 +1005,25 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     } catch (e) {
       log(":::: There is an error during link share :::: $e");
     }
+  }
+
+  _updateLinkStatus({required String linkId, required LinkStatusEnum status}) {
+    final currentList = List<InvitationLinkResponse>.from(
+      state.invitationLinks?.items ?? [],
+    );
+
+    final updatedList = currentList.map((element) {
+      // log(":::: we entered here ::::::: 0");
+      if (element.id == linkId) {
+        // log(":::: we entered here ::::::: 1");
+        return element.copyWith(status: status);
+      }
+      return element;
+    }).toList();
+
+    state = state.copyWith(
+      invitationLinks: state.invitationLinks?.copyWith(items: updatedList),
+    );
   }
 }
 

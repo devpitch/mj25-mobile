@@ -106,6 +106,34 @@ class InvitationLinkResponse {
       'guests': guests?.map((g) => g.toJson()).toList(),
     };
   }
+
+  InvitationLinkResponse copyWith({
+    String? id,
+    String? code,
+    int? guestSize,
+    int? guestPerEntry,
+    int? guestsRegistered,
+    LinkTypeEnum? type,
+    LinkStatusEnum? status,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? inviteUrl,
+    List<GuestResponse>? guests,
+  }) {
+    return InvitationLinkResponse(
+      id: id ?? this.id,
+      code: code ?? this.code,
+      guestSize: guestSize ?? this.guestSize,
+      guestPerEntry: guestPerEntry ?? this.guestPerEntry,
+      guestsRegistered: guestsRegistered ?? this.guestsRegistered,
+      type: type ?? this.type,
+      status: status ?? this.status,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      inviteUrl: inviteUrl ?? this.inviteUrl,
+      guests: guests ?? this.guests,
+    );
+  }
 }
 
 // class GuestResponse {

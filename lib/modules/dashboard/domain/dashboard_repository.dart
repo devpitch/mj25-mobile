@@ -260,7 +260,7 @@ class DashboardRepositoryImpl implements DashboardRepository {
     );
 
     if (response.parsedData?.toJson() != null) {
-      // return GuestsResponse.fromJson(response.parsedData!.toJson()["updateInvitationLink);
+      return response.parsedData!.toJson()["updateInvitationLink"];
     }
 
     return null;

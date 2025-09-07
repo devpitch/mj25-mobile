@@ -8,6 +8,8 @@ class AppImage {
   static const String check = "${imageBaseUrl}check.png";
   static const String guestUser = "${imageBaseUrl}guest-user.png";
   static const String checkTicked = "${imageBaseUrl}check-ticked.png";
+  static const String status = "${imageBaseUrl}status.png";
+  static const String registered = "${imageBaseUrl}registered.png";
 
   ///Icons
   static const String scanIcon = "${svgBaseUrl}scan.svg";
@@ -22,5 +24,8 @@ class AppImage {
   static const String searchIcon = "${svgBaseUrl}search.svg";
   static const String caution = "${svgBaseUrl}caution.svg";
   static const String filter = "${svgBaseUrl}filter.svg";
+  static const String size = "${svgBaseUrl}size.svg";
+  static const String entry = "${svgBaseUrl}entry.svg";
+
   static const String attendanceIcon = "${svgBaseUrl}attendance.svg";
 }

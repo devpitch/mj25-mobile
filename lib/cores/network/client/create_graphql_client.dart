@@ -62,6 +62,7 @@ GraphQLClient createGraphQLClient({
         log(":::The request token::: $token");
         return "Bearer $token";
       },
+      // ).concat(HttpLink("https://wizard.mj25.rsvp/graphql")),
     ).concat(HttpLink("https://testing.mj25.rsvp/graphql")),
   );
 
