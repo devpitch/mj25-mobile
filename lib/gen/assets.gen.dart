@@ -42,6 +42,13 @@ class $AssetsImagesGen {
   /// File path: assets/images/refer.png
   AssetGenImage get refer => const AssetGenImage('assets/images/refer.png');
 
+  /// File path: assets/images/registered.png
+  AssetGenImage get registered =>
+      const AssetGenImage('assets/images/registered.png');
+
+  /// File path: assets/images/status.png
+  AssetGenImage get status => const AssetGenImage('assets/images/status.png');
+
   /// File path: assets/images/symbol.png
   AssetGenImage get symbol => const AssetGenImage('assets/images/symbol.png');
 
@@ -52,6 +59,8 @@ class $AssetsImagesGen {
     guestUser,
     inviteLink,
     refer,
+    registered,
+    status,
     symbol,
   ];
 }
@@ -74,6 +83,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/delete.svg
   String get delete => 'assets/svgs/delete.svg';
 
+  /// File path: assets/svgs/entry.svg
+  String get entry => 'assets/svgs/entry.svg';
+
   /// File path: assets/svgs/filter.svg
   String get filter => 'assets/svgs/filter.svg';
 
@@ -86,6 +98,12 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/link.svg
   String get link => 'assets/svgs/link.svg';
 
+  /// File path: assets/svgs/notify.svg
+  String get notify => 'assets/svgs/notify.svg';
+
+  /// File path: assets/svgs/registered.svg
+  String get registered => 'assets/svgs/registered.svg';
+
   /// File path: assets/svgs/scan.svg
   String get scan => 'assets/svgs/scan.svg';
 
@@ -94,6 +112,12 @@ class $AssetsSvgsGen {
 
   /// File path: assets/svgs/search.svg
   String get search => 'assets/svgs/search.svg';
+
+  /// File path: assets/svgs/size.svg
+  String get size => 'assets/svgs/size.svg';
+
+  /// File path: assets/svgs/status.svg
+  String get status => 'assets/svgs/status.svg';
 
   /// File path: assets/svgs/upload.svg
   String get upload => 'assets/svgs/upload.svg';
@@ -105,13 +129,18 @@ class $AssetsSvgsGen {
     caution,
     copy,
     delete,
+    entry,
     filter,
     generate,
     guest,
     link,
+    notify,
+    registered,
     scan,
     searchUser,
     search,
+    size,
+    status,
     upload,
   ];
 }

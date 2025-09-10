@@ -133,10 +133,15 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
         }
 
         if (nextPage) {
-          final currentList = state.invitationLinks?.items ?? [];
+          final List<InvitationLinkResponse> currentList =
+              state.invitationLinks?.items ?? [];
+
           currentList.addAll(response.items ?? []);
+
+          final Set<InvitationLinkResponse> newList = Set.from(currentList);
+
           state = state.copyWith(
-            invitationLinks: response.copyWith(items: currentList),
+            invitationLinks: response.copyWith(items: newList.toList()),
             guestFilters: guestFilter,
           );
         } else {
@@ -158,7 +163,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       if ((!showLoader && (state.guestList?.guests?.items?.isEmpty ?? false)) ||
           showLoader) {
         state = state.copyWith(
-          loadingGuests: true,
+          loadingGuests: !nextPage,
           loadingMoreGuests: nextPage,
         );
       }
@@ -179,19 +184,25 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
 
       if (response != null) {
         if (nextPage) {
-          final currentList = state.guestList?.guests?.items ?? [];
+          final List<GuestResponse> currentList =
+              state.guestList?.guests?.items ?? [];
           currentList.addAll(response.guests?.items ?? []);
-          state = state.copyWith(
-            guestList: response.guests?.copyWith(items: currentList),
+
+          Set<GuestResponse> newList = {...currentList};
+
+          final GuestsData newData = response.guests?.copyWith(
+            items: newList.toList(),
           );
+
+          state = state.copyWith(guestList: response.copyWith(guests: newData));
         } else {
           state = state.copyWith(guestList: response);
         }
       }
     } catch (e) {
-      log("There is an error from get guests flow::: e");
+      log("There is an error from get guests flow::: $e");
     } finally {
-      state = state.copyWith(loadingGuests: false);
+      state = state.copyWith(loadingGuests: false, loadingMoreGuests: false);
     }
   }
 

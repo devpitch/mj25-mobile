@@ -134,6 +134,12 @@ class InvitationLinkResponse {
       guests: guests ?? this.guests,
     );
   }
+
+  @override
+  bool operator ==(covariant InvitationLinkResponse other) => other.id == id;
+
+  @override
+  int get hashCode => id.hashCode;
 }
 
 // class GuestResponse {

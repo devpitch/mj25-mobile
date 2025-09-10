@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/providers/text_controllers.dart';
 import 'package:event_handler/cores/utils/constants.dart';
@@ -55,7 +53,7 @@ class LoginScreen extends ConsumerWidget {
                 onNumberChange: (number) {
                   getTextController(TextControllerStrings.phoneNumber)!.text =
                       number.phoneNumber ?? "";
-                  log("::: The number is ${number.phoneNumber}");
+                  // log("::: The number is ${number.phoneNumber}");
                 },
               ),
               20.verticalSpace,

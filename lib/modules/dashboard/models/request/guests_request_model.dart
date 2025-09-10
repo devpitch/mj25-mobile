@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:event_handler/cores/network/client/graphql/__generated/query.graphql.dart';
 
 class GuestsRequestModel {
@@ -16,6 +18,7 @@ class GuestsRequestModel {
   }
 
   Variables$Query$guests get toVariables {
+    log(":::: The toJson is :::: ${toJson()}");
     return Variables$Query$guests.fromJson(toJson());
   }
 }

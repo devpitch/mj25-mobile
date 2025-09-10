@@ -7,6 +7,7 @@ import 'package:event_handler/cores/utils/helper_functions.dart';
 import 'package:event_handler/cores/utils/rydmie_alerts.dart';
 import 'package:event_handler/cores/utils/text_controller_strings.dart';
 import 'package:event_handler/injections/injector.dart';
+import 'package:event_handler/main.dart';
 import 'package:event_handler/modules/authentication/models/request/login_request_model.dart';
 import 'package:event_handler/modules/authentication/models/responses/login_response.dart';
 import 'package:event_handler/modules/authentication/service/auth_service.dart';
@@ -31,7 +32,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
     if (sessionExpiryDate != null &&
         HelperFunctions.checkIfDateIsInTheFuture(sessionExpiryDate)) {
-      await Future.delayed(const Duration(milliseconds: 500));
+      genRef!.read(authProvider.notifier).updateAuthState({"userInfo": user});
+      await Future.delayed(const Duration(milliseconds: 300));
       getMe();
       return Get.toNamed(AppRouter.dashboardView);
     }
@@ -63,7 +65,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       final response = await _service.login(request);
 
       if (response != null) {
-        await Future.delayed(const Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 700));
         Get.toNamed(AppRouter.dashboardView);
         EventAlert.showSuccess(context, message: "Login Successful");
         getMe();
@@ -97,6 +99,24 @@ class AuthNotifier extends StateNotifier<AuthState> {
       AppRouter.loginPage,
       ModalRoute.withName(AppRouter.loginPage),
     );
+  }
+
+  String getBaseUrl() {
+    final UserResponse? user = state.userInfo;
+    final String? phone = getTextController(
+      TextControllerStrings.phoneNumber,
+    )?.text.trim();
+
+    String number = user?.phone ?? phone ?? "+234-7010101010";
+    number.replaceFirst("+234-", "+234");
+
+    return number == "+2347010101010"
+        ? "https://testing.mj25.rsvp/graphql"
+        : "https://wizard.mj25.rsvp/graphql";
+  }
+
+  updateAuthState(Map<String, dynamic> data) {
+    state = state.copyWith(userInfo: data["userInfo"]);
   }
 }
 

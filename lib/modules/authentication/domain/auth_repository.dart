@@ -47,7 +47,7 @@ class AuthRepositoryImpl implements AuthRepository {
         : null;
 
     if (data != null) {
-      _saveSessionData(data);
+      await _saveSessionData(data);
     }
 
     return data;
@@ -94,12 +94,12 @@ class AuthRepositoryImpl implements AuthRepository {
   //   return null;
   // }
 
-  void _saveSessionData(LoginResponse loginResponse) {
-    _secureStorageInteractor.saveRefreshToken(
+  _saveSessionData(LoginResponse loginResponse) async {
+    await _secureStorageInteractor.saveRefreshToken(
       loginResponse.refreshToken!.token!,
     );
-    _secureStorageInteractor.saveToken(loginResponse.accessToken!.token!);
-    _secureStorageInteractor.saveUser(loginResponse.user!);
+    await _secureStorageInteractor.saveToken(loginResponse.accessToken!.token!);
+    await _secureStorageInteractor.saveUser(loginResponse.user!);
 
     _dataHolder.token = loginResponse.accessToken!.token;
     _dataHolder.refreshToken = loginResponse.refreshToken!.token;
@@ -115,7 +115,7 @@ class AuthRepositoryImpl implements AuthRepository {
     log("::: The expiry date is $expiryDate");
 
     if (expiryDate != null) {
-      _secureStorageInteractor.saveSessionExpiryDate(expiryDate);
+      await _secureStorageInteractor.saveSessionExpiryDate(expiryDate);
     }
   }
 }
