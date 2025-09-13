@@ -50,6 +50,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       selectedFilterType: data["selectedFilterType"],
       selectedFilterStatus: data["selectedFilterStatus"],
       activeGuest: data["activeGuest"],
+      isGeneralTag: data["isGeneral"],
     );
   }
 
@@ -264,6 +265,8 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
             AppBottomSheet.show(
               context,
               title: "Tag Guests",
+              expand: false,
+              isScrollable: false,
               child: GuestListSheet(),
             );
             break;
@@ -1035,6 +1038,21 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     state = state.copyWith(
       invitationLinks: state.invitationLinks?.copyWith(items: updatedList),
     );
+  }
+
+  addGuest(String guestId) {
+    // log("::: You called the adding room :: 0");
+    final List<String> currentList = state.generalTaggedGuest ?? [];
+
+    if (currentList.contains(guestId)) {
+      // log("::: You called the adding room :: 1");
+      currentList.remove(guestId);
+    } else {
+      // log("::: You called the adding room :: 2");
+      currentList.add(guestId);
+    }
+    state = state.copyWith(generalTaggedGuest: currentList);
+    log("::: You called the adding room :: 3");
   }
 }
 

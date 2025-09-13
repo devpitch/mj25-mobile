@@ -103,14 +103,17 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   String getBaseUrl() {
     final UserResponse? user = state.userInfo;
+    log(":::user::: ${user?.toJson()}");
+    log(":::user::: ${user?.phone}");
     final String? phone = getTextController(
       TextControllerStrings.phoneNumber,
     )?.text.trim();
 
-    String number = user?.phone ?? phone ?? "+234-7010101010";
+    String number = user?.phone?.trim() ?? phone ?? "+234-7010101010";
     number.replaceFirst("+234-", "+234");
+    log(":::user:::1 $number");
 
-    return number == "+2347010101010"
+    return (number == "+2347010101010" || number == "+234-7010101010")
         ? "https://testing.mj25.rsvp/graphql"
         : "https://wizard.mj25.rsvp/graphql";
   }

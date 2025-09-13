@@ -12,20 +12,36 @@ import 'package:get/get.dart';
 
 class GuestItemBox extends StatelessWidget {
   final GuestResponse guestInfo;
-  const GuestItemBox({super.key, required this.guestInfo});
+  final Function()? onTapped;
+  final bool isActive;
+  const GuestItemBox({
+    super.key,
+    required this.guestInfo,
+    this.onTapped,
+    this.isActive = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        genRef!.read(dashboardProvider.notifier).updateState({
-          "activeGuest": guestInfo,
-        });
-        Get.toNamed(AppRouter.guestDetailsView);
-      },
+      onTap:
+          onTapped ??
+          () {
+            genRef!.read(dashboardProvider.notifier).updateState({
+              "activeGuest": guestInfo,
+            });
+            Get.toNamed(AppRouter.guestDetailsView);
+          },
       child: Container(
         height: 72,
         width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+          color: isActive
+              ? ThemeColors.contentSecondary.withValues(alpha: .3)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(8.r),
+        ),
         alignment: Alignment.center,
         child: Row(
           children: [

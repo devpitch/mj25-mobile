@@ -131,8 +131,10 @@ class UploadViewBuilder extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  20.verticalSpace,
-                  TaggedGuestBuilder(noPadding: true, isFlex: false),
+                  if (state.generalTaggedGuest?.isNotEmpty ?? false) ...[
+                    20.verticalSpace,
+                    TaggedGuestBuilder(noPadding: true, isFlex: false),
+                  ],
                 ],
               ),
             ),
