@@ -15,10 +15,12 @@ import 'package:event_handler/modules/dashboard/models/request/guests_request_mo
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_update_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/update_guest_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/upload_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/rsvp_model.dart';
+import 'package:event_handler/modules/dashboard/models/response/upload_request_response.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class DashboardRepository {
@@ -41,6 +43,8 @@ abstract class DashboardRepository {
   Future updateInvitationLink(LinkUpdateRequestModel request);
 
   Future<GuestResponse?> deleteGuest(String id);
+
+  Future<UploadRequestResponse?> uploadImageRequest(UploadRequestModel request);
 
   Future invitation(String code);
   // Future<UploadUrlResponse?> getSelfieUploadUrl();
@@ -95,6 +99,27 @@ class DashboardRepositoryImpl implements DashboardRepository {
 
     if (response.parsedData?.toJson() != null) {
       return response.parsedData?.toJson()['generateInviteLink'];
+    }
+
+    return null;
+  }
+
+  @override
+  Future<UploadRequestResponse?> uploadImageRequest(
+    UploadRequestModel request,
+  ) async {
+    final response = await handleQueryResult(
+      queryBuilder: () => _client.client.mutate$UploadRequest(
+        Options$Mutation$UploadRequest(variables: request.toVariables),
+      ),
+    );
+
+    log(
+      "::::Response from the invitation Link generation:::: ${jsonEncode(response.parsedData?.toJson())}",
+    );
+
+    if (response.parsedData?.toJson() != null) {
+      return UploadRequestResponse.fromJson(response.parsedData!.toJson());
     }
 
     return null;

@@ -1,13 +1,17 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:event_handler/config/route/route_mapping.dart';
+import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/network/client/graphql/enums/link_status_enum.dart';
 import 'package:event_handler/cores/network/client/graphql/enums/link_type_enum.dart';
+import 'package:event_handler/cores/network/client/http_client.dart';
 import 'package:event_handler/cores/providers/text_controllers.dart';
 import 'package:event_handler/cores/utils/custom_dialog.dart';
+import 'package:event_handler/cores/utils/extensions.dart';
 import 'package:event_handler/cores/utils/helper_functions.dart';
 import 'package:event_handler/cores/utils/image_service.dart';
 import 'package:event_handler/cores/utils/rydmie_alerts.dart';
@@ -23,14 +27,16 @@ import 'package:event_handler/modules/dashboard/models/request/guests_request_mo
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_update_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/update_guest_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/upload_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/rsvp_model.dart';
+import 'package:event_handler/modules/dashboard/models/response/upload_request_response.dart';
 import 'package:event_handler/modules/dashboard/models/upload_image_model.dart';
 import 'package:event_handler/modules/dashboard/services/dashboard_service.dart';
 import 'package:event_handler/modules/dashboard/widgets/filter_list_sheet.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -262,6 +268,11 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
           }
         case "tagGuest":
           {
+            if (state.guestList == null ||
+                state.guestList!.guests == null ||
+                state.guestList!.guests!.items == null) {
+              unawaited(getGuests());
+            }
             AppBottomSheet.show(
               context,
               title: "Tag Guests",
@@ -570,7 +581,7 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
           lastName: lastName,
           email: email,
           phoneNumber: phone,
-          title: title!,
+          title: title,
         ),
       );
 
@@ -1045,14 +1056,120 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     final List<String> currentList = state.generalTaggedGuest ?? [];
 
     if (currentList.contains(guestId)) {
-      // log("::: You called the adding room :: 1");
+      log("::: You called the adding room :: 1");
       currentList.remove(guestId);
     } else {
-      // log("::: You called the adding room :: 2");
+      log("::: You called the adding room :: 2");
       currentList.add(guestId);
     }
     state = state.copyWith(generalTaggedGuest: currentList);
     log("::: You called the adding room :: 3");
+  }
+
+  List<GuestResponse> getTaggedGuests() {
+    final guestList = state.guestList?.guests?.items ?? [];
+    final currentList = state.generalTaggedGuest ?? [];
+    return guestList.where((element) {
+      return currentList.contains(element.id);
+    }).toList();
+  }
+
+  uploadImages(BuildContext context) async {
+    try {
+      state = state.copyWith(isUploadingFiles: true);
+      showCustomDialog(
+        context,
+        child: SizedBox(
+          height: context.deviceHeight,
+          width: double.infinity,
+          child: Center(
+            child: CupertinoActivityIndicator(
+              radius: 15,
+              color: context.primaryColor,
+            ),
+          ),
+        ),
+      );
+      List<UploadImageModel> images = state.images ?? [];
+
+      UploadRequestModel request = UploadRequestModel(
+        count: images.length,
+        isGeneral: state.isGeneralTag ?? false,
+        tags: state.generalTaggedGuest,
+      );
+
+      final UploadRequestResponse? response = await _service.uploadImageRequest(
+        request,
+      );
+
+      if (response != null) {
+        state = state.copyWith(uploaderResponse: response);
+        await _uploadFiles(context);
+        Get.close(1);
+        EventAlert.showSuccess(context, message: "File uploaded successful");
+        initiateUpload();
+      }
+    } catch (e) {
+      log(":::: There is an error during image upload :::: $e");
+      Get.close(1);
+    }
+  }
+
+  Future<void> _uploadFiles(BuildContext context) async {
+    try {
+      final upLoaders = state.uploaderResponse?.uploadRequest ?? [];
+      final images = state.images ?? [];
+      final imageService = genRef!.read(imageServiceProvider);
+
+      for (int i = 0; i < upLoaders.length; i++) {
+        final currentImage = await imageService.compressImage(
+          imagePath: images[i].path,
+          isPath: true,
+        );
+        final currentUploader = upLoaders[i];
+
+        final res = await uploadFile(
+          file: File(currentImage.path),
+          uploadUrl: currentUploader.uploadUrl!,
+        );
+
+        if (res) {
+          log(":::: log file uploaded successfully..");
+        }
+      }
+    } catch (e) {
+      log(":::: There is an error during image upload :::: $e");
+    }
+  }
+
+  static Future<bool> uploadFile({
+    required File file,
+    required String uploadUrl,
+  }) async {
+    final client = AppHttpClient();
+
+    try {
+      final response = await client.uploadFile(
+        filePath: file.path,
+        uploadUrl: uploadUrl,
+      );
+
+      print('Upload successful: ${response.data}');
+      return true;
+    } catch (e) {
+      print('Error: $e');
+      return false;
+    }
+  }
+
+  removeImage(UploadImageModel image) {
+    final List<UploadImageModel> images = state.images ?? [];
+    images.remove(image);
+    state = state.copyWith(images: images);
+  }
+
+  initiateUpload() {
+    state = state.copyWith(clearUploader: "yes");
   }
 }
 

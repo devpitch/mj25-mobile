@@ -25,6 +25,7 @@ class AppImage {
   static const String caution = "${svgBaseUrl}caution.svg";
   static const String filter = "${svgBaseUrl}filter.svg";
   static const String size = "${svgBaseUrl}size.svg";
+  static const String serverUpload = "${svgBaseUrl}server-upload.svg";
   static const String entry = "${svgBaseUrl}entry.svg";
 
   static const String attendanceIcon = "${svgBaseUrl}attendance.svg";

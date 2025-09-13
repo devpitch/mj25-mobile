@@ -117,7 +117,7 @@ class GuestListSheet extends HookConsumerWidget {
           width: 300,
           text: "Continue",
           onClick: () {
-            // Navigator.pop(context);
+            Navigator.pop(context);
           },
         ),
       ],

@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:event_handler/config/theme/app_colors.dart';
 import 'package:event_handler/config/theme/app_theme.dart';
+import 'package:event_handler/cores/utils/assets_mangment.dart';
 import 'package:event_handler/cores/utils/hex_color.dart';
+import 'package:event_handler/cores/utils/icon_builder.dart';
 import 'package:event_handler/cores/widgets/app_header.dart';
 import 'package:event_handler/cores/widgets/custom_text.dart';
 import 'package:event_handler/cores/widgets/rydmie_button.dart';
@@ -27,7 +30,22 @@ class UploadViewBuilder extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         10.verticalSpace,
-        AppHeaderText(label: images.isEmpty ? "Select Images" : "Photos"),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AppHeaderText(label: images.isEmpty ? "Select Images" : "Photos"),
+            if (state.images?.isNotEmpty ?? false)
+              IconBuilder(
+                iconPath: AppImage.serverUpload,
+                size: 30,
+                color: ThemeColors.contentSecondary,
+                onTapped: () {
+                  notifier.uploadImages(context);
+                },
+              ),
+          ],
+        ),
+        10.verticalSpace,
         if (images.isEmpty)
           DottedBorder(
             options: RoundedRectDottedBorderOptions(
@@ -81,17 +99,41 @@ class UploadViewBuilder extends ConsumerWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (cxt, index) {
                       final image = images[index];
-                      return GestureDetector(
-                        onTap: () {
-                          notifier.openDetails(context, imageInfo: image);
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12.r),
-                          child: Image.file(
-                            File(image.path),
-                            fit: BoxFit.cover,
+                      return Stack(
+                        children: [
+                          Positioned.fill(
+                            child: GestureDetector(
+                              onTap: () {
+                                notifier.openDetails(context, imageInfo: image);
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12.r),
+                                child: Image.file(
+                                  File(image.path),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                          Positioned(
+                            top: 5,
+                            right: 5,
+                            child: GestureDetector(
+                              onTap: () {
+                                notifier.removeImage(image);
+                              },
+                              child: CircleAvatar(
+                                radius: 15,
+                                backgroundColor: context.contentSecondary,
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 18,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       );
                     },
                     itemCount: images.length,
@@ -131,9 +173,24 @@ class UploadViewBuilder extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  if (state.generalTaggedGuest?.isNotEmpty ?? false) ...[
+                  if (state.generalTaggedGuest?.isNotEmpty ??
+                      false || (state.isGeneralTag ?? false)) ...[
                     20.verticalSpace,
-                    TaggedGuestBuilder(noPadding: true, isFlex: false),
+                    if (state.isGeneralTag ?? false)
+                      SizedBox(
+                        height: 200,
+                        width: double.infinity,
+                        child: Center(
+                          child: CustomText(
+                            text: "Tagged Everyone",
+                            weight: FontWeight.w800,
+                            color: context.contentSecondary,
+                            size: 20,
+                          ),
+                        ),
+                      )
+                    else
+                      TaggedGuestBuilder(noPadding: true, isFlex: false),
                   ],
                 ],
               ),

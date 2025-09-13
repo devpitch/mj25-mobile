@@ -1,6 +1,7 @@
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
+import 'package:event_handler/modules/dashboard/models/response/upload_request_response.dart';
 import 'package:event_handler/modules/dashboard/models/upload_image_model.dart';
 import 'package:flutter/material.dart';
 
@@ -45,6 +46,8 @@ class DashboardState {
   final bool? loadingMoreLinks;
   final bool? isGeneralTag;
   final List<String>? generalTaggedGuest;
+  final bool? isUploadingFiles;
+  final UploadRequestResponse? uploaderResponse;
 
   DashboardState({
     this.activeTab = "Links",
@@ -87,6 +90,8 @@ class DashboardState {
     this.loadingMoreGuests,
     this.isGeneralTag,
     this.generalTaggedGuest,
+    this.isUploadingFiles,
+    this.uploaderResponse,
   });
 
   DashboardState copyWith({
@@ -133,10 +138,13 @@ class DashboardState {
     bool? loadingMoreGuests,
     bool? isGeneralTag,
     List<String>? generalTaggedGuest,
+    bool? isUploadingFiles,
+    UploadRequestResponse? uploaderResponse,
+    String? clearUploader,
   }) {
     return DashboardState(
       activeTab: activeTab ?? this.activeTab,
-      images: images ?? this.images,
+      images: clearUploader == "yes" ? null : images ?? this.images,
       activeImage: activeImage ?? this.activeImage,
       loadingLinks: loadingLinks ?? this.loadingLinks,
       invitationLinks: invitationLinks ?? this.invitationLinks,
@@ -194,8 +202,18 @@ class DashboardState {
       guestActionType: guestActionType ?? this.guestActionType,
       loadingMoreLinks: loadingMoreLinks ?? this.loadingMoreLinks,
       loadingMoreGuests: loadingMoreGuests ?? this.loadingMoreGuests,
-      isGeneralTag: isGeneralTag ?? this.isGeneralTag,
-      generalTaggedGuest: generalTaggedGuest ?? this.generalTaggedGuest,
+      isGeneralTag: clearUploader == "yes"
+          ? null
+          : isGeneralTag ?? this.isGeneralTag,
+      generalTaggedGuest: clearUploader == "yes"
+          ? null
+          : generalTaggedGuest ?? this.generalTaggedGuest,
+      isUploadingFiles: clearUploader == "yes"
+          ? null
+          : isUploadingFiles ?? this.isUploadingFiles,
+      uploaderResponse: clearUploader == "yes"
+          ? null
+          : uploaderResponse ?? this.uploaderResponse,
     );
   }
 }

@@ -8,10 +8,12 @@ import 'package:event_handler/modules/dashboard/models/request/guests_request_mo
 import 'package:event_handler/modules/dashboard/models/request/link_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/link_update_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/request/update_guest_request_model.dart';
+import 'package:event_handler/modules/dashboard/models/request/upload_request_model.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/guests_management_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/invitation_link_response.dart';
 import 'package:event_handler/modules/dashboard/models/response/rsvp_model.dart';
+import 'package:event_handler/modules/dashboard/models/response/upload_request_response.dart';
 
 class DashboardService {
   final DashboardRepository _repo;
@@ -99,6 +101,17 @@ class DashboardService {
       return await _repo.guests(request);
     } catch (e) {
       log("::::   This is the error from guests fetching:::: $e");
+      return null;
+    }
+  }
+
+  Future<UploadRequestResponse?> uploadImageRequest(
+    UploadRequestModel request,
+  ) async {
+    try {
+      return await _repo.uploadImageRequest(request);
+    } catch (e) {
+      log("::::   This is the error from image upload request:::: $e");
       return null;
     }
   }
