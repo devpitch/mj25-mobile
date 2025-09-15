@@ -12,7 +12,7 @@ class UploadRequestModel {
   UploadRequestModel({required this.count, required this.isGeneral, this.tags});
 
   Map<String, dynamic> toJson() {
-    return {'count': count, 'isGeneral': isGeneral, 'tagIds': tags};
+    return {'count': count, 'isGeneral': isGeneral, 'tagIds': tags ?? []};
   }
 
   Variables$Mutation$UploadRequest get toVariables {

@@ -121,6 +121,13 @@ class AuthNotifier extends StateNotifier<AuthState> {
   updateAuthState(Map<String, dynamic> data) {
     state = state.copyWith(userInfo: data["userInfo"]);
   }
+
+  Future<void> logoutApp(BuildContext context) async {
+    final secureStorageInteractor = getIt<SecureStorageInteractor>();
+    await secureStorageInteractor.onLogout();
+    await Get.offAllNamed(AppRouter.loginPage);
+    MyAppWrapper.restartApp(context);
+  }
 }
 
 final authProvider = StateNotifierProvider<AuthNotifier, AuthState>(

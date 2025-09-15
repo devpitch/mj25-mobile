@@ -1,8 +1,10 @@
 import 'package:event_handler/cores/utils/constants.dart';
+import 'package:event_handler/cores/utils/custom_dialog.dart';
 import 'package:event_handler/cores/utils/extensions.dart';
 import 'package:event_handler/cores/utils/hex_color.dart';
 import 'package:event_handler/cores/widgets/app_footer_box.dart';
 import 'package:event_handler/cores/widgets/custom_text.dart';
+import 'package:event_handler/modules/authentication/widgets/log_out_dialog.dart';
 import 'package:event_handler/modules/dashboard/provider/dashboard_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -32,6 +34,14 @@ class DashboardView extends ConsumerWidget {
         ),
         centerTitle: true,
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showCustomDialog(context, child: LogoutEventDialog());
+            },
+            icon: const Icon(Icons.logout, color: Colors.red),
+          ),
+        ],
       ),
       bottomSheet: AppFooterBox(bottomPadding: 10, child: AppBottomNavBox()),
       body: Container(
