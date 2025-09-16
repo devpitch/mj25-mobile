@@ -47,6 +47,7 @@ class DashboardState {
   final bool? isGeneralTag;
   final List<String>? generalTaggedGuest;
   final bool? isUploadingFiles;
+  final List<GuestResponse>? pickedGuests;
   final UploadRequestResponse? uploaderResponse;
 
   DashboardState({
@@ -92,6 +93,7 @@ class DashboardState {
     this.generalTaggedGuest,
     this.isUploadingFiles,
     this.uploaderResponse,
+    this.pickedGuests,
   });
 
   DashboardState copyWith({
@@ -141,6 +143,7 @@ class DashboardState {
     bool? isUploadingFiles,
     UploadRequestResponse? uploaderResponse,
     String? clearUploader,
+    List<GuestResponse>? pickedGuests,
   }) {
     return DashboardState(
       activeTab: activeTab ?? this.activeTab,
@@ -214,6 +217,9 @@ class DashboardState {
       uploaderResponse: clearUploader == "yes"
           ? null
           : uploaderResponse ?? this.uploaderResponse,
+      pickedGuests: clearUploader == "yes"
+          ? null
+          : pickedGuests ?? this.pickedGuests,
     );
   }
 }

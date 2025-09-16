@@ -185,7 +185,7 @@ class PhotoGuestInfo extends StatelessWidget {
             size: 20,
             color: context.contentNegative,
             onTapped: () {
-              genRef!.read(dashboardProvider.notifier).addGuest(guestInfo.id!);
+              genRef!.read(dashboardProvider.notifier).addGuest(guestInfo);
             },
           ),
         ],

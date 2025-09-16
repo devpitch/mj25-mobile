@@ -1051,9 +1051,11 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
     );
   }
 
-  addGuest(String guestId) {
+  addGuest(GuestResponse guestInfo) {
     // log("::: You called the adding room :: 0");
     final List<String> currentList = state.generalTaggedGuest ?? [];
+    final List<GuestResponse> currentInfoList = state.pickedGuests ?? [];
+    final guestId = guestInfo.id!;
 
     if (currentList.contains(guestId)) {
       log("::: You called the adding room :: 1");
@@ -1062,12 +1064,15 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       log("::: You called the adding room :: 2");
       currentList.add(guestId);
     }
-    state = state.copyWith(generalTaggedGuest: currentList);
+    state = state.copyWith(
+      generalTaggedGuest: currentList,
+      pickedGuests: {...currentInfoList, guestInfo}.toList(),
+    );
     log("::: You called the adding room :: 3");
   }
 
   List<GuestResponse> getTaggedGuests() {
-    final guestList = state.guestList?.guests?.items ?? [];
+    final guestList = state.pickedGuests ?? [];
     final currentList = state.generalTaggedGuest ?? [];
     return guestList.where((element) {
       return currentList.contains(element.id);
@@ -1179,6 +1184,24 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
 
   initiateUpload() {
     state = state.copyWith(clearUploader: "yes");
+  }
+
+  Future<List<GuestResponse>> fetchGuestViaQuery({
+    required String query,
+  }) async {
+    GuestsRequestModel request = GuestsRequestModel(
+      limit: 50,
+      page: 1,
+      search: query,
+    );
+
+    final GuestsResponse? response = await _service.guests(request);
+
+    if (response != null) {
+      return response.guests?.items ?? [];
+    } else {
+      return [];
+    }
   }
 }
 
