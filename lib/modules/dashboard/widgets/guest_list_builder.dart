@@ -1,3 +1,6 @@
+import 'dart:math' as math;
+
+import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:event_handler/config/theme/app_theme.dart';
 import 'package:event_handler/cores/providers/text_controllers.dart';
 import 'package:event_handler/cores/utils/assets_mangment.dart';
@@ -13,6 +16,7 @@ import 'package:event_handler/modules/dashboard/domain/constant.dart';
 import 'package:event_handler/modules/dashboard/models/response/guest_response.dart';
 import 'package:event_handler/modules/dashboard/provider/dashboard_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -129,29 +133,46 @@ class GuestListBuilder extends HookConsumerWidget {
             )
           else
             Flexible(
-              child: Skeletonizer(
-                enabled: isLoading,
-                child: ListView.separated(
-                  controller: scrollController,
-                  padding: const EdgeInsets.only(bottom: 100, top: 15),
-                  itemBuilder: (cxt, index) {
-                    if (index == filteredList.length &&
-                        (state.loadingMoreGuests ?? false)) {
-                      return Center(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          child: CupertinoActivityIndicator(
-                            color: context.contentPrimary,
+              child: CustomMaterialIndicator(
+                onRefresh: () async {
+                  return await notifier.getGuests();
+                },
+                backgroundColor: Colors.white,
+                indicatorBuilder: (context, controller) {
+                  return Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: CircularProgressIndicator(
+                      color: context.contentSecondary,
+                      value: controller.state.isLoading
+                          ? null
+                          : math.min(controller.value, 1.0),
+                    ),
+                  );
+                },
+                child: Skeletonizer(
+                  enabled: isLoading,
+                  child: ListView.separated(
+                    controller: scrollController,
+                    padding: const EdgeInsets.only(bottom: 100, top: 15),
+                    itemBuilder: (cxt, index) {
+                      if (index == filteredList.length &&
+                          (state.loadingMoreGuests ?? false)) {
+                        return Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            child: CupertinoActivityIndicator(
+                              color: context.contentPrimary,
+                            ),
                           ),
-                        ),
-                      );
-                    }
-                    return GuestItemBox(guestInfo: filteredList[index]);
-                  },
-                  separatorBuilder: (_, __) => 10.verticalSpace,
-                  itemCount:
-                      filteredList.length +
-                      ((state.loadingMoreGuests ?? false) ? 1 : 0),
+                        );
+                      }
+                      return GuestItemBox(guestInfo: filteredList[index]);
+                    },
+                    separatorBuilder: (_, __) => 10.verticalSpace,
+                    itemCount:
+                        filteredList.length +
+                        ((state.loadingMoreGuests ?? false) ? 1 : 0),
+                  ),
                 ),
               ),
             ),
