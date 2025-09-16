@@ -1121,6 +1121,8 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
       final images = state.images ?? [];
       final imageService = genRef!.read(imageServiceProvider);
 
+      int uploadedCount = 0;
+
       for (int i = 0; i < upLoaders.length; i++) {
         final currentImage = await imageService.compressImage(
           imagePath: images[i].path,
@@ -1134,8 +1136,15 @@ class DashboardNotifier extends StateNotifier<DashboardState> {
         );
 
         if (res) {
+          uploadedCount++;
           log(":::: log file uploaded successfully..");
         }
+      }
+
+      if (uploadedCount == images.length) {
+        final ids = upLoaders.map((e) => e.id!).toList();
+        log(":::: The Ids are :::: $ids");
+        await _service.confirmUploads(ids);
       }
     } catch (e) {
       log(":::: There is an error during image upload :::: $e");

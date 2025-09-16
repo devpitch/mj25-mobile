@@ -113,6 +113,9 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/search.svg
   String get search => 'assets/svgs/search.svg';
 
+  /// File path: assets/svgs/server-upload.svg
+  String get serverUpload => 'assets/svgs/server-upload.svg';
+
   /// File path: assets/svgs/size.svg
   String get size => 'assets/svgs/size.svg';
 
@@ -139,6 +142,7 @@ class $AssetsSvgsGen {
     scan,
     searchUser,
     search,
+    serverUpload,
     size,
     status,
     upload,

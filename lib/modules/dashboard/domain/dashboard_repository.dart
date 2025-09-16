@@ -46,6 +46,8 @@ abstract class DashboardRepository {
 
   Future<UploadRequestResponse?> uploadImageRequest(UploadRequestModel request);
 
+  Future confirmUpload(List<String> ids);
+
   Future invitation(String code);
   // Future<UploadUrlResponse?> getSelfieUploadUrl();
 }
@@ -145,6 +147,30 @@ class DashboardRepositoryImpl implements DashboardRepository {
       return GuestResponse.fromJson(
         response.parsedData?.toJson()['deleteGuest'],
       );
+    }
+
+    return null;
+  }
+
+  @override
+  Future confirmUpload(List<String> ids) async {
+    log(":::: This is the just testing ::: $ids");
+    final response = await handleQueryResult(
+      queryBuilder: () => _client.client.mutate$confirmUpload(
+        Options$Mutation$confirmUpload(
+          variables: Variables$Mutation$confirmUpload(
+            input: Input$UploadConfirmInput(ids: ids),
+          ),
+        ),
+      ),
+    );
+
+    log(
+      "::::Response from confirm uploads :::: ${response.data?["confirmUpload"]}",
+    );
+
+    if (response.data?["confirmUpload"] != null) {
+      return response.data!['confirmUpload'];
     }
 
     return null;

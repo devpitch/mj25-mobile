@@ -1,6 +1,7 @@
 // ignore_for_file: type=lint
 import 'dart:async';
 import 'fragments.graphql.dart';
+import 'package:event_handler/cores/network/client/graphql/scalar.dart';
 import 'package:flutter/widgets.dart' as widgets;
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart' as graphql;
@@ -2397,14 +2398,16 @@ class Mutation$confirmUpload {
     return Mutation$confirmUpload(
       confirmUpload: (l$confirmUpload as List<dynamic>)
           .map(
-            (e) => Fragment$FileResponse.fromJson((e as Map<String, dynamic>)),
+            (e) => Mutation$confirmUpload$confirmUpload.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final List<Fragment$FileResponse> confirmUpload;
+  final List<Mutation$confirmUpload$confirmUpload> confirmUpload;
 
   final String $__typename;
 
@@ -2472,10 +2475,17 @@ abstract class CopyWith$Mutation$confirmUpload<TRes> {
   factory CopyWith$Mutation$confirmUpload.stub(TRes res) =
       _CopyWithStubImpl$Mutation$confirmUpload;
 
-  TRes call({List<Fragment$FileResponse>? confirmUpload, String? $__typename});
+  TRes call({
+    List<Mutation$confirmUpload$confirmUpload>? confirmUpload,
+    String? $__typename,
+  });
   TRes confirmUpload(
-    Iterable<Fragment$FileResponse> Function(
-      Iterable<CopyWith$Fragment$FileResponse<Fragment$FileResponse>>,
+    Iterable<Mutation$confirmUpload$confirmUpload> Function(
+      Iterable<
+        CopyWith$Mutation$confirmUpload$confirmUpload<
+          Mutation$confirmUpload$confirmUpload
+        >
+      >,
     )
     _fn,
   );
@@ -2498,7 +2508,7 @@ class _CopyWithImpl$Mutation$confirmUpload<TRes>
     Mutation$confirmUpload(
       confirmUpload: confirmUpload == _undefined || confirmUpload == null
           ? _instance.confirmUpload
-          : (confirmUpload as List<Fragment$FileResponse>),
+          : (confirmUpload as List<Mutation$confirmUpload$confirmUpload>),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -2506,14 +2516,18 @@ class _CopyWithImpl$Mutation$confirmUpload<TRes>
   );
 
   TRes confirmUpload(
-    Iterable<Fragment$FileResponse> Function(
-      Iterable<CopyWith$Fragment$FileResponse<Fragment$FileResponse>>,
+    Iterable<Mutation$confirmUpload$confirmUpload> Function(
+      Iterable<
+        CopyWith$Mutation$confirmUpload$confirmUpload<
+          Mutation$confirmUpload$confirmUpload
+        >
+      >,
     )
     _fn,
   ) => call(
     confirmUpload: _fn(
       _instance.confirmUpload.map(
-        (e) => CopyWith$Fragment$FileResponse(e, (i) => i),
+        (e) => CopyWith$Mutation$confirmUpload$confirmUpload(e, (i) => i),
       ),
     ).toList(),
   );
@@ -2525,8 +2539,10 @@ class _CopyWithStubImpl$Mutation$confirmUpload<TRes>
 
   TRes _res;
 
-  call({List<Fragment$FileResponse>? confirmUpload, String? $__typename}) =>
-      _res;
+  call({
+    List<Mutation$confirmUpload$confirmUpload>? confirmUpload,
+    String? $__typename,
+  }) => _res;
 
   confirmUpload(_fn) => _res;
 }
@@ -2562,9 +2578,19 @@ const documentNodeMutationconfirmUpload = DocumentNode(
             directives: [],
             selectionSet: SelectionSetNode(
               selections: [
-                FragmentSpreadNode(
-                  name: NameNode(value: 'FileResponse'),
+                FieldNode(
+                  name: NameNode(value: '_id'),
+                  alias: null,
+                  arguments: [],
                   directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'isConfirmed'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
                 ),
                 FieldNode(
                   name: NameNode(value: '__typename'),
@@ -2586,9 +2612,6 @@ const documentNodeMutationconfirmUpload = DocumentNode(
         ],
       ),
     ),
-    fragmentDefinitionFileResponse,
-    fragmentDefinitionGuestResponse,
-    fragmentDefinitionGuestLinkResponse,
   ],
 );
 Mutation$confirmUpload _parserFn$Mutation$confirmUpload(
@@ -2786,6 +2809,300 @@ class Mutation$confirmUpload$Widget
            result,
          ),
        );
+}
+
+class Mutation$confirmUpload$confirmUpload implements Fragment$FileResponse {
+  Mutation$confirmUpload$confirmUpload({
+    required this.$_id,
+    required this.url,
+    this.uploadUrl,
+    required this.isGeneral,
+    required this.isConfirmed,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.tags,
+    this.$__typename = 'FileResponse',
+  });
+
+  factory Mutation$confirmUpload$confirmUpload.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$$_id = json['_id'];
+    final l$url = json['url'];
+    final l$uploadUrl = json['uploadUrl'];
+    final l$isGeneral = json['isGeneral'];
+    final l$isConfirmed = json['isConfirmed'];
+    final l$createdAt = json['createdAt'];
+    final l$updatedAt = json['updatedAt'];
+    final l$tags = json['tags'];
+    final l$$__typename = json['__typename'];
+    return Mutation$confirmUpload$confirmUpload(
+      $_id: (l$$_id as String),
+      url: (l$url as String),
+      uploadUrl: (l$uploadUrl as String?),
+      isGeneral: (l$isGeneral as bool),
+      isConfirmed: (l$isConfirmed as bool),
+      createdAt: dateTimeFromJson(l$createdAt),
+      updatedAt: dateTimeFromJson(l$updatedAt),
+      tags: (l$tags as List<dynamic>)
+          .map(
+            (e) => Fragment$GuestResponse.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String $_id;
+
+  final String url;
+
+  final String? uploadUrl;
+
+  final bool isGeneral;
+
+  final bool isConfirmed;
+
+  final DateTime createdAt;
+
+  final DateTime updatedAt;
+
+  final List<Fragment$GuestResponse> tags;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$$_id = $_id;
+    _resultData['_id'] = l$$_id;
+    final l$url = url;
+    _resultData['url'] = l$url;
+    final l$uploadUrl = uploadUrl;
+    _resultData['uploadUrl'] = l$uploadUrl;
+    final l$isGeneral = isGeneral;
+    _resultData['isGeneral'] = l$isGeneral;
+    final l$isConfirmed = isConfirmed;
+    _resultData['isConfirmed'] = l$isConfirmed;
+    final l$createdAt = createdAt;
+    _resultData['createdAt'] = dateTimeToJson(l$createdAt);
+    final l$updatedAt = updatedAt;
+    _resultData['updatedAt'] = dateTimeToJson(l$updatedAt);
+    final l$tags = tags;
+    _resultData['tags'] = l$tags.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_id = $_id;
+    final l$url = url;
+    final l$uploadUrl = uploadUrl;
+    final l$isGeneral = isGeneral;
+    final l$isConfirmed = isConfirmed;
+    final l$createdAt = createdAt;
+    final l$updatedAt = updatedAt;
+    final l$tags = tags;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$$_id,
+      l$url,
+      l$uploadUrl,
+      l$isGeneral,
+      l$isConfirmed,
+      l$createdAt,
+      l$updatedAt,
+      Object.hashAll(l$tags.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation$confirmUpload$confirmUpload ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_id = $_id;
+    final lOther$$_id = other.$_id;
+    if (l$$_id != lOther$$_id) {
+      return false;
+    }
+    final l$url = url;
+    final lOther$url = other.url;
+    if (l$url != lOther$url) {
+      return false;
+    }
+    final l$uploadUrl = uploadUrl;
+    final lOther$uploadUrl = other.uploadUrl;
+    if (l$uploadUrl != lOther$uploadUrl) {
+      return false;
+    }
+    final l$isGeneral = isGeneral;
+    final lOther$isGeneral = other.isGeneral;
+    if (l$isGeneral != lOther$isGeneral) {
+      return false;
+    }
+    final l$isConfirmed = isConfirmed;
+    final lOther$isConfirmed = other.isConfirmed;
+    if (l$isConfirmed != lOther$isConfirmed) {
+      return false;
+    }
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (l$createdAt != lOther$createdAt) {
+      return false;
+    }
+    final l$updatedAt = updatedAt;
+    final lOther$updatedAt = other.updatedAt;
+    if (l$updatedAt != lOther$updatedAt) {
+      return false;
+    }
+    final l$tags = tags;
+    final lOther$tags = other.tags;
+    if (l$tags.length != lOther$tags.length) {
+      return false;
+    }
+    for (int i = 0; i < l$tags.length; i++) {
+      final l$tags$entry = l$tags[i];
+      final lOther$tags$entry = lOther$tags[i];
+      if (l$tags$entry != lOther$tags$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension$Mutation$confirmUpload$confirmUpload
+    on Mutation$confirmUpload$confirmUpload {
+  CopyWith$Mutation$confirmUpload$confirmUpload<
+    Mutation$confirmUpload$confirmUpload
+  >
+  get copyWith => CopyWith$Mutation$confirmUpload$confirmUpload(this, (i) => i);
+}
+
+abstract class CopyWith$Mutation$confirmUpload$confirmUpload<TRes> {
+  factory CopyWith$Mutation$confirmUpload$confirmUpload(
+    Mutation$confirmUpload$confirmUpload instance,
+    TRes Function(Mutation$confirmUpload$confirmUpload) then,
+  ) = _CopyWithImpl$Mutation$confirmUpload$confirmUpload;
+
+  factory CopyWith$Mutation$confirmUpload$confirmUpload.stub(TRes res) =
+      _CopyWithStubImpl$Mutation$confirmUpload$confirmUpload;
+
+  TRes call({
+    String? $_id,
+    String? url,
+    String? uploadUrl,
+    bool? isGeneral,
+    bool? isConfirmed,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    List<Fragment$GuestResponse>? tags,
+    String? $__typename,
+  });
+  TRes tags(
+    Iterable<Fragment$GuestResponse> Function(
+      Iterable<CopyWith$Fragment$GuestResponse<Fragment$GuestResponse>>,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl$Mutation$confirmUpload$confirmUpload<TRes>
+    implements CopyWith$Mutation$confirmUpload$confirmUpload<TRes> {
+  _CopyWithImpl$Mutation$confirmUpload$confirmUpload(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation$confirmUpload$confirmUpload _instance;
+
+  final TRes Function(Mutation$confirmUpload$confirmUpload) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_id = _undefined,
+    Object? url = _undefined,
+    Object? uploadUrl = _undefined,
+    Object? isGeneral = _undefined,
+    Object? isConfirmed = _undefined,
+    Object? createdAt = _undefined,
+    Object? updatedAt = _undefined,
+    Object? tags = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation$confirmUpload$confirmUpload(
+      $_id: $_id == _undefined || $_id == null
+          ? _instance.$_id
+          : ($_id as String),
+      url: url == _undefined || url == null ? _instance.url : (url as String),
+      uploadUrl: uploadUrl == _undefined
+          ? _instance.uploadUrl
+          : (uploadUrl as String?),
+      isGeneral: isGeneral == _undefined || isGeneral == null
+          ? _instance.isGeneral
+          : (isGeneral as bool),
+      isConfirmed: isConfirmed == _undefined || isConfirmed == null
+          ? _instance.isConfirmed
+          : (isConfirmed as bool),
+      createdAt: createdAt == _undefined || createdAt == null
+          ? _instance.createdAt
+          : (createdAt as DateTime),
+      updatedAt: updatedAt == _undefined || updatedAt == null
+          ? _instance.updatedAt
+          : (updatedAt as DateTime),
+      tags: tags == _undefined || tags == null
+          ? _instance.tags
+          : (tags as List<Fragment$GuestResponse>),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  TRes tags(
+    Iterable<Fragment$GuestResponse> Function(
+      Iterable<CopyWith$Fragment$GuestResponse<Fragment$GuestResponse>>,
+    )
+    _fn,
+  ) => call(
+    tags: _fn(
+      _instance.tags.map((e) => CopyWith$Fragment$GuestResponse(e, (i) => i)),
+    ).toList(),
+  );
+}
+
+class _CopyWithStubImpl$Mutation$confirmUpload$confirmUpload<TRes>
+    implements CopyWith$Mutation$confirmUpload$confirmUpload<TRes> {
+  _CopyWithStubImpl$Mutation$confirmUpload$confirmUpload(this._res);
+
+  TRes _res;
+
+  call({
+    String? $_id,
+    String? url,
+    String? uploadUrl,
+    bool? isGeneral,
+    bool? isConfirmed,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    List<Fragment$GuestResponse>? tags,
+    String? $__typename,
+  }) => _res;
+
+  tags(_fn) => _res;
 }
 
 class Variables$Mutation$UploadRequest {

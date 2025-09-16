@@ -94,6 +94,13 @@ mutation updateInvitationLink($input: UpdateInvitationLinkInput!) {
     }
 }
 
+mutation confirmUpload($input: UploadConfirmInput!) {
+    confirmUpload(input: $input) {
+        _id
+        isConfirmed
+    }
+}
+
 ### GROUP RENTAL ###
 
 ################################################################

@@ -78,6 +78,15 @@ class DashboardService {
     }
   }
 
+  confirmUploads(List<String> ids) async {
+    try {
+      return await _repo.confirmUpload(ids);
+    } catch (e) {
+      log(":::: This is the error from confirming uploads:::: $e");
+      return null;
+    }
+  }
+
   Future updateInvitationLink(LinkUpdateRequestModel request) async {
     try {
       return await _repo.updateInvitationLink(request);
