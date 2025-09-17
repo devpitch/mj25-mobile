@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
@@ -31,6 +32,7 @@ class GuestListBuilder extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(dashboardProvider);
     final notifier = ref.read(dashboardProvider.notifier);
+
     final bool hasNextPage =
         (state.guestList?.guests?.items?.length ?? 0) % 50 == 0;
 
@@ -40,28 +42,47 @@ class GuestListBuilder extends HookConsumerWidget {
         ? dummyGuestList
         : state.guestList?.guests?.items ?? [];
 
-    // 🔹 Local filter state using hooks
+    // 🔹 Search state
     final searchQuery = useState<String>("");
+    final debouncedQuery = useState<String>("");
+    final isSearching = useState<bool>(false);
+    final results = useState<List<GuestResponse>>([]);
 
     // 🔹 ScrollController for pagination
     final scrollController = useScrollController();
 
-    // 🔹 Filter logic
-    final filteredList = useMemoized(() {
-      if (searchQuery.value.isEmpty) return guestList;
-      final query = searchQuery.value.toLowerCase();
-      return guestList.where((guest) {
-        return (guest.firstName?.toLowerCase().contains(query) ?? false) ||
-            (guest.lastName?.toLowerCase().contains(query) ?? false) ||
-            (guest.email?.toLowerCase().contains(query) ?? false) ||
-            (guest.phone?.toLowerCase().contains(query) ?? false);
-      }).toList();
-    }, [searchQuery.value, guestList]);
+    // 🔹 Debounce effect
+    useEffect(() {
+      final timer = Timer(const Duration(seconds: 2), () {
+        debouncedQuery.value = searchQuery.value;
+      });
+      return timer.cancel;
+    }, [searchQuery.value]);
+
+    // 🔹 Remote search effect
+    useEffect(() {
+      if (debouncedQuery.value.isEmpty) {
+        results.value = guestList; // fallback to normal list if no search
+        return null;
+      }
+
+      isSearching.value = true;
+      notifier
+          .fetchGuestViaQuery(query: debouncedQuery.value.toLowerCase())
+          .then((guestList) {
+            results.value = guestList;
+          })
+          .whenComplete(() {
+            isSearching.value = false;
+          });
+
+      return null;
+    }, [debouncedQuery.value]);
 
     // 🔹 Initial fetch
     useEffect(() {
       Future.microtask(() {
-        notifier.getGuests(showLoader: filteredList.isEmpty);
+        notifier.getGuests(showLoader: guestList.isEmpty);
       });
       return null;
     }, []);
@@ -81,6 +102,10 @@ class GuestListBuilder extends HookConsumerWidget {
       return () => scrollController.removeListener(scrollListener);
     }, [scrollController, state.loadingMoreGuests, hasNextPage]);
 
+    final listToRender = debouncedQuery.value.isEmpty
+        ? guestList
+        : results.value;
+
     return SizedBox(
       height: context.deviceHeight,
       child: Column(
@@ -99,7 +124,7 @@ class GuestListBuilder extends HookConsumerWidget {
             },
           ),
 
-          // 🔹 Filter/Search input
+          // 🔹 Search input
           20.verticalSpace,
           CustomLabelTextField(
             hintText: "Search guests...",
@@ -112,24 +137,29 @@ class GuestListBuilder extends HookConsumerWidget {
             ),
           ),
 
-          if (filteredList.isEmpty && !isLoading)
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconBuilder(iconPath: AppImage.guestUser, size: 80),
-                15.verticalSpace,
-                CustomText(text: "No guests found."),
-                30.verticalSpace,
-                if (getTextController(
-                  TextControllerStrings.search,
-                )!.text.isEmpty) ...[
-                  EventButton(
-                    width: 150,
-                    text: "Reload",
-                    onClick: () => notifier.getGuests(),
-                  ),
+          if (isSearching.value)
+            const Padding(
+              padding: EdgeInsets.all(20),
+              child: Center(child: CupertinoActivityIndicator()),
+            )
+          else if (listToRender.isEmpty && !isLoading)
+            Flexible(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconBuilder(iconPath: AppImage.guestUser, size: 80),
+                  15.verticalSpace,
+                  CustomText(text: "No guests found."),
+                  30.verticalSpace,
+                  if (searchQuery.value.isEmpty) ...[
+                    EventButton(
+                      width: 150,
+                      text: "Reload",
+                      onClick: () => notifier.getGuests(),
+                    ),
+                  ],
                 ],
-              ],
+              ),
             )
           else
             Flexible(
@@ -155,7 +185,7 @@ class GuestListBuilder extends HookConsumerWidget {
                     controller: scrollController,
                     padding: const EdgeInsets.only(bottom: 100, top: 15),
                     itemBuilder: (cxt, index) {
-                      if (index == filteredList.length &&
+                      if (index == listToRender.length &&
                           (state.loadingMoreGuests ?? false)) {
                         return Center(
                           child: Padding(
@@ -166,11 +196,11 @@ class GuestListBuilder extends HookConsumerWidget {
                           ),
                         );
                       }
-                      return GuestItemBox(guestInfo: filteredList[index]);
+                      return GuestItemBox(guestInfo: listToRender[index]);
                     },
                     separatorBuilder: (_, __) => 10.verticalSpace,
                     itemCount:
-                        filteredList.length +
+                        listToRender.length +
                         ((state.loadingMoreGuests ?? false) ? 1 : 0),
                   ),
                 ),
@@ -181,113 +211,3 @@ class GuestListBuilder extends HookConsumerWidget {
     );
   }
 }
-
-///
-///
-///
-// class GuestListBuilder extends HookConsumerWidget {
-//   const GuestListBuilder({super.key});
-//
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     final state = ref.watch(dashboardProvider);
-//     final notifier = ref.read(dashboardProvider.notifier);
-//
-//     final bool isLoading = state.loadingGuests ?? false;
-//     final List<GuestResponse> guestList = isLoading
-//         ? dummyGuestList
-//         : state.guestList?.guests?.items ?? [];
-//
-//     // 🔹 Local filter state using hooks
-//     final searchQuery = useState<String>("");
-//
-//     // 🔹 Filter logic
-//     final filteredList = useMemoized(() {
-//       if (searchQuery.value.isEmpty) return guestList;
-//       return guestList.where((guest) {
-//         final query = searchQuery.value.toLowerCase();
-//         return (guest.firstName?.toLowerCase().contains(query) ?? false) ||
-//             (guest.lastName?.toLowerCase().contains(query) ?? false) ||
-//             (guest.email?.toLowerCase().contains(query) ?? false) ||
-//             (guest.phone?.toLowerCase().contains(query) ?? false);
-//       }).toList();
-//     }, [searchQuery.value, guestList]);
-//
-//     // 🔹 Initial fetch
-//     useEffect(() {
-//       Future.microtask(() {
-//         notifier.getGuests(showLoader: filteredList.isEmpty);
-//       });
-//       return null;
-//     }, []);
-//
-//     return SizedBox(
-//       height: context.deviceHeight,
-//       child: Column(
-//         children: [
-//           10.verticalSpace,
-//
-//           EventButton(
-//             width: double.infinity,
-//             fillColor: context.contentSecondary,
-//             textColor: context.contentPrimary,
-//             text: "Scan QR Code",
-//             isLoading: state.loadingGuest ?? false,
-//             onClick: () {
-//               ref.read(globalBuildContextProvider.notifier).state = context;
-//               notifier.scanQrCode(context);
-//             },
-//           ),
-//
-//           // 🔹 Filter/Search input
-//           20.verticalSpace,
-//           CustomLabelTextField(
-//             hintText: "Search guests...",
-//             hintColor: HexColor("#5E8C73"),
-//             textCtrl: getTextController(TextControllerStrings.search),
-//             onChange: (val) => searchQuery.value = val?.trim() ?? "",
-//             prefixIcon: IconBuilder(
-//               iconPath: AppImage.searchIcon,
-//               color: context.contentPrimary,
-//             ),
-//           ),
-//
-//           if (filteredList.isEmpty && !isLoading)
-//             Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 IconBuilder(iconPath: AppImage.guestUser, size: 80),
-//                 15.verticalSpace,
-//                 CustomText(text: "No guests found."),
-//                 30.verticalSpace,
-//                 if (getTextController(
-//                   TextControllerStrings.search,
-//                 )!.text.isEmpty) ...[
-//                   EventButton(
-//                     width: 150,
-//                     text: "Reload",
-//                     onClick: () => notifier.getGuests(),
-//                   ),
-//                 ],
-//               ],
-//             )
-//           else
-//             Flexible(
-//               child: Skeletonizer(
-//                 enabled: isLoading,
-//                 child: ListView.separated(
-//                   shrinkWrap: true,
-//                   // physics: const NeverScrollableScrollPhysics(),
-//                   padding: const EdgeInsets.only(bottom: 100, top: 15),
-//                   itemBuilder: (cxt, index) =>
-//                       GuestItemBox(guestInfo: filteredList[index]),
-//                   separatorBuilder: (_, __) => 10.verticalSpace,
-//                   itemCount: filteredList.length,
-//                 ),
-//               ),
-//             ),
-//         ],
-//       ),
-//     );
-//   }
-// }

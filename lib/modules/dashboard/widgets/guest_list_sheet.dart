@@ -84,7 +84,7 @@ class GuestListSheet extends HookConsumerWidget {
             ),
           ),
         ),
-        if (!isGeneral) ...[
+        ...[
           10.verticalSpace,
           CustomLabelTextField(
             hintText: "search guest...",
@@ -105,7 +105,7 @@ class GuestListSheet extends HookConsumerWidget {
           ),
 
         // results list
-        if (results.value.isNotEmpty && !isGeneral && !isSearching.value)
+        if (results.value.isNotEmpty && !isSearching.value)
           Flexible(
             child: ListView.separated(
               shrinkWrap: true,
@@ -145,119 +145,3 @@ class GuestListSheet extends HookConsumerWidget {
     );
   }
 }
-
-///
-///
-///
-// class GuestListSheet extends HookConsumerWidget {
-//   const GuestListSheet({super.key});
-//
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     final state = ref.watch(dashboardProvider);
-//     final notifier = ref.read(dashboardProvider.notifier);
-//
-//     final bool isGeneral = state.isGeneralTag ?? false;
-//
-//     List<GuestResponse> guestList = state.guestList?.guests?.items ?? [];
-//
-//     final searchQuery = useState<String>("");
-//
-//     final filteredList = useMemoized(() async {
-//       if (searchQuery.value.isEmpty) return [];
-//       final query = searchQuery.value.toLowerCase();
-//
-//       guestList = await notifier.fetchGuestViaQuery(query: query);
-//
-//       return guestList.where((guest) {
-//         return (guest.firstName?.toLowerCase().contains(query) ?? false) ||
-//             (guest.lastName?.toLowerCase().contains(query) ?? false) ||
-//             (guest.email?.toLowerCase().contains(query) ?? false) ||
-//             (guest.phone?.toLowerCase().contains(query) ?? false);
-//       }).toList();
-//     }, [searchQuery.value, guestList]);
-//
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         GestureDetector(
-//           onTap: () {
-//             notifier.updateState({"isGeneral": !isGeneral});
-//           },
-//           child: Container(
-//             color: Colors.transparent,
-//             child: Row(
-//               children: [
-//                 IconBuilder(
-//                   iconPath: isGeneral ? AppImage.checkTicked : AppImage.check,
-//                   size: 18,
-//                 ),
-//                 10.horizontalSpace,
-//                 CustomText(
-//                   text: "General",
-//                   size: 16,
-//                   weight: FontWeight.w800,
-//                   color: context.contentTertiary,
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//         if (!isGeneral) ...[
-//           10.verticalSpace,
-//           CustomLabelTextField(
-//             hintText: "search guest...",
-//             hintColor: HexColor("#5E8C73"),
-//             onChange: (val) => searchQuery.value = val?.trim() ?? "",
-//             prefixIcon: IconBuilder(
-//               iconPath: AppImage.searchIcon,
-//               color: context.contentTertiary,
-//             ),
-//           ),
-//         ],
-//         if (filteredList.isNotEmpty && !isGeneral)
-//           Flexible(
-//             child: ListView.separated(
-//               shrinkWrap: true,
-//               // physics: ,
-//               padding: const EdgeInsets.only(bottom: 10, top: 15),
-//               itemBuilder: (cxt, index) {
-//                 if (index == filteredList.length &&
-//                     (state.loadingMoreGuests ?? false)) {
-//                   return Center(
-//                     child: Padding(
-//                       padding: const EdgeInsets.symmetric(vertical: 16),
-//                       child: CupertinoActivityIndicator(
-//                         color: context.contentPrimary,
-//                       ),
-//                     ),
-//                   );
-//                 }
-//                 return GuestItemBox(
-//                   guestInfo: filteredList[index],
-//                   isActive:
-//                       state.generalTaggedGuest?.contains(
-//                         filteredList[index].id,
-//                       ) ??
-//                       false,
-//                   onTapped: () {
-//                     notifier.addGuest(filteredList[index].id);
-//                   },
-//                 );
-//               },
-//               separatorBuilder: (_, __) => 10.verticalSpace,
-//               itemCount: filteredList.length,
-//             ),
-//           ),
-//         40.verticalSpace,
-//         EventButton(
-//           width: 300,
-//           text: "Continue",
-//           onClick: () {
-//             Navigator.pop(context);
-//           },
-//         ),
-//       ],
-//     );
-//   }
-// }

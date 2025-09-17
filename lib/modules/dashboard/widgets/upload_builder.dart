@@ -178,7 +178,7 @@ class UploadViewBuilder extends ConsumerWidget {
                     20.verticalSpace,
                     if (state.isGeneralTag ?? false)
                       SizedBox(
-                        height: 200,
+                        height: 60,
                         width: double.infinity,
                         child: Center(
                           child: CustomText(
@@ -188,9 +188,9 @@ class UploadViewBuilder extends ConsumerWidget {
                             size: 20,
                           ),
                         ),
-                      )
-                    else
-                      TaggedGuestBuilder(noPadding: true, isFlex: false),
+                      ),
+
+                    TaggedGuestBuilder(noPadding: true, isFlex: false),
                   ],
                 ],
               ),
